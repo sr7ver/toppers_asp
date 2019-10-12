@@ -1,0 +1,27 @@
+PACKAGE asp_arch_arm_m_gcc
+
+cy8c5xlp.h
+cy8c5xlp_rom.ld
+E_PACKAGE
+MANIFEST
+target.tf
+target_asm.inc
+target_cfg1_out.h
+target_check.tf
+target_config.c
+target_config.h
+target_kernel.h
+target_offset.tf
+target_rename.def
+target_rename.h
+target_serial.c
+target_serial.cfg
+target_serial.h
+target_sil.h
+target_stddef.h
+target_syssvc.h
+target_test.h
+target_timer.cfg
+target_timer.h
+target_unrename.h
+target_user.txt

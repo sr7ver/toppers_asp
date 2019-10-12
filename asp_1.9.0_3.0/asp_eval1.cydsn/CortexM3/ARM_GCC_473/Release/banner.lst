@@ -1,0 +1,1337 @@
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"banner.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.print_banner,"ax",%progbits
+  19              		.align	1
+  20              		.global	print_banner
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	print_banner, %function
+  24              	print_banner:
+  25              	.LFB20:
+  26              		.file 1 ".\\asp\\syssvc\\banner.c"
+   1:.\asp\syssvc/banner.c **** /*
+   2:.\asp\syssvc/banner.c ****  *  TOPPERS/ASP Kernel
+   3:.\asp\syssvc/banner.c ****  *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4:.\asp\syssvc/banner.c ****  *      Advanced Standard Profile Kernel
+   5:.\asp\syssvc/banner.c ****  * 
+   6:.\asp\syssvc/banner.c ****  *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   7:.\asp\syssvc/banner.c ****  *                              Toyohashi Univ. of Technology, JAPAN
+   8:.\asp\syssvc/banner.c ****  *  Copyright (C) 2004-2014 by Embedded and Real-Time Systems Laboratory
+   9:.\asp\syssvc/banner.c ****  *              Graduate School of Information Science, Nagoya Univ., JAPAN
+  10:.\asp\syssvc/banner.c ****  * 
+  11:.\asp\syssvc/banner.c ****  *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  12:.\asp\syssvc/banner.c ****  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  13:.\asp\syssvc/banner.c ****  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  14:.\asp\syssvc/banner.c ****  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  15:.\asp\syssvc/banner.c ****  *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  16:.\asp\syssvc/banner.c ****  *      スコード中に含まれていること．
+  17:.\asp\syssvc/banner.c ****  *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  18:.\asp\syssvc/banner.c ****  *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  19:.\asp\syssvc/banner.c ****  *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  20:.\asp\syssvc/banner.c ****  *      の無保証規定を掲載すること．
+  21:.\asp\syssvc/banner.c ****  *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  22:.\asp\syssvc/banner.c ****  *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  23:.\asp\syssvc/banner.c ****  *      と．
+  24:.\asp\syssvc/banner.c ****  *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  25:.\asp\syssvc/banner.c ****  *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  26:.\asp\syssvc/banner.c ****  *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  27:.\asp\syssvc/banner.c ****  *        報告すること．
+  28:.\asp\syssvc/banner.c ****  *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  29:.\asp\syssvc/banner.c ****  *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  30:.\asp\syssvc/banner.c ****  *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  31:.\asp\syssvc/banner.c ****  *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 2
+
+
+  32:.\asp\syssvc/banner.c ****  *      免責すること．
+  33:.\asp\syssvc/banner.c ****  * 
+  34:.\asp\syssvc/banner.c ****  *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  35:.\asp\syssvc/banner.c ****  *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  36:.\asp\syssvc/banner.c ****  *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  37:.\asp\syssvc/banner.c ****  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  38:.\asp\syssvc/banner.c ****  *  の責任を負わない．
+  39:.\asp\syssvc/banner.c ****  * 
+  40:.\asp\syssvc/banner.c ****  *  $Id: banner.c 2594 2014-01-02 07:08:54Z ertl-hiro $
+  41:.\asp\syssvc/banner.c ****  */
+  42:.\asp\syssvc/banner.c **** 
+  43:.\asp\syssvc/banner.c **** /*
+  44:.\asp\syssvc/banner.c ****  *		カーネル起動メッセージの出力
+  45:.\asp\syssvc/banner.c ****  */
+  46:.\asp\syssvc/banner.c **** 
+  47:.\asp\syssvc/banner.c **** #include <kernel.h>
+  48:.\asp\syssvc/banner.c **** #include <t_syslog.h>
+  49:.\asp\syssvc/banner.c **** #include "target_syssvc.h"
+  50:.\asp\syssvc/banner.c **** #include "banner.h"
+  51:.\asp\syssvc/banner.c **** 
+  52:.\asp\syssvc/banner.c **** #ifndef TARGET_COPYRIGHT
+  53:.\asp\syssvc/banner.c **** #define TARGET_COPYRIGHT
+  54:.\asp\syssvc/banner.c **** #endif /* TARGET_COPYRIGHT */
+  55:.\asp\syssvc/banner.c **** 
+  56:.\asp\syssvc/banner.c **** static const char banner[] = "\n"
+  57:.\asp\syssvc/banner.c **** "TOPPERS/ASP Kernel Release %d.%X.%d for " TARGET_NAME
+  58:.\asp\syssvc/banner.c **** " (" __DATE__ ", " __TIME__ ")\n"
+  59:.\asp\syssvc/banner.c **** "Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory\n"
+  60:.\asp\syssvc/banner.c **** "                            Toyohashi Univ. of Technology, JAPAN\n"
+  61:.\asp\syssvc/banner.c **** "Copyright (C) 2004-2014 by Embedded and Real-Time Systems Laboratory\n"
+  62:.\asp\syssvc/banner.c **** "            Graduate School of Information Science, Nagoya Univ., JAPAN\n"
+  63:.\asp\syssvc/banner.c **** TARGET_COPYRIGHT;
+  64:.\asp\syssvc/banner.c **** 
+  65:.\asp\syssvc/banner.c **** void
+  66:.\asp\syssvc/banner.c **** print_banner(intptr_t exinf)
+  67:.\asp\syssvc/banner.c **** {
+  27              		.loc 1 67 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 32
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 00B5     		push	{lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 4
+  35              		.cfi_offset 14, -4
+  36              	.LBB4:
+  37              	.LBB5:
+  38              		.file 2 ".\\asp\\include/t_syslog.h"
+   1:.\asp\include/t_syslog.h **** /*
+   2:.\asp\include/t_syslog.h ****  *  TOPPERS/ASP Kernel
+   3:.\asp\include/t_syslog.h ****  *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4:.\asp\include/t_syslog.h ****  *      Advanced Standard Profile Kernel
+   5:.\asp\include/t_syslog.h ****  * 
+   6:.\asp\include/t_syslog.h ****  *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   7:.\asp\include/t_syslog.h ****  *                              Toyohashi Univ. of Technology, JAPAN
+   8:.\asp\include/t_syslog.h ****  *  Copyright (C) 2004-2011 by Embedded and Real-Time Systems Laboratory
+   9:.\asp\include/t_syslog.h ****  *              Graduate School of Information Science, Nagoya Univ., JAPAN
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 3
+
+
+  10:.\asp\include/t_syslog.h ****  * 
+  11:.\asp\include/t_syslog.h ****  *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  12:.\asp\include/t_syslog.h ****  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  13:.\asp\include/t_syslog.h ****  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  14:.\asp\include/t_syslog.h ****  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  15:.\asp\include/t_syslog.h ****  *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  16:.\asp\include/t_syslog.h ****  *      スコード中に含まれていること．
+  17:.\asp\include/t_syslog.h ****  *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  18:.\asp\include/t_syslog.h ****  *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  19:.\asp\include/t_syslog.h ****  *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  20:.\asp\include/t_syslog.h ****  *      の無保証規定を掲載すること．
+  21:.\asp\include/t_syslog.h ****  *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  22:.\asp\include/t_syslog.h ****  *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  23:.\asp\include/t_syslog.h ****  *      と．
+  24:.\asp\include/t_syslog.h ****  *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  25:.\asp\include/t_syslog.h ****  *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  26:.\asp\include/t_syslog.h ****  *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  27:.\asp\include/t_syslog.h ****  *        報告すること．
+  28:.\asp\include/t_syslog.h ****  *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  29:.\asp\include/t_syslog.h ****  *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  30:.\asp\include/t_syslog.h ****  *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  31:.\asp\include/t_syslog.h ****  *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  32:.\asp\include/t_syslog.h ****  *      免責すること．
+  33:.\asp\include/t_syslog.h ****  * 
+  34:.\asp\include/t_syslog.h ****  *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  35:.\asp\include/t_syslog.h ****  *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  36:.\asp\include/t_syslog.h ****  *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  37:.\asp\include/t_syslog.h ****  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  38:.\asp\include/t_syslog.h ****  *  の責任を負わない．
+  39:.\asp\include/t_syslog.h ****  * 
+  40:.\asp\include/t_syslog.h ****  *  @(#) $Id: t_syslog.h 2126 2011-06-26 01:07:35Z ertl-hiro $
+  41:.\asp\include/t_syslog.h ****  */
+  42:.\asp\include/t_syslog.h **** 
+  43:.\asp\include/t_syslog.h **** /*
+  44:.\asp\include/t_syslog.h ****  *		システムログ出力を行うための定義
+  45:.\asp\include/t_syslog.h ****  *
+  46:.\asp\include/t_syslog.h ****  *  システムログサービスは，システムのログ情報を出力するためのサービス
+  47:.\asp\include/t_syslog.h ****  *  である．カーネルからのログ情報の出力にも用いるため，内部で待ち状態
+  48:.\asp\include/t_syslog.h ****  *  にはいることはない．
+  49:.\asp\include/t_syslog.h ****  *
+  50:.\asp\include/t_syslog.h ****  *  ログ情報は，カーネル内のログバッファに書き込むか，低レベルの文字出
+  51:.\asp\include/t_syslog.h ****  *  力関数を用いて出力する．どちらを使うかは，拡張サービスコールで切り
+  52:.\asp\include/t_syslog.h ****  *  換えることができる．
+  53:.\asp\include/t_syslog.h ****  *
+  54:.\asp\include/t_syslog.h ****  *  ログバッファ領域がオーバフローした場合には，古いログ情報を消して上
+  55:.\asp\include/t_syslog.h ****  *  書きする．
+  56:.\asp\include/t_syslog.h ****  *
+  57:.\asp\include/t_syslog.h ****  *  アセンブリ言語のソースファイルからこのファイルをインクルードする時
+  58:.\asp\include/t_syslog.h ****  *  は，TOPPERS_MACRO_ONLYを定義しておくことで，マクロ定義以外の記述を
+  59:.\asp\include/t_syslog.h ****  *  除くことができる．
+  60:.\asp\include/t_syslog.h ****  *
+  61:.\asp\include/t_syslog.h ****  *  このファイルをインクルードする前に，t_stddef.hをインクルードしてお
+  62:.\asp\include/t_syslog.h ****  *  くことが必要である．
+  63:.\asp\include/t_syslog.h ****  */
+  64:.\asp\include/t_syslog.h **** 
+  65:.\asp\include/t_syslog.h **** #ifndef TOPPERS_T_SYSLOG_H
+  66:.\asp\include/t_syslog.h **** #define TOPPERS_T_SYSLOG_H
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 4
+
+
+  67:.\asp\include/t_syslog.h **** 
+  68:.\asp\include/t_syslog.h **** #ifdef __cplusplus
+  69:.\asp\include/t_syslog.h **** extern "C" {
+  70:.\asp\include/t_syslog.h **** #endif
+  71:.\asp\include/t_syslog.h **** 
+  72:.\asp\include/t_syslog.h **** /*
+  73:.\asp\include/t_syslog.h ****  *  ログ情報の種別の定義
+  74:.\asp\include/t_syslog.h ****  */
+  75:.\asp\include/t_syslog.h **** #define LOG_TYPE_COMMENT	UINT_C(0x01)	/* コメント */
+  76:.\asp\include/t_syslog.h **** #define LOG_TYPE_ASSERT		UINT_C(0x02)	/* アサーションの失敗 */
+  77:.\asp\include/t_syslog.h **** 
+  78:.\asp\include/t_syslog.h **** #define LOG_TYPE_INH		UINT_C(0x11)	/* 割込みハンドラ */
+  79:.\asp\include/t_syslog.h **** #define LOG_TYPE_ISR		UINT_C(0x12)	/* 割込みサービスルーチン */
+  80:.\asp\include/t_syslog.h **** #define LOG_TYPE_CYC		UINT_C(0x13)	/* 周期ハンドラ */
+  81:.\asp\include/t_syslog.h **** #define LOG_TYPE_ALM		UINT_C(0x14)	/* アラームハンドラ */
+  82:.\asp\include/t_syslog.h **** #define LOG_TYPE_OVR		UINT_C(0x15)	/* オーバランハンドラ */
+  83:.\asp\include/t_syslog.h **** #define LOG_TYPE_EXC		UINT_C(0x16)	/* CPU例外ハンドラ */
+  84:.\asp\include/t_syslog.h **** #define LOG_TYPE_TEX		UINT_C(0x17)	/* タスク例外処理ルーチン */
+  85:.\asp\include/t_syslog.h **** #define LOG_TYPE_TSKSTAT	UINT_C(0x18)	/* タスク状態変化 */
+  86:.\asp\include/t_syslog.h **** #define LOG_TYPE_DSP		UINT_C(0x19)	/* ディスパッチャ */
+  87:.\asp\include/t_syslog.h **** #define LOG_TYPE_SVC		UINT_C(0x1a)	/* サービスコール */
+  88:.\asp\include/t_syslog.h **** 
+  89:.\asp\include/t_syslog.h **** #define LOG_ENTER			UINT_C(0x00)	/* 入口／開始 */
+  90:.\asp\include/t_syslog.h **** #define LOG_LEAVE			UINT_C(0x80)	/* 出口／終了 */
+  91:.\asp\include/t_syslog.h **** 
+  92:.\asp\include/t_syslog.h **** /*
+  93:.\asp\include/t_syslog.h ****  *  ログ情報の重要度の定義
+  94:.\asp\include/t_syslog.h ****  */
+  95:.\asp\include/t_syslog.h **** #define LOG_EMERG			UINT_C(0)		/* シャットダウンに値するエラー */
+  96:.\asp\include/t_syslog.h **** #define LOG_ALERT			UINT_C(1)
+  97:.\asp\include/t_syslog.h **** #define LOG_CRIT			UINT_C(2)
+  98:.\asp\include/t_syslog.h **** #define LOG_ERROR			UINT_C(3)		/* システムエラー */
+  99:.\asp\include/t_syslog.h **** #define LOG_WARNING			UINT_C(4)		/* 警告メッセージ */
+ 100:.\asp\include/t_syslog.h **** #define LOG_NOTICE			UINT_C(5)
+ 101:.\asp\include/t_syslog.h **** #define LOG_INFO			UINT_C(6)
+ 102:.\asp\include/t_syslog.h **** #define LOG_DEBUG			UINT_C(7)		/* デバッグ用メッセージ */
+ 103:.\asp\include/t_syslog.h **** 
+ 104:.\asp\include/t_syslog.h **** #ifndef TOPPERS_MACRO_ONLY
+ 105:.\asp\include/t_syslog.h **** 
+ 106:.\asp\include/t_syslog.h **** /*
+ 107:.\asp\include/t_syslog.h ****  *  ログ情報のデータ構造
+ 108:.\asp\include/t_syslog.h ****  */
+ 109:.\asp\include/t_syslog.h **** 
+ 110:.\asp\include/t_syslog.h **** #define TMAX_LOGINFO	6
+ 111:.\asp\include/t_syslog.h **** 
+ 112:.\asp\include/t_syslog.h **** typedef struct {
+ 113:.\asp\include/t_syslog.h **** 	uint_t		logtype;				/* ログ情報の種別 */
+ 114:.\asp\include/t_syslog.h **** 	SYSTIM		logtim;					/* ログ時刻 */
+ 115:.\asp\include/t_syslog.h **** 	intptr_t	loginfo[TMAX_LOGINFO];	/* その他のログ情報 */
+ 116:.\asp\include/t_syslog.h **** } SYSLOG;
+ 117:.\asp\include/t_syslog.h **** 
+ 118:.\asp\include/t_syslog.h **** /*
+ 119:.\asp\include/t_syslog.h ****  *  ログ情報の重要度のビットマップを作るためのマクロ
+ 120:.\asp\include/t_syslog.h ****  */
+ 121:.\asp\include/t_syslog.h **** #define LOG_MASK(prio)		(1U << (prio))
+ 122:.\asp\include/t_syslog.h **** #define LOG_UPTO(prio)		((1U << ((prio) + 1)) - 1)
+ 123:.\asp\include/t_syslog.h **** 
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 5
+
+
+ 124:.\asp\include/t_syslog.h **** /*
+ 125:.\asp\include/t_syslog.h ****  *  パケット形式の定義
+ 126:.\asp\include/t_syslog.h ****  */
+ 127:.\asp\include/t_syslog.h **** typedef struct t_syslog_rlog {
+ 128:.\asp\include/t_syslog.h **** 	uint_t	count;		/* ログバッファ中のログの数 */
+ 129:.\asp\include/t_syslog.h **** 	uint_t	lost;		/* 失われたログの数 */
+ 130:.\asp\include/t_syslog.h **** 	uint_t	logmask;	/* ログバッファに記録すべき重要度 */
+ 131:.\asp\include/t_syslog.h **** 	uint_t	lowmask;	/* 低レベル出力すべき重要度 */
+ 132:.\asp\include/t_syslog.h **** } T_SYSLOG_RLOG;
+ 133:.\asp\include/t_syslog.h **** 
+ 134:.\asp\include/t_syslog.h **** /*
+ 135:.\asp\include/t_syslog.h ****  *  ログ情報を出力するためのライブラリ関数
+ 136:.\asp\include/t_syslog.h ****  */
+ 137:.\asp\include/t_syslog.h **** 
+ 138:.\asp\include/t_syslog.h **** #ifndef TOPPERS_OMIT_SYSLOG
+ 139:.\asp\include/t_syslog.h **** 
+ 140:.\asp\include/t_syslog.h **** extern ER	syslog_wri_log(uint_t prio, const SYSLOG *p_syslog) throw();
+ 141:.\asp\include/t_syslog.h **** 
+ 142:.\asp\include/t_syslog.h **** Inline void
+ 143:.\asp\include/t_syslog.h **** _syslog_0(uint_t prio, uint_t type)
+ 144:.\asp\include/t_syslog.h **** {
+ 145:.\asp\include/t_syslog.h **** 	SYSLOG	logbuf;
+ 146:.\asp\include/t_syslog.h **** 
+ 147:.\asp\include/t_syslog.h **** 	logbuf.logtype = type;
+ 148:.\asp\include/t_syslog.h **** 	(void) syslog_wri_log(prio, &logbuf);
+ 149:.\asp\include/t_syslog.h **** }
+ 150:.\asp\include/t_syslog.h **** 
+ 151:.\asp\include/t_syslog.h **** Inline void
+ 152:.\asp\include/t_syslog.h **** _syslog_1(uint_t prio, uint_t type, intptr_t arg1)
+ 153:.\asp\include/t_syslog.h **** {
+ 154:.\asp\include/t_syslog.h **** 	SYSLOG	logbuf;
+ 155:.\asp\include/t_syslog.h **** 
+ 156:.\asp\include/t_syslog.h **** 	logbuf.logtype = type;
+ 157:.\asp\include/t_syslog.h **** 	logbuf.loginfo[0] = arg1;
+ 158:.\asp\include/t_syslog.h **** 	(void) syslog_wri_log(prio, &logbuf);
+ 159:.\asp\include/t_syslog.h **** }
+ 160:.\asp\include/t_syslog.h **** 
+ 161:.\asp\include/t_syslog.h **** Inline void
+ 162:.\asp\include/t_syslog.h **** _syslog_2(uint_t prio, uint_t type, intptr_t arg1, intptr_t arg2)
+ 163:.\asp\include/t_syslog.h **** {
+ 164:.\asp\include/t_syslog.h **** 	SYSLOG	logbuf;
+ 165:.\asp\include/t_syslog.h **** 
+ 166:.\asp\include/t_syslog.h **** 	logbuf.logtype = type;
+ 167:.\asp\include/t_syslog.h **** 	logbuf.loginfo[0] = arg1;
+ 168:.\asp\include/t_syslog.h **** 	logbuf.loginfo[1] = arg2;
+ 169:.\asp\include/t_syslog.h **** 	(void) syslog_wri_log(prio, &logbuf);
+ 170:.\asp\include/t_syslog.h **** }
+ 171:.\asp\include/t_syslog.h **** 
+ 172:.\asp\include/t_syslog.h **** Inline void
+ 173:.\asp\include/t_syslog.h **** _syslog_3(uint_t prio, uint_t type, intptr_t arg1, intptr_t arg2,
+ 174:.\asp\include/t_syslog.h **** 														intptr_t arg3)
+ 175:.\asp\include/t_syslog.h **** {
+ 176:.\asp\include/t_syslog.h **** 	SYSLOG	logbuf;
+ 177:.\asp\include/t_syslog.h **** 
+ 178:.\asp\include/t_syslog.h **** 	logbuf.logtype = type;
+ 179:.\asp\include/t_syslog.h **** 	logbuf.loginfo[0] = arg1;
+ 180:.\asp\include/t_syslog.h **** 	logbuf.loginfo[1] = arg2;
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 6
+
+
+ 181:.\asp\include/t_syslog.h **** 	logbuf.loginfo[2] = arg3;
+ 182:.\asp\include/t_syslog.h **** 	(void) syslog_wri_log(prio, &logbuf);
+ 183:.\asp\include/t_syslog.h **** }
+ 184:.\asp\include/t_syslog.h **** 
+ 185:.\asp\include/t_syslog.h **** Inline void
+ 186:.\asp\include/t_syslog.h **** _syslog_4(uint_t prio, uint_t type, intptr_t arg1, intptr_t arg2,
+ 187:.\asp\include/t_syslog.h **** 										intptr_t arg3, intptr_t arg4)
+ 188:.\asp\include/t_syslog.h **** {
+ 189:.\asp\include/t_syslog.h **** 	SYSLOG	logbuf;
+ 190:.\asp\include/t_syslog.h **** 
+ 191:.\asp\include/t_syslog.h **** 	logbuf.logtype = type;
+ 192:.\asp\include/t_syslog.h **** 	logbuf.loginfo[0] = arg1;
+ 193:.\asp\include/t_syslog.h **** 	logbuf.loginfo[1] = arg2;
+ 194:.\asp\include/t_syslog.h **** 	logbuf.loginfo[2] = arg3;
+  39              		.loc 2 194 0
+  40 0002 0920     		movs	r0, #9
+  41              	.LVL1:
+  42              	.LBE5:
+  43              	.LBE4:
+  44              		.loc 1 67 0
+  45 0004 89B0     		sub	sp, sp, #36
+  46              	.LCFI1:
+  47              		.cfi_def_cfa_offset 40
+  48              	.LBB8:
+  49              	.LBB6:
+ 195:.\asp\include/t_syslog.h **** 	logbuf.loginfo[3] = arg4;
+  50              		.loc 2 195 0
+  51 0006 0021     		movs	r1, #0
+  52              	.LBE6:
+  53              	.LBE8:
+  68:.\asp\syssvc/banner.c **** 	syslog_3(LOG_NOTICE, banner,
+  54              		.loc 1 68 0
+  55 0008 064A     		ldr	r2, .L2
+  56              	.LBB9:
+  57              	.LBB7:
+ 191:.\asp\include/t_syslog.h **** 	logbuf.logtype = type;
+  58              		.loc 2 191 0
+  59 000a 0123     		movs	r3, #1
+ 194:.\asp\include/t_syslog.h **** 	logbuf.loginfo[2] = arg3;
+  60              		.loc 2 194 0
+  61 000c 0490     		str	r0, [sp, #16]
+  62              		.loc 2 195 0
+  63 000e 0591     		str	r1, [sp, #20]
+ 196:.\asp\include/t_syslog.h **** 	(void) syslog_wri_log(prio, &logbuf);
+  64              		.loc 2 196 0
+  65 0010 0520     		movs	r0, #5
+  66 0012 6946     		mov	r1, sp
+ 191:.\asp\include/t_syslog.h **** 	logbuf.logtype = type;
+  67              		.loc 2 191 0
+  68 0014 0093     		str	r3, [sp, #0]
+ 192:.\asp\include/t_syslog.h **** 	logbuf.loginfo[0] = arg1;
+  69              		.loc 2 192 0
+  70 0016 0292     		str	r2, [sp, #8]
+ 193:.\asp\include/t_syslog.h **** 	logbuf.loginfo[1] = arg2;
+  71              		.loc 2 193 0
+  72 0018 0393     		str	r3, [sp, #12]
+  73              		.loc 2 196 0
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 7
+
+
+  74 001a FFF7FEFF 		bl	syslog_wri_log
+  75              	.LVL2:
+  76              	.LBE7:
+  77              	.LBE9:
+  69:.\asp\syssvc/banner.c **** 				(TKERNEL_PRVER >> 12) & 0x0fU,
+  70:.\asp\syssvc/banner.c **** 				(TKERNEL_PRVER >> 4) & 0xffU,
+  71:.\asp\syssvc/banner.c **** 				TKERNEL_PRVER & 0x0fU);
+  72:.\asp\syssvc/banner.c **** }
+  78              		.loc 1 72 0
+  79 001e 09B0     		add	sp, sp, #36
+  80 0020 00BD     		pop	{pc}
+  81              	.L3:
+  82 0022 00BF     		.align	2
+  83              	.L2:
+  84 0024 00000000 		.word	.LANCHOR0
+  85              		.cfi_endproc
+  86              	.LFE20:
+  87              		.size	print_banner, .-print_banner
+  88              		.section	.rodata
+  89              		.set	.LANCHOR0,. + 0
+  90              		.type	banner, %object
+  91              		.size	banner, 368
+  92              	banner:
+  93 0000 0A544F50 		.ascii	"\012TOPPERS/ASP Kernel Release %d.%X.%d for CY8CKIT"
+  93      50455253 
+  93      2F415350 
+  93      204B6572 
+  93      6E656C20 
+  94 0030 2D303530 		.ascii	"-050(ARM Cortex-M3) (Feb  3 2014, 17:53:11)\012Copy"
+  94      2841524D 
+  94      20436F72 
+  94      7465782D 
+  94      4D332920 
+  95 0060 72696768 		.ascii	"right (C) 2000-2003 by Embedded and Real-Time Syste"
+  95      74202843 
+  95      29203230 
+  95      30302D32 
+  95      30303320 
+  96 0093 6D73204C 		.ascii	"ms Laboratory\012                            Toyoha"
+  96      61626F72 
+  96      61746F72 
+  96      790A2020 
+  96      20202020 
+  97 00c3 73686920 		.ascii	"shi Univ. of Technology, JAPAN\012Copyright (C) 200"
+  97      556E6976 
+  97      2E206F66 
+  97      20546563 
+  97      686E6F6C 
+  98 00f3 342D3230 		.ascii	"4-2014 by Embedded and Real-Time Systems Laboratory"
+  98      31342062 
+  98      7920456D 
+  98      62656464 
+  98      65642061 
+  99 0126 0A202020 		.ascii	"\012            Graduate School of Information Scie"
+  99      20202020 
+  99      20202020 
+  99      20477261 
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 8
+
+
+  99      64756174 
+ 100 0156 6E63652C 		.ascii	"nce, Nagoya Univ., JAPAN\012\000"
+ 100      204E6167 
+ 100      6F796120 
+ 100      556E6976 
+ 100      2E2C204A 
+ 101              		.text
+ 102              	.Letext0:
+ 103              		.file 3 ".\\asp\\arch\\gcc/tool_stddef.h"
+ 104              		.file 4 ".\\asp\\include/t_stddef.h"
+ 105              		.section	.debug_info,"",%progbits
+ 106              	.Ldebug_info0:
+ 107 0000 48020000 		.4byte	0x248
+ 108 0004 0200     		.2byte	0x2
+ 109 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 110 000a 04       		.byte	0x4
+ 111 000b 01       		.uleb128 0x1
+ 112 000c 60000000 		.4byte	.LASF28
+ 113 0010 01       		.byte	0x1
+ 114 0011 61010000 		.4byte	.LASF29
+ 115 0015 B7000000 		.4byte	.LASF30
+ 116 0019 40000000 		.4byte	.Ldebug_ranges0+0x40
+ 117 001d 00000000 		.4byte	0
+ 118 0021 00000000 		.4byte	0
+ 119 0025 00000000 		.4byte	.Ldebug_line0
+ 120 0029 02       		.uleb128 0x2
+ 121 002a 04       		.byte	0x4
+ 122 002b 05       		.byte	0x5
+ 123 002c 696E7400 		.ascii	"int\000"
+ 124 0030 03       		.uleb128 0x3
+ 125 0031 04       		.byte	0x4
+ 126 0032 07       		.byte	0x7
+ 127 0033 1D010000 		.4byte	.LASF0
+ 128 0037 03       		.uleb128 0x3
+ 129 0038 01       		.byte	0x1
+ 130 0039 06       		.byte	0x6
+ 131 003a 20000000 		.4byte	.LASF1
+ 132 003e 03       		.uleb128 0x3
+ 133 003f 01       		.byte	0x1
+ 134 0040 08       		.byte	0x8
+ 135 0041 A9000000 		.4byte	.LASF2
+ 136 0045 03       		.uleb128 0x3
+ 137 0046 02       		.byte	0x2
+ 138 0047 05       		.byte	0x5
+ 139 0048 07000000 		.4byte	.LASF3
+ 140 004c 03       		.uleb128 0x3
+ 141 004d 02       		.byte	0x2
+ 142 004e 07       		.byte	0x7
+ 143 004f 32010000 		.4byte	.LASF4
+ 144 0053 03       		.uleb128 0x3
+ 145 0054 08       		.byte	0x8
+ 146 0055 05       		.byte	0x5
+ 147 0056 41000000 		.4byte	.LASF5
+ 148 005a 03       		.uleb128 0x3
+ 149 005b 08       		.byte	0x8
+ 150 005c 07       		.byte	0x7
+ 151 005d FA000000 		.4byte	.LASF6
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 9
+
+
+ 152 0061 04       		.uleb128 0x4
+ 153 0062 11000000 		.4byte	.LASF11
+ 154 0066 03       		.byte	0x3
+ 155 0067 75       		.byte	0x75
+ 156 0068 6C000000 		.4byte	0x6c
+ 157 006c 03       		.uleb128 0x3
+ 158 006d 04       		.byte	0x4
+ 159 006e 05       		.byte	0x5
+ 160 006f 4F000000 		.4byte	.LASF7
+ 161 0073 03       		.uleb128 0x3
+ 162 0074 04       		.byte	0x4
+ 163 0075 07       		.byte	0x7
+ 164 0076 85010000 		.4byte	.LASF8
+ 165 007a 03       		.uleb128 0x3
+ 166 007b 04       		.byte	0x4
+ 167 007c 04       		.byte	0x4
+ 168 007d 31000000 		.4byte	.LASF9
+ 169 0081 03       		.uleb128 0x3
+ 170 0082 08       		.byte	0x8
+ 171 0083 04       		.byte	0x4
+ 172 0084 97010000 		.4byte	.LASF10
+ 173 0088 04       		.uleb128 0x4
+ 174 0089 9E010000 		.4byte	.LASF12
+ 175 008d 04       		.byte	0x4
+ 176 008e 65       		.byte	0x65
+ 177 008f 29000000 		.4byte	0x29
+ 178 0093 04       		.uleb128 0x4
+ 179 0094 7E010000 		.4byte	.LASF13
+ 180 0098 04       		.byte	0x4
+ 181 0099 66       		.byte	0x66
+ 182 009a 30000000 		.4byte	0x30
+ 183 009e 04       		.uleb128 0x4
+ 184 009f 2A010000 		.4byte	.LASF14
+ 185 00a3 04       		.byte	0x4
+ 186 00a4 69       		.byte	0x69
+ 187 00a5 73000000 		.4byte	0x73
+ 188 00a9 05       		.uleb128 0x5
+ 189 00aa 455200   		.ascii	"ER\000"
+ 190 00ad 04       		.byte	0x4
+ 191 00ae 6C       		.byte	0x6c
+ 192 00af 88000000 		.4byte	0x88
+ 193 00b3 04       		.uleb128 0x4
+ 194 00b4 16010000 		.4byte	.LASF15
+ 195 00b8 04       		.byte	0x4
+ 196 00b9 76       		.byte	0x76
+ 197 00ba 9E000000 		.4byte	0x9e
+ 198 00be 06       		.uleb128 0x6
+ 199 00bf 20       		.byte	0x20
+ 200 00c0 02       		.byte	0x2
+ 201 00c1 70       		.byte	0x70
+ 202 00c2 F1000000 		.4byte	0xf1
+ 203 00c6 07       		.uleb128 0x7
+ 204 00c7 B3010000 		.4byte	.LASF16
+ 205 00cb 02       		.byte	0x2
+ 206 00cc 71       		.byte	0x71
+ 207 00cd 93000000 		.4byte	0x93
+ 208 00d1 02       		.byte	0x2
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 10
+
+
+ 209 00d2 23       		.byte	0x23
+ 210 00d3 00       		.uleb128 0
+ 211 00d4 07       		.uleb128 0x7
+ 212 00d5 77010000 		.4byte	.LASF17
+ 213 00d9 02       		.byte	0x2
+ 214 00da 72       		.byte	0x72
+ 215 00db B3000000 		.4byte	0xb3
+ 216 00df 02       		.byte	0x2
+ 217 00e0 23       		.byte	0x23
+ 218 00e1 04       		.uleb128 0x4
+ 219 00e2 07       		.uleb128 0x7
+ 220 00e3 58000000 		.4byte	.LASF18
+ 221 00e7 02       		.byte	0x2
+ 222 00e8 73       		.byte	0x73
+ 223 00e9 F1000000 		.4byte	0xf1
+ 224 00ed 02       		.byte	0x2
+ 225 00ee 23       		.byte	0x23
+ 226 00ef 08       		.uleb128 0x8
+ 227 00f0 00       		.byte	0
+ 228 00f1 08       		.uleb128 0x8
+ 229 00f2 61000000 		.4byte	0x61
+ 230 00f6 01010000 		.4byte	0x101
+ 231 00fa 09       		.uleb128 0x9
+ 232 00fb 01010000 		.4byte	0x101
+ 233 00ff 05       		.byte	0x5
+ 234 0100 00       		.byte	0
+ 235 0101 03       		.uleb128 0x3
+ 236 0102 04       		.byte	0x4
+ 237 0103 07       		.byte	0x7
+ 238 0104 C2010000 		.4byte	.LASF19
+ 239 0108 04       		.uleb128 0x4
+ 240 0109 00000000 		.4byte	.LASF20
+ 241 010d 02       		.byte	0x2
+ 242 010e 74       		.byte	0x74
+ 243 010f BE000000 		.4byte	0xbe
+ 244 0113 0A       		.uleb128 0xa
+ 245 0114 57010000 		.4byte	.LASF31
+ 246 0118 02       		.byte	0x2
+ 247 0119 BA       		.byte	0xba
+ 248 011a 01       		.byte	0x1
+ 249 011b 03       		.byte	0x3
+ 250 011c 6E010000 		.4byte	0x16e
+ 251 0120 0B       		.uleb128 0xb
+ 252 0121 D0010000 		.4byte	.LASF21
+ 253 0125 02       		.byte	0x2
+ 254 0126 BA       		.byte	0xba
+ 255 0127 93000000 		.4byte	0x93
+ 256 012b 0B       		.uleb128 0xb
+ 257 012c 11010000 		.4byte	.LASF22
+ 258 0130 02       		.byte	0x2
+ 259 0131 BA       		.byte	0xba
+ 260 0132 93000000 		.4byte	0x93
+ 261 0136 0B       		.uleb128 0xb
+ 262 0137 2C000000 		.4byte	.LASF23
+ 263 013b 02       		.byte	0x2
+ 264 013c BA       		.byte	0xba
+ 265 013d 61000000 		.4byte	0x61
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 11
+
+
+ 266 0141 0B       		.uleb128 0xb
+ 267 0142 CB010000 		.4byte	.LASF24
+ 268 0146 02       		.byte	0x2
+ 269 0147 BA       		.byte	0xba
+ 270 0148 61000000 		.4byte	0x61
+ 271 014c 0B       		.uleb128 0xb
+ 272 014d 37000000 		.4byte	.LASF25
+ 273 0151 02       		.byte	0x2
+ 274 0152 BB       		.byte	0xbb
+ 275 0153 61000000 		.4byte	0x61
+ 276 0157 0B       		.uleb128 0xb
+ 277 0158 3C000000 		.4byte	.LASF26
+ 278 015c 02       		.byte	0x2
+ 279 015d BB       		.byte	0xbb
+ 280 015e 61000000 		.4byte	0x61
+ 281 0162 0C       		.uleb128 0xc
+ 282 0163 D5010000 		.4byte	.LASF32
+ 283 0167 02       		.byte	0x2
+ 284 0168 BD       		.byte	0xbd
+ 285 0169 08010000 		.4byte	0x108
+ 286 016d 00       		.byte	0
+ 287 016e 0D       		.uleb128 0xd
+ 288 016f 01       		.byte	0x1
+ 289 0170 4A010000 		.4byte	.LASF33
+ 290 0174 01       		.byte	0x1
+ 291 0175 42       		.byte	0x42
+ 292 0176 01       		.byte	0x1
+ 293 0177 00000000 		.4byte	.LFB20
+ 294 017b 28000000 		.4byte	.LFE20
+ 295 017f 00000000 		.4byte	.LLST0
+ 296 0183 01       		.byte	0x1
+ 297 0184 F5010000 		.4byte	0x1f5
+ 298 0188 0E       		.uleb128 0xe
+ 299 0189 1A000000 		.4byte	.LASF34
+ 300 018d 01       		.byte	0x1
+ 301 018e 42       		.byte	0x42
+ 302 018f 61000000 		.4byte	0x61
+ 303 0193 2C000000 		.4byte	.LLST1
+ 304 0197 0F       		.uleb128 0xf
+ 305 0198 13010000 		.4byte	0x113
+ 306 019c 02000000 		.4byte	.LBB4
+ 307 01a0 00000000 		.4byte	.Ldebug_ranges0+0
+ 308 01a4 01       		.byte	0x1
+ 309 01a5 44       		.byte	0x44
+ 310 01a6 10       		.uleb128 0x10
+ 311 01a7 36010000 		.4byte	0x136
+ 312 01ab 06       		.byte	0x6
+ 313 01ac 03       		.byte	0x3
+ 314 01ad 00000000 		.4byte	banner
+ 315 01b1 9F       		.byte	0x9f
+ 316 01b2 11       		.uleb128 0x11
+ 317 01b3 20000000 		.4byte	.Ldebug_ranges0+0x20
+ 318 01b7 12       		.uleb128 0x12
+ 319 01b8 62010000 		.4byte	0x162
+ 320 01bc 02       		.byte	0x2
+ 321 01bd 91       		.byte	0x91
+ 322 01be 58       		.sleb128 -40
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 12
+
+
+ 323 01bf 13       		.uleb128 0x13
+ 324 01c0 57010000 		.4byte	0x157
+ 325 01c4 00       		.byte	0
+ 326 01c5 13       		.uleb128 0x13
+ 327 01c6 4C010000 		.4byte	0x14c
+ 328 01ca 09       		.byte	0x9
+ 329 01cb 13       		.uleb128 0x13
+ 330 01cc 41010000 		.4byte	0x141
+ 331 01d0 01       		.byte	0x1
+ 332 01d1 13       		.uleb128 0x13
+ 333 01d2 2B010000 		.4byte	0x12b
+ 334 01d6 01       		.byte	0x1
+ 335 01d7 13       		.uleb128 0x13
+ 336 01d8 20010000 		.4byte	0x120
+ 337 01dc 05       		.byte	0x5
+ 338 01dd 14       		.uleb128 0x14
+ 339 01de 1E000000 		.4byte	.LVL2
+ 340 01e2 23020000 		.4byte	0x223
+ 341 01e6 15       		.uleb128 0x15
+ 342 01e7 01       		.byte	0x1
+ 343 01e8 51       		.byte	0x51
+ 344 01e9 02       		.byte	0x2
+ 345 01ea 7D       		.byte	0x7d
+ 346 01eb 00       		.sleb128 0
+ 347 01ec 15       		.uleb128 0x15
+ 348 01ed 01       		.byte	0x1
+ 349 01ee 50       		.byte	0x50
+ 350 01ef 01       		.byte	0x1
+ 351 01f0 35       		.byte	0x35
+ 352 01f1 00       		.byte	0
+ 353 01f2 00       		.byte	0
+ 354 01f3 00       		.byte	0
+ 355 01f4 00       		.byte	0
+ 356 01f5 08       		.uleb128 0x8
+ 357 01f6 06020000 		.4byte	0x206
+ 358 01fa 06020000 		.4byte	0x206
+ 359 01fe 16       		.uleb128 0x16
+ 360 01ff 01010000 		.4byte	0x101
+ 361 0203 6F01     		.2byte	0x16f
+ 362 0205 00       		.byte	0
+ 363 0206 03       		.uleb128 0x3
+ 364 0207 01       		.byte	0x1
+ 365 0208 08       		.byte	0x8
+ 366 0209 45010000 		.4byte	.LASF27
+ 367 020d 17       		.uleb128 0x17
+ 368 020e BB010000 		.4byte	.LASF35
+ 369 0212 01       		.byte	0x1
+ 370 0213 38       		.byte	0x38
+ 371 0214 1E020000 		.4byte	0x21e
+ 372 0218 05       		.byte	0x5
+ 373 0219 03       		.byte	0x3
+ 374 021a 00000000 		.4byte	banner
+ 375 021e 18       		.uleb128 0x18
+ 376 021f F5010000 		.4byte	0x1f5
+ 377 0223 19       		.uleb128 0x19
+ 378 0224 01       		.byte	0x1
+ 379 0225 A4010000 		.4byte	.LASF36
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 13
+
+
+ 380 0229 02       		.byte	0x2
+ 381 022a 8C       		.byte	0x8c
+ 382 022b 01       		.byte	0x1
+ 383 022c A9000000 		.4byte	0xa9
+ 384 0230 01       		.byte	0x1
+ 385 0231 40020000 		.4byte	0x240
+ 386 0235 1A       		.uleb128 0x1a
+ 387 0236 93000000 		.4byte	0x93
+ 388 023a 1A       		.uleb128 0x1a
+ 389 023b 40020000 		.4byte	0x240
+ 390 023f 00       		.byte	0
+ 391 0240 1B       		.uleb128 0x1b
+ 392 0241 04       		.byte	0x4
+ 393 0242 46020000 		.4byte	0x246
+ 394 0246 18       		.uleb128 0x18
+ 395 0247 08010000 		.4byte	0x108
+ 396 024b 00       		.byte	0
+ 397              		.section	.debug_abbrev,"",%progbits
+ 398              	.Ldebug_abbrev0:
+ 399 0000 01       		.uleb128 0x1
+ 400 0001 11       		.uleb128 0x11
+ 401 0002 01       		.byte	0x1
+ 402 0003 25       		.uleb128 0x25
+ 403 0004 0E       		.uleb128 0xe
+ 404 0005 13       		.uleb128 0x13
+ 405 0006 0B       		.uleb128 0xb
+ 406 0007 03       		.uleb128 0x3
+ 407 0008 0E       		.uleb128 0xe
+ 408 0009 1B       		.uleb128 0x1b
+ 409 000a 0E       		.uleb128 0xe
+ 410 000b 55       		.uleb128 0x55
+ 411 000c 06       		.uleb128 0x6
+ 412 000d 11       		.uleb128 0x11
+ 413 000e 01       		.uleb128 0x1
+ 414 000f 52       		.uleb128 0x52
+ 415 0010 01       		.uleb128 0x1
+ 416 0011 10       		.uleb128 0x10
+ 417 0012 06       		.uleb128 0x6
+ 418 0013 00       		.byte	0
+ 419 0014 00       		.byte	0
+ 420 0015 02       		.uleb128 0x2
+ 421 0016 24       		.uleb128 0x24
+ 422 0017 00       		.byte	0
+ 423 0018 0B       		.uleb128 0xb
+ 424 0019 0B       		.uleb128 0xb
+ 425 001a 3E       		.uleb128 0x3e
+ 426 001b 0B       		.uleb128 0xb
+ 427 001c 03       		.uleb128 0x3
+ 428 001d 08       		.uleb128 0x8
+ 429 001e 00       		.byte	0
+ 430 001f 00       		.byte	0
+ 431 0020 03       		.uleb128 0x3
+ 432 0021 24       		.uleb128 0x24
+ 433 0022 00       		.byte	0
+ 434 0023 0B       		.uleb128 0xb
+ 435 0024 0B       		.uleb128 0xb
+ 436 0025 3E       		.uleb128 0x3e
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 14
+
+
+ 437 0026 0B       		.uleb128 0xb
+ 438 0027 03       		.uleb128 0x3
+ 439 0028 0E       		.uleb128 0xe
+ 440 0029 00       		.byte	0
+ 441 002a 00       		.byte	0
+ 442 002b 04       		.uleb128 0x4
+ 443 002c 16       		.uleb128 0x16
+ 444 002d 00       		.byte	0
+ 445 002e 03       		.uleb128 0x3
+ 446 002f 0E       		.uleb128 0xe
+ 447 0030 3A       		.uleb128 0x3a
+ 448 0031 0B       		.uleb128 0xb
+ 449 0032 3B       		.uleb128 0x3b
+ 450 0033 0B       		.uleb128 0xb
+ 451 0034 49       		.uleb128 0x49
+ 452 0035 13       		.uleb128 0x13
+ 453 0036 00       		.byte	0
+ 454 0037 00       		.byte	0
+ 455 0038 05       		.uleb128 0x5
+ 456 0039 16       		.uleb128 0x16
+ 457 003a 00       		.byte	0
+ 458 003b 03       		.uleb128 0x3
+ 459 003c 08       		.uleb128 0x8
+ 460 003d 3A       		.uleb128 0x3a
+ 461 003e 0B       		.uleb128 0xb
+ 462 003f 3B       		.uleb128 0x3b
+ 463 0040 0B       		.uleb128 0xb
+ 464 0041 49       		.uleb128 0x49
+ 465 0042 13       		.uleb128 0x13
+ 466 0043 00       		.byte	0
+ 467 0044 00       		.byte	0
+ 468 0045 06       		.uleb128 0x6
+ 469 0046 13       		.uleb128 0x13
+ 470 0047 01       		.byte	0x1
+ 471 0048 0B       		.uleb128 0xb
+ 472 0049 0B       		.uleb128 0xb
+ 473 004a 3A       		.uleb128 0x3a
+ 474 004b 0B       		.uleb128 0xb
+ 475 004c 3B       		.uleb128 0x3b
+ 476 004d 0B       		.uleb128 0xb
+ 477 004e 01       		.uleb128 0x1
+ 478 004f 13       		.uleb128 0x13
+ 479 0050 00       		.byte	0
+ 480 0051 00       		.byte	0
+ 481 0052 07       		.uleb128 0x7
+ 482 0053 0D       		.uleb128 0xd
+ 483 0054 00       		.byte	0
+ 484 0055 03       		.uleb128 0x3
+ 485 0056 0E       		.uleb128 0xe
+ 486 0057 3A       		.uleb128 0x3a
+ 487 0058 0B       		.uleb128 0xb
+ 488 0059 3B       		.uleb128 0x3b
+ 489 005a 0B       		.uleb128 0xb
+ 490 005b 49       		.uleb128 0x49
+ 491 005c 13       		.uleb128 0x13
+ 492 005d 38       		.uleb128 0x38
+ 493 005e 0A       		.uleb128 0xa
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 15
+
+
+ 494 005f 00       		.byte	0
+ 495 0060 00       		.byte	0
+ 496 0061 08       		.uleb128 0x8
+ 497 0062 01       		.uleb128 0x1
+ 498 0063 01       		.byte	0x1
+ 499 0064 49       		.uleb128 0x49
+ 500 0065 13       		.uleb128 0x13
+ 501 0066 01       		.uleb128 0x1
+ 502 0067 13       		.uleb128 0x13
+ 503 0068 00       		.byte	0
+ 504 0069 00       		.byte	0
+ 505 006a 09       		.uleb128 0x9
+ 506 006b 21       		.uleb128 0x21
+ 507 006c 00       		.byte	0
+ 508 006d 49       		.uleb128 0x49
+ 509 006e 13       		.uleb128 0x13
+ 510 006f 2F       		.uleb128 0x2f
+ 511 0070 0B       		.uleb128 0xb
+ 512 0071 00       		.byte	0
+ 513 0072 00       		.byte	0
+ 514 0073 0A       		.uleb128 0xa
+ 515 0074 2E       		.uleb128 0x2e
+ 516 0075 01       		.byte	0x1
+ 517 0076 03       		.uleb128 0x3
+ 518 0077 0E       		.uleb128 0xe
+ 519 0078 3A       		.uleb128 0x3a
+ 520 0079 0B       		.uleb128 0xb
+ 521 007a 3B       		.uleb128 0x3b
+ 522 007b 0B       		.uleb128 0xb
+ 523 007c 27       		.uleb128 0x27
+ 524 007d 0C       		.uleb128 0xc
+ 525 007e 20       		.uleb128 0x20
+ 526 007f 0B       		.uleb128 0xb
+ 527 0080 01       		.uleb128 0x1
+ 528 0081 13       		.uleb128 0x13
+ 529 0082 00       		.byte	0
+ 530 0083 00       		.byte	0
+ 531 0084 0B       		.uleb128 0xb
+ 532 0085 05       		.uleb128 0x5
+ 533 0086 00       		.byte	0
+ 534 0087 03       		.uleb128 0x3
+ 535 0088 0E       		.uleb128 0xe
+ 536 0089 3A       		.uleb128 0x3a
+ 537 008a 0B       		.uleb128 0xb
+ 538 008b 3B       		.uleb128 0x3b
+ 539 008c 0B       		.uleb128 0xb
+ 540 008d 49       		.uleb128 0x49
+ 541 008e 13       		.uleb128 0x13
+ 542 008f 00       		.byte	0
+ 543 0090 00       		.byte	0
+ 544 0091 0C       		.uleb128 0xc
+ 545 0092 34       		.uleb128 0x34
+ 546 0093 00       		.byte	0
+ 547 0094 03       		.uleb128 0x3
+ 548 0095 0E       		.uleb128 0xe
+ 549 0096 3A       		.uleb128 0x3a
+ 550 0097 0B       		.uleb128 0xb
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 16
+
+
+ 551 0098 3B       		.uleb128 0x3b
+ 552 0099 0B       		.uleb128 0xb
+ 553 009a 49       		.uleb128 0x49
+ 554 009b 13       		.uleb128 0x13
+ 555 009c 00       		.byte	0
+ 556 009d 00       		.byte	0
+ 557 009e 0D       		.uleb128 0xd
+ 558 009f 2E       		.uleb128 0x2e
+ 559 00a0 01       		.byte	0x1
+ 560 00a1 3F       		.uleb128 0x3f
+ 561 00a2 0C       		.uleb128 0xc
+ 562 00a3 03       		.uleb128 0x3
+ 563 00a4 0E       		.uleb128 0xe
+ 564 00a5 3A       		.uleb128 0x3a
+ 565 00a6 0B       		.uleb128 0xb
+ 566 00a7 3B       		.uleb128 0x3b
+ 567 00a8 0B       		.uleb128 0xb
+ 568 00a9 27       		.uleb128 0x27
+ 569 00aa 0C       		.uleb128 0xc
+ 570 00ab 11       		.uleb128 0x11
+ 571 00ac 01       		.uleb128 0x1
+ 572 00ad 12       		.uleb128 0x12
+ 573 00ae 01       		.uleb128 0x1
+ 574 00af 40       		.uleb128 0x40
+ 575 00b0 06       		.uleb128 0x6
+ 576 00b1 9742     		.uleb128 0x2117
+ 577 00b3 0C       		.uleb128 0xc
+ 578 00b4 01       		.uleb128 0x1
+ 579 00b5 13       		.uleb128 0x13
+ 580 00b6 00       		.byte	0
+ 581 00b7 00       		.byte	0
+ 582 00b8 0E       		.uleb128 0xe
+ 583 00b9 05       		.uleb128 0x5
+ 584 00ba 00       		.byte	0
+ 585 00bb 03       		.uleb128 0x3
+ 586 00bc 0E       		.uleb128 0xe
+ 587 00bd 3A       		.uleb128 0x3a
+ 588 00be 0B       		.uleb128 0xb
+ 589 00bf 3B       		.uleb128 0x3b
+ 590 00c0 0B       		.uleb128 0xb
+ 591 00c1 49       		.uleb128 0x49
+ 592 00c2 13       		.uleb128 0x13
+ 593 00c3 02       		.uleb128 0x2
+ 594 00c4 06       		.uleb128 0x6
+ 595 00c5 00       		.byte	0
+ 596 00c6 00       		.byte	0
+ 597 00c7 0F       		.uleb128 0xf
+ 598 00c8 1D       		.uleb128 0x1d
+ 599 00c9 01       		.byte	0x1
+ 600 00ca 31       		.uleb128 0x31
+ 601 00cb 13       		.uleb128 0x13
+ 602 00cc 52       		.uleb128 0x52
+ 603 00cd 01       		.uleb128 0x1
+ 604 00ce 55       		.uleb128 0x55
+ 605 00cf 06       		.uleb128 0x6
+ 606 00d0 58       		.uleb128 0x58
+ 607 00d1 0B       		.uleb128 0xb
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 17
+
+
+ 608 00d2 59       		.uleb128 0x59
+ 609 00d3 0B       		.uleb128 0xb
+ 610 00d4 00       		.byte	0
+ 611 00d5 00       		.byte	0
+ 612 00d6 10       		.uleb128 0x10
+ 613 00d7 05       		.uleb128 0x5
+ 614 00d8 00       		.byte	0
+ 615 00d9 31       		.uleb128 0x31
+ 616 00da 13       		.uleb128 0x13
+ 617 00db 02       		.uleb128 0x2
+ 618 00dc 0A       		.uleb128 0xa
+ 619 00dd 00       		.byte	0
+ 620 00de 00       		.byte	0
+ 621 00df 11       		.uleb128 0x11
+ 622 00e0 0B       		.uleb128 0xb
+ 623 00e1 01       		.byte	0x1
+ 624 00e2 55       		.uleb128 0x55
+ 625 00e3 06       		.uleb128 0x6
+ 626 00e4 00       		.byte	0
+ 627 00e5 00       		.byte	0
+ 628 00e6 12       		.uleb128 0x12
+ 629 00e7 34       		.uleb128 0x34
+ 630 00e8 00       		.byte	0
+ 631 00e9 31       		.uleb128 0x31
+ 632 00ea 13       		.uleb128 0x13
+ 633 00eb 02       		.uleb128 0x2
+ 634 00ec 0A       		.uleb128 0xa
+ 635 00ed 00       		.byte	0
+ 636 00ee 00       		.byte	0
+ 637 00ef 13       		.uleb128 0x13
+ 638 00f0 05       		.uleb128 0x5
+ 639 00f1 00       		.byte	0
+ 640 00f2 31       		.uleb128 0x31
+ 641 00f3 13       		.uleb128 0x13
+ 642 00f4 1C       		.uleb128 0x1c
+ 643 00f5 0B       		.uleb128 0xb
+ 644 00f6 00       		.byte	0
+ 645 00f7 00       		.byte	0
+ 646 00f8 14       		.uleb128 0x14
+ 647 00f9 898201   		.uleb128 0x4109
+ 648 00fc 01       		.byte	0x1
+ 649 00fd 11       		.uleb128 0x11
+ 650 00fe 01       		.uleb128 0x1
+ 651 00ff 31       		.uleb128 0x31
+ 652 0100 13       		.uleb128 0x13
+ 653 0101 00       		.byte	0
+ 654 0102 00       		.byte	0
+ 655 0103 15       		.uleb128 0x15
+ 656 0104 8A8201   		.uleb128 0x410a
+ 657 0107 00       		.byte	0
+ 658 0108 02       		.uleb128 0x2
+ 659 0109 0A       		.uleb128 0xa
+ 660 010a 9142     		.uleb128 0x2111
+ 661 010c 0A       		.uleb128 0xa
+ 662 010d 00       		.byte	0
+ 663 010e 00       		.byte	0
+ 664 010f 16       		.uleb128 0x16
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 18
+
+
+ 665 0110 21       		.uleb128 0x21
+ 666 0111 00       		.byte	0
+ 667 0112 49       		.uleb128 0x49
+ 668 0113 13       		.uleb128 0x13
+ 669 0114 2F       		.uleb128 0x2f
+ 670 0115 05       		.uleb128 0x5
+ 671 0116 00       		.byte	0
+ 672 0117 00       		.byte	0
+ 673 0118 17       		.uleb128 0x17
+ 674 0119 34       		.uleb128 0x34
+ 675 011a 00       		.byte	0
+ 676 011b 03       		.uleb128 0x3
+ 677 011c 0E       		.uleb128 0xe
+ 678 011d 3A       		.uleb128 0x3a
+ 679 011e 0B       		.uleb128 0xb
+ 680 011f 3B       		.uleb128 0x3b
+ 681 0120 0B       		.uleb128 0xb
+ 682 0121 49       		.uleb128 0x49
+ 683 0122 13       		.uleb128 0x13
+ 684 0123 02       		.uleb128 0x2
+ 685 0124 0A       		.uleb128 0xa
+ 686 0125 00       		.byte	0
+ 687 0126 00       		.byte	0
+ 688 0127 18       		.uleb128 0x18
+ 689 0128 26       		.uleb128 0x26
+ 690 0129 00       		.byte	0
+ 691 012a 49       		.uleb128 0x49
+ 692 012b 13       		.uleb128 0x13
+ 693 012c 00       		.byte	0
+ 694 012d 00       		.byte	0
+ 695 012e 19       		.uleb128 0x19
+ 696 012f 2E       		.uleb128 0x2e
+ 697 0130 01       		.byte	0x1
+ 698 0131 3F       		.uleb128 0x3f
+ 699 0132 0C       		.uleb128 0xc
+ 700 0133 03       		.uleb128 0x3
+ 701 0134 0E       		.uleb128 0xe
+ 702 0135 3A       		.uleb128 0x3a
+ 703 0136 0B       		.uleb128 0xb
+ 704 0137 3B       		.uleb128 0x3b
+ 705 0138 0B       		.uleb128 0xb
+ 706 0139 27       		.uleb128 0x27
+ 707 013a 0C       		.uleb128 0xc
+ 708 013b 49       		.uleb128 0x49
+ 709 013c 13       		.uleb128 0x13
+ 710 013d 3C       		.uleb128 0x3c
+ 711 013e 0C       		.uleb128 0xc
+ 712 013f 01       		.uleb128 0x1
+ 713 0140 13       		.uleb128 0x13
+ 714 0141 00       		.byte	0
+ 715 0142 00       		.byte	0
+ 716 0143 1A       		.uleb128 0x1a
+ 717 0144 05       		.uleb128 0x5
+ 718 0145 00       		.byte	0
+ 719 0146 49       		.uleb128 0x49
+ 720 0147 13       		.uleb128 0x13
+ 721 0148 00       		.byte	0
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 19
+
+
+ 722 0149 00       		.byte	0
+ 723 014a 1B       		.uleb128 0x1b
+ 724 014b 0F       		.uleb128 0xf
+ 725 014c 00       		.byte	0
+ 726 014d 0B       		.uleb128 0xb
+ 727 014e 0B       		.uleb128 0xb
+ 728 014f 49       		.uleb128 0x49
+ 729 0150 13       		.uleb128 0x13
+ 730 0151 00       		.byte	0
+ 731 0152 00       		.byte	0
+ 732 0153 00       		.byte	0
+ 733              		.section	.debug_loc,"",%progbits
+ 734              	.Ldebug_loc0:
+ 735              	.LLST0:
+ 736 0000 00000000 		.4byte	.LFB20
+ 737 0004 02000000 		.4byte	.LCFI0
+ 738 0008 0200     		.2byte	0x2
+ 739 000a 7D       		.byte	0x7d
+ 740 000b 00       		.sleb128 0
+ 741 000c 02000000 		.4byte	.LCFI0
+ 742 0010 06000000 		.4byte	.LCFI1
+ 743 0014 0200     		.2byte	0x2
+ 744 0016 7D       		.byte	0x7d
+ 745 0017 04       		.sleb128 4
+ 746 0018 06000000 		.4byte	.LCFI1
+ 747 001c 28000000 		.4byte	.LFE20
+ 748 0020 0200     		.2byte	0x2
+ 749 0022 7D       		.byte	0x7d
+ 750 0023 28       		.sleb128 40
+ 751 0024 00000000 		.4byte	0
+ 752 0028 00000000 		.4byte	0
+ 753              	.LLST1:
+ 754 002c 00000000 		.4byte	.LVL0
+ 755 0030 04000000 		.4byte	.LVL1
+ 756 0034 0100     		.2byte	0x1
+ 757 0036 50       		.byte	0x50
+ 758 0037 04000000 		.4byte	.LVL1
+ 759 003b 28000000 		.4byte	.LFE20
+ 760 003f 0400     		.2byte	0x4
+ 761 0041 F3       		.byte	0xf3
+ 762 0042 01       		.uleb128 0x1
+ 763 0043 50       		.byte	0x50
+ 764 0044 9F       		.byte	0x9f
+ 765 0045 00000000 		.4byte	0
+ 766 0049 00000000 		.4byte	0
+ 767              		.section	.debug_aranges,"",%progbits
+ 768 0000 1C000000 		.4byte	0x1c
+ 769 0004 0200     		.2byte	0x2
+ 770 0006 00000000 		.4byte	.Ldebug_info0
+ 771 000a 04       		.byte	0x4
+ 772 000b 00       		.byte	0
+ 773 000c 0000     		.2byte	0
+ 774 000e 0000     		.2byte	0
+ 775 0010 00000000 		.4byte	.LFB20
+ 776 0014 28000000 		.4byte	.LFE20-.LFB20
+ 777 0018 00000000 		.4byte	0
+ 778 001c 00000000 		.4byte	0
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 20
+
+
+ 779              		.section	.debug_ranges,"",%progbits
+ 780              	.Ldebug_ranges0:
+ 781 0000 02000000 		.4byte	.LBB4
+ 782 0004 04000000 		.4byte	.LBE4
+ 783 0008 06000000 		.4byte	.LBB8
+ 784 000c 08000000 		.4byte	.LBE8
+ 785 0010 0A000000 		.4byte	.LBB9
+ 786 0014 1E000000 		.4byte	.LBE9
+ 787 0018 00000000 		.4byte	0
+ 788 001c 00000000 		.4byte	0
+ 789 0020 02000000 		.4byte	.LBB5
+ 790 0024 04000000 		.4byte	.LBE5
+ 791 0028 06000000 		.4byte	.LBB6
+ 792 002c 08000000 		.4byte	.LBE6
+ 793 0030 0A000000 		.4byte	.LBB7
+ 794 0034 1E000000 		.4byte	.LBE7
+ 795 0038 00000000 		.4byte	0
+ 796 003c 00000000 		.4byte	0
+ 797 0040 00000000 		.4byte	.LFB20
+ 798 0044 28000000 		.4byte	.LFE20
+ 799 0048 00000000 		.4byte	0
+ 800 004c 00000000 		.4byte	0
+ 801              		.section	.debug_line,"",%progbits
+ 802              	.Ldebug_line0:
+ 803 0000 B7000000 		.section	.debug_str,"MS",%progbits,1
+ 803      02007600 
+ 803      00000201 
+ 803      FB0E0D00 
+ 803      01010101 
+ 804              	.LASF20:
+ 805 0000 5359534C 		.ascii	"SYSLOG\000"
+ 805      4F4700
+ 806              	.LASF3:
+ 807 0007 73686F72 		.ascii	"short int\000"
+ 807      7420696E 
+ 807      7400
+ 808              	.LASF11:
+ 809 0011 696E7470 		.ascii	"intptr_t\000"
+ 809      74725F74 
+ 809      00
+ 810              	.LASF34:
+ 811 001a 6578696E 		.ascii	"exinf\000"
+ 811      6600
+ 812              	.LASF1:
+ 813 0020 7369676E 		.ascii	"signed char\000"
+ 813      65642063 
+ 813      68617200 
+ 814              	.LASF23:
+ 815 002c 61726731 		.ascii	"arg1\000"
+ 815      00
+ 816              	.LASF9:
+ 817 0031 666C6F61 		.ascii	"float\000"
+ 817      7400
+ 818              	.LASF25:
+ 819 0037 61726733 		.ascii	"arg3\000"
+ 819      00
+ 820              	.LASF26:
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 21
+
+
+ 821 003c 61726734 		.ascii	"arg4\000"
+ 821      00
+ 822              	.LASF5:
+ 823 0041 6C6F6E67 		.ascii	"long long int\000"
+ 823      206C6F6E 
+ 823      6720696E 
+ 823      7400
+ 824              	.LASF7:
+ 825 004f 6C6F6E67 		.ascii	"long int\000"
+ 825      20696E74 
+ 825      00
+ 826              	.LASF18:
+ 827 0058 6C6F6769 		.ascii	"loginfo\000"
+ 827      6E666F00 
+ 828              	.LASF28:
+ 829 0060 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 829      4320342E 
+ 829      372E3320 
+ 829      32303133 
+ 829      30333132 
+ 830 0093 616E6368 		.ascii	"anch revision 196615]\000"
+ 830      20726576 
+ 830      6973696F 
+ 830      6E203139 
+ 830      36363135 
+ 831              	.LASF2:
+ 832 00a9 756E7369 		.ascii	"unsigned char\000"
+ 832      676E6564 
+ 832      20636861 
+ 832      7200
+ 833              	.LASF30:
+ 834 00b7 433A5C55 		.ascii	"C:\\Users\\asai\\Documents\\PSoC Creator\\asp_1.9.0"
+ 834      73657273 
+ 834      5C617361 
+ 834      695C446F 
+ 834      63756D65 
+ 835 00e5 5F332E30 		.ascii	"_3.0\\asp_eval1.cydsn\000"
+ 835      5C617370 
+ 835      5F657661 
+ 835      6C312E63 
+ 835      7964736E 
+ 836              	.LASF6:
+ 837 00fa 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 837      206C6F6E 
+ 837      6720756E 
+ 837      7369676E 
+ 837      65642069 
+ 838              	.LASF22:
+ 839 0111 74797065 		.ascii	"type\000"
+ 839      00
+ 840              	.LASF15:
+ 841 0116 53595354 		.ascii	"SYSTIM\000"
+ 841      494D00
+ 842              	.LASF0:
+ 843 011d 756E7369 		.ascii	"unsigned int\000"
+ 843      676E6564 
+ 843      20696E74 
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 22
+
+
+ 843      00
+ 844              	.LASF14:
+ 845 012a 756C6F6E 		.ascii	"ulong_t\000"
+ 845      675F7400 
+ 846              	.LASF4:
+ 847 0132 73686F72 		.ascii	"short unsigned int\000"
+ 847      7420756E 
+ 847      7369676E 
+ 847      65642069 
+ 847      6E7400
+ 848              	.LASF27:
+ 849 0145 63686172 		.ascii	"char\000"
+ 849      00
+ 850              	.LASF33:
+ 851 014a 7072696E 		.ascii	"print_banner\000"
+ 851      745F6261 
+ 851      6E6E6572 
+ 851      00
+ 852              	.LASF31:
+ 853 0157 5F737973 		.ascii	"_syslog_4\000"
+ 853      6C6F675F 
+ 853      3400
+ 854              	.LASF29:
+ 855 0161 2E5C6173 		.ascii	".\\asp\\syssvc\\banner.c\000"
+ 855      705C7379 
+ 855      73737663 
+ 855      5C62616E 
+ 855      6E65722E 
+ 856              	.LASF17:
+ 857 0177 6C6F6774 		.ascii	"logtim\000"
+ 857      696D00
+ 858              	.LASF13:
+ 859 017e 75696E74 		.ascii	"uint_t\000"
+ 859      5F7400
+ 860              	.LASF8:
+ 861 0185 6C6F6E67 		.ascii	"long unsigned int\000"
+ 861      20756E73 
+ 861      69676E65 
+ 861      6420696E 
+ 861      7400
+ 862              	.LASF10:
+ 863 0197 646F7562 		.ascii	"double\000"
+ 863      6C6500
+ 864              	.LASF12:
+ 865 019e 696E745F 		.ascii	"int_t\000"
+ 865      7400
+ 866              	.LASF36:
+ 867 01a4 7379736C 		.ascii	"syslog_wri_log\000"
+ 867      6F675F77 
+ 867      72695F6C 
+ 867      6F6700
+ 868              	.LASF16:
+ 869 01b3 6C6F6774 		.ascii	"logtype\000"
+ 869      79706500 
+ 870              	.LASF35:
+ 871 01bb 62616E6E 		.ascii	"banner\000"
+ 871      657200
+ARM GAS  C:\TEMP\cc9Z3LDL.s 			page 23
+
+
+ 872              	.LASF19:
+ 873 01c2 73697A65 		.ascii	"sizetype\000"
+ 873      74797065 
+ 873      00
+ 874              	.LASF24:
+ 875 01cb 61726732 		.ascii	"arg2\000"
+ 875      00
+ 876              	.LASF21:
+ 877 01d0 7072696F 		.ascii	"prio\000"
+ 877      00
+ 878              	.LASF32:
+ 879 01d5 6C6F6762 		.ascii	"logbuf\000"
+ 879      756600
+ 880              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

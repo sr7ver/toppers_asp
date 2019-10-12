@@ -1,0 +1,120 @@
+=====================================================================
+                     CY8CKIT050ターゲット依存部
+                                  Last Modified: 2014 Feb 03 18:09:00
+=====================================================================
+
+(1) 対応しているターゲットシステムの種類・構成
+
+CY8CKIT050ターゲット依存部は，Cypress Semiconductor Corporation（以下
+，Cypress社）の"CY8CKIT-050 PSoC 5LP PSoc Development Kit"をサポート
+している．
+
+本キットに搭載しているPSoC 5LPデバイスは，CY8C5868AXI-LP035である．
+
+・CPU：ARM Cortex-M3(最大動作周波数67MHz)
+・FLASH ROM：256KB
+・SRAM：64KB
+
+
+(2) 使用する開発環境と動作検証した条件（バージョン，オプション等）
+
+開発ツールは，Cypress社のPSoC Creator v3.0 Component Pack7を使用した．
+
+この開発ツールに搭載されているコンパイラは以下の通りである．
+
+gcc version 4.4.1 (Sourcery G++ Lite 2010q1-188)
+
+コンパイラがgccのため，ターゲット名はcy8ckit050_gccとした．
+
+本ターゲットでの動作には，PSoC Creatorのプロジェクトが必要であるが
+ASPカーネルおよびサンプルプログラム(sample1)がコンパイルできる
+PSoC Creatorのプロジェクトをアーカイブしたものを簡易パッケージで
+公開している．
+
+
+(3) ターゲット定義事項の規定
+
+(3-1) 割込み優先度
+
+割込み優先度として指定可能な範囲は，-7 ～ -1 である．
+
+
+(4) メモリマップ
+プログラムはFLASHへ，データはRAMへ配置する．
+
+(5) シリアルインターフェイスについて
+
+PSoC 5LPにはシリアルインターフェイスを標準搭載していない．
+
+シリアルインターフェイスを実現する手段としては以下の2種類がある．
+
+  (a) USBUARTコンポーネント(CDC Interface)を用いる
+  (b) Digital SubsystemにUARTコンポーネントを組み込む
+
+本来ならばDigital Subsystemのリソースは全てユーザに解放することが望ま
+しいが，全てのユーザがUSB-I/Fを実装するとも限らない．
+
+移植の容易性を考慮し，今回は(b)を採用するが，将来的には(a)でも実現し，
+ユーザが選択できるようにしたい．
+
+通信フォーマットは以下の通りである．
+19,200bps，8bit，non-parity，1stop-bit
+
+(6) システムログ機能の情報
+システムログの例レベル出力は，UARTコンポーネントを用いる．
+通信フォーマットは，19,200bps, 8bit, non-parity, 1stop-bitである．
+
+(7) ライブラリの指定
+TOPPERSは標準Cライブラリとしてnewlibの使用を推奨しているが，
+PSoC Creatorは一般的なgccライブラリをデフォルトとしている
+libgcc，libc，libcs3，libcs3unhosted，libcs3micro
+
+特にスタートアップルーチンから呼ばれるlibcs3.aからPSoCの初期化ルーチン
+を直接呼び出しており，現段階でこれを切り分ける手段はみつかっていない．
+
+(8) リセット解除からsta_ker実行まで
+TOPPERSでは，アーキテクチャ依存部にあるstart.Sで必要な初期化を実行後
+sta_kerを呼ぶ手順になっているが，上記(7)で述べたとおり，PSoCでは
+現段階ではリセット解除からmainを呼び出すまでは，PSoC Creatorが自動生成
+するソフトウェアをそのまま使わざるを得ない．
+
+よってPSoC 5LP版では，arch/arm_m_gcc/start.Sの代わりに，
+PSoCプロジェクトディレクトリ下にある，Generated_Source/PSoC5/Cm3Start.c
+を使用し，main関数からsta_ker()をコールする手順とした．
+
+(9) ディレクトリ構成・ファイル構成
+ ./cy8ckit050_gcc
+   ./cy8c5xlp.h
+   ./target.tf
+   ./target_asm.inc
+   ./target_cfg1_out.h
+   ./target_check.tf
+   ./target_config.c
+   ./target_config.h
+   ./target_kernel.h
+   ./target_offset.tf
+   ./target_rename.def
+   ./target_rename.h
+   ./target_serial.c
+   ./target_serial.cfg
+   ./target_serial.h
+   ./target_sil.h
+   ./target_stddef.h
+   ./target_syssvc.h
+   ./target_test.h
+   ./target_timer.cfg
+   ./target_timer.h
+   ./target_unrename.h
+   ./target_user.txt
+
+(9) バージョン履歴
+2014/02/03
+・ASPカーネル 1.9.0に対応
+　動作確認のみ
+
+2014/02/03
+・ASPカーネル 1.8.0に対応
+　char_t → char
+
+2013/08/25
+・最初のリリース

@@ -1,0 +1,81 @@
+--------------- Rebuild Started: 02/03/2014 16:45:25 Project: asp_eval1, Configuration: ARM GCC 4.7.3 Debug ---------------
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\main.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\kernel_cfg.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\sample1.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\core_config.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\core_support.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\core_timer.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\alarm.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\cyclic.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\dataqueue.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\eventflag.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\exception.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\interrupt.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\mailbox.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\mempfix.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\pridataq.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\semaphore.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\sys_manage.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\task.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\task_except.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\task_manage.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\task_refer.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\task_sync.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\time_event.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\time_manage.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\wait.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\startup.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\log_output.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\strerror.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\t_perror.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\banner.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\logtask.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\serial.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\syslog.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\vasyslog.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\target_config.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\target_serial.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\cyfitter_cfg.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\UART_1.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\UART_1_PM.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\UART_1_INT.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\UART_1_BOOT.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\UART_1_IntClock.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\Cm3Start.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\CyBootAsmGnu.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\CyDmac.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\CyFlash.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\CyLib.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\cyPm.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\CySpc.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\cyutils.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\isr_1.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\cymetadata.o"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\asp_eval1.hex"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\asp_eval1.elf"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\asp_eval1.map"
+Deleting file ".\asp_eval1.cycdx"
+Deleting file ".\asp_eval1.svd"
+Deleting file ".\asp_eval1.rpt"
+Deleting file ".\asp_eval1_timing.html"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\.deps\C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\.deps\ARM_C_FILE.P"
+Deleting file ".\CortexM3\ARM_GCC_473\Debug\.deps\GNU_ARM_ASM_FILE.P"
+cydsfit.exe "-.appdatapath" "C:\Users\asai\AppData\Local\Cypress Semiconductor\PSoC Creator\3.0" "-.fdsnotice" "-.fdswarpdepfile=warp_dependencies.txt" "-.fdselabdepfile=elab_dependencies.txt" "-.fdsbldfile=generated_files.txt" "-p" "C:\Users\asai\Documents\PSoC Creator\asp_1.8.1_3.0\asp_eval1.cydsn\asp_eval1.cyprj" "-d" "CY8C5868AXI-LP035" "-s" "C:\Users\asai\Documents\PSoC Creator\asp_1.8.1_3.0\asp_eval1.cydsn\Generated_Source\PSoC5" "--" "-yv2" "-v3" "-ygs" "-q10" "-o2" "-.fftcfgtype=LE"
+Elaborating Design...
+HDL Generation ...
+Synthesis ...
+Place and Route ...
+Tech mapping ...
+Info: mpr.M0037: Unused pieces of the design have been optimized out. See the Tech mapping section of the report file for details. (App=cydsfit)
+Analog Placement ...
+Analog Routing ...
+Analog Code Generation ...
+Digital Placement ...
+Digital Routing ...
+Bitstream Generation ...
+Static timing analysis ...
+API Generation ...
+Dependency Generation ...
+Clean Temporary Files ...
+--------------- Rebuild Failed: 02/03/2014 16:45:51 ---------------

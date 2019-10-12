@@ -1,0 +1,730 @@
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"strerror.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.itron_strerror,"ax",%progbits
+  19              		.align	1
+  20              		.global	itron_strerror
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	itron_strerror, %function
+  24              	itron_strerror:
+  25              	.LFB1:
+  26              		.file 1 ".\\asp\\library\\strerror.c"
+   1:.\asp\library/strerror.c **** /*
+   2:.\asp\library/strerror.c ****  *  TOPPERS Software
+   3:.\asp\library/strerror.c ****  *      Toyohashi Open Platform for Embedded Real-Time Systems
+   4:.\asp\library/strerror.c ****  * 
+   5:.\asp\library/strerror.c ****  *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   6:.\asp\library/strerror.c ****  *                              Toyohashi Univ. of Technology, JAPAN
+   7:.\asp\library/strerror.c ****  *  Copyright (C) 2004-2010 by Embedded and Real-Time Systems Laboratory
+   8:.\asp\library/strerror.c ****  *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   9:.\asp\library/strerror.c ****  * 
+  10:.\asp\library/strerror.c ****  *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  11:.\asp\library/strerror.c ****  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  12:.\asp\library/strerror.c ****  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  13:.\asp\library/strerror.c ****  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  14:.\asp\library/strerror.c ****  *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  15:.\asp\library/strerror.c ****  *      スコード中に含まれていること．
+  16:.\asp\library/strerror.c ****  *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  17:.\asp\library/strerror.c ****  *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  18:.\asp\library/strerror.c ****  *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  19:.\asp\library/strerror.c ****  *      の無保証規定を掲載すること．
+  20:.\asp\library/strerror.c ****  *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  21:.\asp\library/strerror.c ****  *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  22:.\asp\library/strerror.c ****  *      と．
+  23:.\asp\library/strerror.c ****  *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  24:.\asp\library/strerror.c ****  *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  25:.\asp\library/strerror.c ****  *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  26:.\asp\library/strerror.c ****  *        報告すること．
+  27:.\asp\library/strerror.c ****  *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  28:.\asp\library/strerror.c ****  *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  29:.\asp\library/strerror.c ****  *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  30:.\asp\library/strerror.c ****  *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  31:.\asp\library/strerror.c ****  *      免責すること．
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 2
+
+
+  32:.\asp\library/strerror.c ****  * 
+  33:.\asp\library/strerror.c ****  *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  34:.\asp\library/strerror.c ****  *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  35:.\asp\library/strerror.c ****  *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  36:.\asp\library/strerror.c ****  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  37:.\asp\library/strerror.c ****  *  の責任を負わない．
+  38:.\asp\library/strerror.c ****  * 
+  39:.\asp\library/strerror.c ****  *  @(#) $Id: strerror.c 1732 2010-02-03 03:15:52Z ertl-hiro $
+  40:.\asp\library/strerror.c ****  */
+  41:.\asp\library/strerror.c **** 
+  42:.\asp\library/strerror.c **** /*
+  43:.\asp\library/strerror.c ****  *		エラーメッセージ文字列を返す関数
+  44:.\asp\library/strerror.c ****  */
+  45:.\asp\library/strerror.c **** 
+  46:.\asp\library/strerror.c **** #include <t_stddef.h>
+  47:.\asp\library/strerror.c **** #include <t_stdlib.h>
+  48:.\asp\library/strerror.c **** 
+  49:.\asp\library/strerror.c **** const char *
+  50:.\asp\library/strerror.c **** itron_strerror(ER ercd)
+  51:.\asp\library/strerror.c **** {
+  27              		.loc 1 51 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              	.LVL0:
+  33 0000 3A30     		adds	r0, r0, #58
+  34              	.LVL1:
+  35 0002 C0B2     		uxtb	r0, r0
+  36              	.LVL2:
+  37 0004 3A28     		cmp	r0, #58
+  38 0006 03D8     		bhi	.L3
+  39 0008 024B     		ldr	r3, .L5
+  40 000a 53F82000 		ldr	r0, [r3, r0, lsl #2]
+  41 000e 7047     		bx	lr
+  42              	.L3:
+  52:.\asp\library/strerror.c **** 	switch (MERCD(ercd)) {
+  43              		.loc 1 52 0
+  44 0010 0148     		ldr	r0, .L5+4
+  53:.\asp\library/strerror.c **** 	case E_OK:
+  54:.\asp\library/strerror.c **** 		return("E_OK");
+  55:.\asp\library/strerror.c **** 
+  56:.\asp\library/strerror.c **** 	case E_SYS:
+  57:.\asp\library/strerror.c **** 		return("E_SYS");
+  58:.\asp\library/strerror.c **** 	case E_NOSPT:
+  59:.\asp\library/strerror.c **** 		return("E_NOSPT");
+  60:.\asp\library/strerror.c **** 	case E_RSFN:
+  61:.\asp\library/strerror.c **** 		return("E_RSFN");
+  62:.\asp\library/strerror.c **** 	case E_RSATR:
+  63:.\asp\library/strerror.c **** 		return("E_RSATR");
+  64:.\asp\library/strerror.c **** 
+  65:.\asp\library/strerror.c **** 	case E_PAR:
+  66:.\asp\library/strerror.c **** 		return("E_PAR");
+  67:.\asp\library/strerror.c **** 	case E_ID:
+  68:.\asp\library/strerror.c **** 		return("E_ID");
+  69:.\asp\library/strerror.c **** 
+  70:.\asp\library/strerror.c **** 	case E_CTX:
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 3
+
+
+  71:.\asp\library/strerror.c **** 		return("E_CTX");
+  72:.\asp\library/strerror.c **** 	case E_MACV:
+  73:.\asp\library/strerror.c **** 		return("E_MACV");
+  74:.\asp\library/strerror.c **** 	case E_OACV:
+  75:.\asp\library/strerror.c **** 		return("E_OACV");
+  76:.\asp\library/strerror.c **** 	case E_ILUSE:
+  77:.\asp\library/strerror.c **** 		return("E_ILUSE");
+  78:.\asp\library/strerror.c **** 
+  79:.\asp\library/strerror.c **** 	case E_NOMEM:
+  80:.\asp\library/strerror.c **** 		return("E_NOMEM");
+  81:.\asp\library/strerror.c **** 	case E_NOID:
+  82:.\asp\library/strerror.c **** 		return("E_NOID");
+  83:.\asp\library/strerror.c **** 	case E_NORES:
+  84:.\asp\library/strerror.c **** 		return("E_NORES");
+  85:.\asp\library/strerror.c **** 
+  86:.\asp\library/strerror.c **** 	case E_OBJ:
+  87:.\asp\library/strerror.c **** 		return("E_OBJ");
+  88:.\asp\library/strerror.c **** 	case E_NOEXS:
+  89:.\asp\library/strerror.c **** 		return("E_NOEXS");
+  90:.\asp\library/strerror.c **** 	case E_QOVR:
+  91:.\asp\library/strerror.c **** 		return("E_QOVR");
+  92:.\asp\library/strerror.c **** 
+  93:.\asp\library/strerror.c **** 	case E_RLWAI:
+  94:.\asp\library/strerror.c **** 		return("E_RLWAI");
+  95:.\asp\library/strerror.c **** 	case E_TMOUT:
+  96:.\asp\library/strerror.c **** 		return("E_TMOUT");
+  97:.\asp\library/strerror.c **** 	case E_DLT:
+  98:.\asp\library/strerror.c **** 		return("E_DLT");
+  99:.\asp\library/strerror.c **** 	case E_CLS:
+ 100:.\asp\library/strerror.c **** 		return("E_CLS");
+ 101:.\asp\library/strerror.c **** 
+ 102:.\asp\library/strerror.c **** 	case E_WBLK:
+ 103:.\asp\library/strerror.c **** 		return("E_WBLK");
+ 104:.\asp\library/strerror.c **** 	case E_BOVR:
+ 105:.\asp\library/strerror.c **** 		return("E_BOVR");
+ 106:.\asp\library/strerror.c **** 
+ 107:.\asp\library/strerror.c **** 	default:
+ 108:.\asp\library/strerror.c **** 		return("unknown error");
+ 109:.\asp\library/strerror.c **** 	}
+ 110:.\asp\library/strerror.c **** }
+  45              		.loc 1 110 0
+  46 0012 7047     		bx	lr
+  47              	.L6:
+  48              		.align	2
+  49              	.L5:
+  50 0014 00000000 		.word	.LANCHOR0
+  51 0018 00000000 		.word	.LC0
+  52              		.cfi_endproc
+  53              	.LFE1:
+  54              		.size	itron_strerror, .-itron_strerror
+  55              		.section	.rodata
+  56              		.align	2
+  57              		.set	.LANCHOR0,. + 0
+  58              		.type	CSWTCH.2, %object
+  59              		.size	CSWTCH.2, 236
+  60              	CSWTCH.2:
+  61 0000 0E000000 		.word	.LC1
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 4
+
+
+  62 0004 15000000 		.word	.LC2
+  63 0008 00000000 		.word	.LC0
+  64 000c 00000000 		.word	.LC0
+  65 0010 00000000 		.word	.LC0
+  66 0014 00000000 		.word	.LC0
+  67 0018 1C000000 		.word	.LC3
+  68 001c 22000000 		.word	.LC4
+  69 0020 28000000 		.word	.LC5
+  70 0024 30000000 		.word	.LC6
+  71 0028 00000000 		.word	.LC0
+  72 002c 00000000 		.word	.LC0
+  73 0030 00000000 		.word	.LC0
+  74 0034 00000000 		.word	.LC0
+  75 0038 00000000 		.word	.LC0
+  76 003c 38000000 		.word	.LC7
+  77 0040 3F000000 		.word	.LC8
+  78 0044 47000000 		.word	.LC9
+  79 0048 00000000 		.word	.LC0
+  80 004c 00000000 		.word	.LC0
+  81 0050 00000000 		.word	.LC0
+  82 0054 00000000 		.word	.LC0
+  83 0058 00000000 		.word	.LC0
+  84 005c 4D000000 		.word	.LC10
+  85 0060 55000000 		.word	.LC11
+  86 0064 5C000000 		.word	.LC12
+  87 0068 00000000 		.word	.LC0
+  88 006c 00000000 		.word	.LC0
+  89 0070 00000000 		.word	.LC0
+  90 0074 00000000 		.word	.LC0
+  91 0078 64000000 		.word	.LC13
+  92 007c 6C000000 		.word	.LC14
+  93 0080 73000000 		.word	.LC15
+  94 0084 7A000000 		.word	.LC16
+  95 0088 00000000 		.word	.LC0
+  96 008c 00000000 		.word	.LC0
+  97 0090 00000000 		.word	.LC0
+  98 0094 00000000 		.word	.LC0
+  99 0098 00000000 		.word	.LC0
+ 100 009c 00000000 		.word	.LC0
+ 101 00a0 80000000 		.word	.LC17
+ 102 00a4 85000000 		.word	.LC18
+ 103 00a8 00000000 		.word	.LC0
+ 104 00ac 00000000 		.word	.LC0
+ 105 00b0 00000000 		.word	.LC0
+ 106 00b4 00000000 		.word	.LC0
+ 107 00b8 00000000 		.word	.LC0
+ 108 00bc 8B000000 		.word	.LC19
+ 109 00c0 93000000 		.word	.LC20
+ 110 00c4 9A000000 		.word	.LC21
+ 111 00c8 00000000 		.word	.LC0
+ 112 00cc 00000000 		.word	.LC0
+ 113 00d0 00000000 		.word	.LC0
+ 114 00d4 A2000000 		.word	.LC22
+ 115 00d8 00000000 		.word	.LC0
+ 116 00dc 00000000 		.word	.LC0
+ 117 00e0 00000000 		.word	.LC0
+ 118 00e4 00000000 		.word	.LC0
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 5
+
+
+ 119 00e8 A8000000 		.word	.LC23
+ 120              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 121              	.LC0:
+ 122 0000 756E6B6E 		.ascii	"unknown error\000"
+ 122      6F776E20 
+ 122      6572726F 
+ 122      7200
+ 123              	.LC1:
+ 124 000e 455F424F 		.ascii	"E_BOVR\000"
+ 124      565200
+ 125              	.LC2:
+ 126 0015 455F5742 		.ascii	"E_WBLK\000"
+ 126      4C4B00
+ 127              	.LC3:
+ 128 001c 455F434C 		.ascii	"E_CLS\000"
+ 128      5300
+ 129              	.LC4:
+ 130 0022 455F444C 		.ascii	"E_DLT\000"
+ 130      5400
+ 131              	.LC5:
+ 132 0028 455F544D 		.ascii	"E_TMOUT\000"
+ 132      4F555400 
+ 133              	.LC6:
+ 134 0030 455F524C 		.ascii	"E_RLWAI\000"
+ 134      57414900 
+ 135              	.LC7:
+ 136 0038 455F514F 		.ascii	"E_QOVR\000"
+ 136      565200
+ 137              	.LC8:
+ 138 003f 455F4E4F 		.ascii	"E_NOEXS\000"
+ 138      45585300 
+ 139              	.LC9:
+ 140 0047 455F4F42 		.ascii	"E_OBJ\000"
+ 140      4A00
+ 141              	.LC10:
+ 142 004d 455F4E4F 		.ascii	"E_NORES\000"
+ 142      52455300 
+ 143              	.LC11:
+ 144 0055 455F4E4F 		.ascii	"E_NOID\000"
+ 144      494400
+ 145              	.LC12:
+ 146 005c 455F4E4F 		.ascii	"E_NOMEM\000"
+ 146      4D454D00 
+ 147              	.LC13:
+ 148 0064 455F494C 		.ascii	"E_ILUSE\000"
+ 148      55534500 
+ 149              	.LC14:
+ 150 006c 455F4F41 		.ascii	"E_OACV\000"
+ 150      435600
+ 151              	.LC15:
+ 152 0073 455F4D41 		.ascii	"E_MACV\000"
+ 152      435600
+ 153              	.LC16:
+ 154 007a 455F4354 		.ascii	"E_CTX\000"
+ 154      5800
+ 155              	.LC17:
+ 156 0080 455F4944 		.ascii	"E_ID\000"
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 6
+
+
+ 156      00
+ 157              	.LC18:
+ 158 0085 455F5041 		.ascii	"E_PAR\000"
+ 158      5200
+ 159              	.LC19:
+ 160 008b 455F5253 		.ascii	"E_RSATR\000"
+ 160      41545200 
+ 161              	.LC20:
+ 162 0093 455F5253 		.ascii	"E_RSFN\000"
+ 162      464E00
+ 163              	.LC21:
+ 164 009a 455F4E4F 		.ascii	"E_NOSPT\000"
+ 164      53505400 
+ 165              	.LC22:
+ 166 00a2 455F5359 		.ascii	"E_SYS\000"
+ 166      5300
+ 167              	.LC23:
+ 168 00a8 455F4F4B 		.ascii	"E_OK\000"
+ 168      00
+ 169              		.text
+ 170              	.Letext0:
+ 171              		.file 2 ".\\asp\\arch\\gcc/tool_stddef.h"
+ 172              		.file 3 ".\\asp\\include/t_stddef.h"
+ 173              		.section	.debug_info,"",%progbits
+ 174              	.Ldebug_info0:
+ 175 0000 D9000000 		.4byte	0xd9
+ 176 0004 0200     		.2byte	0x2
+ 177 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 178 000a 04       		.byte	0x4
+ 179 000b 01       		.uleb128 0x1
+ 180 000c FE000000 		.4byte	.LASF14
+ 181 0010 01       		.byte	0x1
+ 182 0011 A4000000 		.4byte	.LASF15
+ 183 0015 00000000 		.4byte	.LASF16
+ 184 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 185 001d 00000000 		.4byte	0
+ 186 0021 00000000 		.4byte	0
+ 187 0025 00000000 		.4byte	.Ldebug_line0
+ 188 0029 02       		.uleb128 0x2
+ 189 002a 04       		.byte	0x4
+ 190 002b 05       		.byte	0x5
+ 191 002c 696E7400 		.ascii	"int\000"
+ 192 0030 03       		.uleb128 0x3
+ 193 0031 04       		.byte	0x4
+ 194 0032 07       		.byte	0x7
+ 195 0033 BD000000 		.4byte	.LASF0
+ 196 0037 04       		.uleb128 0x4
+ 197 0038 58000000 		.4byte	.LASF11
+ 198 003c 02       		.byte	0x2
+ 199 003d 66       		.byte	0x66
+ 200 003e 42000000 		.4byte	0x42
+ 201 0042 03       		.uleb128 0x3
+ 202 0043 01       		.byte	0x1
+ 203 0044 06       		.byte	0x6
+ 204 0045 50010000 		.4byte	.LASF1
+ 205 0049 03       		.uleb128 0x3
+ 206 004a 01       		.byte	0x1
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 7
+
+
+ 207 004b 08       		.byte	0x8
+ 208 004c 65000000 		.4byte	.LASF2
+ 209 0050 03       		.uleb128 0x3
+ 210 0051 02       		.byte	0x2
+ 211 0052 05       		.byte	0x5
+ 212 0053 F4000000 		.4byte	.LASF3
+ 213 0057 03       		.uleb128 0x3
+ 214 0058 02       		.byte	0x2
+ 215 0059 07       		.byte	0x7
+ 216 005a 85000000 		.4byte	.LASF4
+ 217 005e 03       		.uleb128 0x3
+ 218 005f 08       		.byte	0x8
+ 219 0060 05       		.byte	0x5
+ 220 0061 E1000000 		.4byte	.LASF5
+ 221 0065 03       		.uleb128 0x3
+ 222 0066 08       		.byte	0x8
+ 223 0067 07       		.byte	0x7
+ 224 0068 CA000000 		.4byte	.LASF6
+ 225 006c 03       		.uleb128 0x3
+ 226 006d 04       		.byte	0x4
+ 227 006e 05       		.byte	0x5
+ 228 006f 47010000 		.4byte	.LASF7
+ 229 0073 03       		.uleb128 0x3
+ 230 0074 04       		.byte	0x4
+ 231 0075 07       		.byte	0x7
+ 232 0076 73000000 		.4byte	.LASF8
+ 233 007a 03       		.uleb128 0x3
+ 234 007b 04       		.byte	0x4
+ 235 007c 04       		.byte	0x4
+ 236 007d 5F000000 		.4byte	.LASF9
+ 237 0081 03       		.uleb128 0x3
+ 238 0082 08       		.byte	0x8
+ 239 0083 04       		.byte	0x4
+ 240 0084 9D000000 		.4byte	.LASF10
+ 241 0088 04       		.uleb128 0x4
+ 242 0089 43000000 		.4byte	.LASF12
+ 243 008d 03       		.byte	0x3
+ 244 008e 65       		.byte	0x65
+ 245 008f 29000000 		.4byte	0x29
+ 246 0093 05       		.uleb128 0x5
+ 247 0094 455200   		.ascii	"ER\000"
+ 248 0097 03       		.byte	0x3
+ 249 0098 6C       		.byte	0x6c
+ 250 0099 88000000 		.4byte	0x88
+ 251 009d 06       		.uleb128 0x6
+ 252 009e 01       		.byte	0x1
+ 253 009f 49000000 		.4byte	.LASF17
+ 254 00a3 01       		.byte	0x1
+ 255 00a4 32       		.byte	0x32
+ 256 00a5 01       		.byte	0x1
+ 257 00a6 CA000000 		.4byte	0xca
+ 258 00aa 00000000 		.4byte	.LFB1
+ 259 00ae 1C000000 		.4byte	.LFE1
+ 260 00b2 02       		.byte	0x2
+ 261 00b3 7D       		.byte	0x7d
+ 262 00b4 00       		.sleb128 0
+ 263 00b5 01       		.byte	0x1
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 8
+
+
+ 264 00b6 CA000000 		.4byte	0xca
+ 265 00ba 07       		.uleb128 0x7
+ 266 00bb 98000000 		.4byte	.LASF18
+ 267 00bf 01       		.byte	0x1
+ 268 00c0 32       		.byte	0x32
+ 269 00c1 93000000 		.4byte	0x93
+ 270 00c5 00000000 		.4byte	.LLST0
+ 271 00c9 00       		.byte	0
+ 272 00ca 08       		.uleb128 0x8
+ 273 00cb 04       		.byte	0x4
+ 274 00cc D0000000 		.4byte	0xd0
+ 275 00d0 09       		.uleb128 0x9
+ 276 00d1 D5000000 		.4byte	0xd5
+ 277 00d5 03       		.uleb128 0x3
+ 278 00d6 01       		.byte	0x1
+ 279 00d7 08       		.byte	0x8
+ 280 00d8 EF000000 		.4byte	.LASF13
+ 281 00dc 00       		.byte	0
+ 282              		.section	.debug_abbrev,"",%progbits
+ 283              	.Ldebug_abbrev0:
+ 284 0000 01       		.uleb128 0x1
+ 285 0001 11       		.uleb128 0x11
+ 286 0002 01       		.byte	0x1
+ 287 0003 25       		.uleb128 0x25
+ 288 0004 0E       		.uleb128 0xe
+ 289 0005 13       		.uleb128 0x13
+ 290 0006 0B       		.uleb128 0xb
+ 291 0007 03       		.uleb128 0x3
+ 292 0008 0E       		.uleb128 0xe
+ 293 0009 1B       		.uleb128 0x1b
+ 294 000a 0E       		.uleb128 0xe
+ 295 000b 55       		.uleb128 0x55
+ 296 000c 06       		.uleb128 0x6
+ 297 000d 11       		.uleb128 0x11
+ 298 000e 01       		.uleb128 0x1
+ 299 000f 52       		.uleb128 0x52
+ 300 0010 01       		.uleb128 0x1
+ 301 0011 10       		.uleb128 0x10
+ 302 0012 06       		.uleb128 0x6
+ 303 0013 00       		.byte	0
+ 304 0014 00       		.byte	0
+ 305 0015 02       		.uleb128 0x2
+ 306 0016 24       		.uleb128 0x24
+ 307 0017 00       		.byte	0
+ 308 0018 0B       		.uleb128 0xb
+ 309 0019 0B       		.uleb128 0xb
+ 310 001a 3E       		.uleb128 0x3e
+ 311 001b 0B       		.uleb128 0xb
+ 312 001c 03       		.uleb128 0x3
+ 313 001d 08       		.uleb128 0x8
+ 314 001e 00       		.byte	0
+ 315 001f 00       		.byte	0
+ 316 0020 03       		.uleb128 0x3
+ 317 0021 24       		.uleb128 0x24
+ 318 0022 00       		.byte	0
+ 319 0023 0B       		.uleb128 0xb
+ 320 0024 0B       		.uleb128 0xb
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 9
+
+
+ 321 0025 3E       		.uleb128 0x3e
+ 322 0026 0B       		.uleb128 0xb
+ 323 0027 03       		.uleb128 0x3
+ 324 0028 0E       		.uleb128 0xe
+ 325 0029 00       		.byte	0
+ 326 002a 00       		.byte	0
+ 327 002b 04       		.uleb128 0x4
+ 328 002c 16       		.uleb128 0x16
+ 329 002d 00       		.byte	0
+ 330 002e 03       		.uleb128 0x3
+ 331 002f 0E       		.uleb128 0xe
+ 332 0030 3A       		.uleb128 0x3a
+ 333 0031 0B       		.uleb128 0xb
+ 334 0032 3B       		.uleb128 0x3b
+ 335 0033 0B       		.uleb128 0xb
+ 336 0034 49       		.uleb128 0x49
+ 337 0035 13       		.uleb128 0x13
+ 338 0036 00       		.byte	0
+ 339 0037 00       		.byte	0
+ 340 0038 05       		.uleb128 0x5
+ 341 0039 16       		.uleb128 0x16
+ 342 003a 00       		.byte	0
+ 343 003b 03       		.uleb128 0x3
+ 344 003c 08       		.uleb128 0x8
+ 345 003d 3A       		.uleb128 0x3a
+ 346 003e 0B       		.uleb128 0xb
+ 347 003f 3B       		.uleb128 0x3b
+ 348 0040 0B       		.uleb128 0xb
+ 349 0041 49       		.uleb128 0x49
+ 350 0042 13       		.uleb128 0x13
+ 351 0043 00       		.byte	0
+ 352 0044 00       		.byte	0
+ 353 0045 06       		.uleb128 0x6
+ 354 0046 2E       		.uleb128 0x2e
+ 355 0047 01       		.byte	0x1
+ 356 0048 3F       		.uleb128 0x3f
+ 357 0049 0C       		.uleb128 0xc
+ 358 004a 03       		.uleb128 0x3
+ 359 004b 0E       		.uleb128 0xe
+ 360 004c 3A       		.uleb128 0x3a
+ 361 004d 0B       		.uleb128 0xb
+ 362 004e 3B       		.uleb128 0x3b
+ 363 004f 0B       		.uleb128 0xb
+ 364 0050 27       		.uleb128 0x27
+ 365 0051 0C       		.uleb128 0xc
+ 366 0052 49       		.uleb128 0x49
+ 367 0053 13       		.uleb128 0x13
+ 368 0054 11       		.uleb128 0x11
+ 369 0055 01       		.uleb128 0x1
+ 370 0056 12       		.uleb128 0x12
+ 371 0057 01       		.uleb128 0x1
+ 372 0058 40       		.uleb128 0x40
+ 373 0059 0A       		.uleb128 0xa
+ 374 005a 9742     		.uleb128 0x2117
+ 375 005c 0C       		.uleb128 0xc
+ 376 005d 01       		.uleb128 0x1
+ 377 005e 13       		.uleb128 0x13
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 10
+
+
+ 378 005f 00       		.byte	0
+ 379 0060 00       		.byte	0
+ 380 0061 07       		.uleb128 0x7
+ 381 0062 05       		.uleb128 0x5
+ 382 0063 00       		.byte	0
+ 383 0064 03       		.uleb128 0x3
+ 384 0065 0E       		.uleb128 0xe
+ 385 0066 3A       		.uleb128 0x3a
+ 386 0067 0B       		.uleb128 0xb
+ 387 0068 3B       		.uleb128 0x3b
+ 388 0069 0B       		.uleb128 0xb
+ 389 006a 49       		.uleb128 0x49
+ 390 006b 13       		.uleb128 0x13
+ 391 006c 02       		.uleb128 0x2
+ 392 006d 06       		.uleb128 0x6
+ 393 006e 00       		.byte	0
+ 394 006f 00       		.byte	0
+ 395 0070 08       		.uleb128 0x8
+ 396 0071 0F       		.uleb128 0xf
+ 397 0072 00       		.byte	0
+ 398 0073 0B       		.uleb128 0xb
+ 399 0074 0B       		.uleb128 0xb
+ 400 0075 49       		.uleb128 0x49
+ 401 0076 13       		.uleb128 0x13
+ 402 0077 00       		.byte	0
+ 403 0078 00       		.byte	0
+ 404 0079 09       		.uleb128 0x9
+ 405 007a 26       		.uleb128 0x26
+ 406 007b 00       		.byte	0
+ 407 007c 49       		.uleb128 0x49
+ 408 007d 13       		.uleb128 0x13
+ 409 007e 00       		.byte	0
+ 410 007f 00       		.byte	0
+ 411 0080 00       		.byte	0
+ 412              		.section	.debug_loc,"",%progbits
+ 413              	.Ldebug_loc0:
+ 414              	.LLST0:
+ 415 0000 00000000 		.4byte	.LVL0
+ 416 0004 02000000 		.4byte	.LVL1
+ 417 0008 0100     		.2byte	0x1
+ 418 000a 50       		.byte	0x50
+ 419 000b 02000000 		.4byte	.LVL1
+ 420 000f 04000000 		.4byte	.LVL2
+ 421 0013 0300     		.2byte	0x3
+ 422 0015 70       		.byte	0x70
+ 423 0016 46       		.sleb128 -58
+ 424 0017 9F       		.byte	0x9f
+ 425 0018 04000000 		.4byte	.LVL2
+ 426 001c 1C000000 		.4byte	.LFE1
+ 427 0020 0400     		.2byte	0x4
+ 428 0022 F3       		.byte	0xf3
+ 429 0023 01       		.uleb128 0x1
+ 430 0024 50       		.byte	0x50
+ 431 0025 9F       		.byte	0x9f
+ 432 0026 00000000 		.4byte	0
+ 433 002a 00000000 		.4byte	0
+ 434              		.section	.debug_aranges,"",%progbits
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 11
+
+
+ 435 0000 1C000000 		.4byte	0x1c
+ 436 0004 0200     		.2byte	0x2
+ 437 0006 00000000 		.4byte	.Ldebug_info0
+ 438 000a 04       		.byte	0x4
+ 439 000b 00       		.byte	0
+ 440 000c 0000     		.2byte	0
+ 441 000e 0000     		.2byte	0
+ 442 0010 00000000 		.4byte	.LFB1
+ 443 0014 1C000000 		.4byte	.LFE1-.LFB1
+ 444 0018 00000000 		.4byte	0
+ 445 001c 00000000 		.4byte	0
+ 446              		.section	.debug_ranges,"",%progbits
+ 447              	.Ldebug_ranges0:
+ 448 0000 00000000 		.4byte	.LFB1
+ 449 0004 1C000000 		.4byte	.LFE1
+ 450 0008 00000000 		.4byte	0
+ 451 000c 00000000 		.4byte	0
+ 452              		.section	.debug_line,"",%progbits
+ 453              	.Ldebug_line0:
+ 454 0000 84000000 		.section	.debug_str,"MS",%progbits,1
+ 454      02006B00 
+ 454      00000201 
+ 454      FB0E0D00 
+ 454      01010101 
+ 455              	.LASF16:
+ 456 0000 433A5C55 		.ascii	"C:\\Users\\asai\\Documents\\PSoC Creator\\asp_1.9.0"
+ 456      73657273 
+ 456      5C617361 
+ 456      695C446F 
+ 456      63756D65 
+ 457 002e 5F332E30 		.ascii	"_3.0\\asp_eval1.cydsn\000"
+ 457      5C617370 
+ 457      5F657661 
+ 457      6C312E63 
+ 457      7964736E 
+ 458              	.LASF12:
+ 459 0043 696E745F 		.ascii	"int_t\000"
+ 459      7400
+ 460              	.LASF17:
+ 461 0049 6974726F 		.ascii	"itron_strerror\000"
+ 461      6E5F7374 
+ 461      72657272 
+ 461      6F7200
+ 462              	.LASF11:
+ 463 0058 696E7438 		.ascii	"int8_t\000"
+ 463      5F7400
+ 464              	.LASF9:
+ 465 005f 666C6F61 		.ascii	"float\000"
+ 465      7400
+ 466              	.LASF2:
+ 467 0065 756E7369 		.ascii	"unsigned char\000"
+ 467      676E6564 
+ 467      20636861 
+ 467      7200
+ 468              	.LASF8:
+ 469 0073 6C6F6E67 		.ascii	"long unsigned int\000"
+ 469      20756E73 
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 12
+
+
+ 469      69676E65 
+ 469      6420696E 
+ 469      7400
+ 470              	.LASF4:
+ 471 0085 73686F72 		.ascii	"short unsigned int\000"
+ 471      7420756E 
+ 471      7369676E 
+ 471      65642069 
+ 471      6E7400
+ 472              	.LASF18:
+ 473 0098 65726364 		.ascii	"ercd\000"
+ 473      00
+ 474              	.LASF10:
+ 475 009d 646F7562 		.ascii	"double\000"
+ 475      6C6500
+ 476              	.LASF15:
+ 477 00a4 2E5C6173 		.ascii	".\\asp\\library\\strerror.c\000"
+ 477      705C6C69 
+ 477      62726172 
+ 477      795C7374 
+ 477      72657272 
+ 478              	.LASF0:
+ 479 00bd 756E7369 		.ascii	"unsigned int\000"
+ 479      676E6564 
+ 479      20696E74 
+ 479      00
+ 480              	.LASF6:
+ 481 00ca 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 481      206C6F6E 
+ 481      6720756E 
+ 481      7369676E 
+ 481      65642069 
+ 482              	.LASF5:
+ 483 00e1 6C6F6E67 		.ascii	"long long int\000"
+ 483      206C6F6E 
+ 483      6720696E 
+ 483      7400
+ 484              	.LASF13:
+ 485 00ef 63686172 		.ascii	"char\000"
+ 485      00
+ 486              	.LASF3:
+ 487 00f4 73686F72 		.ascii	"short int\000"
+ 487      7420696E 
+ 487      7400
+ 488              	.LASF14:
+ 489 00fe 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 489      4320342E 
+ 489      372E3320 
+ 489      32303133 
+ 489      30333132 
+ 490 0131 616E6368 		.ascii	"anch revision 196615]\000"
+ 490      20726576 
+ 490      6973696F 
+ 490      6E203139 
+ 490      36363135 
+ 491              	.LASF7:
+ 492 0147 6C6F6E67 		.ascii	"long int\000"
+ARM GAS  C:\TEMP\cctz1sWD.s 			page 13
+
+
+ 492      20696E74 
+ 492      00
+ 493              	.LASF1:
+ 494 0150 7369676E 		.ascii	"signed char\000"
+ 494      65642063 
+ 494      68617200 
+ 495              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

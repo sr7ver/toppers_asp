@@ -1,0 +1,1951 @@
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 1
+
+
+   1              	# 1 ".\\asp\\arch\\arm_m_gcc\\common\\core_support.S"
+   1              	/*
+   0              	
+   0              	
+   2              	 *  TOPPERS/ASP Kernel
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4              	 *      Advanced Standard Profile Kernel
+   5              	 * 
+   6              	 *  Copyright (C) 2008-2011 by Embedded and Real-Time Systems Laboratory
+   7              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   8              	 * 
+   9              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  10              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  11              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  12              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  13              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  14              	 *      スコード中に含まれていること．
+  15              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  16              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  17              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  18              	 *      の無保証規定を掲載すること．
+  19              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  20              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  21              	 *      と．
+  22              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  23              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  24              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  25              	 *        報告すること．
+  26              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  27              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  28              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  29              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  30              	 *      免責すること．
+  31              	 * 
+  32              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  33              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  34              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  35              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  36              	 *  の責任を負わない．
+  37              	 * 
+  38              	 *  @(#) $Id: core_support.S 2517 2013-08-20 09:53:39Z ertl-honda $
+  39              	 */
+  40              	
+  41              	/*
+  42              	 *  プロセッサ依存モジュール アセンブリ言語部（ARM-M用）
+  43              	 */
+  44              	
+  45              	#define TOPPERS_MACRO_ONLY
+  46              	#define UINT_C(val)		(val)		/* uint_t型の定数を作るマクロ */
+  47              	#define ULONG_C(val)	(val)		/* ulong_t型の定数を作るマクロ */
+  48              	#define CAST(type, val)	(val)		/* 型キャストを行うマクロ */
+  49              	
+  50              	#include "kernel_impl.h"
+   1              	/*
+   2              	 *  TOPPERS/ASP Kernel
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4              	 *      Advanced Standard Profile Kernel
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 2
+
+
+   5              	 * 
+   6              	 *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   7              	 *                              Toyohashi Univ. of Technology, JAPAN
+   8              	 *  Copyright (C) 2004-2010 by Embedded and Real-Time Systems Laboratory
+   9              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+  10              	 * 
+  11              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  12              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  13              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  14              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  15              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  16              	 *      スコード中に含まれていること．
+  17              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  18              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  19              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  20              	 *      の無保証規定を掲載すること．
+  21              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  22              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  23              	 *      と．
+  24              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  25              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  26              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  27              	 *        報告すること．
+  28              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  29              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  30              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  31              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  32              	 *      免責すること．
+  33              	 * 
+  34              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  35              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  36              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  37              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  38              	 *  の責任を負わない．
+  39              	 * 
+  40              	 *  @(#) $Id: kernel_impl.h 1713 2010-01-27 13:23:29Z ertl-hiro $
+  41              	 */
+  42              	
+  43              	/*
+  44              	 *		TOPPERS/ASPカーネル内部向け標準ヘッダファイル
+  45              	 *
+  46              	 *  このヘッダファイルは，カーネルを構成するプログラムのソースファイル
+  47              	 *  で必ずインクルードするべき標準ヘッダファイルである．
+  48              	 *
+  49              	 *  アセンブリ言語のソースファイルからこのファイルをインクルードする時
+  50              	 *  は，TOPPERS_MACRO_ONLYを定義しておく．これにより，マクロ定義以外を
+  51              	 *  除くようになっている．
+  52              	 */
+  53              	
+  54              	#ifndef TOPPERS_KERNEL_IMPL_H
+  55              	#define TOPPERS_KERNEL_IMPL_H
+  56              	
+  57              	/*
+  58              	 *  カーネルの内部識別名のリネーム
+  59              	 */
+  60              	#include "kernel_rename.h"
+   1              	/* This file is generated from kernel_rename.def by genrename. */
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 3
+
+
+   2              	
+   3              	#ifndef TOPPERS_KERNEL_RENAME_H
+   4              	#define TOPPERS_KERNEL_RENAME_H
+   5              	
+   6              	/*
+   7              	 *  startup.c
+   8              	 */
+   9              	#define kerflg						_kernel_kerflg
+  10              	#define exit_kernel					_kernel_exit_kernel
+  11              	
+  12              	/*
+  13              	 *  task.c
+  14              	 */
+  15              	#define p_runtsk					_kernel_p_runtsk
+  16              	#define p_schedtsk					_kernel_p_schedtsk
+  17              	#define reqflg						_kernel_reqflg
+  18              	#define ipmflg						_kernel_ipmflg
+  19              	#define disdsp						_kernel_disdsp
+  20              	#define dspflg						_kernel_dspflg
+  21              	#define ready_queue					_kernel_ready_queue
+  22              	#define ready_primap				_kernel_ready_primap
+  23              	#define initialize_task				_kernel_initialize_task
+  24              	#define search_schedtsk				_kernel_search_schedtsk
+  25              	#define make_runnable				_kernel_make_runnable
+  26              	#define make_non_runnable			_kernel_make_non_runnable
+  27              	#define make_dormant				_kernel_make_dormant
+  28              	#define make_active					_kernel_make_active
+  29              	#define change_priority				_kernel_change_priority
+  30              	#define rotate_ready_queue			_kernel_rotate_ready_queue
+  31              	#define call_texrtn					_kernel_call_texrtn
+  32              	#define calltex						_kernel_calltex
+  33              	
+  34              	/*
+  35              	 *  wait.c
+  36              	 */
+  37              	#define make_wait_tmout				_kernel_make_wait_tmout
+  38              	#define wait_complete				_kernel_wait_complete
+  39              	#define wait_tmout					_kernel_wait_tmout
+  40              	#define wait_tmout_ok				_kernel_wait_tmout_ok
+  41              	#define wait_release				_kernel_wait_release
+  42              	#define wobj_make_wait				_kernel_wobj_make_wait
+  43              	#define wobj_make_wait_tmout		_kernel_wobj_make_wait_tmout
+  44              	#define init_wait_queue				_kernel_init_wait_queue
+  45              	
+  46              	/*
+  47              	 *  time_event.c
+  48              	 */
+  49              	#define current_time				_kernel_current_time
+  50              	#define min_time					_kernel_min_time
+  51              	#define next_time					_kernel_next_time
+  52              	#define next_subtime				_kernel_next_subtime
+  53              	#define last_index					_kernel_last_index
+  54              	#define initialize_tmevt			_kernel_initialize_tmevt
+  55              	#define tmevt_up					_kernel_tmevt_up
+  56              	#define tmevt_down					_kernel_tmevt_down
+  57              	#define tmevtb_insert				_kernel_tmevtb_insert
+  58              	#define tmevtb_delete				_kernel_tmevtb_delete
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 4
+
+
+  59              	#define tmevt_lefttim				_kernel_tmevt_lefttim
+  60              	#define signal_time					_kernel_signal_time
+  61              	
+  62              	/*
+  63              	 *  semaphore.c
+  64              	 */
+  65              	#define initialize_semaphore		_kernel_initialize_semaphore
+  66              	
+  67              	/*
+  68              	 *  eventflag.c
+  69              	 */
+  70              	#define initialize_eventflag		_kernel_initialize_eventflag
+  71              	#define check_flg_cond				_kernel_check_flg_cond
+  72              	
+  73              	/*
+  74              	 *  dataqueue.c
+  75              	 */
+  76              	#define initialize_dataqueue		_kernel_initialize_dataqueue
+  77              	#define enqueue_data				_kernel_enqueue_data
+  78              	#define force_enqueue_data			_kernel_force_enqueue_data
+  79              	#define dequeue_data				_kernel_dequeue_data
+  80              	#define send_data					_kernel_send_data
+  81              	#define force_send_data				_kernel_force_send_data
+  82              	#define receive_data				_kernel_receive_data
+  83              	
+  84              	/*
+  85              	 *  pridataq.c
+  86              	 */
+  87              	#define initialize_pridataq			_kernel_initialize_pridataq
+  88              	#define enqueue_pridata				_kernel_enqueue_pridata
+  89              	#define dequeue_pridata				_kernel_dequeue_pridata
+  90              	#define send_pridata				_kernel_send_pridata
+  91              	#define receive_pridata				_kernel_receive_pridata
+  92              	
+  93              	/*
+  94              	 *  mailbox.c
+  95              	 */
+  96              	#define initialize_mailbox			_kernel_initialize_mailbox
+  97              	
+  98              	/*
+  99              	 *  mempfix.c
+ 100              	 */
+ 101              	#define initialize_mempfix			_kernel_initialize_mempfix
+ 102              	#define get_mpf_block				_kernel_get_mpf_block
+ 103              	
+ 104              	/*
+ 105              	 *  cyclic.c
+ 106              	 */
+ 107              	#define initialize_cyclic			_kernel_initialize_cyclic
+ 108              	#define call_cychdr					_kernel_call_cychdr
+ 109              	
+ 110              	/*
+ 111              	 *  alarm.c
+ 112              	 */
+ 113              	#define initialize_alarm			_kernel_initialize_alarm
+ 114              	#define call_almhdr					_kernel_call_almhdr
+ 115              	
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 5
+
+
+ 116              	/*
+ 117              	 *  interrupt.c
+ 118              	 */
+ 119              	#define initialize_interrupt		_kernel_initialize_interrupt
+ 120              	
+ 121              	/*
+ 122              	 *  exception.c
+ 123              	 */
+ 124              	#define initialize_exception		_kernel_initialize_exception
+ 125              	
+ 126              	/*
+ 127              	 *  kernel_cfg.c
+ 128              	 */
+ 129              	#define initialize_object			_kernel_initialize_object
+ 130              	#define call_inirtn					_kernel_call_inirtn
+ 131              	#define call_terrtn					_kernel_call_terrtn
+ 132              	#define tmax_tskid					_kernel_tmax_tskid
+ 133              	#define tinib_table					_kernel_tinib_table
+ 134              	#define torder_table				_kernel_torder_table
+ 135              	#define tcb_table					_kernel_tcb_table
+ 136              	#define tmax_semid					_kernel_tmax_semid
+ 137              	#define seminib_table				_kernel_seminib_table
+ 138              	#define semcb_table					_kernel_semcb_table
+ 139              	#define tmax_flgid					_kernel_tmax_flgid
+ 140              	#define flginib_table				_kernel_flginib_table
+ 141              	#define flgcb_table					_kernel_flgcb_table
+ 142              	#define tmax_dtqid					_kernel_tmax_dtqid
+ 143              	#define dtqinib_table				_kernel_dtqinib_table
+ 144              	#define dtqcb_table					_kernel_dtqcb_table
+ 145              	#define tmax_pdqid					_kernel_tmax_pdqid
+ 146              	#define pdqinib_table				_kernel_pdqinib_table
+ 147              	#define pdqcb_table					_kernel_pdqcb_table
+ 148              	#define tmax_mbxid					_kernel_tmax_mbxid
+ 149              	#define mbxinib_table				_kernel_mbxinib_table
+ 150              	#define mbxcb_table					_kernel_mbxcb_table
+ 151              	#define tmax_mpfid					_kernel_tmax_mpfid
+ 152              	#define mpfinib_table				_kernel_mpfinib_table
+ 153              	#define mpfcb_table					_kernel_mpfcb_table
+ 154              	#define tmax_cycid					_kernel_tmax_cycid
+ 155              	#define cycinib_table				_kernel_cycinib_table
+ 156              	#define cyccb_table					_kernel_cyccb_table
+ 157              	#define tmax_almid					_kernel_tmax_almid
+ 158              	#define alminib_table				_kernel_alminib_table
+ 159              	#define almcb_table					_kernel_almcb_table
+ 160              	#define tnum_inhno					_kernel_tnum_inhno
+ 161              	#define inhinib_table				_kernel_inhinib_table
+ 162              	#define tnum_intno					_kernel_tnum_intno
+ 163              	#define intinib_table				_kernel_intinib_table
+ 164              	#define tnum_excno					_kernel_tnum_excno
+ 165              	#define excinib_table				_kernel_excinib_table
+ 166              	#define tmevt_heap					_kernel_tmevt_heap
+ 167              	#define istksz						_kernel_istksz
+ 168              	#define istk						_kernel_istk
+ 169              	#define istkpt						_kernel_istkpt
+ 170              	
+ 171              	
+ 172              	#ifdef TOPPERS_LABEL_ASM
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 6
+
+
+ 173              	
+ 174              	/*
+ 175              	 *  startup.c
+ 176              	 */
+ 177              	#define _kerflg						__kernel_kerflg
+ 178              	#define _exit_kernel				__kernel_exit_kernel
+ 179              	
+ 180              	/*
+ 181              	 *  task.c
+ 182              	 */
+ 183              	#define _p_runtsk					__kernel_p_runtsk
+ 184              	#define _p_schedtsk					__kernel_p_schedtsk
+ 185              	#define _reqflg						__kernel_reqflg
+ 186              	#define _ipmflg						__kernel_ipmflg
+ 187              	#define _disdsp						__kernel_disdsp
+ 188              	#define _dspflg						__kernel_dspflg
+ 189              	#define _ready_queue				__kernel_ready_queue
+ 190              	#define _ready_primap				__kernel_ready_primap
+ 191              	#define _initialize_task			__kernel_initialize_task
+ 192              	#define _search_schedtsk			__kernel_search_schedtsk
+ 193              	#define _make_runnable				__kernel_make_runnable
+ 194              	#define _make_non_runnable			__kernel_make_non_runnable
+ 195              	#define _make_dormant				__kernel_make_dormant
+ 196              	#define _make_active				__kernel_make_active
+ 197              	#define _change_priority			__kernel_change_priority
+ 198              	#define _rotate_ready_queue			__kernel_rotate_ready_queue
+ 199              	#define _call_texrtn				__kernel_call_texrtn
+ 200              	#define _calltex					__kernel_calltex
+ 201              	
+ 202              	/*
+ 203              	 *  wait.c
+ 204              	 */
+ 205              	#define _make_wait_tmout			__kernel_make_wait_tmout
+ 206              	#define _wait_complete				__kernel_wait_complete
+ 207              	#define _wait_tmout					__kernel_wait_tmout
+ 208              	#define _wait_tmout_ok				__kernel_wait_tmout_ok
+ 209              	#define _wait_release				__kernel_wait_release
+ 210              	#define _wobj_make_wait				__kernel_wobj_make_wait
+ 211              	#define _wobj_make_wait_tmout		__kernel_wobj_make_wait_tmout
+ 212              	#define _init_wait_queue			__kernel_init_wait_queue
+ 213              	
+ 214              	/*
+ 215              	 *  time_event.c
+ 216              	 */
+ 217              	#define _current_time				__kernel_current_time
+ 218              	#define _min_time					__kernel_min_time
+ 219              	#define _next_time					__kernel_next_time
+ 220              	#define _next_subtime				__kernel_next_subtime
+ 221              	#define _last_index					__kernel_last_index
+ 222              	#define _initialize_tmevt			__kernel_initialize_tmevt
+ 223              	#define _tmevt_up					__kernel_tmevt_up
+ 224              	#define _tmevt_down					__kernel_tmevt_down
+ 225              	#define _tmevtb_insert				__kernel_tmevtb_insert
+ 226              	#define _tmevtb_delete				__kernel_tmevtb_delete
+ 227              	#define _tmevt_lefttim				__kernel_tmevt_lefttim
+ 228              	#define _signal_time				__kernel_signal_time
+ 229              	
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 7
+
+
+ 230              	/*
+ 231              	 *  semaphore.c
+ 232              	 */
+ 233              	#define _initialize_semaphore		__kernel_initialize_semaphore
+ 234              	
+ 235              	/*
+ 236              	 *  eventflag.c
+ 237              	 */
+ 238              	#define _initialize_eventflag		__kernel_initialize_eventflag
+ 239              	#define _check_flg_cond				__kernel_check_flg_cond
+ 240              	
+ 241              	/*
+ 242              	 *  dataqueue.c
+ 243              	 */
+ 244              	#define _initialize_dataqueue		__kernel_initialize_dataqueue
+ 245              	#define _enqueue_data				__kernel_enqueue_data
+ 246              	#define _force_enqueue_data			__kernel_force_enqueue_data
+ 247              	#define _dequeue_data				__kernel_dequeue_data
+ 248              	#define _send_data					__kernel_send_data
+ 249              	#define _force_send_data			__kernel_force_send_data
+ 250              	#define _receive_data				__kernel_receive_data
+ 251              	
+ 252              	/*
+ 253              	 *  pridataq.c
+ 254              	 */
+ 255              	#define _initialize_pridataq		__kernel_initialize_pridataq
+ 256              	#define _enqueue_pridata			__kernel_enqueue_pridata
+ 257              	#define _dequeue_pridata			__kernel_dequeue_pridata
+ 258              	#define _send_pridata				__kernel_send_pridata
+ 259              	#define _receive_pridata			__kernel_receive_pridata
+ 260              	
+ 261              	/*
+ 262              	 *  mailbox.c
+ 263              	 */
+ 264              	#define _initialize_mailbox			__kernel_initialize_mailbox
+ 265              	
+ 266              	/*
+ 267              	 *  mempfix.c
+ 268              	 */
+ 269              	#define _initialize_mempfix			__kernel_initialize_mempfix
+ 270              	#define _get_mpf_block				__kernel_get_mpf_block
+ 271              	
+ 272              	/*
+ 273              	 *  cyclic.c
+ 274              	 */
+ 275              	#define _initialize_cyclic			__kernel_initialize_cyclic
+ 276              	#define _call_cychdr				__kernel_call_cychdr
+ 277              	
+ 278              	/*
+ 279              	 *  alarm.c
+ 280              	 */
+ 281              	#define _initialize_alarm			__kernel_initialize_alarm
+ 282              	#define _call_almhdr				__kernel_call_almhdr
+ 283              	
+ 284              	/*
+ 285              	 *  interrupt.c
+ 286              	 */
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 8
+
+
+ 287              	#define _initialize_interrupt		__kernel_initialize_interrupt
+ 288              	
+ 289              	/*
+ 290              	 *  exception.c
+ 291              	 */
+ 292              	#define _initialize_exception		__kernel_initialize_exception
+ 293              	
+ 294              	/*
+ 295              	 *  kernel_cfg.c
+ 296              	 */
+ 297              	#define _initialize_object			__kernel_initialize_object
+ 298              	#define _call_inirtn				__kernel_call_inirtn
+ 299              	#define _call_terrtn				__kernel_call_terrtn
+ 300              	#define _tmax_tskid					__kernel_tmax_tskid
+ 301              	#define _tinib_table				__kernel_tinib_table
+ 302              	#define _torder_table				__kernel_torder_table
+ 303              	#define _tcb_table					__kernel_tcb_table
+ 304              	#define _tmax_semid					__kernel_tmax_semid
+ 305              	#define _seminib_table				__kernel_seminib_table
+ 306              	#define _semcb_table				__kernel_semcb_table
+ 307              	#define _tmax_flgid					__kernel_tmax_flgid
+ 308              	#define _flginib_table				__kernel_flginib_table
+ 309              	#define _flgcb_table				__kernel_flgcb_table
+ 310              	#define _tmax_dtqid					__kernel_tmax_dtqid
+ 311              	#define _dtqinib_table				__kernel_dtqinib_table
+ 312              	#define _dtqcb_table				__kernel_dtqcb_table
+ 313              	#define _tmax_pdqid					__kernel_tmax_pdqid
+ 314              	#define _pdqinib_table				__kernel_pdqinib_table
+ 315              	#define _pdqcb_table				__kernel_pdqcb_table
+ 316              	#define _tmax_mbxid					__kernel_tmax_mbxid
+ 317              	#define _mbxinib_table				__kernel_mbxinib_table
+ 318              	#define _mbxcb_table				__kernel_mbxcb_table
+ 319              	#define _tmax_mpfid					__kernel_tmax_mpfid
+ 320              	#define _mpfinib_table				__kernel_mpfinib_table
+ 321              	#define _mpfcb_table				__kernel_mpfcb_table
+ 322              	#define _tmax_cycid					__kernel_tmax_cycid
+ 323              	#define _cycinib_table				__kernel_cycinib_table
+ 324              	#define _cyccb_table				__kernel_cyccb_table
+ 325              	#define _tmax_almid					__kernel_tmax_almid
+ 326              	#define _alminib_table				__kernel_alminib_table
+ 327              	#define _almcb_table				__kernel_almcb_table
+ 328              	#define _tnum_inhno					__kernel_tnum_inhno
+ 329              	#define _inhinib_table				__kernel_inhinib_table
+ 330              	#define _tnum_intno					__kernel_tnum_intno
+ 331              	#define _intinib_table				__kernel_intinib_table
+ 332              	#define _tnum_excno					__kernel_tnum_excno
+ 333              	#define _excinib_table				__kernel_excinib_table
+ 334              	#define _tmevt_heap					__kernel_tmevt_heap
+ 335              	#define _istksz						__kernel_istksz
+ 336              	#define _istk						__kernel_istk
+ 337              	#define _istkpt						__kernel_istkpt
+ 338              	
+ 339              	
+ 340              	#endif /* TOPPERS_LABEL_ASM */
+ 341              	
+ 342              	#include "target_rename.h"
+   1              	/* This file is generated from target_rename.def by genrename. */
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 9
+
+
+   2              	
+   3              	#ifndef TOPPERS_TARGET_RENAME_H
+   4              	#define TOPPERS_TARGET_RENAME_H
+   5              	
+   6              	
+   7              	/*
+   8              	 * target_config.c
+   9              	 */
+  10              	#define target_initialize			_kernel_target_initialize
+  11              	#define target_exit					_kernel_target_exit
+  12              	
+  13              	#ifdef TOPPERS_LABEL_ASM
+  14              	
+  15              	
+  16              	/*
+  17              	 * target_config.c
+  18              	 */
+  19              	#define _target_initialize			__kernel_target_initialize
+  20              	#define _target_exit				__kernel_target_exit
+  21              	
+  22              	#endif /* TOPPERS_LABEL_ASM */
+  23              	
+  24              	#include "arm_m_gcc/common/core_rename.h"
+   1              	/* This file is generated from core_rename.def by genrename. */
+  25              	
+ 343              	
+  61              	
+  62              	/*
+  63              	 *  アプリケーションと共通のヘッダファイル
+  64              	 */
+  65              	#include <kernel.h>
+   1              	/*
+   2              	 *  TOPPERS/ASP Kernel
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4              	 *      Advanced Standard Profile Kernel
+   5              	 * 
+   6              	 *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   7              	 *                              Toyohashi Univ. of Technology, JAPAN
+   8              	 *  Copyright (C) 2004-2013 by Embedded and Real-Time Systems Laboratory
+   9              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+  10              	 * 
+  11              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  12              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  13              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  14              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  15              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  16              	 *      スコード中に含まれていること．
+  17              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  18              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  19              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  20              	 *      の無保証規定を掲載すること．
+  21              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  22              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  23              	 *      と．
+  24              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  25              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  26              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 10
+
+
+  27              	 *        報告すること．
+  28              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  29              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  30              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  31              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  32              	 *      免責すること．
+  33              	 * 
+  34              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  35              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  36              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  37              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  38              	 *  の責任を負わない．
+  39              	 * 
+  40              	 *  $Id: kernel.h 2541 2013-10-13 15:16:25Z ertl-hiro $
+  41              	 */
+  42              	
+  43              	/*
+  44              	 *		TOPPERS/ASPカーネル 標準ヘッダファイル
+  45              	 *
+  46              	 *  TOPPERS/ASPカーネルがサポートするサービスコールの宣言と，必要なデー
+  47              	 *  タ型，定数，マクロの定義を含むヘッダファイル．
+  48              	 *
+  49              	 *  アセンブリ言語のソースファイルからこのファイルをインクルードする時
+  50              	 *  は，TOPPERS_MACRO_ONLYを定義しておく．これにより，マクロ定義以外を
+  51              	 *  除くようになっている．
+  52              	 *
+  53              	 *  このファイルをインクルードする前にインクルードしておくべきファイル
+  54              	 *  はない．
+  55              	 */
+  56              	
+  57              	#ifndef TOPPERS_KERNEL_H
+  58              	#define TOPPERS_KERNEL_H
+  59              	
+  60              	#ifdef __cplusplus
+  61              	extern "C" {
+  62              	#endif
+  63              	
+  64              	/*
+  65              	 *	TOPPERS共通のデータ型・定数・マクロ
+  66              	 */
+  67              	#include <t_stddef.h>
+   1              	/*
+   2              	 *  TOPPERS Software
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems
+   4              	 * 
+   5              	 *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   6              	 *                              Toyohashi Univ. of Technology, JAPAN
+   7              	 *  Copyright (C) 2004-2012 by Embedded and Real-Time Systems Laboratory
+   8              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   9              	 * 
+  10              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  11              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  12              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  13              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  14              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  15              	 *      スコード中に含まれていること．
+  16              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 11
+
+
+  17              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  18              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  19              	 *      の無保証規定を掲載すること．
+  20              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  21              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  22              	 *      と．
+  23              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  24              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  25              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  26              	 *        報告すること．
+  27              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  28              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  29              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  30              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  31              	 *      免責すること．
+  32              	 * 
+  33              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  34              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  35              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  36              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  37              	 *  の責任を負わない．
+  38              	 * 
+  39              	 *  @(#) $Id: t_stddef.h 2406 2012-08-25 06:30:54Z ertl-hiro $
+  40              	 */
+  41              	
+  42              	/*
+  43              	 *		TOPPERS共通ヘッダファイル
+  44              	 *
+  45              	 *  TOPPERS関連のすべてのソースファイルでインクルードすべきヘッダファイ
+  46              	 *  ル．各種のカーネルやソフトウェア部品で共通に用いることを想定してい
+  47              	 *  る．TOPPERSの各種のカーネルやソフトウェア部品で共通に用いるデータ型，
+  48              	 *  定数，マクロの定義などを含む．
+  49              	 *
+  50              	 *  アセンブリ言語のソースファイルからこのファイルをインクルードする時
+  51              	 *  は，TOPPERS_MACRO_ONLYを定義しておく．これにより，マクロ定義以外を
+  52              	 *  除くようになっている．
+  53              	 *
+  54              	 *  このファイルをインクルードする前にインクルードしておくべきファイル
+  55              	 *  はない．
+  56              	 */
+  57              	
+  58              	#ifndef TOPPERS_T_STDDEF_H
+  59              	#define TOPPERS_T_STDDEF_H
+  60              	
+  61              	#ifdef __cplusplus
+  62              	extern "C" {
+  63              	#endif
+  64              	
+  65              	/*
+  66              	 *  ターゲット依存部
+  67              	 */
+  68              	#include "target_stddef.h"
+   1              	/*
+   2              	 *  TOPPERS Software
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems
+   4              	 * 
+   5              	 *  Copyright (C) 2008-2011 by Embedded and Real-Time Systems Laboratory
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 12
+
+
+   6              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   7              	 * 
+   8              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+   9              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  10              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  11              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  12              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  13              	 *      スコード中に含まれていること．
+  14              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  15              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  16              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  17              	 *      の無保証規定を掲載すること．
+  18              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  19              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  20              	 *      と．
+  21              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  22              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  23              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  24              	 *        報告すること．
+  25              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  26              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  27              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  28              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  29              	 *      免責すること．
+  30              	 * 
+  31              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  32              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  33              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  34              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  35              	 *  の責任を負わない．
+  36              	 * 
+  37              	 *  @(#) $Id: target_stddef.h 2183 2011-07-23 10:29:36Z ertl-honda $
+  38              	 */
+  39              	
+  40              	/*
+  41              	 *  t_stddef.hのターゲット依存部（CY8C5XLP用）
+  42              	 *
+  43              	 *  このインクルードファイルは，t_stddef.hの先頭でインクルードされる．
+  44              	 *  他のファイルからは直接インクルードすることはない．他のインクルード
+  45              	 *  ファイルに先立って処理されるため，他のインクルードファイルに依存し
+  46              	 *  てはならない．
+  47              	 */
+  48              	
+  49              	#ifndef TOPPERS_TARGET_STDDEF_H
+  50              	#define TOPPERS_TARGET_STDDEF_H
+  51              	
+  52              	/*
+  53              	 *  ターゲットを識別するためのマクロの定義
+  54              	 */
+  55              	#define TOPPERS_CY8C5XLP				/* システム略称 */
+  56              	
+  57              	/*
+  58              	 *  開発環境で共通な定義
+  59              	 *
+  60              	 *  開発環境でstdint.hが用意されている場合には，TOPPERS_STDINT_TYPE1の
+  61              	 *  マクロ定義を削除し，stdint.hをインクルードすればよい．
+  62              	 */
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 13
+
+
+  63              	#define TOPPERS_STDINT_TYPE1
+  64              	#define TOPPERS_STDFLOAT_TYPE1
+  65              	#include <tool_stddef.h>
+   1              	/*
+  66              	
+  67              	/*
+  68              	 *  コア依存で共通な定義
+  69              	 */
+  70              	#include <core_stddef.h>
+   1              	/*
+  71              	
+  69              	
+  68              	
+  69              	/*
+  70              	 *  ターゲット依存部
+  71              	 */
+  72              	#include "target_kernel.h"
+   1              	/*
+   2              	 *  TOPPERS/ASP Kernel
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4              	 *      Advanced Standard Profile Kernel
+   5              	 * 
+   6              	 *  Copyright (C) 2008-2011 by Embedded and Real-Time Systems Laboratory
+   7              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   8              	 * 
+   9              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  10              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  11              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  12              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  13              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  14              	 *      スコード中に含まれていること．
+  15              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  16              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  17              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  18              	 *      の無保証規定を掲載すること．
+  19              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  20              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  21              	 *      と．
+  22              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  23              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  24              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  25              	 *        報告すること．
+  26              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  27              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  28              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  29              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  30              	 *      免責すること．
+  31              	 * 
+  32              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  33              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  34              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  35              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  36              	 *  の責任を負わない．
+  37              	 * 
+  38              	 *  @(#) $Id: target_kernel.h 2202 2011-07-26 13:27:11Z ertl-honda $
+  39              	 */
+  40              	
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 14
+
+
+  41              	/*
+  42              	 *  kernel.hのチップ依存部（CY8C5XLP用）
+  43              	 *
+  44              	 *  このインクルードファイルは，kernel.hでインクルードされる．他のファ
+  45              	 *  イルから直接インクルードすることはない．このファイルをインクルード
+  46              	 *  する前に，t_stddef.hがインクルードされるので，それらに依存してもよ
+  47              	 *  い．
+  48              	 */
+  49              	
+  50              	#ifndef TOPPERS_TARGET_KERNEL_H
+  51              	#define TOPPERS_TARGET_KERNEL_H
+  52              	
+  53              	/*
+  54              	 *  カーネル管理の割込み優先度の範囲
+  55              	 *
+  56              	 *  TMIN_INTPRIの定義を変更することで，このレベルよりも高い割込み優先度
+  57              	 *  を持つものをカーネル管理外の割込みとするかを変更できる．
+  58              	 */
+  59              	#define TMIN_INTPRI		(-7)		/* 割込み優先度の最小値（最高値）*/
+  60              	
+  61              	/*
+  62              	 *  サポートする機能の定義
+  63              	 */
+  64              	#define TOPPERS_TARGET_SUPPORT_GET_UTM	/* get_utmをサポートする */
+  65              	
+  66              	/*
+  67              	 *  タイムティックの定義
+  68              	 */
+  69              	#define TIC_NUME   1U            /* タイムティックの周期の分子 */
+  70              	#define TIC_DENO   1U            /* タイムティックの周期の分母 */
+  71              	
+  72              	/*
+  73              	 *  コア依存で共通な定義
+  74              	 */
+  75              	#include "arm_m_gcc/common/core_kernel.h"
+   1              	/*
+  76              	
+  73              	
+  66              	
+  67              	/*
+  68              	 *  システムログ機能のための定義
+  69              	 */
+  70              	#include <t_syslog.h>
+   1              	/*
+  71              	
+  72              	/*
+  73              	 *  型キャストを行うマクロの定義
+  74              	 */
+  75              	#ifndef CAST
+  76              	#define CAST(type, val)		((type)(val))
+  77              	#endif /* CAST */
+  78              	
+  79              	/*
+  80              	 *  ターゲット依存情報の定義
+  81              	 */
+  82              	#include "target_config.h"
+   1              	/*
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 15
+
+
+   2              	 *  TOPPERS/ASP Kernel
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4              	 *      Advanced Standard Profile Kernel
+   5              	 * 
+   6              	 *  Copyright (C) 2008-2011 by Embedded and Real-Time Systems Laboratory
+   7              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   8              	 * 
+   9              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  10              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  11              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  12              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  13              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  14              	 *      スコード中に含まれていること．
+  15              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  16              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  17              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  18              	 *      の無保証規定を掲載すること．
+  19              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  20              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  21              	 *      と．
+  22              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  23              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  24              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  25              	 *        報告すること．
+  26              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  27              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  28              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  29              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  30              	 *      免責すること．
+  31              	 * 
+  32              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  33              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  34              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  35              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  36              	 *  の責任を負わない．
+  37              	 * 
+  38              	 *  @(#) $Id: target_config.h 2183 2011-07-23 10:29:36Z ertl-honda $
+  39              	 */
+  40              	
+  41              	/*
+  42              	 *  チップ依存モジュール（CY8C5XLP用）
+  43              	 *
+  44              	 *  カーネルのターゲット依存部のインクルードファイル．kernel_impl.hのター
+  45              	 *  ゲット依存部の位置付けとなる．
+  46              	 */
+  47              	
+  48              	#ifndef TOPPERS_TARGET_CONFIG_H
+  49              	#define TOPPERS_TARGET_CONFIG_H
+  50              	
+  51              	/*
+  52              	 *  ターゲット依存部のハードウェア資源の定義
+  53              	 */
+  54              	#include "cy8c5xlp.h"
+   1              	/*
+   2              	 *  TOPPERS/ASP Kernel
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4              	 *      Advanced Standard Profile Kernel
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 16
+
+
+   5              	 * 
+   6              	 *  Copyright (C) 2008-2013 by Embedded and Real-Time Systems Laboratory
+   7              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   8              	 * 
+   9              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  10              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  11              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  12              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  13              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  14              	 *      スコード中に含まれていること．
+  15              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  16              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  17              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  18              	 *      の無保証規定を掲載すること．
+  19              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  20              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  21              	 *      と．
+  22              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  23              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  24              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  25              	 *        報告すること．
+  26              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  27              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  28              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  29              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  30              	 *      免責すること．
+  31              	 * 
+  32              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  33              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  34              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  35              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  36              	 *  の責任を負わない．
+  37              	 * 
+  38              	 */
+  39              	
+  40              	/*
+  41              	 *  CY8CKIT-050に関する定義
+  42              	 */
+  43              	
+  44              	#ifndef TOPPERS_CY8C5XLP_H
+  45              	#define TOPPERS_CY8C5XLP_H
+  46              	
+  47              	#include <sil.h>
+   1              	/*
+   2              	 *  TOPPERS Software
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems
+   4              	 * 
+   5              	 *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   6              	 *                              Toyohashi Univ. of Technology, JAPAN
+   7              	 *  Copyright (C) 2004-2011 by Embedded and Real-Time Systems Laboratory
+   8              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   9              	 * 
+  10              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  11              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  12              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  13              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  14              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 17
+
+
+  15              	 *      スコード中に含まれていること．
+  16              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  17              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  18              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  19              	 *      の無保証規定を掲載すること．
+  20              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  21              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  22              	 *      と．
+  23              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  24              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  25              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  26              	 *        報告すること．
+  27              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  28              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  29              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  30              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  31              	 *      免責すること．
+  32              	 * 
+  33              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  34              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  35              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  36              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  37              	 *  の責任を負わない．
+  38              	 * 
+  39              	 *  @(#) $Id: sil.h 2242 2011-08-26 21:00:19Z ertl-hiro $
+  40              	 */
+  41              	
+  42              	/*
+  43              	 *		システムインタフェースレイヤ
+  44              	 *
+  45              	 *  システムインタフェースレイヤのサービスコールの定義・宣言とマクロな
+  46              	 *  どの定義を含むヘッダファイル．
+  47              	 *
+  48              	 *  アセンブリ言語のソースファイルからこのファイルをインクルードする時
+  49              	 *  は，TOPPERS_MACRO_ONLYを定義しておくことで，マクロ定義以外の記述を
+  50              	 *  除くことができる．
+  51              	 *
+  52              	 *  このファイルをインクルードする前にインクルードしておくべきファイル
+  53              	 *  はない．
+  54              	 */
+  55              	
+  56              	#ifndef TOPPERS_SIL_H
+  57              	#define TOPPERS_SIL_H
+  58              	
+  59              	#ifdef __cplusplus
+  60              	extern "C" {
+  61              	#endif
+  62              	
+  63              	/*
+  64              	 *	TOPPERS共通のデータ型・定数・マクロ
+  65              	 */
+  66              	#include <t_stddef.h>
+  67              	
+  68              	/*
+  69              	 *  ターゲット依存部
+  70              	 */
+  71              	#include "target_sil.h"
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 18
+
+
+   1              	/*
+   2              	 *  TOPPERS Software
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems
+   4              	 * 
+   5              	 *  Copyright (C) 2008-2011 by Embedded and Real-Time Systems Laboratory
+   6              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   7              	 * 
+   8              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+   9              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  10              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  11              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  12              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  13              	 *      スコード中に含まれていること．
+  14              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  15              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  16              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  17              	 *      の無保証規定を掲載すること．
+  18              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  19              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  20              	 *      と．
+  21              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  22              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  23              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  24              	 *        報告すること．
+  25              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  26              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  27              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  28              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  29              	 *      免責すること．
+  30              	 * 
+  31              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  32              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  33              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  34              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  35              	 *  の責任を負わない．
+  36              	 * 
+  37              	 */
+  38              	
+  39              	/*
+  40              	 *   sil.hのチップ依存部（CY8C5XLP用）
+  41              	 *
+  42              	 *  このインクルードファイルは，sil.hの先頭でインクルードされる．他のファ
+  43              	 *  イルからは直接インクルードすることはない．このファイルをインクルー
+  44              	 *  ドする前に，t_stddef.hがインクルードされるので，それらに依存しても
+  45              	 *  よい．
+  46              	 */
+  47              	
+  48              	#ifndef TOPPERS_TARGET_SIL_H
+  49              	#define TOPPERS_TARGET_SIL_H
+  50              	
+  51              	/*
+  52              	 *  プロセッサのエンディアン
+  53              	 */
+  54              	#define SIL_ENDIAN_LITTLE
+  55              	
+  56              	/*
+  57              	 *  コア依存で共通な定義
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 19
+
+
+  58              	 */
+  59              	#include "core_sil.h"
+   1              	/*
+  60              	
+  72              	
+  48              	
+  55              	
+  56              	/*
+  57              	 *  トレースログに関する設定
+  58              	 */
+  59              	#ifdef TOPPERS_ENABLE_TRACE
+  60              	#include "logtrace/trace_config.h"
+  61              	#endif /* TOPPERS_ENABLE_TRACE */
+  62              	
+  63              	/*
+  64              	 *  RAM実行する場合やQEMU実行時ROMデバッグ時はMSPを初期化する
+  65              	 *  必要があるため,スタートアップルーチンでMSPを初期化する． 
+  66              	 */
+  67              	#define INIT_MSP
+  68              	
+  69              	/*
+  70              	 *  デフォルトの非タスクコンテキスト用のスタック領域の定義
+  71              	 */
+  72              	#define DEFAULT_ISTKSZ      (0x1000U)   /* 4KByte */
+  73              	
+  74              	/*
+  75              	 *  微少時間待ちのための定義（本来はSILのターゲット依存部）
+  76              	 */
+  77              	#ifndef TOPPERS_RAM_DEBUG
+  78              	#define SIL_DLY_TIM1    160
+  79              	#define SIL_DLY_TIM2    100
+  80              	#else
+  81              	#define SIL_DLY_TIM1    270
+  82              	#define SIL_DLY_TIM2    140
+  83              	#endif  /* TOPPERS_RAM_DEBUG */
+  84              	
+  85              	#ifndef TOPPERS_MACRO_ONLY
+  86              	
+  87              	/*
+  88              	 *  ターゲットシステム依存の初期化
+  89              	 */
+  90              	extern void	target_initialize(void);
+  91              	
+  92              	/*
+  93              	 *  ターゲットシステムの終了
+  94              	 *
+  95              	 *  システムを終了する時に使う．
+  96              	 */
+  97              	extern void	target_exit(void) NoReturn;
+  98              	
+  99              	#endif /* TOPPERS_MACRO_ONLY */
+ 100              	
+ 101              	/*
+ 102              	 *  コア依存モジュール（ARM-M用）
+ 103              	 */
+ 104              	#include "core_config.h"
+   1              	/*
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 20
+
+
+ 105              	
+  83              	
+  84              	/*
+  85              	 *  すべての関数をコンパイルするための定義
+  86              	 */
+  87              	#ifdef ALLFUNC
+  88              	#include "allfunc.h"
+   1              	/*
+  89              	#endif /* ALLFUNC */
+  51              	#include "arm_m.h"
+   1              	/*
+  52              	#include "offset.h"
+   1              	/* offset.h */
+  53              	#include "target_asm.inc"
+   1              	#include "arm_m_gcc/common/core_asm.inc"
+   1              	/*
+   2              	 *  TOPPERS/ASP Kernel
+   3              	 *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4              	 *      Advanced Standard Profile Kernel
+   5              	 * 
+   6              	 *  Copyright (C) 2011 by Embedded and Real-Time Systems Laboratory
+   7              	 *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   8              	 * 
+   9              	 *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  10              	 *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  11              	 *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  12              	 *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  13              	 *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  14              	 *      スコード中に含まれていること．
+  15              	 *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  16              	 *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  17              	 *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  18              	 *      の無保証規定を掲載すること．
+  19              	 *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  20              	 *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  21              	 *      と．
+  22              	 *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  23              	 *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  24              	 *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  25              	 *        報告すること．
+  26              	 *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  27              	 *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  28              	 *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  29              	 *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  30              	 *      免責すること．
+  31              	 * 
+  32              	 *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  33              	 *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  34              	 *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  35              	 *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  36              	 *  の責任を負わない．
+  37              	 * 
+  38              	 *  @(#) $Id: core_asm.inc 2448 2013-02-05 12:27:28Z ertl-honda $
+  39              	 */
+  40              	
+  41              	#ifndef TOPPERS_CORE_ASM_INC
+  42              	#define TOPPERS_CORE_ASM_INC
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 21
+
+
+  43              	
+  44              	/*
+  45              	 *  ATHUMB相当の定義
+  46              	 */
+  47              	.macro __athumb name
+  48              		.syntax unified
+  49              		.thumb
+  50              		.thumb_func
+  51              		.type name, function
+  52              	.endm
+  53              	
+   2              	...
+  54              	
+  55              	/*
+  56              	 *  タスクディスパッチャ
+  57              	 */
+  58              		ATEXT
+  59              		ABALIGN(4)
+  60              		ATHUMB(dispatch)
+  61              		AGLOBAL(dispatch)
+  62              	ALABEL(dispatch)
+  63              		/*
+  64              		 *
+  65              		 *  このルーチンは，タスクコンテキスト・CPUロック状態・ディパッチ許可状態
+  66              		 *  ・（モデル上の）割込み優先度マスク全開状態で呼び出される．
+  67              		 */
+  68 0000 2DE9F04F 		stmfd sp!,{r4-r11,lr}         /* レジスタの保存 */
+  69 0004 9C48     		ldr   r0, =p_runtsk           /* p_runtskを読み込む */
+  70 0006 0168     		ldr   r1, [r0]
+  71 0008 C1F818D0 		str   sp, [r1,#TCB_sp]        /* タスクスタックを保存 */
+  72 000c DFF86CE2 		ldr   lr, =dispatch_r         /* 実行再開番地を保存 */
+  73 0010 C1F81CE0 		str   lr, [r1,#TCB_pc]        
+  74 0014 00F0E3B8 		b     dispatcher
+  75              	
+  76              		ATHUMB(dispatch_r)
+  77              		AGLOBAL(dispatch_r)
+  78              	ALABEL(dispatch_r)
+  79 0018 BDE8F04F 		ldmfd sp!,{r4 - r11,lr}       /* レジスタの復帰 */
+  80              		/*
+  81              		 * タスク例外処理ルーチンの起動
+  82              		 * dispatcherから呼び出されるため，TCBのアドレスはr1に入っている
+  83              		 */
+  84 001c 887B     		ldrb  r0,[r1,#TCB_enatex]
+  85 001e 10F0040F 		tst   r0,#TCB_enatex_mask
+  86 0022 00F00B80 		beq   dispatch_r_1            /* enatex が false ならリターン */
+  87 0026 0869     		ldr   r0,[r1,#TCB_texptn]     /* texptn が 0 ならリターン     */
+  88 0028 0042     		tst   r0,r0
+  89 002a 00F00780 		beq   dispatch_r_1            
+  90 002e 9449     		ldr   r1, =ipmflg             /* ipmflgが false ならリターン  */
+  91 0030 0868     		ldr   r0, [r1]
+  92 0032 0042     		tst   r0,r0
+  93 0034 00F00280 		beq   dispatch_r_1
+  94 0038 9248     		ldr   r0, =call_texrtn        /* タスク例外ルーチンの呼び出し */
+  95 003a 0047     		bx    r0
+  96              	ALABEL(dispatch_r_1)              /* タスクへのcall_textnから戻る */
+  97 003c 7047     		bx    lr
+  98              	
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 22
+
+
+  99              	/*
+ 100              	 *  CPU例外エントリ
+ 101              	 *
+ 102              	 *  割込みエントリと処理の内容は同等だが，ログの種類が異なるため，
+ 103              	 *  分けている．
+ 104              	 */
+ 105 003e 00BF     		ABALIGN(4)
+ 106              		ATEXT
+ 107              		ATHUMB(core_exc_entry)
+ 108              		AGLOBAL(core_exc_entry)
+ 109              	ALABEL(core_exc_entry)
+ 110              		/*
+ 111              		 *  例外/割込みが発生すると，発生時にアクティブなスタックにスクラ
+ 112              		 *  ッチレジスタ等が保存される．
+ 113              		 *  この内容に加えて，CPU例外ハンドラへの情報として，basepri の値と，
+ 114              		 *  EXC_RETURNの情報を加えて保存する．basepriの値は，CPU例外からの
+ 115              		 *  リターン時に割込み優先度マスクの値を元に戻すためにも用いられる．
+ 116              		 *
+ 117              		 *   -----------
+ 118              		 *  | EXC_RETURN|  
+ 119              		 *   -----------
+ 120              		 *  |  basepri  |  
+ 121              		 *   -----------
+ 122              		 *  |    R0     |  
+ 123              		 *   -----------
+ 124              		 *  |    R1     |
+ 125              		 *   -----------
+ 126              		 *  |    R2     |
+ 127              		 *   -----------
+ 128              		 *  |    R3     |
+ 129              		 *   -----------
+ 130              		 *  |    R12    |
+ 131              		 *   -----------
+ 132              		 *  |    LR     |
+ 133              		 *   -----------
+ 134              		 *  |    PC     |
+ 135              		 *   -----------
+ 136              		 *  |   xPSR    |
+ 137              		 *   -----------
+ 138              		 *
+ 139              		 */
+ 140              	
+ 141              		/*
+ 142              		 *  カーネル管理外の例外かチェック
+ 143              		 *  カーネル内のクリティカルセクションの実行中，全割込みロック状態，
+ 144              		 *  CPUロック状態，カーネル管理外の割込みハンドラ実行中のいずれかで
+ 145              		 *  発生したCPU例外を，カーネル管理外のCPU例外と呼ぶ
+ 146              		 *  全割込みロック状態はFAULTMASKが'1'の場合
+ 147              		 *  CPUロック状態はbasepriがIIPM_LOCKかで判断する．
+ 148              		 */
+ 149 0040 EFF31382 		mrs   r2, FAULTMASK           /* 全割込みロック状態ならカーネル管理外例外処理へ */
+ 150 0044 E2B9     		cbnz  r2, core_nonkernel_exc_entry
+ 151              	
+ 152 0046 EFF31182 		mrs   r2, basepri             /* baepriの値を取得 */
+ 153 004a 202A     		cmp   r2, #IIPM_LOCK          /* CPUロック状態ならカーネル管理外例外処理へ */
+ 154 004c 00F01880 		beq   core_nonkernel_exc_entry
+ 155              	
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 23
+
+
+ 156              	
+ 157              		/*
+ 158              		 * スタックを変更する必要があるかチェック
+ 159              		 * EXC_RETURN（割込み時にLRに設定される値）をチェックして，例外発生時に
+ 160              		 * アクティブなスタックを特定することで多重割込みか判定する．
+ 161              		 */
+ 162 0050 1EF0040F 		tst   lr, #EXC_RETURN_PSP    /* 割込み元がMSPなら多重割込み */
+ 163 0054 00F00980 		beq   core_exc_entry_1       /* 多重割込みならcore_exc_entry_1へ */
+ 164 0058 EFF30980 		mrs   r0, psp                /* 一段目の割込みの場合はPSP上に */
+ 165 005c 20E90440 		stmfd r0!, {r2,lr}           /* 例外発生時の割込み優先度マスク(r2)とEXC_RETURN(lr)をPSP上に積む */
+ 166 0060 80F30988 		msr   psp, r0                /* CPU例外ハンドラへの引数となる */
+ 167 0064 00B5     		push  {lr}                   /* MSP上にもEXC_RETURN を積む    */ 
+ 168 0066 00F003B8 		b     core_exc_entry_2
+ 169              	ALABEL(core_exc_entry_1)         /* 多重割込みの場合 */
+ 170 006a 04B4     		push  {r2}                   /* 割込み発生時の割込み優先度マスクを積む */
+ 171 006c 00B5     		push  {lr}                   /* EXC_RETURN を積む             */ 
+ 172 006e 6846     		mov   r0, sp                 /* CPU例外ハンドラへの引数となる */
+ 173              	
+ 174              		/*
+ 175              		 *  共通処理
+ 176              		 */
+ 177              	ALABEL(core_exc_entry_2)
+ 178 0070 EFF30583 		mrs   r3, ipsr               /* ハンドラアドレスを取得 */
+ 179 0074 8449     		ldr   r1, =_kernel_exc_tbl
+ 180 0076 51F82320 		ldr   r2, [r1, r3, lsl #2]
+ 181              	
+ 182              	#ifdef LOG_EXC_ENTER
+ 183              		push  {r0,r2,r3}
+ 184              		mov   r0, r3                 /* 例外番号をパラメータに  */
+ 185              		bl    log_exc_enter          /* log_exc_enterを呼び出す */
+ 186              		pop   {r0,r2,r3}
+ 187              		push  {r3}                   /* 例外番号をスタックへ    */
+ 188              	#endif /* LOG_EXC_ENTER */
+ 189              	
+ 190              		/*
+ 191              		 *  CPU例外ハンドラの呼び出し
+ 192              		 */
+ 193 007a 9047     		blx   r2
+ 194              	
+ 195              	#ifdef LOG_EXC_ENTER
+ 196              		pop   {r0}                   /* 例外番号を引数に        */
+ 197              		bl    log_exc_leave          /* log_exc_leaveを呼び出す */
+ 198              	#endif /* LOG_EXC_ENTER */
+ 199              	
+ 200 007c 00F045B8 		b     ret_exc
+ 201              	
+ 202              	/*
+ 203              	 *  カーネル管理外のCPU例外の出入口処理
+ 204              	 */
+ 205              	ALABEL(core_nonkernel_exc_entry)
+ 206 0080 1EF0040F 		tst   lr, #EXC_RETURN_PSP    /* 割込み元がMSPなら多重割込み */
+ 207 0084 00F00980 		beq   core_nonkernel_exc_entry_1  /* 多重割込みなら */
+ 208 0088 EFF30980 		mrs   r0, psp                /* 一段目の割込みの場合はPSP上に */
+ 209 008c 20E90440 		stmfd r0!, {r2,lr}           /* 例外発生時の割込み優先度マスク(r2)とEXC_RETURN(lr)をPSP上に積む */
+ 210 0090 80F30988 		msr   psp, r0                /* CPU例外ハンドラへの引数となる */
+ 211 0094 00B5     		push  {lr}                   /* MSP上にもEXC_RETURN を積む    */ 
+ 212 0096 00F003B8 		b     core_nonkernel_exc_entry_2
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 24
+
+
+ 213              	ALABEL(core_nonkernel_exc_entry_1) /* 多重割込みの場合 */
+ 214 009a 04B4     		push  {r2}                   /* 割込み発生時の割込み優先度マスクを積む */
+ 215 009c 00B5     		push  {lr}                   /* EXC_RETURN を積む             */ 
+ 216 009e 6846     		mov   r0, sp                 /* CPU例外ハンドラへの引数となる */
+ 217              	
+ 218              	ALABEL(core_nonkernel_exc_entry_2)
+ 219 00a0 EFF30583 		mrs   r3, ipsr               /* CPU例外ハンドラのアドレスを取得 */
+ 220 00a4 7849     		ldr   r1, =_kernel_exc_tbl
+ 221 00a6 51F82320 		ldr   r2, [r1, r3, lsl #2]
+ 222              	
+ 223              		/*
+ 224              		 *  CPU例外ハンドラの呼び出し
+ 225              		 */
+ 226 00aa 9047     		blx   r2
+ 227              	
+ 228              		/*
+ 229              		 *  割込みロック状態とする．
+ 230              		 */
+ 231 00ac 71B6     		cpsid f
+ 232              	
+ 233              		/*
+ 234              		 *  戻り先のコンテキストの判定
+ 235              		 * 
+ 236              		 *  割込みハンドラ実行にLRにセットされるEXC_RETURNをチェックして，戻り
+ 237              		 *  先でMSPが使われていれば，割込み先が非タスクコンテキストと判定する．
+ 238              		 */
+ 239 00ae 08BC     		pop   {r3}                     /* lrをスタックから取得         */
+ 240 00b0 13F0040F 		tst   r3, #EXC_RETURN_PSP      /* 戻り先がPSPなら              */
+ 241 00b4 40F00380 		bne   core_nonkernel_ret_exc_1
+ 242 00b8 02BC     		pop   {r1}                     /* 元の割込み優先度マスク(basepri) */
+ 243 00ba 00F006B8 		b     core_nonkernel_ret_exc_2 /* の値をMSPから取得 */
+ 244              	
+ 245              	ALABEL(core_nonkernel_ret_exc_1)
+ 246              		/*
+ 247              		 *  PSP上からEXC_RETURNを削除
+ 248              		 */
+ 249 00be EFF30982 		mrs   r2, psp
+ 250 00c2 0432     		adds  r2, r2, #4
+ 251              		/*
+ 252              		 *  元の割込み優先度マスク(basepri)の値をPSPから取得
+ 253              		 */
+ 254 00c4 02CA     		ldmfd r2!, {r1} 
+ 255 00c6 82F30988 		msr   psp, r2
+ 256              	
+ 257              	ALABEL(core_nonkernel_ret_exc_2)
+ 258 00ca 81F31188 		msr   basepri, r1             /* 割込み優先度マスクを割込み前に状態へ */
+ 259 00ce 1847     		bx    r3                      /* リターン */
+ 260              	
+ 261              	/*
+ 262              	 *  割込みエントリ
+ 263              	 */
+ 264              		ATHUMB(core_int_entry)
+ 265              		AGLOBAL(core_int_entry)
+ 266              	ALABEL(core_int_entry)
+ 267              		/*
+ 268              		 *  割込み発生時の割込み優先度マスクをスタックに保存するため取得
+ 269              		 */
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 25
+
+
+ 270 00d0 EFF31182 		mrs   r2, basepri             /* baepriの値を取得 */
+ 271              	
+ 272              		/*
+ 273              		 * 多重割込みかチェック
+ 274              		 * EXC_RETURN（割込み時にLRに設定される値）をチェックして，例外発生時に
+ 275              		 * アクティブなスタックを特定することで多重割込みか判定する．
+ 276              		 */
+ 277 00d4 1EF0040F 		tst   lr, #EXC_RETURN_PSP    /* 割込み元がMSPなら多重割込み */
+ 278 00d8 00F00980 		beq   core_int_entry_1       /* 多重割込みならcore_int_entry_1へ */
+ 279 00dc EFF30980 		mrs   r0, psp                /* 一段目の割込みの場合はPSP上に */
+ 280 00e0 20E90440 		stmfd r0!, {r2,lr}           /* 割込み発生時の割込み優先度マスク(r2)とEXC_RETURN(lr)をPSP上に積む 
+ 281 00e4 80F30988 		msr   psp, r0                /* CPU例外ハンドラへの引数となる */
+ 282 00e8 00B5     		push  {lr}                   /* MSP上にもEXC_RETURN を積む    */ 
+ 283 00ea 00F003B8 		b     core_int_entry_2
+ 284              	ALABEL(core_int_entry_1)         /* 多重割込みの場合 */
+ 285 00ee 04B4     		push  {r2}                   /* 割込み発生時の割込み優先度マスクを積む */
+ 286 00f0 00B5     		push  {lr}                   /* EXC_RETURN を積む             */ 
+ 287 00f2 6846     		mov   r0, sp                 /* 未定義の割込みが発生した場合の情報とする */
+ 288              	
+ 289              		/*
+ 290              		 *  共通処理
+ 291              		 */
+ 292              	ALABEL(core_int_entry_2)
+ 293 00f4 EFF30583 		mrs   r3, ipsr               /* ハンドラアドレスを取得 */
+ 294 00f8 6349     		ldr   r1, =_kernel_exc_tbl
+ 295 00fa 51F82320 		ldr   r2, [r1, r3, lsl #2]
+ 296              	
+ 297              		/*
+ 298              		 *  basepriの設定
+ 299              		 *  NVIC優先度マスクが自動的に設定されるため優先度マスクの点では必要な
+ 300              		 *  いが，x_get_ipm()がbasepriを参照するため，basepriも更新する．
+ 301              		 */
+ 302 00fe 6349     		ldr   r1, =_kernel_int_iipm_tbl
+ 303 0100 51F823E0 		ldr   lr, [r1, r3, lsl #2]
+ 304 0104 8EF31188 		msr   basepri, lr
+ 305              	
+ 306              	#ifdef LOG_INH_ENTER
+ 307              		push  {r0,r2,r3}
+ 308              		mov   r0, r3                 /* 例外番号をパラメータに  */
+ 309              		bl    log_inh_enter          /* log_exc_enterを呼び出す */
+ 310              		pop   {r0,r2,r3}
+ 311              	#endif /* LOG_EXC_ENTER */
+ 312              	
+ 313              	#ifdef LOG_INH_LEAVE
+ 314              		push  { r3 }                   /* 例外番号をスタックへ    */
+ 315              	#endif /* LOG_INT_LEAVE */
+ 316              	
+ 317              		/*
+ 318              		 *  割込みハンドラの呼び出し
+ 319              		 */
+ 320 0108 9047     		blx   r2
+ 321              	
+ 322              	#ifdef LOG_INH_LEAVE
+ 323              		pop   {r0}                   /* 例外番号を引数に        */
+ 324              		bl    log_exc_leave          /* log_exc_leaveを呼び出す */
+ 325              	#endif /* LOG_INH_LEAVE */
+ 326              	
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 26
+
+
+ 327              	
+ 328              	
+ 329              	/*
+ 330              	 *  割込み/例外出口
+ 331              	 *
+ 332              	 *  ret_exc/ret_intは，CPU例外/割込みハンドラから戻った直後に実行する
+ 333              	 *  ルーチンである．
+ 334              	 */
+ 335              	ALABEL(ret_exc)
+ 336              	ALABEL(ret_int)
+ 337              		/*
+ 338              		 *  割込みロック状態とする．この時点では，CPUロック状態にはならない
+ 339              		 * （basepriとlock_flagとsaved_iipmは更新しない）．
+ 340              		 *
+ 341              		 *  割込みロック状態とするのは，戻り先のコンテキストのチェックと，
+ 342              		 *  戻り先が非タスクコンテキストであった場合のリターンをアトミック
+ 343              		 *  に行うためである．bsepriをCPUロックの値にすることでもアトミッ
+ 344              		 *  クなチェックと復帰は可能であるが，割込みからリターンしても，
+ 345              		 *  basepri の設定内容は元に戻らないため，使用することができない． 
+ 346              		 *  一方，FAULTMASKは，割込みからのリターン処理によって，'0'にクリ
+ 347              		 *  アされる．
+ 348              		 */
+ 349 010a 71B6     		cpsid f
+ 350              	
+ 351              		/*
+ 352              		 *  戻り先のコンテキストの判定
+ 353              		 * 
+ 354              		 *  割込みハンドラ実行にLRにセットされるEXC_RETURNをチェックして，戻り
+ 355              		 *  先でMSPが使われていれば，割込み先が非タスクコンテキストと判定する．
+ 356              		 */
+ 357 010c 08BC     		pop   {r3}                     /* lrをスタックから取得         */
+ 358 010e 13F0040F 		tst   r3, #EXC_RETURN_PSP      /* 戻り先がPSPなら ret_int_1 へ */
+ 359 0112 40F00380 		bne   ret_int_1
+ 360 0116 02BC     		pop   {r1}                     /* 元の割込み優先度マスク(basepri)をr1へ */
+ 361 0118 00F008B8 		b     ret_int_2                /* の値をMSPから取得 */
+ 362              	
+ 363              		/*
+ 364              		 *  一段目の割込みの出口処理
+ 365              		 */
+ 366              	ALABEL(ret_int_1)
+ 367              		/*
+ 368              		 *  PSP上から，EXC_RETURN(r0)と元の割込み優先度マスク(basepri)(r1)
+ 369              		 *  を取得
+ 370              		 */
+ 371 011c EFF30982 		mrs   r2, psp
+ 372 0120 03CA     		ldmfd r2!, {r0,r1} 
+ 373 0122 82F30988 		msr   psp, r2
+ 374              	
+ 375              		/*
+ 376              		 *  reqflgをチェックする
+ 377              		 * 
+ 378              		 *  カーネル管理内の割込みは禁止した状態で実行する必要があるため，
+ 379              		 *  FAULTMASKを'1'にした状態で実行する．
+ 380              		 *  reqflgをチェックする前に割込みを禁止するのは，reqflgをチェック
+ 381              		 *  した直後に割込みハンドラが起動され，その中でディスパッチが要求
+ 382              		 *  された場合に，すぐにディスパッチされないという問題が生じるため
+ 383              		 *  である．
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 27
+
+
+ 384              		 */
+ 385 0126 5A48     		ldr   r0, =reqflg             /* reqflgがfalseならそのまま戻る */
+ 386 0128 0268     		ldr   r2, [r0]
+ 387 012a 12B9     		cbnz  r2, ret_int_3           /* trueならret_int_3へ           */
+ 388              	
+ 389              	ALABEL(ret_int_2)
+ 390              		/*
+ 391              		 *  ここには割込みロック状態（FAULTMASKがセット）された状態で来る．
+ 392              		 *  Threadモードからのリターンにより自動的に割込みロック解除状態になる．
+ 393              		 *  割込み優先度マスクは割込み前に状態に戻す．
+ 394              		 */ 
+ 395 012c 81F31188 		msr   basepri, r1             /* 割込み優先度マスクを割込み前に状態へ */
+ 396 0130 1847     		bx    r3                      /* リターン */
+ 397              	
+ 398              	ALABEL(ret_int_3)
+ 399              		/*
+ 400              		 *  ここでは，戻り先がタスクであり，PSP上にスクラッチレジスタと割
+ 401              		 *  込み優先度マスク(basepri)が保存された状態になっている．また，
+ 402              		 *  プロセッサは，Handlerモード・割込みロック状態となっている．
+ 403              		 *  また，r0には，reqflgのアドレス，r3には割込み受付時のlrの値が保
+ 404              		 *  持されている．
+ 405              		 */
+ 406              		/*
+ 407              		 *  タスク例外ハンドラやディスパッチをする際にThreadモードへ遷移する
+ 408              		 *  ダミーのスタックフレームを作成して，bx命令でHandlerモードからリ
+ 409              		 *  ターンする．また，遅延ディスパッチする場合も，再び割り込んだタス
+ 410              		 *  クに戻る際には，svc命令で，svc_handlerを呼び出す．
+ 411              		 *  スタックフレームは，Configureation and Control Register(CCR)の
+ 412              		 *  STKALIGNが'1'の場合は，8byte境界にアラインされる．
+ 413              		 *  参考 : DDI0403B_arm_architecture_v7m_reference_manual(P.220)
+ 414              		 *  そのため，この時点のスタックは割込みや例外発生時に作成された
+ 415              		 *  スタックフレームから，8byte境界のサイズにしておくと，svc_handler
+ 416              		 *  等でスタックフレームのアライメントの有無の確認を省略できる．
+ 417              		 *  ただし，システム起動後は，動的にCCRのSTKALIGNの設定を変更するのは
+ 418              		 *  禁止とする．
+ 419              		 *  この時点は標準のスタックフレームは，割込み・例外発生時と同等であ
+ 420              		 *  るため，タスクスタック(PSP)は8byte境界になっている．
+ 421              		 */
+ 422 0132 4FF00001 		mov   r1, #0                   /* reqflgをfalseに */
+ 423 0136 0160     		str   r1, [r0]
+ 424              	
+ 425              		/*
+ 426              		 *  CPUロック状態に移行する．
+ 427              		 *
+ 428              		 *  カーネルの管理内の割込みを禁止するようにbasepriを設定し，
+ 429              		 *  lock_flag と saved_iipm を更新する．saved_iipmは，戻り先の割込み
+ 430              		 *  優先度マスク（の内部表現）に設定する．
+ 431              		 *  この時点でCPUロック状態とするのは，dispatcherへ分岐する時と，
+ 432              		 *  call_texrtnを呼び出す時に，CPUロック状態になっている必要がある
+ 433              		 *  ためである．
+ 434              		 *  なお，この処理の後，Threadモードへの移行処理を行なうため，割込み
+ 435              		 *  ロック状態(FAULTMASKを"1")は保持する．
+ 436              		 */
+ 437 0138 5649     		ldr   r1, =IIPM_LOCK          /* CPUロック状態 */ 
+ 438 013a 81F31188 		msr   basepri, r1          
+ 439 013e 4FF00101 		mov   r1, #0x01               /* lock_flag を trueに */
+ 440 0142 5548     		ldr   r0, =lock_flag          
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 28
+
+
+ 441 0144 0160     		str   r1, [r0]
+ 442              	
+ 443              		/*
+ 444              		 *  割込み優先度マスクを，全解除状態（TIPM_ENAALL）に設定する
+ 445              		 *  すでにCPUロック状態なので，saved_iipmをIIPM_ENAALLとする．
+ 446              		 */
+ 447 0146 5549     		ldr   r1, =IIPM_ENAALL
+ 448 0148 5548     		ldr   r0, =saved_iipm
+ 449 014a 0160     		str   r1, [r0]
+ 450              	
+ 451              		/*
+ 452              		 *  Threadモードへ移行する．
+ 453              		 *
+ 454              		 *  dispatcherやcall_texrnを呼び出す場合は，Threadモードである必
+ 455              		 *  要があるため，PSPスタック上にダミーの例外フレームを置いて，
+ 456              		 *  擬似的に割込みハンドラからリターンする．
+ 457              		 *  リターンと同時にFAULTMASKが自動的にクリアされ，カーネル管理外の
+ 458              		 *  割込みが許可される．
+ 459              		 */
+ 460 014c 5548     		ldr   r0, =ret_int_4          /* PC   */
+ 461 014e 5649     		ldr   r1, =EPSR_T             /* xPSR(Tビットが'1'である必要がある) */
+ 462 0150 EFF30982 		mrs   r2, psp
+ 463 0154 22E90300 		stmfd r2!, {r0-r1}            /* ダミーフレームをスタック上に積む   */
+ 464 0158 183A     		subs  r2, #(EXC_FRAME_SIZE - (4*2)) /* r0-r3,r12,lrの内容は設定する必要がない */
+ 465 015a 82F30988 		msr   psp,r2                  
+ 466 015e 1847     		bx    r3                      /* Threadモードへ移行 */
+ 467              	    
+ 468              	ALABEL(ret_int_4)
+ 469              		/*
+ 470              		 *  上記の処理により，Threadモードで実行される．
+ 471              		 *  dspflgがfalseである場合と，p_runtskとp_schedtskが同じ場合には，
+ 472              		 *  ディスパッチを行わない．このチェックが必要なのは，タスク例外処
+ 473              		 *  理ルーチンの呼出しが必要な場合に，ディスパッチが必要なくても，
+ 474              		 *  reqflgをtrueにするためである．
+ 475              		 */
+ 476 0160 4548     		ldr   r0, =p_runtsk       /* ディスパッチを行わない場合でも，r1にp_runtsk の値(TCB) */
+ 477 0162 0168     		ldr   r1, [r0]            /* が入っている必要があるので，先に読み込む */
+ 478 0164 5148     		ldr   r0, =dspflg         
+ 479 0166 0268     		ldr   r2, [r0]
+ 480 0168 82B1     		cbz   r2, ret_int_r_1     /* dspflgがfalseならret_int_r_1へ */
+ 481 016a 5148     		ldr   r0, =p_schedtsk     
+ 482 016c 0268     		ldr   r2, [r0]
+ 483 016e 9142     		cmp   r1, r2              /* p_runtskとp_schedtskが同じなら */
+ 484 0170 00F00C80 		beq   ret_int_r_1         /*                  ret_int_r_1へ */
+ 485 0174 2DE9F00F 		stmfd sp!, {r4-r11}       /* 残りのレジスタを保存 */
+ 486 0178 C1F818D0 		str   sp, [r1,#TCB_sp]    /* タスクスタックを保存 */
+ 487 017c DFF834E1 		ldr   lr, =ret_int_r      /* 実行再開番地を保存   */
+ 488 0180 C1F81CE0 		str   lr, [r1,#TCB_pc]
+ 489 0184 00F02BB8 		b     dispatcher          /* ディスパッチャへ */
+ 490              	
+ 491              	/*
+ 492              	 * 割込みによりプリエンプトされたタスクへのリターン処理
+ 493              	 *
+ 494              	 * Threadモードで，ディスパッチャや割込みの出口処理から呼び出される．
+ 495              	 * 割込みによりプリエンプトされたタスクへリターンするには，いったん
+ 496              	 * Handlerモードに移行し，PCに0xfffffffdを代入してリターンする必要
+ 497              	 * がある．そのため，SVCにより，SVCハンドラを呼び出し，Handlerモー
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 29
+
+
+ 498              	 * ドへ移行する．
+ 499              	 */
+ 500              		ATHUMB(ret_int_r)
+ 501              		AGLOBAL(ret_int_r)
+ 502              	ALABEL(ret_int_r)
+ 503 0188 BDE8F00F 		pop {r4-r11}                  /* レジスタの復帰 */
+ 504              	ALABEL(ret_int_r_1)
+ 505              		/*
+ 506              		 *  enatexがtrueで，texptnが0でなければ，タスク例外処理ルーチンを
+ 507              		 *  呼び出す．
+ 508              		 *  dispatcherから呼び出されるため，TCBのアドレスはr1に入っている
+ 509              		 */
+ 510 018c 887B     		ldrb  r0, [r1,#TCB_enatex]
+ 511 018e 10F0040F 		tst   r0, #TCB_enatex_mask
+ 512 0192 00F00780 		beq   ret_int_r_2           /* enatex が false なら ret_int_r_2へ */
+ 513 0196 0869     		ldr   r0, [r1,#TCB_texptn]  /* texptn が 0 ならリターン     */
+ 514 0198 20B1     		cbz   r0, ret_int_r_2
+ 515 019a 3949     		ldr   r1, =ipmflg             /* ipmflgが false ならリターン  */
+ 516 019c 0868     		ldr   r0, [r1]
+ 517 019e 08B1     		cbz   r0, ret_int_r_2
+ 518 01a0 FFF7FEFF 		bl    call_texrtn           /* タスク例外ルーチンの呼び出し */
+ 519              	ALABEL(ret_int_r_2)
+ 520 01a4 00DF     		svc   0                     /* SVCの呼び出し */
+ 521              	
+ 522              	/*
+ 523              	 *  SVCハンドラ
+ 524              	 */
+ 525              		ATHUMB(svc_handler)
+ 526              		AGLOBAL(svc_handler)
+ 527              	ALABEL(svc_handler)
+ 528              		/*
+ 529              		 *  割込み処理からのリターンにより，CPUロック解除状態に移行するよ
+ 530              		 *  う準備する．
+ 531              		 */
+ 532 01a6 71B6     		cpsid f                       /* 割込みロック状態へ */
+ 533 01a8 EFF30980 		mrs   r0, psp
+ 534 01ac 2030     		adds  r0, #EXC_FRAME_SIZE     /* スタックを捨てる   */
+ 535 01ae 80F30988 		msr   psp, r0
+ 536 01b2 4FF00000 		mov   r0, #0
+ 537 01b6 3849     		ldr   r1, =lock_flag          /* CPUロック解除状態へ */
+ 538 01b8 0860     		str   r0, [r1]
+ 539 01ba 3849     		ldr   r1, =IIPM_ENAALL        /* 割込み優先度マスクを全解除状態に設定 */
+ 540 01bc 81F31188 		msr   basepri, r1             
+ 541 01c0 7047     		bx    lr                      /* リターン     */
+ 542              	
+ 543              	/*
+ 544              	 *  ディスパッチャの動作開始
+ 545              	 */
+ 546              		ATHUMB(start_dispatch)
+ 547              		AGLOBAL(start_dispatch)
+ 548              	ALABEL(start_dispatch)
+ 549              		/*
+ 550              		 *  このルーチンは，カーネル起動時に，すべての割込みを禁止した状態
+ 551              		 * （割込みロック状態と同等）で呼び出される．また，割込みモード（非
+ 552              		 *  タスクコンテキストと同等）で呼び出されることを想定している．
+ 553              		 *
+ 554              		 *  core_initializeで，lock_flagをtrueに，saved_iipmをIIPM_ENAALLに
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 30
+
+
+ 555              		 *  初期化しているため，カーネル管理外の割込みを許可することで，
+ 556              		 *  CPUロック状態・（モデル上の）割込み優先度マスク全解除状態になる．
+ 557              		 *  また，task_initializeでdisdspをfalseに初期化しているため，ディ
+ 558              		 *  スパッチ許可状態になっている．
+ 559              		 */
+ 560 01c2 3D48     		ldr   r0,=istkpt              /* MSPを初期化   */
+ 561 01c4 0168     		ldr   r1,[r0]                 /* start_dispatch呼び出し時に呼び出し用に */
+ 562 01c6 81F30888 		msr   msp, r1                 /* 使用しているため初期化する             */
+ 563 01ca 3249     		ldr   r1, =IIPM_LOCK          /* カーネル管理内の割込みを禁止 */
+ 564 01cc 81F31188 		msr   basepri, r1 
+ 565 01d0 61B6     		cpsie f                       /* カーネル管理外の割込みを許可 */
+ 566 01d2 4FF00200 		mov   r0, #CONTROL_PSP        /* PSPを有効に  */
+ 567 01d6 80F31488 		msr   control, r0
+ 568 01da BFF36F8F 		isb                           /* control の操作後に必要 */
+ 569              	
+ 570              	/*
+ 571              	 *  現在のコンテキストを捨ててディスパッチ
+ 572              	 */
+ 573              		ATHUMB(exit_and_dispatch)
+ 574              		AGLOBAL(exit_and_dispatch)
+ 575              	ALABEL(exit_and_dispatch)
+ 576              		/* ディスパッチャ本体（dispatcher）へ */ 
+ 577              	
+ 578              	
+ 579              	/*
+ 580              	 *  ディスパッチャ本体
+ 581              	 */
+ 582              	ALABEL(dispatcher)
+ 583              		/*
+ 584              		 *  このルーチンは，タスクコンテキスト・CPUロック状態・ディスパッチ
+ 585              		 *  許可状態・（モデル上の）割込み優先度マスク全解除状態で呼び出さ
+ 586              		 *  れる．
+ 587              		 *
+ 588              		 *  すなわち，Threadモード・lock_flagがtrue・disdspがfalse・dspflg
+ 589              		 *  がtrue・saved_iipmがIIPM_ENAALLとなっている．実行再開番地へもこ
+ 590              		 *  の状態のまま分岐する．
+ 591              		 */
+ 592              	#ifdef LOG_DSP_ENTER
+ 593              		ldr   r1, =p_runtsk     /* p_runtskをパラメータに */
+ 594              		ldr   r0, [r1]        
+ 595              		bl    log_dsp_enter
+ 596              	#endif /* LOG_DSP_ENTER */
+ 597              	ALABEL(dispatcher_0)
+ 598 01de 3448     		ldr   r0, =p_schedtsk   /* p_schedtskをp_runtskに */
+ 599 01e0 0168     		ldr   r1, [r0]
+ 600 01e2 254A     		ldr   r2, =p_runtsk   
+ 601 01e4 1160     		str   r1, [r2]        
+ 602 01e6 19B1     		cbz   r1, dispatcher_1  /* p_runtskがNULLならdispatcher_1へ */           
+ 603 01e8 D1F818D0 		ldr   sp, [r1,#TCB_sp]  /* タスクスタックを復帰 */
+ 604              	#ifdef LOG_DSP_LEAVE
+ 605              		mov   r0, r1            /* p_runtskをパラメータに */
+ 606              		mov   r4, r1            /* r1はスクラッチレジスタなので保存 */
+ 607              		bl    log_dsp_leave
+ 608              		mov   r1, r4
+ 609              	#endif /* LOG_DSP_LEAVE */
+ 610 01ec D1F81CF0 		ldr   pc, [r1,#TCB_pc]  /* 実行再開番地を復帰   */    
+ 611              	ALABEL(dispatcher_1)
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 31
+
+
+ 612              		/*
+ 613              		 * CPUロック状態の解除と，非タスクコンテキスト実行状態への
+ 614              		 * 準備をする
+ 615              		 */
+ 616 01f0 4FF00000 		mov   r0, #CONTROL_MSP  /* MSPを有効に  */
+ 617 01f4 80F31488 		msr   control, r0       
+ 618 01f8 BFF36F8F 		isb                     /* control の操作後に必要 */
+ 619 01fc 4FF00004 		mov   r4, #0            /* r4 <- '0' */
+ 620 0200 244D     		ldr   r5, =IIPM_LOCK    /* r5 <- 割込みロック状態の割込み優先度マスクの値 */
+ 621 0202 234E     		ldr   r6, =reqflg       /* r6 <- reqflg */
+ 622 0204 244F     		ldr   r7, =lock_flag    /* r7 <- lock_flg */
+ 623 0206 3C60     		str   r4, [r7]          /* CPUロック解除状態へ */
+ 624              	ALABEL(dispatcher_2)
+ 625              		/*
+ 626              		 *  割込みを許可し，非タスクコンテキスト実行状態とし割込みを待つ．
+ 627              		 *
+ 628              		 *  ここで非タスクコンテキスト実行状態に切り換えるのは，ここで発生
+ 629              		 *  する割込み処理にどのスタックを使うかという問題の解決と，割込み
+ 630              		 *  ハンドラ内でのタスクディスパッチの防止という2つの意味がある．
+ 631              		 *
+ 632              		 *  プロセッサを割込み待ちに移行させる処理と，割込み許可とは，不可
+ 633              		 *  分に行なう必要がある．
+ 634              		 *  これを不可分に行なわない場合，割込みを許可した直後に割込
+ 635              		 *  みが入り，その中でタスクが実行可能状態になると，実行すべきタス
+ 636              		 *  クがあるにもかかわらずプロセッサが割込み待ちになってしまう．
+ 637              		 *  ARM-Mでは，PRIMASKをセットした状態でWFIを呼び出すことで実現できる．
+ 638              		 *  この状態で割込みが入ると，割込みは実行されず，WFIからリターンす
+ 639              		 *  ることになるので，一旦割込みを許可して割込みハンドラを実行する．
+ 640              		 *
+ 641              		 *  割込み待ちの間は，p_runtskをNULL（＝0）に設定しなければならな
+ 642              		 *  い．このように設定しないと，割込みハンドラからiget_tidを呼び出
+ 643              		 *  した際の動作が仕様に合致しなくなる．
+ 644              		 *
+ 645              		 *  ターゲットによっては，省電力モード等に移行するため，標準の方法と
+ 646              		 *  異なる手順が必要な場合がある．
+ 647              		 *  そのようなターゲットでは，ターゲット依存において，TOPPERS_CUSTOM_IDLE
+ 648              		 *  を定義し，アセンブラマクロとして，toppers_asm_custom_idle を用意
+ 649              		 *  すればよい．
+ 650              		 *
+ 651              		 *  なお，toppers_asm_custom_idle の記述にあたっては，次のレジスタは
+ 652              		 *  toppers_asm_custom_idleの前後で使用するため，
+ 653              		 *  toppers_asm_custom_idle 内で使用する場合は，前後で保存復帰すること．
+ 654              		 *  これらのレジスタは Calee saved レジスタであるため， 
+ 655              		 *  toppers_asm_custom_idle として関数呼び出しをした場合は，呼び出した
+ 656              		 *  関数で自動的に保存復帰されるため，アセンブラレベルでの保存復帰は必
+ 657              		 *  要ない．
+ 658              		 *
+ 659              		 *  レジスタ : 内容
+ 660              		 *   r4      : '0'
+ 661              		 *   r5      : 'IIPM_LOCK'
+ 662              		 *   r6      : reqflgのアドレス
+ 663              		 *   r7      : lock_flgのアドレス
+ 664              		 *   sp      : 非タスクコンテキスト用のスタックの先頭アドレス(msp)
+ 665              		 */
+ 666              	#ifdef TOPPERS_CUSTOM_IDLE
+ 667              		toppers_asm_custom_idle
+ 668              	#else
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 32
+
+
+ 669 0208 72B6     		cpsid i               /* PRIMASK をセット */
+ 670 020a 84F31188 		msr   basepri, r4     /* 全割込み許可 */ 
+ 671 020e 30BF     		wfi
+ 672 0210 62B6     		cpsie i               /* PRIMASK をクリア（割込みを受け付ける） */
+ 673 0212 85F31188 		msr   basepri, r5     /* CPUロック状態へ */ 
+ 674              	#endif /* TOPPERS_CUSTOM_IDLE */
+ 675              	
+ 676 0216 3068     		ldr   r0, [r6]        /* reqflgがfalseならdispatcher_2へ */
+ 677 0218 0028     		cmp   r0, #0
+ 678 021a 3FF4F5AF 		beq   dispatcher_2
+ 679 021e 3460     		str   r4, [r6]        /* reqflgをfalseに */
+ 680              	
+ 681              		/*
+ 682              		 *  CPUロック状態に戻す．割込み待ちの間に実行した割込みハンドラによ
+ 683              		 *  り，saved_iipmが書き換えられる可能性があるため，元の値に戻す必
+ 684              		 *  要がある．dispatcherが実行される時は，saved_iipmがIIPM_ENAALL
+ 685              		 *  となっているため，ここではsaved_iipmをIIPM_ENAALL（＝0）に戻せ
+ 686              		 *  ばよい．
+ 687              		 */
+ 688 0220 4FF00200 		mov   r0, #CONTROL_PSP  /* PSPを有効に  */ 
+ 689 0224 80F31488 		msr   control, r0      
+ 690 0228 BFF36F8F 		isb                     /* control の操作後に必要 */
+ 691 022c 4FF00102 		mov   r2, #1            /* lock_flagをtrueへ */
+ 692 0230 3A60     		str   r2, [r7]
+ 693 0232 1B48     		ldr   r0, =saved_iipm   /* saved_iipm を0に */
+ 694 0234 0460     		str   r4, [r0]
+ 695 0236 FFF7D2BF 		b     dispatcher_0
+ 696              	
+ 697              	
+ 698              	/*
+ 699              	 *  カーネルの終了処理の呼出し
+ 700              	 *
+ 701              	 *  スタックを非タスクコンテキスト用に切り替え．
+ 702              	 *  
+ 703              	 */
+ 704              		ATHUMB(call_exit_kernel)
+ 705              		AGLOBAL(call_exit_kernel)
+ 706              	ALABEL(call_exit_kernel)
+ 707 023a 4FF00000 		mov   r0, #CONTROL_MSP
+ 708 023e 80F31488 		msr   control, r0       /* MSPを有効に  */
+ 709 0242 BFF36F8F 		isb                     /* control の操作後に必要 */
+ 710 0246 1D48     		ldr   r0, =exit_kernel  /* カーネルの終了処理を呼ぶ */
+ 711 0248 0047     		bx    r0
+ 712              	
+ 713              	
+ 714              	/*
+ 715              	 *  タスク起動処理
+ 716              	 *
+ 717              	 *  dispatcherから呼び出されるため，TCBのアドレスはr1に入っている
+ 718              	 *
+ 719              	 */ 
+ 720              		ATHUMB(start_r)
+ 721              		AGLOBAL(start_r)
+ 722              	ALABEL(start_r)
+ 723 024a 4FF00000 		mov   r0, #0
+ 724 024e 124C     		ldr   r4, =lock_flag                    /* CPUロック解除状態へ */
+ 725 0250 2060     		str   r0, [r4]
+ARM GAS  C:\TEMP\ccDfpUqv.s 			page 33
+
+
+ 726 0252 80F31188 		msr   basepri, r0                       /* 割込み許可   */
+ 727 0256 DFF868E0 		ldr   lr, =ext_tsk                      /* 戻り番地設定 */
+ 728 025a 8A68     		ldr   r2, [r1, #TCB_p_tinib]            /* p_runtsk->p_tinibをr2に  */
+ 729 025c 5068     		ldr   r0, [r2, #TINIB_exinf]            /* exinfを引数レジスタr0に  */
+ 730 025e 9168     		ldr   r1, [r2, #TINIB_task]             /* タスク起動番地にジャンプ */
+ 731 0260 0847     		bx    r1
+ 732              	
+ 733              	/*
+ 734              	 *  微少時間待ち
+ 735              	 */
+ 736 0262 00BF     		ABALIGN(4)
+ 737              		ATEXT
+ 738              		ATHUMB(sil_dly_nse)
+ 739              		AGLOBAL(sil_dly_nse)
+ 740              	ALABEL(sil_dly_nse)
+ 741 0264 A038     		subs  r0, r0, #SIL_DLY_TIM1
+ 742 0266 0028     		cmp   r0, #0
+ 743 0268 00F30180 		bgt   sil_dly_nse1
+ 744 026c 7047     		bx    lr
+ 745              	ALABEL(sil_dly_nse1)
+ 746 026e 6438     		subs  r0, r0, #SIL_DLY_TIM2
+ 747 0270 0028     		cmp   r0, #0
+ 748 0272 3FF7FCAF 		bgt   sil_dly_nse1
+ 749 0276 70470000 		bx    lr
+ 749      00000000 
+ 749      00000000 
+ 749      00000000 
+ 749      00000000 

@@ -1,0 +1,3149 @@
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"exception.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text._kernel_initialize_exception,"ax",%progbits
+  19              		.align	1
+  20              		.global	_kernel_initialize_exception
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	_kernel_initialize_exception, %function
+  24              	_kernel_initialize_exception:
+  25              	.LFB53:
+  26              		.file 1 ".\\asp\\kernel\\exception.c"
+   1:.\asp\kernel/exception.c **** /*
+   2:.\asp\kernel/exception.c ****  *  TOPPERS/ASP Kernel
+   3:.\asp\kernel/exception.c ****  *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4:.\asp\kernel/exception.c ****  *      Advanced Standard Profile Kernel
+   5:.\asp\kernel/exception.c ****  * 
+   6:.\asp\kernel/exception.c ****  *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   7:.\asp\kernel/exception.c ****  *                              Toyohashi Univ. of Technology, JAPAN
+   8:.\asp\kernel/exception.c ****  *  Copyright (C) 2005-2011 by Embedded and Real-Time Systems Laboratory
+   9:.\asp\kernel/exception.c ****  *              Graduate School of Information Science, Nagoya Univ., JAPAN
+  10:.\asp\kernel/exception.c ****  * 
+  11:.\asp\kernel/exception.c ****  *  è„ãLíòçÏå†é“ÇÕÅCà»â∫ÇÃ(1)Å`(4)ÇÃèåèÇñûÇΩÇ∑èÍçáÇ…å¿ÇËÅCñ{É\ÉtÉgÉEÉF
+  12:.\asp\kernel/exception.c ****  *  ÉAÅiñ{É\ÉtÉgÉEÉFÉAÇâ¸ïœÇµÇΩÇ‡ÇÃÇä‹ÇﬁÅDà»â∫ìØÇ∂ÅjÇégópÅEï°êªÅEâ¸
+  13:.\asp\kernel/exception.c ****  *  ïœÅEçƒîzïzÅià»â∫ÅCóòópÇ∆åƒÇ‘ÅjÇ∑ÇÈÇ±Ç∆Çñ≥èûÇ≈ãñë¯Ç∑ÇÈÅD
+  14:.\asp\kernel/exception.c ****  *  (1) ñ{É\ÉtÉgÉEÉFÉAÇÉ\Å[ÉXÉRÅ[ÉhÇÃå`Ç≈óòópÇ∑ÇÈèÍçáÇ…ÇÕÅCè„ãLÇÃíòçÏ
+  15:.\asp\kernel/exception.c ****  *      å†ï\é¶ÅCÇ±ÇÃóòópèåèÇ®ÇÊÇ—â∫ãLÇÃñ≥ï€èÿãKíËÇ™ÅCÇªÇÃÇ‹Ç‹ÇÃå`Ç≈É\Å[
+  16:.\asp\kernel/exception.c ****  *      ÉXÉRÅ[ÉhíÜÇ…ä‹Ç‹ÇÍÇƒÇ¢ÇÈÇ±Ç∆ÅD
+  17:.\asp\kernel/exception.c ****  *  (2) ñ{É\ÉtÉgÉEÉFÉAÇÅCÉâÉCÉuÉâÉäå`éÆÇ»Ç«ÅCëºÇÃÉ\ÉtÉgÉEÉFÉAäJî≠Ç…ég
+  18:.\asp\kernel/exception.c ****  *      ópÇ≈Ç´ÇÈå`Ç≈çƒîzïzÇ∑ÇÈèÍçáÇ…ÇÕÅCçƒîzïzÇ…î∫Ç§ÉhÉLÉÖÉÅÉìÉgÅióòóp
+  19:.\asp\kernel/exception.c ****  *      é“É}ÉjÉÖÉAÉãÇ»Ç«ÅjÇ…ÅCè„ãLÇÃíòçÏå†ï\é¶ÅCÇ±ÇÃóòópèåèÇ®ÇÊÇ—â∫ãL
+  20:.\asp\kernel/exception.c ****  *      ÇÃñ≥ï€èÿãKíËÇåfç⁄Ç∑ÇÈÇ±Ç∆ÅD
+  21:.\asp\kernel/exception.c ****  *  (3) ñ{É\ÉtÉgÉEÉFÉAÇÅCã@äÌÇ…ëgÇ›çûÇﬁÇ»Ç«ÅCëºÇÃÉ\ÉtÉgÉEÉFÉAäJî≠Ç…ég
+  22:.\asp\kernel/exception.c ****  *      ópÇ≈Ç´Ç»Ç¢å`Ç≈çƒîzïzÇ∑ÇÈèÍçáÇ…ÇÕÅCéüÇÃÇ¢Ç∏ÇÍÇ©ÇÃèåèÇñûÇΩÇ∑Ç±
+  23:.\asp\kernel/exception.c ****  *      Ç∆ÅD
+  24:.\asp\kernel/exception.c ****  *    (a) çƒîzïzÇ…î∫Ç§ÉhÉLÉÖÉÅÉìÉgÅióòópé“É}ÉjÉÖÉAÉãÇ»Ç«ÅjÇ…ÅCè„ãLÇÃíò
+  25:.\asp\kernel/exception.c ****  *        çÏå†ï\é¶ÅCÇ±ÇÃóòópèåèÇ®ÇÊÇ—â∫ãLÇÃñ≥ï€èÿãKíËÇåfç⁄Ç∑ÇÈÇ±Ç∆ÅD
+  26:.\asp\kernel/exception.c ****  *    (b) çƒîzïzÇÃå`ë‘ÇÅCï Ç…íËÇﬂÇÈï˚ñ@Ç…ÇÊÇ¡ÇƒÅCTOPPERSÉvÉçÉWÉFÉNÉgÇ…
+  27:.\asp\kernel/exception.c ****  *        ïÒçêÇ∑ÇÈÇ±Ç∆ÅD
+  28:.\asp\kernel/exception.c ****  *  (4) ñ{É\ÉtÉgÉEÉFÉAÇÃóòópÇ…ÇÊÇËíºê⁄ìIÇ‹ÇΩÇÕä‘ê⁄ìIÇ…ê∂Ç∂ÇÈÇ¢Ç©Ç»ÇÈëπ
+  29:.\asp\kernel/exception.c ****  *      äQÇ©ÇÁÇ‡ÅCè„ãLíòçÏå†é“Ç®ÇÊÇ—TOPPERSÉvÉçÉWÉFÉNÉgÇñ∆ê”Ç∑ÇÈÇ±Ç∆ÅD
+  30:.\asp\kernel/exception.c ****  *      Ç‹ÇΩÅCñ{É\ÉtÉgÉEÉFÉAÇÃÉÜÅ[ÉUÇ‹ÇΩÇÕÉGÉìÉhÉÜÅ[ÉUÇ©ÇÁÇÃÇ¢Ç©Ç»ÇÈóù
+  31:.\asp\kernel/exception.c ****  *      óRÇ…äÓÇ√Ç≠êøãÅÇ©ÇÁÇ‡ÅCè„ãLíòçÏå†é“Ç®ÇÊÇ—TOPPERSÉvÉçÉWÉFÉNÉgÇ
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 2
+
+
+  32:.\asp\kernel/exception.c ****  *      ñ∆ê”Ç∑ÇÈÇ±Ç∆ÅD
+  33:.\asp\kernel/exception.c ****  * 
+  34:.\asp\kernel/exception.c ****  *  ñ{É\ÉtÉgÉEÉFÉAÇÕÅCñ≥ï€èÿÇ≈íÒãüÇ≥ÇÍÇƒÇ¢ÇÈÇ‡ÇÃÇ≈Ç†ÇÈÅDè„ãLíòçÏå†é“Ç®
+  35:.\asp\kernel/exception.c ****  *  ÇÊÇ—TOPPERSÉvÉçÉWÉFÉNÉgÇÕÅCñ{É\ÉtÉgÉEÉFÉAÇ…ä÷ÇµÇƒÅCì¡íËÇÃégópñ⁄ìI
+  36:.\asp\kernel/exception.c ****  *  Ç…ëŒÇ∑ÇÈìKçáê´Ç‡ä‹ÇﬂÇƒÅCÇ¢Ç©Ç»ÇÈï€èÿÇ‡çsÇÌÇ»Ç¢ÅDÇ‹ÇΩÅCñ{É\ÉtÉgÉEÉF
+  37:.\asp\kernel/exception.c ****  *  ÉAÇÃóòópÇ…ÇÊÇËíºê⁄ìIÇ‹ÇΩÇÕä‘ê⁄ìIÇ…ê∂Ç∂ÇΩÇ¢Ç©Ç»ÇÈëπäQÇ…ä÷ÇµÇƒÇ‡ÅCÇª
+  38:.\asp\kernel/exception.c ****  *  ÇÃê”îCÇïâÇÌÇ»Ç¢ÅD
+  39:.\asp\kernel/exception.c ****  * 
+  40:.\asp\kernel/exception.c ****  *  @(#) $Id: exception.c 2133 2011-06-26 03:14:51Z ertl-hiro $
+  41:.\asp\kernel/exception.c ****  */
+  42:.\asp\kernel/exception.c **** 
+  43:.\asp\kernel/exception.c **** /*
+  44:.\asp\kernel/exception.c ****  *		CPUó·äOä«óùã@î\
+  45:.\asp\kernel/exception.c ****  */
+  46:.\asp\kernel/exception.c **** 
+  47:.\asp\kernel/exception.c **** #include "kernel_impl.h"
+  48:.\asp\kernel/exception.c **** #include "task.h"
+  49:.\asp\kernel/exception.c **** #include "exception.h"
+  50:.\asp\kernel/exception.c **** 
+  51:.\asp\kernel/exception.c **** /*
+  52:.\asp\kernel/exception.c ****  *  ÉgÉåÅ[ÉXÉçÉOÉ}ÉNÉçÇÃÉfÉtÉHÉãÉgíËã`
+  53:.\asp\kernel/exception.c ****  */
+  54:.\asp\kernel/exception.c **** #ifndef LOG_XSNS_DPN_ENTER
+  55:.\asp\kernel/exception.c **** #define LOG_XSNS_DPN_ENTER(p_excinf)
+  56:.\asp\kernel/exception.c **** #endif /* LOG_XSNS_DPN_ENTER */
+  57:.\asp\kernel/exception.c **** 
+  58:.\asp\kernel/exception.c **** #ifndef LOG_XSNS_DPN_LEAVE
+  59:.\asp\kernel/exception.c **** #define LOG_XSNS_DPN_LEAVE(state)
+  60:.\asp\kernel/exception.c **** #endif /* LOG_XSNS_DPN_LEAVE */
+  61:.\asp\kernel/exception.c **** 
+  62:.\asp\kernel/exception.c **** #ifndef LOG_XSNS_XPN_ENTER
+  63:.\asp\kernel/exception.c **** #define LOG_XSNS_XPN_ENTER(p_excinf)
+  64:.\asp\kernel/exception.c **** #endif /* LOG_XSNS_XPN_ENTER */
+  65:.\asp\kernel/exception.c **** 
+  66:.\asp\kernel/exception.c **** #ifndef LOG_XSNS_XPN_LEAVE
+  67:.\asp\kernel/exception.c **** #define LOG_XSNS_XPN_LEAVE(state)
+  68:.\asp\kernel/exception.c **** #endif /* LOG_XSNS_XPN_LEAVE */
+  69:.\asp\kernel/exception.c **** 
+  70:.\asp\kernel/exception.c **** /* 
+  71:.\asp\kernel/exception.c ****  *  CPUó·äOÉnÉìÉhÉâä«óùã@î\ÇÃèâä˙âª
+  72:.\asp\kernel/exception.c ****  */
+  73:.\asp\kernel/exception.c **** #ifdef TOPPERS_excini
+  74:.\asp\kernel/exception.c **** #ifndef OMIT_INITIALIZE_EXCEPTION
+  75:.\asp\kernel/exception.c **** 
+  76:.\asp\kernel/exception.c **** void
+  77:.\asp\kernel/exception.c **** initialize_exception(void)
+  78:.\asp\kernel/exception.c **** {
+  27              		.loc 1 78 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              	.LVL0:
+  32 0000 10B5     		push	{r4, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 4, -8
+  36              		.cfi_offset 14, -4
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 3
+
+
+  79:.\asp\kernel/exception.c **** 	uint_t			i;
+  80:.\asp\kernel/exception.c **** 	const EXCINIB	*p_excinib;
+  81:.\asp\kernel/exception.c **** 
+  82:.\asp\kernel/exception.c **** 	for (i = 0; i < tnum_excno; i++) {
+  37              		.loc 1 82 0
+  38 0002 0024     		movs	r4, #0
+  39              	.LVL1:
+  40              	.L2:
+  41              		.loc 1 82 0 is_stmt 0 discriminator 1
+  42 0004 064B     		ldr	r3, .L6
+  43 0006 1868     		ldr	r0, [r3, #0]
+  44 0008 8442     		cmp	r4, r0
+  45 000a 07D2     		bcs	.L5
+  46              	.L3:
+  47              	.LVL2:
+  83:.\asp\kernel/exception.c **** 		p_excinib = &(excinib_table[i]);
+  48              		.loc 1 83 0 is_stmt 1 discriminator 2
+  49 000c 0C22     		movs	r2, #12
+  50 000e 6243     		muls	r2, r4, r2
+  84:.\asp\kernel/exception.c **** 		x_define_exc(p_excinib->excno, p_excinib->exc_entry);
+  51              		.loc 1 84 0 discriminator 2
+  52 0010 0449     		ldr	r1, .L6+4
+  82:.\asp\kernel/exception.c **** 	for (i = 0; i < tnum_excno; i++) {
+  53              		.loc 1 82 0 discriminator 2
+  54 0012 0134     		adds	r4, r4, #1
+  55              	.LVL3:
+  56              	.LBB6:
+  57              	.LBB7:
+  58              		.file 2 ".\\asp\\arch\\arm_m_gcc\\common/core_config.h"
+   1:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+   2:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  TOPPERS/ASP Kernel
+   3:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      Advanced Standard Profile Kernel
+   5:.\asp\arch\arm_m_gcc\common/core_config.h ****  * 
+   6:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Copyright (C) 2008-2011,2013 by Embedded and Real-Time Systems Laboratory
+   7:.\asp\arch\arm_m_gcc\common/core_config.h ****  *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   8:.\asp\arch\arm_m_gcc\common/core_config.h ****  * 
+   9:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  è„ãLíòçÏå†é“ÇÕÅCà»â∫ÇÃ(1)Å`(4)ÇÃèåèÇñûÇΩÇ∑èÍçáÇ…å¿ÇËÅCñ{É\ÉtÉgÉEÉF
+  10:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉAÅiñ{É\ÉtÉgÉEÉFÉAÇâ¸ïœÇµÇΩÇ‡ÇÃÇä‹ÇﬁÅDà»â∫ìØÇ∂ÅjÇégópÅEï°êªÅEâ¸
+  11:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ïœÅEçƒîzïzÅià»â∫ÅCóòópÇ∆åƒÇ‘ÅjÇ∑ÇÈÇ±Ç∆Çñ≥èûÇ≈ãñë¯Ç∑ÇÈÅD
+  12:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  (1) ñ{É\ÉtÉgÉEÉFÉAÇÉ\Å[ÉXÉRÅ[ÉhÇÃå`Ç≈óòópÇ∑ÇÈèÍçáÇ…ÇÕÅCè„ãLÇÃíòçÏ
+  13:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      å†ï\é¶ÅCÇ±ÇÃóòópèåèÇ®ÇÊÇ—â∫ãLÇÃñ≥ï€èÿãKíËÇ™ÅCÇªÇÃÇ‹Ç‹ÇÃå`Ç≈É\Å[
+  14:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      ÉXÉRÅ[ÉhíÜÇ…ä‹Ç‹ÇÍÇƒÇ¢ÇÈÇ±Ç∆ÅD
+  15:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  (2) ñ{É\ÉtÉgÉEÉFÉAÇÅCÉâÉCÉuÉâÉäå`éÆÇ»Ç«ÅCëºÇÃÉ\ÉtÉgÉEÉFÉAäJî≠Ç…ég
+  16:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      ópÇ≈Ç´ÇÈå`Ç≈çƒîzïzÇ∑ÇÈèÍçáÇ…ÇÕÅCçƒîzïzÇ…î∫Ç§ÉhÉLÉÖÉÅÉìÉgÅióòóp
+  17:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      é“É}ÉjÉÖÉAÉãÇ»Ç«ÅjÇ…ÅCè„ãLÇÃíòçÏå†ï\é¶ÅCÇ±ÇÃóòópèåèÇ®ÇÊÇ—â∫ãL
+  18:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      ÇÃñ≥ï€èÿãKíËÇåfç⁄Ç∑ÇÈÇ±Ç∆ÅD
+  19:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  (3) ñ{É\ÉtÉgÉEÉFÉAÇÅCã@äÌÇ…ëgÇ›çûÇﬁÇ»Ç«ÅCëºÇÃÉ\ÉtÉgÉEÉFÉAäJî≠Ç…ég
+  20:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      ópÇ≈Ç´Ç»Ç¢å`Ç≈çƒîzïzÇ∑ÇÈèÍçáÇ…ÇÕÅCéüÇÃÇ¢Ç∏ÇÍÇ©ÇÃèåèÇñûÇΩÇ∑Ç±
+  21:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      Ç∆ÅD
+  22:.\asp\arch\arm_m_gcc\common/core_config.h ****  *    (a) çƒîzïzÇ…î∫Ç§ÉhÉLÉÖÉÅÉìÉgÅióòópé“É}ÉjÉÖÉAÉãÇ»Ç«ÅjÇ…ÅCè„ãLÇÃíò
+  23:.\asp\arch\arm_m_gcc\common/core_config.h ****  *        çÏå†ï\é¶ÅCÇ±ÇÃóòópèåèÇ®ÇÊÇ—â∫ãLÇÃñ≥ï€èÿãKíËÇåfç⁄Ç∑ÇÈÇ±Ç∆ÅD
+  24:.\asp\arch\arm_m_gcc\common/core_config.h ****  *    (b) çƒîzïzÇÃå`ë‘ÇÅCï Ç…íËÇﬂÇÈï˚ñ@Ç…ÇÊÇ¡ÇƒÅCTOPPERSÉvÉçÉWÉFÉNÉgÇ…
+  25:.\asp\arch\arm_m_gcc\common/core_config.h ****  *        ïÒçêÇ∑ÇÈÇ±Ç∆ÅD
+  26:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  (4) ñ{É\ÉtÉgÉEÉFÉAÇÃóòópÇ…ÇÊÇËíºê⁄ìIÇ‹ÇΩÇÕä‘ê⁄ìIÇ…ê∂Ç∂ÇÈÇ¢Ç©Ç»ÇÈëπ
+  27:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      äQÇ©ÇÁÇ‡ÅCè„ãLíòçÏå†é“Ç®ÇÊÇ—TOPPERSÉvÉçÉWÉFÉNÉgÇñ∆ê”Ç∑ÇÈÇ±Ç∆ÅD
+  28:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      Ç‹ÇΩÅCñ{É\ÉtÉgÉEÉFÉAÇÃÉÜÅ[ÉUÇ‹ÇΩÇÕÉGÉìÉhÉÜÅ[ÉUÇ©ÇÁÇÃÇ¢Ç©Ç»ÇÈóù
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 4
+
+
+  29:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      óRÇ…äÓÇ√Ç≠êøãÅÇ©ÇÁÇ‡ÅCè„ãLíòçÏå†é“Ç®ÇÊÇ—TOPPERSÉvÉçÉWÉFÉNÉgÇ
+  30:.\asp\arch\arm_m_gcc\common/core_config.h ****  *      ñ∆ê”Ç∑ÇÈÇ±Ç∆ÅD
+  31:.\asp\arch\arm_m_gcc\common/core_config.h ****  * 
+  32:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ñ{É\ÉtÉgÉEÉFÉAÇÕÅCñ≥ï€èÿÇ≈íÒãüÇ≥ÇÍÇƒÇ¢ÇÈÇ‡ÇÃÇ≈Ç†ÇÈÅDè„ãLíòçÏå†é“Ç®
+  33:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇÊÇ—TOPPERSÉvÉçÉWÉFÉNÉgÇÕÅCñ{É\ÉtÉgÉEÉFÉAÇ…ä÷ÇµÇƒÅCì¡íËÇÃégópñ⁄ìI
+  34:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç…ëŒÇ∑ÇÈìKçáê´Ç‡ä‹ÇﬂÇƒÅCÇ¢Ç©Ç»ÇÈï€èÿÇ‡çsÇÌÇ»Ç¢ÅDÇ‹ÇΩÅCñ{É\ÉtÉgÉEÉF
+  35:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉAÇÃóòópÇ…ÇÊÇËíºê⁄ìIÇ‹ÇΩÇÕä‘ê⁄ìIÇ…ê∂Ç∂ÇΩÇ¢Ç©Ç»ÇÈëπäQÇ…ä÷ÇµÇƒÇ‡ÅCÇª
+  36:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇÃê”îCÇïâÇÌÇ»Ç¢ÅD
+  37:.\asp\arch\arm_m_gcc\common/core_config.h ****  * 
+  38:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  @(#) $Id: core_config.h 2554 2013-10-17 02:53:02Z ertl-honda $
+  39:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  40:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  41:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+  42:.\asp\arch\arm_m_gcc\common/core_config.h ****  *		ÉvÉçÉZÉbÉTàÀë∂ÉÇÉWÉÖÅ[ÉãÅiARM-MópÅj
+  43:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+  44:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç±ÇÃÉCÉìÉNÉãÅ[ÉhÉtÉ@ÉCÉãÇÕÅCtarget_config.hÅiÇ‹ÇΩÇÕÅCÇªÇ±Ç©ÇÁÉCÉìÉN
+  45:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉãÅ[ÉhÇ≥ÇÍÇÈÉtÉ@ÉCÉãÅjÇÃÇ›Ç©ÇÁÉCÉìÉNÉãÅ[ÉhÇ≥ÇÍÇÈÅDëºÇÃÉtÉ@ÉCÉãÇ©ÇÁ
+  46:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  íºê⁄ÉCÉìÉNÉãÅ[ÉhÇµÇƒÇÕÇ»ÇÁÇ»Ç¢ÅD
+  47:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  48:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  49:.\asp\arch\arm_m_gcc\common/core_config.h **** #ifndef TOPPERS_CORE_CONFIG_H
+  50:.\asp\arch\arm_m_gcc\common/core_config.h **** #define TOPPERS_CORE_CONFIG_H
+  51:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  52:.\asp\arch\arm_m_gcc\common/core_config.h **** #ifndef TOPPERS_MACRO_ONLY
+  53:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  54:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+  55:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉvÉçÉZÉbÉTÇÃì¡éÍñΩóﬂÇÃÉCÉìÉâÉCÉìä÷êîíËã`
+  56:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  57:.\asp\arch\arm_m_gcc\common/core_config.h **** #include <core_insn.h>
+  58:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  59:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+  60:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  É^Å[ÉQÉbÉgàÀë∂ÇÃÉIÉuÉWÉFÉNÉgëÆê´
+  61:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  62:.\asp\arch\arm_m_gcc\common/core_config.h **** #define TARGET_INHATR  TA_NONKERNEL /* É^Å[ÉQÉbÉgíËã`ÇÃäÑçûÇ›ÉnÉìÉhÉâëÆê´ */
+  63:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  64:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+  65:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉGÉâÅ[É`ÉFÉbÉNï˚ñ@ÇÃéwíË
+  66:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  67:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_STKSZ_ALIGN	8	/* ÉXÉ^ÉbÉNÉTÉCÉYÇÃÉAÉâÉCÉìíPà  */
+  68:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_FUNC_ALIGN	1	/* ä÷êîÇÃÉAÉâÉCÉìíPà  */
+  69:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_FUNC_NONNULL		/* ä÷êîÇÃîÒNULLÉ`ÉFÉbÉN */
+  70:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_STACK_ALIGN	8	/* ÉXÉ^ÉbÉNóÃàÊÇÃÉAÉâÉCÉìíPà  */
+  71:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_STACK_NONNULL		/* ÉXÉ^ÉbÉNóÃàÊÇÃîÒNULLÉ`ÉFÉbÉN */
+  72:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_MPF_ALIGN		4	/* å≈íËí∑ÉÅÉÇÉäÉvÅ[ÉãóÃàÊÇÃÉAÉâÉCÉìíPà  */
+  73:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_MPF_NONNULL		/* å≈íËí∑ÉÅÉÇÉäÉvÅ[ÉãóÃàÊÇÃîÒNULLÉ`ÉFÉbÉN */
+  74:.\asp\arch\arm_m_gcc\common/core_config.h **** #define CHECK_MB_ALIGN		4	/* ä«óùóÃàÊÇÃÉAÉâÉCÉìíPà  */
+  75:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  76:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+  77:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  îÒÉ^ÉXÉNÉRÉìÉeÉLÉXÉgópÇÃÉXÉ^ÉbÉNèâä˙íl
+  78:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  79:.\asp\arch\arm_m_gcc\common/core_config.h **** #define TOPPERS_ISTKPT(istk, istksz) ((STK_T *)((uint8_t *)(istk) + (istksz)))
+  80:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  81:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+  82:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  É^ÉXÉNÉRÉìÉeÉLÉXÉgÉuÉçÉbÉNÇÃíËã`
+  83:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  84:.\asp\arch\arm_m_gcc\common/core_config.h **** typedef struct task_context_block {
+  85:.\asp\arch\arm_m_gcc\common/core_config.h **** 	void	*sp;		/* ÉXÉ^ÉbÉNÉ|ÉCÉìÉ^ */
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 5
+
+
+  86:.\asp\arch\arm_m_gcc\common/core_config.h **** 	FP		pc;			/* ÉvÉçÉOÉâÉÄÉJÉEÉìÉ^ */
+  87:.\asp\arch\arm_m_gcc\common/core_config.h **** } TSKCTXB;
+  88:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  89:.\asp\arch\arm_m_gcc\common/core_config.h **** #endif /* TOPPERS_MACRO_ONLY */
+  90:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+  91:.\asp\arch\arm_m_gcc\common/core_config.h **** #ifndef TOPPERS_MACRO_ONLY
+  92:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+  93:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉRÉìÉeÉLÉXÉgÇÃéQè∆
+  94:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+  95:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+  96:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline bool_t
+  97:.\asp\arch\arm_m_gcc\common/core_config.h **** sense_context(void)
+  98:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+  99:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/*
+ 100:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  PSPÇ™óLå¯Ç»ÇÁÉ^ÉXÉNÉRÉìÉeÉLÉXÉgÅCMSPÇ™óLå¯Ç»ÇÁîÒÉ^ÉXÉNÉRÉìÉeÉLÉXÉg
+ 101:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  Ç∆Ç∑ÇÈÅD 
+ 102:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 */
+ 103:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if ((get_control() & CONTROL_PSP) == CONTROL_PSP){
+ 104:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return false;
+ 105:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 106:.\asp\arch\arm_m_gcc\common/core_config.h **** 	else {
+ 107:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return true;
+ 108:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 109:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 110:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 111:.\asp\arch\arm_m_gcc\common/core_config.h **** #endif /* TOPPERS_MACRO_ONLY */
+ 112:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 113:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 114:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  TOPPERSïWèÄäÑçûÇ›èàóùÉÇÉfÉãÇÃé¿åª
+ 115:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 116:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óDêÊìxÉ}ÉXÉNÇ∆ÇµÇƒÇÕÅCBASEPRIÇópÇ¢ÇÈÅDëSäÑçûÇ›Çã÷é~Ç∑ÇÈ
+ 117:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ã@î\Ç∆ÇµÇƒÅCFAULTMASKÇ‚PRIMASKÇ™Ç†ÇÈÇ™ÅCÉJÅ[ÉlÉãä«óùäOÇÃäÑçûÇ›Ç
+ 118:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉTÉ|Å[ÉgÇ∑ÇÈÇΩÇﬂÅCÇ±ÇÍÇÁÇÕCPUÉçÉbÉNÇÃÇΩÇﬂÇ…ópÇ¢Ç»Ç¢ÅD
+ 119:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇªÇÃÇΩÇﬂÅCBASEPRIÇópÇ¢Çƒã[éóìIÇ…CPUÉçÉbÉNÉtÉâÉOÇé¿åªÇ∑ÇÈÅD
+ 120:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 121:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç‹Ç∏ÅCCPUÉçÉbÉNèÛë‘Çä«óùÇ∑ÇΩÇﬂÇÃïœêî(lock_flag)Çópà”Ç∑ÇÈÅD
+ 122:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 123:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNÉtÉâÉOÇ™ÉNÉäÉAÇ≥ÇÍÇƒÇ¢ÇÈä‘ÇÕÅCBASEPRIÇÉÇÉfÉãè„ÇÃäÑçûÇ›
+ 124:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  óDêÊìxÉ}ÉXÉNÇÃílÇ…ê›íËÇ∑ÇÈÅDÇ±ÇÃä‘ÇÕÅCÉÇÉfÉãè„ÇÃäÑçûÇ›óDêÊìxÉ}ÉX
+ 125:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉNÇÕÅCBASEPRIÇópÇ¢ÇÈÅD
+ 126:.\asp\arch\arm_m_gcc\common/core_config.h ****  * 
+ 127:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇªÇÍÇ…ëŒÇµÇƒCPUÉçÉbÉNÉtÉâÉOÇ™ÉZÉbÉgÇ≥ÇÍÇ¢ÇÈä‘ÇÕÅCBASEPRIÇÅCÉJÅ[Él
+ 128:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Éãä«óùäOÇÃÇ‡ÇÃÇèúÇ≠Ç∑Ç◊ÇƒÇÃäÑçûÇ›óvãÅÇÉ}ÉXÉNÇ∑ÇÈíl(TIPM_LOCK)Ç∆ÅC
+ 129:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉÇÉfÉãè„ÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÇ∆ÇÃçÇÇ¢ï˚Ç…ê›íËÇ∑ÇÈÅDÇ±ÇÃä‘ÇÃÉÇÉfÉãè„
+ 130:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÇÕÅCÇªÇÃÇΩÇﬂÇÃïœêî(saved_iipm, ì‡ïîï\åªÇ≈ï€éù)
+ 131:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Çópà”ÇµÇƒï€éùÇ∑ÇÈÅD
+ 132:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 133:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 134:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 135:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óDêÊìxÉ}ÉXÉNÇÃäOïîï\åªÇ∆ì‡ïîï\åªÇÃïœä∑
+ 136:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 137:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉAÉZÉìÉuÉäåæåÍÇÃÉ\Å[ÉXÉtÉ@ÉCÉãÇ©ÇÁÉCÉìÉNÉãÅ[ÉhÇ∑ÇÈèÍçáÇÃÇΩÇﬂÇ…ÅC
+ 138:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CASTÇégóp
+ 139:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óDêÊìxÇÃÉrÉbÉgïù(TBITW_IPRI)Ç™ 8 ÇÃèÍçáÇÕÅCì‡ïîóDêÊìx 255
+ 140:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇÕÅCäOïîóDêÊìx -1 Ç…ëŒâûÇ∑ÇÈÅD
+ 141:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 142:.\asp\arch\arm_m_gcc\common/core_config.h **** #define EXT_IPM(iipm)   (CAST(PRI,((iipm >> (8 - TBITW_IPRI)) - (1 << TBITW_IPRI))))       /* ì‡ïîï
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 6
+
+
+ 143:.\asp\arch\arm_m_gcc\common/core_config.h **** #define INT_IPM(ipm)    (((1 << TBITW_IPRI) - CAST(uint8_t, -(ipm)))  << (8 - TBITW_IPRI)) /* äOïîï
+ 144:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 145:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 146:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNèÛë‘Ç≈ÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉN
+ 147:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 148:.\asp\arch\arm_m_gcc\common/core_config.h **** #define TIPM_LOCK    TMIN_INTPRI
+ 149:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 150:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 151:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNèÛë‘Ç≈ÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÇÃì‡ïîï\åª
+ 152:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 153:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  TIPM_LOCKÇÕÅCCPUÉçÉbÉNèÛë‘Ç≈ÇÃBASEPRIÇÃílÅDÉJÅ[ÉlÉãä«óùäOÇÃÇ‡ÇÃÇ
+ 154:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  èúÇ≠Ç∑Ç◊ÇƒÇÃäÑçûÇ›ÇÉ}ÉXÉNÇ∑ÇÈílÇ…íËã`Ç∑ÇÈÅD  
+ 155:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 156:.\asp\arch\arm_m_gcc\common/core_config.h **** #define IIPM_LOCK    INT_IPM(TIPM_LOCK)
+ 157:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 158:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 159:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  TIPM_ENAALLÅiäÑçûÇ›óDêÊìxÉ}ÉXÉNëSâèúÅjÇÃì‡ïîï\åª
+ 160:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 161:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  BASEPRIÇ… '0' Çê›íËÇ∑ÇÈÇ±Ç∆Ç≈ÅCëSäÑçûÇ›Çãñâ¬Ç∑ÇÈÅD
+ 162:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 163:.\asp\arch\arm_m_gcc\common/core_config.h **** #define IIPM_ENAALL  (0)
+ 164:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 165:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 166:.\asp\arch\arm_m_gcc\common/core_config.h **** #ifndef TOPPERS_MACRO_ONLY
+ 167:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 168:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 169:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNÉtÉâÉOé¿åªÇÃÇΩÇﬂÇÃïœêî
+ 170:.\asp\arch\arm_m_gcc\common/core_config.h ****  * 
+ 171:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç±ÇÍÇÁÇÃïœêîÇÕÅCCPUÉçÉbÉNèÛë‘ÇÃéûÇÃÇ›èëÇ´ä∑Ç¶ÇƒÇ‡ÇÊÇ¢Ç∆Ç∑ÇÈÅD
+ 172:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉCÉìÉâÉCÉìä÷êîíÜÇ≈ÅCÉAÉNÉZÉXÇÃèáèòÇ™ïœâªÇµÇ»Ç¢ÇÊÇ§ÅCvolatile ÇéwíËÅD 
+ 173:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 174:.\asp\arch\arm_m_gcc\common/core_config.h **** extern volatile bool_t  lock_flag;    /* CPUÉçÉbÉNÉtÉâÉOÇÃílÇï€éùÇ∑ÇÈïœêî */
+ 175:.\asp\arch\arm_m_gcc\common/core_config.h **** extern volatile uint32_t saved_iipm;  /* äÑçûÇ›óDêÊìxÇÉ}ÉXÉNÇ∑ÇÈïœêî */
+ 176:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 177:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 178:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNèÛë‘Ç÷ÇÃà⁄çs
+ 179:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 180:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  BASEPRIÅiÉnÅ[ÉhÉEÉFÉAÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÅjÇÅCsaved_iipmÇ…ï€ë∂ÇµÅC
+ 181:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉJÅ[ÉlÉãä«óùäOÇÃÇ‡ÇÃÇèúÇ≠Ç∑Ç◊ÇƒÇÃäÑçûÇ›ÇÉ}ÉXÉNÇ∑ÇÈílÅiTIPM_LOCKÅj
+ 182:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç…ê›íËÇ∑ÇÈÅDÇ‹ÇΩÅClock_flagÇtrueÇ…Ç∑ÇÈÅD
+ 183:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 184:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  BASEPRIÇ™ÅCç≈èâÇ©ÇÁTIPM_LOCKÇ∆ìØÇ∂Ç©ÇªÇÍÇÊÇËçÇÇ¢èÍçáÇ…ÇÕÅCÇªÇÍÇ
+ 185:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  saved_iipmÇ…ï€ë∂Ç∑ÇÈÇÃÇ›Ç≈ÅCTIPM_LOCKÇ…ÇÕê›íËÇµÇ»Ç¢ÅDÇ±ÇÍÇÕÅCÉÇÉfÉã
+ 186:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  è„ÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÇ™ÅCTIPM_LOCKÇ∆ìØÇ∂Ç©ÇªÇÍÇÊÇËçÇÇ¢ÉåÉxÉãÇ…ê›íË
+ 187:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç≥ÇÍÇƒÇ¢ÇÈèÛë‘Ç…Ç†ÇΩÇÈÅD
+ 188:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 189:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç±ÇÃä÷êîÇÕÅCCPUÉçÉbÉNèÛë‘Åilock_flagÇ™trueÇÃèÛë‘ÅjÇ≈åƒÇŒÇÍÇÈÇ±Ç∆ÇÕ
+ 190:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç»Ç¢Ç‡ÇÃÇ∆ëzíËÇµÇƒÇ¢ÇÈÅD
+ 191:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 192:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline void
+ 193:.\asp\arch\arm_m_gcc\common/core_config.h **** x_lock_cpu(void)
+ 194:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 195:.\asp\arch\arm_m_gcc\common/core_config.h **** 	uint32_t iipm;
+ 196:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 197:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/*
+ 198:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  get_basepri()ÇÃï‘ÇËílÇíºê⁄saved_iipmÇ…ï€ë∂ÇπÇ∏ÅCàÍéûïœêîiipm
+ 199:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  ÇópÇ¢ÇƒÇ¢ÇÈÇÃÇÕÅCget_baespri()ÇåƒÇÒÇæíºå„Ç…äÑçûÇ›Ç™î≠ê∂ÇµÅC
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 7
+
+
+ 200:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  ãNìÆÇ≥ÇÍÇΩäÑçûÇ›èàóùÇ≈saved_iipmÇ™ïœçXÇ≥ÇÍÇÈâ¬î\ê´Ç™Ç†ÇÈÇΩÇﬂÇ≈
+ 201:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  Ç†ÇÈÅD
+ 202:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 */
+ 203:.\asp\arch\arm_m_gcc\common/core_config.h **** 	iipm = get_basepri();
+ 204:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/*
+ 205:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  BASEPRIÉåÉWÉXÉ^ÇÕílÇ™è¨Ç≥Ç¢ÇŸÇ«óDêÊìxÇ™çÇÇ¢Ç™ÅCIIPM_ENAALL Ç™
+ 206:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  '0'Ç≈Ç†ÇÈÇΩÇﬂÅCíPèÉÇ…óDêÊìxî‰ärÇæÇØÇ≈ÇÕïsè\ï™Ç≈Ç†ÇÈÅD
+ 207:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 */
+ 208:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if ((IIPM_LOCK < iipm) || (IIPM_ENAALL == iipm)) {
+ 209:.\asp\arch\arm_m_gcc\common/core_config.h **** 		set_basepri(IIPM_LOCK);
+ 210:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 211:.\asp\arch\arm_m_gcc\common/core_config.h **** 	saved_iipm = iipm;
+ 212:.\asp\arch\arm_m_gcc\common/core_config.h **** 	lock_flag = true;
+ 213:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/* ÉNÉäÉeÉBÉJÉãÉZÉNÉVÉáÉìÇÃëOå„Ç≈ÉÅÉÇÉäÇ™èëÇ´ä∑ÇÌÇÈâ¬î\ê´Ç™Ç†ÇÈ */
+ 214:.\asp\arch\arm_m_gcc\common/core_config.h **** 	ARM_MEMORY_CHANGED;
+ 215:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 216:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 217:.\asp\arch\arm_m_gcc\common/core_config.h **** #define t_lock_cpu()    x_lock_cpu()
+ 218:.\asp\arch\arm_m_gcc\common/core_config.h **** #define i_lock_cpu()    x_lock_cpu()
+ 219:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 220:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 221:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNèÛë‘ÇÃâèú
+ 222:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 223:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  lock_flagÇfalseÇ…ÇµÅCIPMÅiÉnÅ[ÉhÉEÉFÉAÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÅjÇÅC
+ 224:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  saved_iipmÇ…ï€ë∂ÇµÇΩílÇ…ñﬂÇ∑ÅD
+ 225:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 226:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç±ÇÃä÷êîÇÕÅCCPUÉçÉbÉNèÛë‘Åilock_flagÇ™trueÇÃèÛë‘ÅjÇ≈ÇÃÇ›åƒÇŒÇÍÇÈÇ‡
+ 227:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇÃÇ∆ëzíËÇµÇƒÇ¢ÇÈÅD
+ 228:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 229:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline void
+ 230:.\asp\arch\arm_m_gcc\common/core_config.h **** x_unlock_cpu(void)
+ 231:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 232:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/* ÉNÉäÉeÉBÉJÉãÉZÉNÉVÉáÉìÇÃëOå„Ç≈ÉÅÉÇÉäÇ™èëÇ´ä∑ÇÌÇÈâ¬î\ê´Ç™Ç†ÇÈ */
+ 233:.\asp\arch\arm_m_gcc\common/core_config.h **** 	ARM_MEMORY_CHANGED;
+ 234:.\asp\arch\arm_m_gcc\common/core_config.h **** 	lock_flag = false;
+ 235:.\asp\arch\arm_m_gcc\common/core_config.h **** 	set_basepri(saved_iipm);
+ 236:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 237:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 238:.\asp\arch\arm_m_gcc\common/core_config.h **** #define t_unlock_cpu()    x_unlock_cpu()
+ 239:.\asp\arch\arm_m_gcc\common/core_config.h **** #define i_unlock_cpu()    x_unlock_cpu()
+ 240:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 241:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 242:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNèÛë‘ÇÃéQè∆
+ 243:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 244:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline bool_t
+ 245:.\asp\arch\arm_m_gcc\common/core_config.h **** x_sense_lock(void)
+ 246:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 247:.\asp\arch\arm_m_gcc\common/core_config.h **** 	return(lock_flag);
+ 248:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 249:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 250:.\asp\arch\arm_m_gcc\common/core_config.h **** #define t_sense_lock()    x_sense_lock()
+ 251:.\asp\arch\arm_m_gcc\common/core_config.h **** #define i_sense_lock()    x_sense_lock()
+ 252:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 253:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 254:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  chg_ipmÇ≈óLå¯Ç»äÑçûÇ›óDêÊìxÇÃîÕàÕÇÃîªíË
+ 255:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 256:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  TMIN_INTPRIÇÃílÇ…ÇÊÇÁÇ∏ÅCchg_ipmÇ≈ÇÕÅC-(1 << TBITW_IPRI)Å`TIPM_ENAALLÅiÅÅ0Åj
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 8
+
+
+ 257:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇÃîÕàÕÇ…ê›íËÇ≈Ç´ÇÈÇ±Ç∆Ç∆Ç∑ÇÈÅiÉ^Å[ÉQÉbÉgíËã`ÇÃägí£ÅjÅD
+ 258:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óDêÊìxÇÃÉrÉbÉgïù(TBITW_IPRI)Ç™ 8 ÇÃèÍçáÇÕÅC-256 Å` 0 Ç™éwíËâ¬î\Ç≈Ç†ÇÈÅD
+ 259:.\asp\arch\arm_m_gcc\common/core_config.h ****  *   
+ 260:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 261:.\asp\arch\arm_m_gcc\common/core_config.h **** #define VALID_INTPRI_CHGIPM(intpri) \
+ 262:.\asp\arch\arm_m_gcc\common/core_config.h **** 				((-((1 << TBITW_IPRI) - 1) <= (intpri) && (intpri) <= TIPM_ENAALL))
+ 263:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 264:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 265:.\asp\arch\arm_m_gcc\common/core_config.h ****  * ÅiÉÇÉfÉãè„ÇÃÅjäÑçûÇ›óDêÊìxÉ}ÉXÉNÇÃê›íË
+ 266:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 267:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNÉtÉâÉOÇ™ÉNÉäÉAÇ≥ÇÍÇƒÇ¢ÇÈéûÇÕÅCÉnÅ[ÉhÉEÉFÉAÇÃäÑçûÇ›óDêÊìxÉ}
+ 268:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉXÉNÇê›íËÇ∑ÇÈÅDCPUÉçÉbÉNÉtÉâÉOÇ™ÉZÉbÉgÇ≥ÇÍÇƒÇ¢ÇÈéûÇÕÅCsaved_iipm
+ 269:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Çê›íËÇµÅCÇ≥ÇÁÇ…ÅCÉnÅ[ÉhÉEÉFÉAÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÇÅCê›íËÇµÇÊÇ§Ç∆
+ 270:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇµÇΩÅiÉÇÉfÉãè„ÇÃÅjäÑçûÇ›óDêÊìxÉ}ÉXÉNÇ∆TIPM_LOCKÇÃçÇÇ¢ï˚Ç…ê›íËÇ∑ÇÈÅD
+ 271:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 272:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline void
+ 273:.\asp\arch\arm_m_gcc\common/core_config.h **** x_set_ipm(PRI intpri)
+ 274:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 275:.\asp\arch\arm_m_gcc\common/core_config.h **** 	uint8_t   iipm = INT_IPM(intpri);
+ 276:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 277:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if (intpri == TIPM_ENAALL){
+ 278:.\asp\arch\arm_m_gcc\common/core_config.h **** 		iipm = IIPM_ENAALL;
+ 279:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 280:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 281:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if (!lock_flag) {
+ 282:.\asp\arch\arm_m_gcc\common/core_config.h **** 		set_basepri(iipm);
+ 283:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 284:.\asp\arch\arm_m_gcc\common/core_config.h **** 	else {
+ 285:.\asp\arch\arm_m_gcc\common/core_config.h **** 		saved_iipm = iipm;
+ 286:.\asp\arch\arm_m_gcc\common/core_config.h **** 		/*
+ 287:.\asp\arch\arm_m_gcc\common/core_config.h **** 		 *  BASEPRIÉåÉWÉXÉ^ÇÕílÇ™è¨Ç≥Ç¢ÇŸÇ«óDêÊìxÇ™çÇÇ¢Ç™ÅCIIPM_ENAALL Ç™
+ 288:.\asp\arch\arm_m_gcc\common/core_config.h **** 		 *  '0'Ç≈Ç†ÇÈÇΩÇﬂÅCíPèÉÇ…óDêÊìxî‰ärÇæÇØÇ≈ÇÕïsè\ï™Ç≈Ç†ÇÈÅD
+ 289:.\asp\arch\arm_m_gcc\common/core_config.h **** 		 */
+ 290:.\asp\arch\arm_m_gcc\common/core_config.h **** 		if ((iipm < IIPM_LOCK ) && (IIPM_ENAALL != iipm)) {
+ 291:.\asp\arch\arm_m_gcc\common/core_config.h **** 			set_basepri(iipm);
+ 292:.\asp\arch\arm_m_gcc\common/core_config.h **** 		}
+ 293:.\asp\arch\arm_m_gcc\common/core_config.h **** 		else {
+ 294:.\asp\arch\arm_m_gcc\common/core_config.h **** 			set_basepri(IIPM_LOCK);
+ 295:.\asp\arch\arm_m_gcc\common/core_config.h **** 		}
+ 296:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 297:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 298:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 299:.\asp\arch\arm_m_gcc\common/core_config.h **** #define t_set_ipm(intpri)    x_set_ipm(intpri)
+ 300:.\asp\arch\arm_m_gcc\common/core_config.h **** #define i_set_ipm(intpri)    x_set_ipm(intpri)
+ 301:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 302:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 303:.\asp\arch\arm_m_gcc\common/core_config.h ****  * ÅiÉÇÉfÉãè„ÇÃÅjäÑçûÇ›óDêÊìxÉ}ÉXÉNÇÃéQè∆
+ 304:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 305:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUÉçÉbÉNÉtÉâÉOÇ™ÉNÉäÉAÇ≥ÇÍÇƒÇ¢ÇÈéûÇÕÉnÅ[ÉhÉEÉFÉAÇÃäÑçûÇ›óDêÊìxÉ}
+ 306:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉXÉNÇÅCÉZÉbÉgÇ≥ÇÍÇƒÇ¢ÇÈéûÇÕsaved_iipmÇéQè∆Ç∑ÇÈÅD
+ 307:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 308:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline PRI
+ 309:.\asp\arch\arm_m_gcc\common/core_config.h **** x_get_ipm(void)
+ 310:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 311:.\asp\arch\arm_m_gcc\common/core_config.h **** 	uint8_t iipm;
+ 312:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 313:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if (!lock_flag) {
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 9
+
+
+ 314:.\asp\arch\arm_m_gcc\common/core_config.h **** 		iipm = get_basepri();
+ 315:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 316:.\asp\arch\arm_m_gcc\common/core_config.h **** 	else {
+ 317:.\asp\arch\arm_m_gcc\common/core_config.h **** 		iipm = saved_iipm;
+ 318:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 319:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 320:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if (iipm == IIPM_ENAALL) {
+ 321:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return(TIPM_ENAALL);
+ 322:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 323:.\asp\arch\arm_m_gcc\common/core_config.h **** 	else {
+ 324:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return(EXT_IPM(iipm));
+ 325:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 326:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 327:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 328:.\asp\arch\arm_m_gcc\common/core_config.h **** #define t_get_ipm()    x_get_ipm()
+ 329:.\asp\arch\arm_m_gcc\common/core_config.h **** #define i_get_ipm()    x_get_ipm()
+ 330:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 331:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 332:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  SVCÉnÉìÉhÉâÅicore_support.SÅj
+ 333:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 334:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void svc_handler(void);
+ 335:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 336:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 337:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉXÉ^Å[ÉgÉAÉbÉvÉãÅ[É`ÉìÅistart.SÅj
+ 338:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 339:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void _start(void);
+ 340:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 341:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 342:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ç≈çÇóDêÊèáà É^ÉXÉNÇ÷ÇÃÉfÉBÉXÉpÉbÉ`Åicore_support.SÅj
+ 343:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 344:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  dispatchÇÕÅCÉ^ÉXÉNÉRÉìÉeÉLÉXÉgÇ©ÇÁåƒÇ—èoÇ≥ÇÍÇΩÉTÅ[ÉrÉXÉRÅ[ÉãèàóùÇ©
+ 345:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇÁåƒÇ—èoÇ∑Ç◊Ç´Ç‡ÇÃÇ≈ÅCÉ^ÉXÉNÉRÉìÉeÉLÉXÉgÅECPUÉçÉbÉNèÛë‘ÅEÉfÉBÉXÉpÉb
+ 346:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  É`ãñâ¬èÛë‘ÅEÅiÉÇÉfÉãè„ÇÃÅjäÑçûÇ›óDêÊìxÉ}ÉXÉNëSâèúèÛë‘Ç≈åƒÇ—èoÇ≥Ç»
+ 347:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇØÇÍÇŒÇ»ÇÁÇ»Ç¢ÅD
+ 348:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 349:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void dispatch(void);
+ 350:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 351:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 352:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉfÉBÉXÉpÉbÉ`ÉÉÇÃìÆçÏäJénÅicore_support.SÅj
+ 353:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 354:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  start_dispatchÇÕÅCÉJÅ[ÉlÉããNìÆéûÇ…åƒÇ—èoÇ∑Ç◊Ç´Ç‡ÇÃÇ≈ÅCÇ∑Ç◊ÇƒÇÃäÑçû
+ 355:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç›Çã÷é~ÇµÇΩèÛë‘ÅiäÑçûÇ›ÉçÉbÉNèÛë‘Ç∆ìØìôÇÃèÛë‘ÅjÇ≈åƒÇ—èoÇ≥Ç»ÇØÇÍÇŒ
+ 356:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç»ÇÁÇ»Ç¢ÅD
+ 357:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 358:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void start_dispatch(void) NoReturn;
+ 359:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 360:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 361:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  åªç›ÇÃÉRÉìÉeÉLÉXÉgÇéÃÇƒÇƒÉfÉBÉXÉpÉbÉ`Åicore_support.SÅj
+ 362:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 363:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  exit_and_dispatchÇÕÅCext_tskÇ©ÇÁåƒÇ—èoÇ∑Ç◊Ç´Ç‡ÇÃÇ≈ÅCÉ^ÉXÉNÉRÉìÉeÉL
+ 364:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉXÉgÅECPUÉçÉbÉNèÛë‘ÅEÉfÉBÉXÉpÉbÉ`ãñâ¬èÛë‘ÅEÅiÉÇÉfÉãè„ÇÃÅjäÑçûÇ›óDêÊ
+ 365:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ìxÉ}ÉXÉNëSâèúèÛë‘Ç≈åƒÇ—èoÇ≥Ç»ÇØÇÍÇŒÇ»ÇÁÇ»Ç¢ÅD
+ 366:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 367:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void exit_and_dispatch(void) NoReturn;
+ 368:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 369:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 370:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉJÅ[ÉlÉãÇÃèIóπèàóùÇÃåƒèoÇµÅicore_support.SÅj
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 10
+
+
+ 371:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 372:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  call_exit_kernelÇÕÅCÉJÅ[ÉlÉãÇÃèIóπéûÇ…åƒÇ—èoÇ∑Ç◊Ç´Ç‡ÇÃÇ≈ÅCîÒÉ^ÉXÉN
+ 373:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉRÉìÉeÉLÉXÉgÇ…êÿÇËä∑Ç¶ÇƒÅCÉJÅ[ÉlÉãÇÃèIóπèàóùÅiexit_kernelÅjÇåƒÇ—èo
+ 374:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç∑ÅD
+ 375:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 376:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void call_exit_kernel(void) NoReturn;
+ 377:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 378:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 379:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  É^ÉXÉNÉRÉìÉeÉLÉXÉgÇÃèâä˙âª
+ 380:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 381:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  É^ÉXÉNÇ™ãxé~èÛë‘Ç©ÇÁé¿çsÇ≈Ç´ÇÈèÛë‘Ç…à⁄çsÇ∑ÇÈéûÇ…åƒÇŒÇÍÇÈÅDÇ±ÇÃéûì_
+ 382:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç≈ÉXÉ^ÉbÉNóÃàÊÇégÇ¡ÇƒÇÕÇ»ÇÁÇ»Ç¢ÅD
+ 383:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 384:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  activate_contextÇÅCÉCÉìÉâÉCÉìä÷êîÇ≈ÇÕÇ»Ç≠É}ÉNÉçíËã`Ç∆ÇµÇƒÇ¢ÇÈÇÃÇÕÅC
+ 385:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç±ÇÃéûì_Ç≈ÇÕTCBÇ™íËã`Ç≥ÇÍÇƒÇ¢Ç»Ç¢ÇΩÇﬂÇ≈Ç†ÇÈÅD
+ 386:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 387:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void    start_r(void);
+ 388:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 389:.\asp\arch\arm_m_gcc\common/core_config.h **** #define activate_context(p_tcb)                                         \
+ 390:.\asp\arch\arm_m_gcc\common/core_config.h **** {                                                                       \
+ 391:.\asp\arch\arm_m_gcc\common/core_config.h ****     (p_tcb)->tskctxb.sp = (void *)((uint8_t *)((p_tcb)->p_tinib->stk)    \
+ 392:.\asp\arch\arm_m_gcc\common/core_config.h ****                                         + (p_tcb)->p_tinib->stksz);     \
+ 393:.\asp\arch\arm_m_gcc\common/core_config.h ****     (p_tcb)->tskctxb.pc = (FP) start_r;                             \
+ 394:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 395:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 396:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 397:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  calltexÇÕégópÇµÇ»Ç¢
+ 398:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 399:.\asp\arch\arm_m_gcc\common/core_config.h **** #define OMIT_CALLTEX
+ 400:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 401:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 402:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›î‘çÜÅEäÑçûÇ›ÉnÉìÉhÉâî‘çÜ
+ 403:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 404:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ÉnÉìÉhÉâî‘çÜ(inhno)Ç∆äÑçûÇ›î‘çÜ(intno)ÇÕÅCäÑÇËçûÇ›î≠ê∂éûÇ…
+ 405:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  EPSRÇ…ê›íËÇ≥ÇÍÇÈó·äOî‘çÜÇ∆Ç∑ÇÈÅD 
+ 406:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 407:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 408:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 409:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›î‘çÜÇÃîÕàÕÇÃîªíË
+ 410:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 411:.\asp\arch\arm_m_gcc\common/core_config.h **** #define VALID_INTNO(intno)           ((TMIN_INTNO <= (intno)) && ((intno) <= TMAX_INTNO))
+ 412:.\asp\arch\arm_m_gcc\common/core_config.h **** #define VALID_INTNO_DISINT(intno)    VALID_INTNO(intno)
+ 413:.\asp\arch\arm_m_gcc\common/core_config.h **** #define VALID_INTNO_CFGINT(intno)    VALID_INTNO(intno)
+ 414:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 415:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 416:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ÉnÉìÉhÉâÇÃê›íË
+ 417:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 418:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉxÉNÉgÉãî‘çÜinhnoÇÃäÑçûÇ›ÉnÉìÉhÉâÇÃãNìÆî‘ínint_entryÇ…ê›íËÇ∑ÇÈÅDäÑçûÇ›
+ 419:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉnÉìÉhÉâÉeÅ[ÉuÉã
+ 420:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 421:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline void
+ 422:.\asp\arch\arm_m_gcc\common/core_config.h **** x_define_inh(INHNO inhno, FP int_entry)
+ 423:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 424:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 425:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 426:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 427:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 11
+
+
+ 428:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ÉnÉìÉhÉâÇÃèoì¸å˚èàóùÇÃê∂ê¨É}ÉNÉç
+ 429:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 430:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 431:.\asp\arch\arm_m_gcc\common/core_config.h **** #define INT_ENTRY(inhno, inthdr)    inthdr
+ 432:.\asp\arch\arm_m_gcc\common/core_config.h **** #define INTHDR_ENTRY(inhno, inhno_num, inthdr) extern void inthdr(void);
+ 433:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 434:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 435:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óvãÅã÷é~ÉtÉâÉO
+ 436:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 437:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 438:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 439:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ëÆê´Ç™ê›íËÇ≥ÇÍÇƒÇ¢ÇÈÇ©Çîªï Ç∑ÇÈÇΩÇﬂÇÃïœêîÅikernel_cfg.cÅj
+ 440:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 441:.\asp\arch\arm_m_gcc\common/core_config.h **** extern const uint32_t	bitpat_cfgint[];
+ 442:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 443:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 444:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óvãÅã÷é~ÉtÉâÉOÇÃÉZÉbÉg
+ 445:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 446:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ëÆê´Ç™ê›íËÇ≥ÇÍÇƒÇ¢Ç»Ç¢äÑçûÇ›óvãÅÉâÉCÉìÇ…ëŒÇµÇƒäÑçûÇ›óvãÅã÷é~
+ 447:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉtÉâÉOÇÉNÉäÉAÇµÇÊÇ§Ç∆ÇµÇΩèÍçáÇ…ÇÕÅCfalseÇï‘Ç∑ÅD  
+ 448:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 449:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline bool_t
+ 450:.\asp\arch\arm_m_gcc\common/core_config.h **** x_disable_int(INTNO intno)
+ 451:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 452:.\asp\arch\arm_m_gcc\common/core_config.h **** 	uint32_t tmp;
+ 453:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 454:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/*
+ 455:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  äÑçûÇ›ëÆê´Ç™ê›íËÇ≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
+ 456:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 */
+ 457:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if ((bitpat_cfgint[intno >> 5] & (1 << (intno & 0x1f))) == 0x00) {
+ 458:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return(false);
+ 459:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 460:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 461:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if (intno == IRQNO_SYSTICK) {
+ 462:.\asp\arch\arm_m_gcc\common/core_config.h **** 		tmp = sil_rew_mem((void *)SYSTIC_CONTROL_STATUS);
+ 463:.\asp\arch\arm_m_gcc\common/core_config.h **** 		tmp &= ~SYSTIC_TICINT;
+ 464:.\asp\arch\arm_m_gcc\common/core_config.h **** 		sil_wrw_mem((void *)SYSTIC_CONTROL_STATUS, tmp);
+ 465:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}else {
+ 466:.\asp\arch\arm_m_gcc\common/core_config.h **** 		tmp = intno - 16;
+ 467:.\asp\arch\arm_m_gcc\common/core_config.h **** 		sil_wrw_mem((void *)((uint32_t *)NVIC_CLRENA0 + (tmp >> 5)),
+ 468:.\asp\arch\arm_m_gcc\common/core_config.h **** 					(1 << (tmp & 0x1f)));
+ 469:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 470:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 471:.\asp\arch\arm_m_gcc\common/core_config.h **** 	return(true);
+ 472:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 473:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 474:.\asp\arch\arm_m_gcc\common/core_config.h **** #define t_disable_int(intno) x_disable_int(intno)
+ 475:.\asp\arch\arm_m_gcc\common/core_config.h **** #define i_disable_int(intno) x_disable_int(intno)
+ 476:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 477:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 478:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óvãÅã÷é~ÉtÉâÉOÇÃâèú
+ 479:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 480:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ëÆê´Ç™ê›íËÇ≥ÇÍÇƒÇ¢Ç»Ç¢äÑçûÇ›óvãÅÉâÉCÉìÇ…ëŒÇµÇƒäÑçûÇ›óvãÅã÷é~
+ 481:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉtÉâÉOÇÉNÉäÉAÇµÇÊÇ§Ç∆ÇµÇΩèÍçáÇ…ÇÕÅCfalseÇï‘Ç∑ÅD
+ 482:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 483:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline bool_t
+ 484:.\asp\arch\arm_m_gcc\common/core_config.h **** x_enable_int(INTNO intno)
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 12
+
+
+ 485:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 486:.\asp\arch\arm_m_gcc\common/core_config.h **** 	uint32_t tmp;
+ 487:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 488:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/*
+ 489:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  äÑçûÇ›ëÆê´Ç™ê›íËÇ≥ÇÍÇƒÇ¢Ç»Ç¢èÍçá
+ 490:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 */
+ 491:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if ((bitpat_cfgint[intno >> 5] & (1 << (intno & 0x1f))) == 0x00) {
+ 492:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return(false);
+ 493:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 494:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 495:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if (intno == IRQNO_SYSTICK) {
+ 496:.\asp\arch\arm_m_gcc\common/core_config.h **** 		tmp = sil_rew_mem((void *)SYSTIC_CONTROL_STATUS);
+ 497:.\asp\arch\arm_m_gcc\common/core_config.h **** 		tmp |= SYSTIC_TICINT;
+ 498:.\asp\arch\arm_m_gcc\common/core_config.h **** 		sil_wrw_mem((void *)SYSTIC_CONTROL_STATUS, tmp);
+ 499:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}else {
+ 500:.\asp\arch\arm_m_gcc\common/core_config.h **** 		tmp = intno - 16;
+ 501:.\asp\arch\arm_m_gcc\common/core_config.h **** 		sil_wrw_mem((void *)((uint32_t *)NVIC_SETENA0 + (tmp >> 5)),
+ 502:.\asp\arch\arm_m_gcc\common/core_config.h **** 					(1 << (tmp & 0x1f)));
+ 503:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 504:.\asp\arch\arm_m_gcc\common/core_config.h ****     
+ 505:.\asp\arch\arm_m_gcc\common/core_config.h **** 	return(true);
+ 506:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 507:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 508:.\asp\arch\arm_m_gcc\common/core_config.h **** #define t_enable_int(intno) x_enable_int(intno)
+ 509:.\asp\arch\arm_m_gcc\common/core_config.h **** #define i_enable_int(intno) x_enable_int(intno)
+ 510:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 511:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 512:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›óvãÅÉâÉCÉìÇÃëÆê´ÇÃê›íË
+ 513:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 514:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void x_config_int(INTNO intno, ATR intatr, PRI intpri);
+ 515:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 516:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 517:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ÉnÉìÉhÉâì¸å˚Ç≈ïKóvÇ»IRCëÄçÏ
+ 518:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 519:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline void
+ 520:.\asp\arch\arm_m_gcc\common/core_config.h **** i_begin_int(INTNO intno)
+ 521:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 522:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 523:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 524:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 525:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  äÑçûÇ›ÉnÉìÉhÉâÇÃèoå˚Ç≈ïKóvÇ»IRCëÄçÏ
+ 526:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 527:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline void
+ 528:.\asp\arch\arm_m_gcc\common/core_config.h **** i_end_int(INTNO intno)
+ 529:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 530:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 531:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 532:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 533:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÉnÉìÉhÉâä÷åW
+ 534:.\asp\arch\arm_m_gcc\common/core_config.h ****  */ 
+ 535:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 536:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 537:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÉnÉìÉhÉâî‘çÜ
+ 538:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 539:.\asp\arch\arm_m_gcc\common/core_config.h **** #define VALID_EXCNO_DEFEXC(excno)    (TMIN_EXCNO <= (excno) && (excno) <= TMAX_EXCNO)
+ 540:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 541:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 13
+
+
+ 542:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÉnÉìÉhÉâÇÃãñâ¬
+ 543:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 544:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void enable_exc(EXCNO excno);
+ 545:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 546:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 547:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÉnÉìÉhÉâÇÃã÷é~
+ 548:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 549:.\asp\arch\arm_m_gcc\common/core_config.h **** extern void disable_exc(EXCNO excno);
+ 550:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 551:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 552:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÉnÉìÉhÉâÇÃê›íË
+ 553:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 554:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline void
+ 555:.\asp\arch\arm_m_gcc\common/core_config.h **** x_define_exc(EXCNO excno, FP exc_entry)
+ 556:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 557:.\asp\arch\arm_m_gcc\common/core_config.h **** 	/*
+ 558:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 *  àÍïîÇÃó·äOÇÕãñâ¬ÇçsÇ§ïKóvÇ™Ç†ÇÈ
+ 559:.\asp\arch\arm_m_gcc\common/core_config.h **** 	 */
+ 560:.\asp\arch\arm_m_gcc\common/core_config.h **** 	enable_exc(excno);
+  59              		.loc 2 560 0 discriminator 2
+  60 0014 5058     		ldr	r0, [r2, r1]
+  61 0016 FFF7FEFF 		bl	_kernel_enable_exc
+  62              	.LVL4:
+  63 001a F3E7     		b	.L2
+  64              	.LVL5:
+  65              	.L5:
+  66              	.LBE7:
+  67              	.LBE6:
+  85:.\asp\kernel/exception.c **** 	}
+  86:.\asp\kernel/exception.c **** }
+  68              		.loc 1 86 0
+  69 001c 10BD     		pop	{r4, pc}
+  70              	.L7:
+  71 001e 00BF     		.align	2
+  72              	.L6:
+  73 0020 00000000 		.word	_kernel_tnum_excno
+  74 0024 00000000 		.word	_kernel_excinib_table
+  75              		.cfi_endproc
+  76              	.LFE53:
+  77              		.size	_kernel_initialize_exception, .-_kernel_initialize_exception
+  78              		.section	.text.xsns_dpn,"ax",%progbits
+  79              		.align	1
+  80              		.global	xsns_dpn
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	xsns_dpn, %function
+  84              	xsns_dpn:
+  85              	.LFB54:
+  87:.\asp\kernel/exception.c **** 
+  88:.\asp\kernel/exception.c **** #endif /* OMIT_INITIALIZE_EXCEPTION */
+  89:.\asp\kernel/exception.c **** #endif /* TOPPERS_excini */
+  90:.\asp\kernel/exception.c **** 
+  91:.\asp\kernel/exception.c **** /*
+  92:.\asp\kernel/exception.c ****  *  CPUó·äOÇÃî≠ê∂ÇµÇΩÉRÉìÉeÉLÉXÉgÇÃéQè∆
+  93:.\asp\kernel/exception.c ****  */
+  94:.\asp\kernel/exception.c **** 
+  95:.\asp\kernel/exception.c **** /*
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 14
+
+
+  96:.\asp\kernel/exception.c ****  *  CPUó·äOî≠ê∂éûÇÃÉfÉBÉXÉpÉbÉ`ï€óØèÛë‘ÇÃéQè∆
+  97:.\asp\kernel/exception.c ****  *
+  98:.\asp\kernel/exception.c ****  *  CPUó·äOÉnÉìÉhÉâíÜÇ≈disdspÇ™ïœâªÇ∑ÇÈÇ±Ç∆ÇÕÇ»Ç¢ÇΩÇﬂÅCCPUó·äOÇ™î≠ê∂Çµ
+  99:.\asp\kernel/exception.c ****  *  ÇΩéûÇÃdisdspÇï€ë∂ÇµÇƒÇ®Ç≠ïKóvÇÕÇ»Ç¢ÅD
+ 100:.\asp\kernel/exception.c ****  */
+ 101:.\asp\kernel/exception.c **** #ifdef TOPPERS_xsns_dpn
+ 102:.\asp\kernel/exception.c **** 
+ 103:.\asp\kernel/exception.c **** bool_t
+ 104:.\asp\kernel/exception.c **** xsns_dpn(void *p_excinf)
+ 105:.\asp\kernel/exception.c **** {
+  86              		.loc 1 105 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91              	.LVL6:
+  92              	.LBB14:
+  93              	.LBB15:
+  94              	.LBB16:
+  95              	.LBB17:
+ 561:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 562:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 563:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 564:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÉnÉìÉhÉâÇÃì¸å˚èàóùÇÃê∂ê¨É}ÉNÉç
+ 565:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 566:.\asp\arch\arm_m_gcc\common/core_config.h **** #define EXC_ENTRY(excno, exchdr)    exchdr
+ 567:.\asp\arch\arm_m_gcc\common/core_config.h **** #define EXCHDR_ENTRY(excno, excno_num, exchdr) extern void exchdr(void *p_excinf);
+ 568:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 569:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 570:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÇÃî≠ê∂ÇµÇΩéûÇÃÉRÉìÉeÉLÉXÉgÇÃéQè∆
+ 571:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 572:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÇÃî≠ê∂ÇµÇΩéûÇÃÉRÉìÉeÉLÉXÉgÇ™ÅCÉ^ÉXÉNÉRÉìÉeÉLÉXÉgÇÃéûÇ…falseÅC
+ 573:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÇªÇ§Ç≈Ç»Ç¢éûÇ…trueÇï‘Ç∑ÅD
+ 574:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 575:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline bool_t
+ 576:.\asp\arch\arm_m_gcc\common/core_config.h **** exc_sense_context(void *p_excinf)
+ 577:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 578:.\asp\arch\arm_m_gcc\common/core_config.h **** 	uint32_t exc_return;
+ 579:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 580:.\asp\arch\arm_m_gcc\common/core_config.h **** 	exc_return = *((uint32_t *)p_excinf + P_EXCINF_OFFSET_EXC_RETURN);
+ 581:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if ((exc_return & EXC_RETURN_PSP) == EXC_RETURN_PSP){
+  96              		.loc 2 581 0
+  97 0000 0368     		ldr	r3, [r0, #0]
+  98 0002 5B07     		lsls	r3, r3, #29
+  99 0004 01D4     		bmi	.L9
+ 100              	.LVL7:
+ 101              	.L11:
+ 102              	.LBE17:
+ 103              	.LBE16:
+ 106:.\asp\kernel/exception.c **** 	bool_t	state;
+ 107:.\asp\kernel/exception.c **** 
+ 108:.\asp\kernel/exception.c **** 	LOG_XSNS_DPN_ENTER(p_excinf);
+ 109:.\asp\kernel/exception.c **** 	state = (exc_sense_intmask(p_excinf) && !disdsp) ? false : true;
+ 104              		.loc 1 109 0
+ 105 0006 0120     		movs	r0, #1
+ 106 0008 7047     		bx	lr
+ 107              	.LVL8:
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 15
+
+
+ 108              	.L9:
+ 582:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return false;
+ 583:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 584:.\asp\arch\arm_m_gcc\common/core_config.h **** 	else {
+ 585:.\asp\arch\arm_m_gcc\common/core_config.h **** 		return true;
+ 586:.\asp\arch\arm_m_gcc\common/core_config.h **** 	}
+ 587:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 588:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 589:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 590:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÇÃî≠ê∂ÇµÇΩéûÇÃIPMÅiÉnÅ[ÉhÉEÉFÉAÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÅCì‡ïîï\
+ 591:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  åªÅjÇÃéQè∆
+ 592:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 593:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline uint32_t
+ 594:.\asp\arch\arm_m_gcc\common/core_config.h **** exc_get_iipm(void *p_excinf)
+ 595:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 596:.\asp\arch\arm_m_gcc\common/core_config.h **** 	return(*((uint32_t *)p_excinf + P_EXCINF_OFFSET_BASEPRI));
+ 597:.\asp\arch\arm_m_gcc\common/core_config.h **** }
+ 598:.\asp\arch\arm_m_gcc\common/core_config.h **** 
+ 599:.\asp\arch\arm_m_gcc\common/core_config.h **** /*
+ 600:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÇÃî≠ê∂ÇµÇΩéûÇÃÉRÉìÉeÉLÉXÉgÇ∆äÑçûÇ›ÇÃÉ}ÉXÉNèÛë‘ÇÃéQè∆
+ 601:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 602:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  CPUó·äOÇÃî≠ê∂ÇµÇΩéûÇÃÉVÉXÉeÉÄèÛë‘Ç™ÅCÉJÅ[ÉlÉãé¿çsíÜÇ≈Ç»Ç≠ÅCÉ^ÉXÉNÉR
+ 603:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉìÉeÉLÉXÉgÇ≈Ç†ÇËÅCäÑçûÇ›ÉçÉbÉNèÛë‘Ç≈Ç»Ç≠ÅCCPUÉçÉbÉNèÛë‘Ç≈Ç»Ç≠ÅCÅiÉÇ
+ 604:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉfÉãè„ÇÃÅjäÑçûÇ›óDêÊìxÉ}ÉXÉNëSâèúèÛë‘Ç≈Ç†ÇÈéûÇ…trueÅCÇªÇ§Ç≈Ç»Ç¢éû
+ 605:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç…falseÇï‘Ç∑ÅiCPUó·äOÇ™ÉJÅ[ÉlÉãä«óùäOÇÃäÑçûÇ›èàóùíÜÇ≈î≠ê∂ÇµÇΩèÍçá
+ 606:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç…Ç‡falseÇï‘Ç∑ÅjÅD
+ 607:.\asp\arch\arm_m_gcc\common/core_config.h ****  *
+ 608:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  PUó·äOÇÃî≠ê∂ÇµÇΩéûÇÃBASEPRIÅiÉnÅ[ÉhÉEÉFÉAÇÃäÑçûÇ›óDêÊìxÉ}ÉXÉNÅj
+ 609:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç™Ç∑Ç◊ÇƒÇÃäÑçûÇ›Çãñâ¬Ç∑ÇÈèÛë‘Ç≈Ç†ÇÈÇ±Ç∆ÇÉ`ÉFÉbÉNÇ∑ÇÈÇ±Ç∆Ç≈ÅCÉJÅ[
+ 610:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  ÉlÉãé¿çsíÜÇ≈Ç»Ç¢Ç±Ç∆ÅCäÑçûÇ›ÉçÉbÉNèÛë‘Ç≈Ç»Ç¢Ç±Ç∆ÅCCPUÉçÉbÉNèÛë‘Ç≈Ç»
+ 611:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  Ç¢Ç±Ç∆ÅCÅiÉÇÉfÉãè„ÇÃÅjäÑçûÇ›óDêÊìxÉ}ÉXÉNëSâèúèÛë‘Ç≈Ç†ÇÈÇ±Ç∆ÇÃ4Ç¬ÇÃ
+ 612:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  èåèÇÉ`ÉFÉbÉNÇ∑ÇÈÇ±Ç∆Ç™Ç≈Ç´ÇÈÅiCPUó·äOÇ™î≠ê∂ÇµÇΩéûÇÃlock_flagÇéQ
+ 613:.\asp\arch\arm_m_gcc\common/core_config.h ****  *  è∆Ç∑ÇÈïKóvÇÕÇ»Ç¢ÅjÅD
+ 614:.\asp\arch\arm_m_gcc\common/core_config.h ****  */
+ 615:.\asp\arch\arm_m_gcc\common/core_config.h **** Inline bool_t
+ 616:.\asp\arch\arm_m_gcc\common/core_config.h **** exc_sense_intmask(void *p_excinf)
+ 617:.\asp\arch\arm_m_gcc\common/core_config.h **** {
+ 618:.\asp\arch\arm_m_gcc\common/core_config.h **** 	return(!exc_sense_context(p_excinf)
+ 619:.\asp\arch\arm_m_gcc\common/core_config.h **** 		   && (exc_get_iipm(p_excinf) == IIPM_ENAALL));
+ 109              		.loc 2 619 0
+ 110 000a 4068     		ldr	r0, [r0, #4]
+ 111              	.LVL9:
+ 112 000c 0028     		cmp	r0, #0
+ 113 000e FAD1     		bne	.L11
+ 114              		.loc 1 109 0
+ 115 0010 0249     		ldr	r1, .L13
+ 116 0012 0A68     		ldr	r2, [r1, #0]
+ 117 0014 101C     		adds	r0, r2, #0
+ 118 0016 18BF     		it	ne
+ 119 0018 0120     		movne	r0, #1
+ 120              	.LVL10:
+ 121              	.LBE15:
+ 122              	.LBE14:
+ 110:.\asp\kernel/exception.c **** 	LOG_XSNS_DPN_LEAVE(state);
+ 111:.\asp\kernel/exception.c **** 	return(state);
+ 112:.\asp\kernel/exception.c **** }
+ 123              		.loc 1 112 0
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 16
+
+
+ 124 001a 7047     		bx	lr
+ 125              	.L14:
+ 126              		.align	2
+ 127              	.L13:
+ 128 001c 00000000 		.word	_kernel_disdsp
+ 129              		.cfi_endproc
+ 130              	.LFE54:
+ 131              		.size	xsns_dpn, .-xsns_dpn
+ 132              		.section	.text.xsns_xpn,"ax",%progbits
+ 133              		.align	1
+ 134              		.global	xsns_xpn
+ 135              		.thumb
+ 136              		.thumb_func
+ 137              		.type	xsns_xpn, %function
+ 138              	xsns_xpn:
+ 139              	.LFB55:
+ 113:.\asp\kernel/exception.c **** 
+ 114:.\asp\kernel/exception.c **** #endif /* TOPPERS_xsns_dpn */
+ 115:.\asp\kernel/exception.c **** 
+ 116:.\asp\kernel/exception.c **** /*
+ 117:.\asp\kernel/exception.c ****  *  CPUó·äOî≠ê∂éûÇÃÉ^ÉXÉNó·äOèàóùï€óØèÛë‘ÇÃéQè∆
+ 118:.\asp\kernel/exception.c ****  *
+ 119:.\asp\kernel/exception.c ****  *  CPUó·äOÉnÉìÉhÉâíÜÇ≈p_runtskÇ∆p_runtsk->enatexÇ™ïœâªÇ∑ÇÈÇ±Ç∆ÇÕÇ»Ç¢
+ 120:.\asp\kernel/exception.c ****  *  ÇΩÇﬂÅCCPUó·äOÇ™î≠ê∂ÇµÇΩéûÇÃp_runtsk->enatexÇï€ë∂ÇµÇƒÇ®Ç≠ïKóvÇÕÇ»
+ 121:.\asp\kernel/exception.c ****  *  Ç¢ÅD
+ 122:.\asp\kernel/exception.c ****  */
+ 123:.\asp\kernel/exception.c **** #ifdef TOPPERS_xsns_xpn
+ 124:.\asp\kernel/exception.c **** 
+ 125:.\asp\kernel/exception.c **** bool_t
+ 126:.\asp\kernel/exception.c **** xsns_xpn(void *p_excinf)
+ 127:.\asp\kernel/exception.c **** {
+ 140              		.loc 1 127 0
+ 141              		.cfi_startproc
+ 142              		@ args = 0, pretend = 0, frame = 0
+ 143              		@ frame_needed = 0, uses_anonymous_args = 0
+ 144              		@ link register save eliminated.
+ 145              	.LVL11:
+ 146              	.LBB24:
+ 147              	.LBB25:
+ 148              	.LBB26:
+ 149              	.LBB27:
+ 581:.\asp\arch\arm_m_gcc\common/core_config.h **** 	if ((exc_return & EXC_RETURN_PSP) == EXC_RETURN_PSP){
+ 150              		.loc 2 581 0
+ 151 0000 0368     		ldr	r3, [r0, #0]
+ 152 0002 5A07     		lsls	r2, r3, #29
+ 153 0004 01D4     		bmi	.L16
+ 154              	.LVL12:
+ 155              	.L18:
+ 156              	.LBE27:
+ 157              	.LBE26:
+ 128:.\asp\kernel/exception.c **** 	bool_t	state;
+ 129:.\asp\kernel/exception.c **** 
+ 130:.\asp\kernel/exception.c **** 	LOG_XSNS_XPN_ENTER(p_excinf);
+ 131:.\asp\kernel/exception.c **** 	state = (exc_sense_intmask(p_excinf) && p_runtsk->enatex) ? false : true;
+ 158              		.loc 1 131 0
+ 159 0006 0120     		movs	r0, #1
+ 160 0008 7047     		bx	lr
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 17
+
+
+ 161              	.LVL13:
+ 162              	.L16:
+ 163              		.loc 2 619 0
+ 164 000a 4068     		ldr	r0, [r0, #4]
+ 165              	.LVL14:
+ 166 000c 0028     		cmp	r0, #0
+ 167 000e FAD1     		bne	.L18
+ 168              	.LBE25:
+ 169              	.LBE24:
+ 170              		.loc 1 131 0
+ 171 0010 0349     		ldr	r1, .L20
+ 172 0012 0A68     		ldr	r2, [r1, #0]
+ 173              	.LBB29:
+ 174              	.LBB28:
+ 175 0014 937B     		ldrb	r3, [r2, #14]	@ zero_extendqisi2
+ 176              	.LVL15:
+ 177 0016 83F00400 		eor	r0, r3, #4
+ 178 001a C0F38000 		ubfx	r0, r0, #2, #1
+ 179              	.LVL16:
+ 180              	.LBE28:
+ 181              	.LBE29:
+ 132:.\asp\kernel/exception.c **** 	LOG_XSNS_XPN_LEAVE(state);
+ 133:.\asp\kernel/exception.c **** 	return(state);
+ 134:.\asp\kernel/exception.c **** }
+ 182              		.loc 1 134 0
+ 183 001e 7047     		bx	lr
+ 184              	.L21:
+ 185              		.align	2
+ 186              	.L20:
+ 187 0020 00000000 		.word	_kernel_p_runtsk
+ 188              		.cfi_endproc
+ 189              	.LFE55:
+ 190              		.size	xsns_xpn, .-xsns_xpn
+ 191              		.text
+ 192              	.Letext0:
+ 193              		.file 3 ".\\asp\\arch\\gcc/tool_stddef.h"
+ 194              		.file 4 ".\\asp\\include/t_stddef.h"
+ 195              		.file 5 ".\\asp\\include/kernel.h"
+ 196              		.file 6 ".\\asp\\include/queue.h"
+ 197              		.file 7 ".\\asp\\kernel\\time_event.h"
+ 198              		.file 8 ".\\asp\\kernel\\task.h"
+ 199              		.file 9 ".\\asp\\kernel\\exception.h"
+ 200              		.section	.debug_info,"",%progbits
+ 201              	.Ldebug_info0:
+ 202 0000 DA060000 		.4byte	0x6da
+ 203 0004 0200     		.2byte	0x2
+ 204 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 205 000a 04       		.byte	0x4
+ 206 000b 01       		.uleb128 0x1
+ 207 000c 9C020000 		.4byte	.LASF84
+ 208 0010 01       		.byte	0x1
+ 209 0011 E6030000 		.4byte	.LASF85
+ 210 0015 49040000 		.4byte	.LASF86
+ 211 0019 18000000 		.4byte	.Ldebug_ranges0+0x18
+ 212 001d 00000000 		.4byte	0
+ 213 0021 00000000 		.4byte	0
+ 214 0025 00000000 		.4byte	.Ldebug_line0
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 18
+
+
+ 215 0029 02       		.uleb128 0x2
+ 216 002a 04       		.byte	0x4
+ 217 002b 05       		.byte	0x5
+ 218 002c 696E7400 		.ascii	"int\000"
+ 219 0030 03       		.uleb128 0x3
+ 220 0031 04       		.byte	0x4
+ 221 0032 07       		.byte	0x7
+ 222 0033 24010000 		.4byte	.LASF0
+ 223 0037 03       		.uleb128 0x3
+ 224 0038 01       		.byte	0x1
+ 225 0039 06       		.byte	0x6
+ 226 003a 8A000000 		.4byte	.LASF1
+ 227 003e 04       		.uleb128 0x4
+ 228 003f DE030000 		.4byte	.LASF5
+ 229 0043 03       		.byte	0x3
+ 230 0044 67       		.byte	0x67
+ 231 0045 49000000 		.4byte	0x49
+ 232 0049 03       		.uleb128 0x3
+ 233 004a 01       		.byte	0x1
+ 234 004b 08       		.byte	0x8
+ 235 004c E5020000 		.4byte	.LASF2
+ 236 0050 03       		.uleb128 0x3
+ 237 0051 02       		.byte	0x2
+ 238 0052 05       		.byte	0x5
+ 239 0053 03030000 		.4byte	.LASF3
+ 240 0057 03       		.uleb128 0x3
+ 241 0058 02       		.byte	0x2
+ 242 0059 07       		.byte	0x7
+ 243 005a A1010000 		.4byte	.LASF4
+ 244 005e 04       		.uleb128 0x4
+ 245 005f 1C030000 		.4byte	.LASF6
+ 246 0063 03       		.byte	0x3
+ 247 0064 6D       		.byte	0x6d
+ 248 0065 30000000 		.4byte	0x30
+ 249 0069 03       		.uleb128 0x3
+ 250 006a 08       		.byte	0x8
+ 251 006b 05       		.byte	0x5
+ 252 006c 7C000000 		.4byte	.LASF7
+ 253 0070 03       		.uleb128 0x3
+ 254 0071 08       		.byte	0x8
+ 255 0072 07       		.byte	0x7
+ 256 0073 53000000 		.4byte	.LASF8
+ 257 0077 04       		.uleb128 0x4
+ 258 0078 ED010000 		.4byte	.LASF9
+ 259 007c 03       		.byte	0x3
+ 260 007d 75       		.byte	0x75
+ 261 007e 82000000 		.4byte	0x82
+ 262 0082 03       		.uleb128 0x3
+ 263 0083 04       		.byte	0x4
+ 264 0084 05       		.byte	0x5
+ 265 0085 B1000000 		.4byte	.LASF10
+ 266 0089 04       		.uleb128 0x4
+ 267 008a 2A000000 		.4byte	.LASF11
+ 268 008e 03       		.byte	0x3
+ 269 008f 76       		.byte	0x76
+ 270 0090 94000000 		.4byte	0x94
+ 271 0094 03       		.uleb128 0x3
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 19
+
+
+ 272 0095 04       		.byte	0x4
+ 273 0096 07       		.byte	0x7
+ 274 0097 63010000 		.4byte	.LASF12
+ 275 009b 03       		.uleb128 0x3
+ 276 009c 04       		.byte	0x4
+ 277 009d 04       		.byte	0x4
+ 278 009e 69020000 		.4byte	.LASF13
+ 279 00a2 03       		.uleb128 0x3
+ 280 00a3 08       		.byte	0x8
+ 281 00a4 04       		.byte	0x4
+ 282 00a5 DC000000 		.4byte	.LASF14
+ 283 00a9 05       		.uleb128 0x5
+ 284 00aa F3020000 		.4byte	.LASF26
+ 285 00ae 04       		.byte	0x4
+ 286 00af 04       		.byte	0x4
+ 287 00b0 5B       		.byte	0x5b
+ 288 00b1 C4000000 		.4byte	0xc4
+ 289 00b5 06       		.uleb128 0x6
+ 290 00b6 47020000 		.4byte	.LASF28
+ 291 00ba 04       		.byte	0x4
+ 292 00bb 5B       		.byte	0x5b
+ 293 00bc 29000000 		.4byte	0x29
+ 294 00c0 02       		.byte	0x2
+ 295 00c1 23       		.byte	0x23
+ 296 00c2 00       		.uleb128 0
+ 297 00c3 00       		.byte	0
+ 298 00c4 04       		.uleb128 0x4
+ 299 00c5 25030000 		.4byte	.LASF15
+ 300 00c9 04       		.byte	0x4
+ 301 00ca 5C       		.byte	0x5c
+ 302 00cb CF000000 		.4byte	0xcf
+ 303 00cf 07       		.uleb128 0x7
+ 304 00d0 04       		.byte	0x4
+ 305 00d1 D5000000 		.4byte	0xd5
+ 306 00d5 08       		.uleb128 0x8
+ 307 00d6 01       		.byte	0x1
+ 308 00d7 E1000000 		.4byte	0xe1
+ 309 00db 09       		.uleb128 0x9
+ 310 00dc A9000000 		.4byte	0xa9
+ 311 00e0 00       		.byte	0
+ 312 00e1 04       		.uleb128 0x4
+ 313 00e2 9D000000 		.4byte	.LASF16
+ 314 00e6 04       		.byte	0x4
+ 315 00e7 63       		.byte	0x63
+ 316 00e8 29000000 		.4byte	0x29
+ 317 00ec 04       		.uleb128 0x4
+ 318 00ed 6A000000 		.4byte	.LASF17
+ 319 00f1 04       		.byte	0x4
+ 320 00f2 65       		.byte	0x65
+ 321 00f3 29000000 		.4byte	0x29
+ 322 00f7 04       		.uleb128 0x4
+ 323 00f8 A4000000 		.4byte	.LASF18
+ 324 00fc 04       		.byte	0x4
+ 325 00fd 66       		.byte	0x66
+ 326 00fe 30000000 		.4byte	0x30
+ 327 0102 04       		.uleb128 0x4
+ 328 0103 87010000 		.4byte	.LASF19
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 20
+
+
+ 329 0107 04       		.byte	0x4
+ 330 0108 69       		.byte	0x69
+ 331 0109 94000000 		.4byte	0x94
+ 332 010d 0A       		.uleb128 0xa
+ 333 010e 455200   		.ascii	"ER\000"
+ 334 0111 04       		.byte	0x4
+ 335 0112 6C       		.byte	0x6c
+ 336 0113 EC000000 		.4byte	0xec
+ 337 0117 0A       		.uleb128 0xa
+ 338 0118 41545200 		.ascii	"ATR\000"
+ 339 011c 04       		.byte	0x4
+ 340 011d 6E       		.byte	0x6e
+ 341 011e F7000000 		.4byte	0xf7
+ 342 0122 04       		.uleb128 0x4
+ 343 0123 77000000 		.4byte	.LASF20
+ 344 0127 04       		.byte	0x4
+ 345 0128 72       		.byte	0x72
+ 346 0129 89000000 		.4byte	0x89
+ 347 012d 0A       		.uleb128 0xa
+ 348 012e 465000   		.ascii	"FP\000"
+ 349 0131 04       		.byte	0x4
+ 350 0132 79       		.byte	0x79
+ 351 0133 C4000000 		.4byte	0xc4
+ 352 0137 04       		.uleb128 0x4
+ 353 0138 76020000 		.4byte	.LASF21
+ 354 013c 05       		.byte	0x5
+ 355 013d 53       		.byte	0x53
+ 356 013e F7000000 		.4byte	0xf7
+ 357 0142 04       		.uleb128 0x4
+ 358 0143 DF010000 		.4byte	.LASF22
+ 359 0147 05       		.byte	0x5
+ 360 0148 57       		.byte	0x57
+ 361 0149 F7000000 		.4byte	0xf7
+ 362 014d 04       		.uleb128 0x4
+ 363 014e 42020000 		.4byte	.LASF23
+ 364 0152 05       		.byte	0x5
+ 365 0153 5C       		.byte	0x5c
+ 366 0154 58010000 		.4byte	0x158
+ 367 0158 07       		.uleb128 0x7
+ 368 0159 04       		.byte	0x4
+ 369 015a 5E010000 		.4byte	0x15e
+ 370 015e 08       		.uleb128 0x8
+ 371 015f 01       		.byte	0x1
+ 372 0160 6A010000 		.4byte	0x16a
+ 373 0164 09       		.uleb128 0x9
+ 374 0165 77000000 		.4byte	0x77
+ 375 0169 00       		.byte	0
+ 376 016a 04       		.uleb128 0x4
+ 377 016b E3000000 		.4byte	.LASF24
+ 378 016f 05       		.byte	0x5
+ 379 0170 5D       		.byte	0x5d
+ 380 0171 75010000 		.4byte	0x175
+ 381 0175 07       		.uleb128 0x7
+ 382 0176 04       		.byte	0x4
+ 383 0177 7B010000 		.4byte	0x17b
+ 384 017b 08       		.uleb128 0x8
+ 385 017c 01       		.byte	0x1
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 21
+
+
+ 386 017d 8C010000 		.4byte	0x18c
+ 387 0181 09       		.uleb128 0x9
+ 388 0182 37010000 		.4byte	0x137
+ 389 0186 09       		.uleb128 0x9
+ 390 0187 77000000 		.4byte	0x77
+ 391 018b 00       		.byte	0
+ 392 018c 07       		.uleb128 0x7
+ 393 018d 04       		.byte	0x4
+ 394 018e 92010000 		.4byte	0x192
+ 395 0192 08       		.uleb128 0x8
+ 396 0193 01       		.byte	0x1
+ 397 0194 9E010000 		.4byte	0x19e
+ 398 0198 09       		.uleb128 0x9
+ 399 0199 9E010000 		.4byte	0x19e
+ 400 019d 00       		.byte	0
+ 401 019e 0B       		.uleb128 0xb
+ 402 019f 04       		.byte	0x4
+ 403 01a0 03       		.uleb128 0x3
+ 404 01a1 04       		.byte	0x4
+ 405 01a2 07       		.byte	0x7
+ 406 01a3 09020000 		.4byte	.LASF25
+ 407 01a7 05       		.uleb128 0x5
+ 408 01a8 FF030000 		.4byte	.LASF27
+ 409 01ac 08       		.byte	0x8
+ 410 01ad 02       		.byte	0x2
+ 411 01ae 54       		.byte	0x54
+ 412 01af CE010000 		.4byte	0x1ce
+ 413 01b3 0C       		.uleb128 0xc
+ 414 01b4 737000   		.ascii	"sp\000"
+ 415 01b7 02       		.byte	0x2
+ 416 01b8 55       		.byte	0x55
+ 417 01b9 9E010000 		.4byte	0x19e
+ 418 01bd 02       		.byte	0x2
+ 419 01be 23       		.byte	0x23
+ 420 01bf 00       		.uleb128 0
+ 421 01c0 0C       		.uleb128 0xc
+ 422 01c1 706300   		.ascii	"pc\000"
+ 423 01c4 02       		.byte	0x2
+ 424 01c5 56       		.byte	0x56
+ 425 01c6 2D010000 		.4byte	0x12d
+ 426 01ca 02       		.byte	0x2
+ 427 01cb 23       		.byte	0x23
+ 428 01cc 04       		.uleb128 0x4
+ 429 01cd 00       		.byte	0
+ 430 01ce 04       		.uleb128 0x4
+ 431 01cf 3D030000 		.4byte	.LASF29
+ 432 01d3 02       		.byte	0x2
+ 433 01d4 57       		.byte	0x57
+ 434 01d5 A7010000 		.4byte	0x1a7
+ 435 01d9 05       		.uleb128 0x5
+ 436 01da D6000000 		.4byte	.LASF30
+ 437 01de 08       		.byte	0x8
+ 438 01df 06       		.byte	0x6
+ 439 01e0 3F       		.byte	0x3f
+ 440 01e1 02020000 		.4byte	0x202
+ 441 01e5 06       		.uleb128 0x6
+ 442 01e6 0D030000 		.4byte	.LASF31
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 22
+
+
+ 443 01ea 06       		.byte	0x6
+ 444 01eb 40       		.byte	0x40
+ 445 01ec 02020000 		.4byte	0x202
+ 446 01f0 02       		.byte	0x2
+ 447 01f1 23       		.byte	0x23
+ 448 01f2 00       		.uleb128 0
+ 449 01f3 06       		.uleb128 0x6
+ 450 01f4 8E020000 		.4byte	.LASF32
+ 451 01f8 06       		.byte	0x6
+ 452 01f9 41       		.byte	0x41
+ 453 01fa 02020000 		.4byte	0x202
+ 454 01fe 02       		.byte	0x2
+ 455 01ff 23       		.byte	0x23
+ 456 0200 04       		.uleb128 0x4
+ 457 0201 00       		.byte	0
+ 458 0202 07       		.uleb128 0x7
+ 459 0203 04       		.byte	0x4
+ 460 0204 D9010000 		.4byte	0x1d9
+ 461 0208 04       		.uleb128 0x4
+ 462 0209 7A030000 		.4byte	.LASF33
+ 463 020d 06       		.byte	0x6
+ 464 020e 42       		.byte	0x42
+ 465 020f D9010000 		.4byte	0x1d9
+ 466 0213 04       		.uleb128 0x4
+ 467 0214 3B020000 		.4byte	.LASF34
+ 468 0218 07       		.byte	0x7
+ 469 0219 3B       		.byte	0x3b
+ 470 021a 02010000 		.4byte	0x102
+ 471 021e 04       		.uleb128 0x4
+ 472 021f 1E000000 		.4byte	.LASF35
+ 473 0223 07       		.byte	0x7
+ 474 0224 40       		.byte	0x40
+ 475 0225 8C010000 		.4byte	0x18c
+ 476 0229 05       		.uleb128 0x5
+ 477 022a 7D020000 		.4byte	.LASF36
+ 478 022e 0C       		.byte	0xc
+ 479 022f 07       		.byte	0x7
+ 480 0230 42       		.byte	0x42
+ 481 0231 60020000 		.4byte	0x260
+ 482 0235 06       		.uleb128 0x6
+ 483 0236 32030000 		.4byte	.LASF37
+ 484 023a 07       		.byte	0x7
+ 485 023b 43       		.byte	0x43
+ 486 023c F7000000 		.4byte	0xf7
+ 487 0240 02       		.byte	0x2
+ 488 0241 23       		.byte	0x23
+ 489 0242 00       		.uleb128 0
+ 490 0243 06       		.uleb128 0x6
+ 491 0244 CD010000 		.4byte	.LASF38
+ 492 0248 07       		.byte	0x7
+ 493 0249 44       		.byte	0x44
+ 494 024a 1E020000 		.4byte	0x21e
+ 495 024e 02       		.byte	0x2
+ 496 024f 23       		.byte	0x23
+ 497 0250 04       		.uleb128 0x4
+ 498 0251 0C       		.uleb128 0xc
+ 499 0252 61726700 		.ascii	"arg\000"
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 23
+
+
+ 500 0256 07       		.byte	0x7
+ 501 0257 45       		.byte	0x45
+ 502 0258 9E010000 		.4byte	0x19e
+ 503 025c 02       		.byte	0x2
+ 504 025d 23       		.byte	0x23
+ 505 025e 08       		.uleb128 0x8
+ 506 025f 00       		.byte	0
+ 507 0260 04       		.uleb128 0x4
+ 508 0261 95020000 		.4byte	.LASF39
+ 509 0265 07       		.byte	0x7
+ 510 0266 46       		.byte	0x46
+ 511 0267 29020000 		.4byte	0x229
+ 512 026b 07       		.uleb128 0x7
+ 513 026c 04       		.byte	0x4
+ 514 026d 60020000 		.4byte	0x260
+ 515 0271 0D       		.uleb128 0xd
+ 516 0272 CA030000 		.4byte	.LASF87
+ 517 0276 04       		.byte	0x4
+ 518 0277 08       		.byte	0x8
+ 519 0278 A4       		.byte	0xa4
+ 520 0279 94020000 		.4byte	0x294
+ 521 027d 0E       		.uleb128 0xe
+ 522 027e 34000000 		.4byte	.LASF40
+ 523 0282 08       		.byte	0x8
+ 524 0283 A5       		.byte	0xa5
+ 525 0284 0D010000 		.4byte	0x10d
+ 526 0288 0E       		.uleb128 0xe
+ 527 0289 8F010000 		.4byte	.LASF41
+ 528 028d 08       		.byte	0x8
+ 529 028e A6       		.byte	0xa6
+ 530 028f 6B020000 		.4byte	0x26b
+ 531 0293 00       		.byte	0
+ 532 0294 04       		.uleb128 0x4
+ 533 0295 12040000 		.4byte	.LASF42
+ 534 0299 08       		.byte	0x8
+ 535 029a A7       		.byte	0xa7
+ 536 029b 71020000 		.4byte	0x271
+ 537 029f 05       		.uleb128 0x5
+ 538 02a0 2F040000 		.4byte	.LASF43
+ 539 02a4 20       		.byte	0x20
+ 540 02a5 08       		.byte	0x8
+ 541 02a6 B7       		.byte	0xb7
+ 542 02a7 1C030000 		.4byte	0x31c
+ 543 02ab 06       		.uleb128 0x6
+ 544 02ac 62020000 		.4byte	.LASF44
+ 545 02b0 08       		.byte	0x8
+ 546 02b1 B8       		.byte	0xb8
+ 547 02b2 17010000 		.4byte	0x117
+ 548 02b6 02       		.byte	0x2
+ 549 02b7 23       		.byte	0x23
+ 550 02b8 00       		.uleb128 0
+ 551 02b9 06       		.uleb128 0x6
+ 552 02ba C7010000 		.4byte	.LASF45
+ 553 02be 08       		.byte	0x8
+ 554 02bf B9       		.byte	0xb9
+ 555 02c0 77000000 		.4byte	0x77
+ 556 02c4 02       		.byte	0x2
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 24
+
+
+ 557 02c5 23       		.byte	0x23
+ 558 02c6 04       		.uleb128 0x4
+ 559 02c7 06       		.uleb128 0x6
+ 560 02c8 38030000 		.4byte	.LASF46
+ 561 02cc 08       		.byte	0x8
+ 562 02cd BA       		.byte	0xba
+ 563 02ce 4D010000 		.4byte	0x14d
+ 564 02d2 02       		.byte	0x2
+ 565 02d3 23       		.byte	0x23
+ 566 02d4 08       		.uleb128 0x8
+ 567 02d5 06       		.uleb128 0x6
+ 568 02d6 CC000000 		.4byte	.LASF47
+ 569 02da 08       		.byte	0x8
+ 570 02db BB       		.byte	0xbb
+ 571 02dc F7000000 		.4byte	0xf7
+ 572 02e0 02       		.byte	0x2
+ 573 02e1 23       		.byte	0x23
+ 574 02e2 0C       		.uleb128 0xc
+ 575 02e3 06       		.uleb128 0x6
+ 576 02e4 11010000 		.4byte	.LASF48
+ 577 02e8 08       		.byte	0x8
+ 578 02e9 C0       		.byte	0xc0
+ 579 02ea 22010000 		.4byte	0x122
+ 580 02ee 02       		.byte	0x2
+ 581 02ef 23       		.byte	0x23
+ 582 02f0 10       		.uleb128 0x10
+ 583 02f1 0C       		.uleb128 0xc
+ 584 02f2 73746B00 		.ascii	"stk\000"
+ 585 02f6 08       		.byte	0x8
+ 586 02f7 C1       		.byte	0xc1
+ 587 02f8 9E010000 		.4byte	0x19e
+ 588 02fc 02       		.byte	0x2
+ 589 02fd 23       		.byte	0x23
+ 590 02fe 14       		.uleb128 0x14
+ 591 02ff 06       		.uleb128 0x6
+ 592 0300 31010000 		.4byte	.LASF49
+ 593 0304 08       		.byte	0x8
+ 594 0305 C4       		.byte	0xc4
+ 595 0306 17010000 		.4byte	0x117
+ 596 030a 02       		.byte	0x2
+ 597 030b 23       		.byte	0x23
+ 598 030c 18       		.uleb128 0x18
+ 599 030d 06       		.uleb128 0x6
+ 600 030e EA000000 		.4byte	.LASF50
+ 601 0312 08       		.byte	0x8
+ 602 0313 C5       		.byte	0xc5
+ 603 0314 6A010000 		.4byte	0x16a
+ 604 0318 02       		.byte	0x2
+ 605 0319 23       		.byte	0x23
+ 606 031a 1C       		.uleb128 0x1c
+ 607 031b 00       		.byte	0
+ 608 031c 04       		.uleb128 0x4
+ 609 031d 74030000 		.4byte	.LASF51
+ 610 0321 08       		.byte	0x8
+ 611 0322 C6       		.byte	0xc6
+ 612 0323 9F020000 		.4byte	0x29f
+ 613 0327 05       		.uleb128 0x5
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 25
+
+
+ 614 0328 80030000 		.4byte	.LASF52
+ 615 032c 20       		.byte	0x20
+ 616 032d 08       		.byte	0x8
+ 617 032e EB       		.byte	0xeb
+ 618 032f CA030000 		.4byte	0x3ca
+ 619 0333 06       		.uleb128 0x6
+ 620 0334 93030000 		.4byte	.LASF53
+ 621 0338 08       		.byte	0x8
+ 622 0339 EC       		.byte	0xec
+ 623 033a 08020000 		.4byte	0x208
+ 624 033e 02       		.byte	0x2
+ 625 033f 23       		.byte	0x23
+ 626 0340 00       		.uleb128 0
+ 627 0341 06       		.uleb128 0x6
+ 628 0342 14030000 		.4byte	.LASF54
+ 629 0346 08       		.byte	0x8
+ 630 0347 ED       		.byte	0xed
+ 631 0348 CA030000 		.4byte	0x3ca
+ 632 034c 02       		.byte	0x2
+ 633 034d 23       		.byte	0x23
+ 634 034e 08       		.uleb128 0x8
+ 635 034f 06       		.uleb128 0x6
+ 636 0350 24000000 		.4byte	.LASF55
+ 637 0354 08       		.byte	0x8
+ 638 0355 F0       		.byte	0xf0
+ 639 0356 3E000000 		.4byte	0x3e
+ 640 035a 02       		.byte	0x2
+ 641 035b 23       		.byte	0x23
+ 642 035c 0C       		.uleb128 0xc
+ 643 035d 06       		.uleb128 0x6
+ 644 035e D6010000 		.4byte	.LASF56
+ 645 0362 08       		.byte	0x8
+ 646 0363 F5       		.byte	0xf5
+ 647 0364 3E000000 		.4byte	0x3e
+ 648 0368 02       		.byte	0x2
+ 649 0369 23       		.byte	0x23
+ 650 036a 0D       		.uleb128 0xd
+ 651 036b 0F       		.uleb128 0xf
+ 652 036c 6F020000 		.4byte	.LASF57
+ 653 0370 08       		.byte	0x8
+ 654 0371 FA       		.byte	0xfa
+ 655 0372 30000000 		.4byte	0x30
+ 656 0376 04       		.byte	0x4
+ 657 0377 01       		.byte	0x1
+ 658 0378 0F       		.byte	0xf
+ 659 0379 02       		.byte	0x2
+ 660 037a 23       		.byte	0x23
+ 661 037b 0C       		.uleb128 0xc
+ 662 037c 0F       		.uleb128 0xf
+ 663 037d 96000000 		.4byte	.LASF58
+ 664 0381 08       		.byte	0x8
+ 665 0382 FB       		.byte	0xfb
+ 666 0383 30000000 		.4byte	0x30
+ 667 0387 04       		.byte	0x4
+ 668 0388 01       		.byte	0x1
+ 669 0389 0E       		.byte	0xe
+ 670 038a 02       		.byte	0x2
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 26
+
+
+ 671 038b 23       		.byte	0x23
+ 672 038c 0C       		.uleb128 0xc
+ 673 038d 0F       		.uleb128 0xf
+ 674 038e 70000000 		.4byte	.LASF59
+ 675 0392 08       		.byte	0x8
+ 676 0393 FC       		.byte	0xfc
+ 677 0394 30000000 		.4byte	0x30
+ 678 0398 04       		.byte	0x4
+ 679 0399 01       		.byte	0x1
+ 680 039a 0D       		.byte	0xd
+ 681 039b 02       		.byte	0x2
+ 682 039c 23       		.byte	0x23
+ 683 039d 0C       		.uleb128 0xc
+ 684 039e 06       		.uleb128 0x6
+ 685 039f 3A000000 		.4byte	.LASF60
+ 686 03a3 08       		.byte	0x8
+ 687 03a4 FE       		.byte	0xfe
+ 688 03a5 37010000 		.4byte	0x137
+ 689 03a9 02       		.byte	0x2
+ 690 03aa 23       		.byte	0x23
+ 691 03ab 10       		.uleb128 0x10
+ 692 03ac 06       		.uleb128 0x6
+ 693 03ad C4000000 		.4byte	.LASF61
+ 694 03b1 08       		.byte	0x8
+ 695 03b2 FF       		.byte	0xff
+ 696 03b3 D5030000 		.4byte	0x3d5
+ 697 03b7 02       		.byte	0x2
+ 698 03b8 23       		.byte	0x23
+ 699 03b9 14       		.uleb128 0x14
+ 700 03ba 10       		.uleb128 0x10
+ 701 03bb 27040000 		.4byte	.LASF62
+ 702 03bf 08       		.byte	0x8
+ 703 03c0 0001     		.2byte	0x100
+ 704 03c2 CE010000 		.4byte	0x1ce
+ 705 03c6 02       		.byte	0x2
+ 706 03c7 23       		.byte	0x23
+ 707 03c8 18       		.uleb128 0x18
+ 708 03c9 00       		.byte	0
+ 709 03ca 07       		.uleb128 0x7
+ 710 03cb 04       		.byte	0x4
+ 711 03cc D0030000 		.4byte	0x3d0
+ 712 03d0 11       		.uleb128 0x11
+ 713 03d1 1C030000 		.4byte	0x31c
+ 714 03d5 07       		.uleb128 0x7
+ 715 03d6 04       		.byte	0x4
+ 716 03d7 94020000 		.4byte	0x294
+ 717 03db 12       		.uleb128 0x12
+ 718 03dc 54434200 		.ascii	"TCB\000"
+ 719 03e0 08       		.byte	0x8
+ 720 03e1 0101     		.2byte	0x101
+ 721 03e3 27030000 		.4byte	0x327
+ 722 03e7 05       		.uleb128 0x5
+ 723 03e8 38010000 		.4byte	.LASF63
+ 724 03ec 0C       		.byte	0xc
+ 725 03ed 09       		.byte	0x9
+ 726 03ee 37       		.byte	0x37
+ 727 03ef 1E040000 		.4byte	0x41e
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 27
+
+
+ 728 03f3 06       		.uleb128 0x6
+ 729 03f4 12020000 		.4byte	.LASF64
+ 730 03f8 09       		.byte	0x9
+ 731 03f9 38       		.byte	0x38
+ 732 03fa 42010000 		.4byte	0x142
+ 733 03fe 02       		.byte	0x2
+ 734 03ff 23       		.byte	0x23
+ 735 0400 00       		.uleb128 0
+ 736 0401 06       		.uleb128 0x6
+ 737 0402 5B020000 		.4byte	.LASF65
+ 738 0406 09       		.byte	0x9
+ 739 0407 39       		.byte	0x39
+ 740 0408 17010000 		.4byte	0x117
+ 741 040c 02       		.byte	0x2
+ 742 040d 23       		.byte	0x23
+ 743 040e 04       		.uleb128 0x4
+ 744 040f 06       		.uleb128 0x6
+ 745 0410 F1000000 		.4byte	.LASF66
+ 746 0414 09       		.byte	0x9
+ 747 0415 3A       		.byte	0x3a
+ 748 0416 2D010000 		.4byte	0x12d
+ 749 041a 02       		.byte	0x2
+ 750 041b 23       		.byte	0x23
+ 751 041c 08       		.uleb128 0x8
+ 752 041d 00       		.byte	0
+ 753 041e 04       		.uleb128 0x4
+ 754 041f E5010000 		.4byte	.LASF67
+ 755 0423 09       		.byte	0x9
+ 756 0424 3B       		.byte	0x3b
+ 757 0425 E7030000 		.4byte	0x3e7
+ 758 0429 13       		.uleb128 0x13
+ 759 042a 17010000 		.4byte	.LASF70
+ 760 042e 02       		.byte	0x2
+ 761 042f 5202     		.2byte	0x252
+ 762 0431 01       		.byte	0x1
+ 763 0432 5E000000 		.4byte	0x5e
+ 764 0436 03       		.byte	0x3
+ 765 0437 48040000 		.4byte	0x448
+ 766 043b 14       		.uleb128 0x14
+ 767 043c FB000000 		.4byte	.LASF68
+ 768 0440 02       		.byte	0x2
+ 769 0441 5202     		.2byte	0x252
+ 770 0443 9E010000 		.4byte	0x19e
+ 771 0447 00       		.byte	0
+ 772 0448 15       		.uleb128 0x15
+ 773 0449 04010000 		.4byte	.LASF88
+ 774 044d 02       		.byte	0x2
+ 775 044e 2B02     		.2byte	0x22b
+ 776 0450 01       		.byte	0x1
+ 777 0451 03       		.byte	0x3
+ 778 0452 6F040000 		.4byte	0x46f
+ 779 0456 14       		.uleb128 0x14
+ 780 0457 12020000 		.4byte	.LASF64
+ 781 045b 02       		.byte	0x2
+ 782 045c 2B02     		.2byte	0x22b
+ 783 045e 42010000 		.4byte	0x142
+ 784 0462 14       		.uleb128 0x14
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 28
+
+
+ 785 0463 F1000000 		.4byte	.LASF66
+ 786 0467 02       		.byte	0x2
+ 787 0468 2B02     		.2byte	0x22b
+ 788 046a 2D010000 		.4byte	0x12d
+ 789 046e 00       		.byte	0
+ 790 046f 16       		.uleb128 0x16
+ 791 0470 01       		.byte	0x1
+ 792 0471 45030000 		.4byte	.LASF89
+ 793 0475 01       		.byte	0x1
+ 794 0476 4D       		.byte	0x4d
+ 795 0477 01       		.byte	0x1
+ 796 0478 00000000 		.4byte	.LFB53
+ 797 047c 28000000 		.4byte	.LFE53
+ 798 0480 00000000 		.4byte	.LLST0
+ 799 0484 01       		.byte	0x1
+ 800 0485 D7040000 		.4byte	0x4d7
+ 801 0489 17       		.uleb128 0x17
+ 802 048a 6900     		.ascii	"i\000"
+ 803 048c 01       		.byte	0x1
+ 804 048d 4F       		.byte	0x4f
+ 805 048e F7000000 		.4byte	0xf7
+ 806 0492 20000000 		.4byte	.LLST1
+ 807 0496 18       		.uleb128 0x18
+ 808 0497 BA000000 		.4byte	.LASF69
+ 809 049b 01       		.byte	0x1
+ 810 049c 50       		.byte	0x50
+ 811 049d D7040000 		.4byte	0x4d7
+ 812 04a1 57000000 		.4byte	.LLST2
+ 813 04a5 19       		.uleb128 0x19
+ 814 04a6 48040000 		.4byte	0x448
+ 815 04aa 14000000 		.4byte	.LBB6
+ 816 04ae 1C000000 		.4byte	.LBE6
+ 817 04b2 01       		.byte	0x1
+ 818 04b3 54       		.byte	0x54
+ 819 04b4 1A       		.uleb128 0x1a
+ 820 04b5 56040000 		.4byte	0x456
+ 821 04b9 7D000000 		.4byte	.LLST3
+ 822 04bd 1B       		.uleb128 0x1b
+ 823 04be 14000000 		.4byte	.LBB7
+ 824 04c2 1C000000 		.4byte	.LBE7
+ 825 04c6 1C       		.uleb128 0x1c
+ 826 04c7 62040000 		.4byte	0x462
+ 827 04cb 1D       		.uleb128 0x1d
+ 828 04cc 1A000000 		.4byte	.LVL4
+ 829 04d0 CC060000 		.4byte	0x6cc
+ 830 04d4 00       		.byte	0
+ 831 04d5 00       		.byte	0
+ 832 04d6 00       		.byte	0
+ 833 04d7 07       		.uleb128 0x7
+ 834 04d8 04       		.byte	0x4
+ 835 04d9 DD040000 		.4byte	0x4dd
+ 836 04dd 11       		.uleb128 0x11
+ 837 04de 1E040000 		.4byte	0x41e
+ 838 04e2 13       		.uleb128 0x13
+ 839 04e3 41000000 		.4byte	.LASF71
+ 840 04e7 02       		.byte	0x2
+ 841 04e8 6802     		.2byte	0x268
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 29
+
+
+ 842 04ea 01       		.byte	0x1
+ 843 04eb E1000000 		.4byte	0xe1
+ 844 04ef 03       		.byte	0x3
+ 845 04f0 01050000 		.4byte	0x501
+ 846 04f4 14       		.uleb128 0x14
+ 847 04f5 FB000000 		.4byte	.LASF68
+ 848 04f9 02       		.byte	0x2
+ 849 04fa 6802     		.2byte	0x268
+ 850 04fc 9E010000 		.4byte	0x19e
+ 851 0500 00       		.byte	0
+ 852 0501 13       		.uleb128 0x13
+ 853 0502 29020000 		.4byte	.LASF72
+ 854 0506 02       		.byte	0x2
+ 855 0507 4002     		.2byte	0x240
+ 856 0509 01       		.byte	0x1
+ 857 050a E1000000 		.4byte	0xe1
+ 858 050e 03       		.byte	0x3
+ 859 050f 2C050000 		.4byte	0x52c
+ 860 0513 14       		.uleb128 0x14
+ 861 0514 FB000000 		.4byte	.LASF68
+ 862 0518 02       		.byte	0x2
+ 863 0519 4002     		.2byte	0x240
+ 864 051b 9E010000 		.4byte	0x19e
+ 865 051f 1E       		.uleb128 0x1e
+ 866 0520 13000000 		.4byte	.LASF90
+ 867 0524 02       		.byte	0x2
+ 868 0525 4202     		.2byte	0x242
+ 869 0527 5E000000 		.4byte	0x5e
+ 870 052b 00       		.byte	0
+ 871 052c 1F       		.uleb128 0x1f
+ 872 052d 01       		.byte	0x1
+ 873 052e 8C040000 		.4byte	.LASF74
+ 874 0532 01       		.byte	0x1
+ 875 0533 68       		.byte	0x68
+ 876 0534 01       		.byte	0x1
+ 877 0535 E1000000 		.4byte	0xe1
+ 878 0539 00000000 		.4byte	.LFB54
+ 879 053d 20000000 		.4byte	.LFE54
+ 880 0541 02       		.byte	0x2
+ 881 0542 7D       		.byte	0x7d
+ 882 0543 00       		.sleb128 0
+ 883 0544 01       		.byte	0x1
+ 884 0545 AC050000 		.4byte	0x5ac
+ 885 0549 20       		.uleb128 0x20
+ 886 054a FB000000 		.4byte	.LASF68
+ 887 054e 01       		.byte	0x1
+ 888 054f 68       		.byte	0x68
+ 889 0550 9E010000 		.4byte	0x19e
+ 890 0554 A1000000 		.4byte	.LLST4
+ 891 0558 21       		.uleb128 0x21
+ 892 0559 AB000000 		.4byte	.LASF73
+ 893 055d 01       		.byte	0x1
+ 894 055e 6A       		.byte	0x6a
+ 895 055f E1000000 		.4byte	0xe1
+ 896 0563 01       		.byte	0x1
+ 897 0564 50       		.byte	0x50
+ 898 0565 19       		.uleb128 0x19
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 30
+
+
+ 899 0566 E2040000 		.4byte	0x4e2
+ 900 056a 00000000 		.4byte	.LBB14
+ 901 056e 1A000000 		.4byte	.LBE14
+ 902 0572 01       		.byte	0x1
+ 903 0573 6D       		.byte	0x6d
+ 904 0574 1A       		.uleb128 0x1a
+ 905 0575 F4040000 		.4byte	0x4f4
+ 906 0579 A1000000 		.4byte	.LLST4
+ 907 057d 22       		.uleb128 0x22
+ 908 057e 01050000 		.4byte	0x501
+ 909 0582 00000000 		.4byte	.LBB16
+ 910 0586 06000000 		.4byte	.LBE16
+ 911 058a 02       		.byte	0x2
+ 912 058b 6A02     		.2byte	0x26a
+ 913 058d 1A       		.uleb128 0x1a
+ 914 058e 13050000 		.4byte	0x513
+ 915 0592 A1000000 		.4byte	.LLST4
+ 916 0596 1B       		.uleb128 0x1b
+ 917 0597 00000000 		.4byte	.LBB17
+ 918 059b 06000000 		.4byte	.LBE17
+ 919 059f 23       		.uleb128 0x23
+ 920 05a0 1F050000 		.4byte	0x51f
+ 921 05a4 DB000000 		.4byte	.LLST7
+ 922 05a8 00       		.byte	0
+ 923 05a9 00       		.byte	0
+ 924 05aa 00       		.byte	0
+ 925 05ab 00       		.byte	0
+ 926 05ac 1F       		.uleb128 0x1f
+ 927 05ad 01       		.byte	0x1
+ 928 05ae 98010000 		.4byte	.LASF75
+ 929 05b2 01       		.byte	0x1
+ 930 05b3 7E       		.byte	0x7e
+ 931 05b4 01       		.byte	0x1
+ 932 05b5 E1000000 		.4byte	0xe1
+ 933 05b9 00000000 		.4byte	.LFB55
+ 934 05bd 24000000 		.4byte	.LFE55
+ 935 05c1 02       		.byte	0x2
+ 936 05c2 7D       		.byte	0x7d
+ 937 05c3 00       		.sleb128 0
+ 938 05c4 01       		.byte	0x1
+ 939 05c5 2C060000 		.4byte	0x62c
+ 940 05c9 20       		.uleb128 0x20
+ 941 05ca FB000000 		.4byte	.LASF68
+ 942 05ce 01       		.byte	0x1
+ 943 05cf 7E       		.byte	0x7e
+ 944 05d0 9E010000 		.4byte	0x19e
+ 945 05d4 15010000 		.4byte	.LLST8
+ 946 05d8 21       		.uleb128 0x21
+ 947 05d9 AB000000 		.4byte	.LASF73
+ 948 05dd 01       		.byte	0x1
+ 949 05de 80       		.byte	0x80
+ 950 05df E1000000 		.4byte	0xe1
+ 951 05e3 01       		.byte	0x1
+ 952 05e4 50       		.byte	0x50
+ 953 05e5 24       		.uleb128 0x24
+ 954 05e6 E2040000 		.4byte	0x4e2
+ 955 05ea 00000000 		.4byte	.LBB24
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 31
+
+
+ 956 05ee 00000000 		.4byte	.Ldebug_ranges0+0
+ 957 05f2 01       		.byte	0x1
+ 958 05f3 83       		.byte	0x83
+ 959 05f4 1A       		.uleb128 0x1a
+ 960 05f5 F4040000 		.4byte	0x4f4
+ 961 05f9 15010000 		.4byte	.LLST8
+ 962 05fd 22       		.uleb128 0x22
+ 963 05fe 01050000 		.4byte	0x501
+ 964 0602 00000000 		.4byte	.LBB26
+ 965 0606 06000000 		.4byte	.LBE26
+ 966 060a 02       		.byte	0x2
+ 967 060b 6A02     		.2byte	0x26a
+ 968 060d 1A       		.uleb128 0x1a
+ 969 060e 13050000 		.4byte	0x513
+ 970 0612 15010000 		.4byte	.LLST8
+ 971 0616 1B       		.uleb128 0x1b
+ 972 0617 00000000 		.4byte	.LBB27
+ 973 061b 06000000 		.4byte	.LBE27
+ 974 061f 23       		.uleb128 0x23
+ 975 0620 1F050000 		.4byte	0x51f
+ 976 0624 4F010000 		.4byte	.LLST11
+ 977 0628 00       		.byte	0
+ 978 0629 00       		.byte	0
+ 979 062a 00       		.byte	0
+ 980 062b 00       		.byte	0
+ 981 062c 25       		.uleb128 0x25
+ 982 062d 62030000 		.4byte	.LASF76
+ 983 0631 02       		.byte	0x2
+ 984 0632 AE       		.byte	0xae
+ 985 0633 39060000 		.4byte	0x639
+ 986 0637 01       		.byte	0x1
+ 987 0638 01       		.byte	0x1
+ 988 0639 26       		.uleb128 0x26
+ 989 063a E1000000 		.4byte	0xe1
+ 990 063e 25       		.uleb128 0x25
+ 991 063f B4010000 		.4byte	.LASF77
+ 992 0643 02       		.byte	0x2
+ 993 0644 AF       		.byte	0xaf
+ 994 0645 4B060000 		.4byte	0x64b
+ 995 0649 01       		.byte	0x1
+ 996 064a 01       		.byte	0x1
+ 997 064b 26       		.uleb128 0x26
+ 998 064c 5E000000 		.4byte	0x5e
+ 999 0650 27       		.uleb128 0x27
+ 1000 0651 5E000000 		.4byte	0x5e
+ 1001 0655 5B060000 		.4byte	0x65b
+ 1002 0659 28       		.uleb128 0x28
+ 1003 065a 00       		.byte	0
+ 1004 065b 29       		.uleb128 0x29
+ 1005 065c B4030000 		.4byte	.LASF78
+ 1006 0660 02       		.byte	0x2
+ 1007 0661 B901     		.2byte	0x1b9
+ 1008 0663 69060000 		.4byte	0x669
+ 1009 0667 01       		.byte	0x1
+ 1010 0668 01       		.byte	0x1
+ 1011 0669 11       		.uleb128 0x11
+ 1012 066a 50060000 		.4byte	0x650
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 32
+
+
+ 1013 066e 25       		.uleb128 0x25
+ 1014 066f 75010000 		.4byte	.LASF79
+ 1015 0673 07       		.byte	0x7
+ 1016 0674 65       		.byte	0x65
+ 1017 0675 13020000 		.4byte	0x213
+ 1018 0679 01       		.byte	0x1
+ 1019 067a 01       		.byte	0x1
+ 1020 067b 29       		.uleb128 0x29
+ 1021 067c 18020000 		.4byte	.LASF80
+ 1022 0680 08       		.byte	0x8
+ 1023 0681 0D01     		.2byte	0x10d
+ 1024 0683 89060000 		.4byte	0x689
+ 1025 0687 01       		.byte	0x1
+ 1026 0688 01       		.byte	0x1
+ 1027 0689 07       		.uleb128 0x7
+ 1028 068a 04       		.byte	0x4
+ 1029 068b DB030000 		.4byte	0x3db
+ 1030 068f 29       		.uleb128 0x29
+ 1031 0690 18040000 		.4byte	.LASF81
+ 1032 0694 08       		.byte	0x8
+ 1033 0695 2E01     		.2byte	0x12e
+ 1034 0697 E1000000 		.4byte	0xe1
+ 1035 069b 01       		.byte	0x1
+ 1036 069c 01       		.byte	0x1
+ 1037 069d 25       		.uleb128 0x25
+ 1038 069e F6010000 		.4byte	.LASF82
+ 1039 06a2 09       		.byte	0x9
+ 1040 06a3 40       		.byte	0x40
+ 1041 06a4 AA060000 		.4byte	0x6aa
+ 1042 06a8 01       		.byte	0x1
+ 1043 06a9 01       		.byte	0x1
+ 1044 06aa 11       		.uleb128 0x11
+ 1045 06ab F7000000 		.4byte	0xf7
+ 1046 06af 27       		.uleb128 0x27
+ 1047 06b0 1E040000 		.4byte	0x41e
+ 1048 06b4 BA060000 		.4byte	0x6ba
+ 1049 06b8 28       		.uleb128 0x28
+ 1050 06b9 00       		.byte	0
+ 1051 06ba 25       		.uleb128 0x25
+ 1052 06bb 9E030000 		.4byte	.LASF83
+ 1053 06bf 09       		.byte	0x9
+ 1054 06c0 45       		.byte	0x45
+ 1055 06c1 C7060000 		.4byte	0x6c7
+ 1056 06c5 01       		.byte	0x1
+ 1057 06c6 01       		.byte	0x1
+ 1058 06c7 11       		.uleb128 0x11
+ 1059 06c8 AF060000 		.4byte	0x6af
+ 1060 06cc 2A       		.uleb128 0x2a
+ 1061 06cd 01       		.byte	0x1
+ 1062 06ce 00000000 		.4byte	.LASF91
+ 1063 06d2 02       		.byte	0x2
+ 1064 06d3 2002     		.2byte	0x220
+ 1065 06d5 01       		.byte	0x1
+ 1066 06d6 01       		.byte	0x1
+ 1067 06d7 09       		.uleb128 0x9
+ 1068 06d8 42010000 		.4byte	0x142
+ 1069 06dc 00       		.byte	0
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 33
+
+
+ 1070 06dd 00       		.byte	0
+ 1071              		.section	.debug_abbrev,"",%progbits
+ 1072              	.Ldebug_abbrev0:
+ 1073 0000 01       		.uleb128 0x1
+ 1074 0001 11       		.uleb128 0x11
+ 1075 0002 01       		.byte	0x1
+ 1076 0003 25       		.uleb128 0x25
+ 1077 0004 0E       		.uleb128 0xe
+ 1078 0005 13       		.uleb128 0x13
+ 1079 0006 0B       		.uleb128 0xb
+ 1080 0007 03       		.uleb128 0x3
+ 1081 0008 0E       		.uleb128 0xe
+ 1082 0009 1B       		.uleb128 0x1b
+ 1083 000a 0E       		.uleb128 0xe
+ 1084 000b 55       		.uleb128 0x55
+ 1085 000c 06       		.uleb128 0x6
+ 1086 000d 11       		.uleb128 0x11
+ 1087 000e 01       		.uleb128 0x1
+ 1088 000f 52       		.uleb128 0x52
+ 1089 0010 01       		.uleb128 0x1
+ 1090 0011 10       		.uleb128 0x10
+ 1091 0012 06       		.uleb128 0x6
+ 1092 0013 00       		.byte	0
+ 1093 0014 00       		.byte	0
+ 1094 0015 02       		.uleb128 0x2
+ 1095 0016 24       		.uleb128 0x24
+ 1096 0017 00       		.byte	0
+ 1097 0018 0B       		.uleb128 0xb
+ 1098 0019 0B       		.uleb128 0xb
+ 1099 001a 3E       		.uleb128 0x3e
+ 1100 001b 0B       		.uleb128 0xb
+ 1101 001c 03       		.uleb128 0x3
+ 1102 001d 08       		.uleb128 0x8
+ 1103 001e 00       		.byte	0
+ 1104 001f 00       		.byte	0
+ 1105 0020 03       		.uleb128 0x3
+ 1106 0021 24       		.uleb128 0x24
+ 1107 0022 00       		.byte	0
+ 1108 0023 0B       		.uleb128 0xb
+ 1109 0024 0B       		.uleb128 0xb
+ 1110 0025 3E       		.uleb128 0x3e
+ 1111 0026 0B       		.uleb128 0xb
+ 1112 0027 03       		.uleb128 0x3
+ 1113 0028 0E       		.uleb128 0xe
+ 1114 0029 00       		.byte	0
+ 1115 002a 00       		.byte	0
+ 1116 002b 04       		.uleb128 0x4
+ 1117 002c 16       		.uleb128 0x16
+ 1118 002d 00       		.byte	0
+ 1119 002e 03       		.uleb128 0x3
+ 1120 002f 0E       		.uleb128 0xe
+ 1121 0030 3A       		.uleb128 0x3a
+ 1122 0031 0B       		.uleb128 0xb
+ 1123 0032 3B       		.uleb128 0x3b
+ 1124 0033 0B       		.uleb128 0xb
+ 1125 0034 49       		.uleb128 0x49
+ 1126 0035 13       		.uleb128 0x13
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 34
+
+
+ 1127 0036 00       		.byte	0
+ 1128 0037 00       		.byte	0
+ 1129 0038 05       		.uleb128 0x5
+ 1130 0039 13       		.uleb128 0x13
+ 1131 003a 01       		.byte	0x1
+ 1132 003b 03       		.uleb128 0x3
+ 1133 003c 0E       		.uleb128 0xe
+ 1134 003d 0B       		.uleb128 0xb
+ 1135 003e 0B       		.uleb128 0xb
+ 1136 003f 3A       		.uleb128 0x3a
+ 1137 0040 0B       		.uleb128 0xb
+ 1138 0041 3B       		.uleb128 0x3b
+ 1139 0042 0B       		.uleb128 0xb
+ 1140 0043 01       		.uleb128 0x1
+ 1141 0044 13       		.uleb128 0x13
+ 1142 0045 00       		.byte	0
+ 1143 0046 00       		.byte	0
+ 1144 0047 06       		.uleb128 0x6
+ 1145 0048 0D       		.uleb128 0xd
+ 1146 0049 00       		.byte	0
+ 1147 004a 03       		.uleb128 0x3
+ 1148 004b 0E       		.uleb128 0xe
+ 1149 004c 3A       		.uleb128 0x3a
+ 1150 004d 0B       		.uleb128 0xb
+ 1151 004e 3B       		.uleb128 0x3b
+ 1152 004f 0B       		.uleb128 0xb
+ 1153 0050 49       		.uleb128 0x49
+ 1154 0051 13       		.uleb128 0x13
+ 1155 0052 38       		.uleb128 0x38
+ 1156 0053 0A       		.uleb128 0xa
+ 1157 0054 00       		.byte	0
+ 1158 0055 00       		.byte	0
+ 1159 0056 07       		.uleb128 0x7
+ 1160 0057 0F       		.uleb128 0xf
+ 1161 0058 00       		.byte	0
+ 1162 0059 0B       		.uleb128 0xb
+ 1163 005a 0B       		.uleb128 0xb
+ 1164 005b 49       		.uleb128 0x49
+ 1165 005c 13       		.uleb128 0x13
+ 1166 005d 00       		.byte	0
+ 1167 005e 00       		.byte	0
+ 1168 005f 08       		.uleb128 0x8
+ 1169 0060 15       		.uleb128 0x15
+ 1170 0061 01       		.byte	0x1
+ 1171 0062 27       		.uleb128 0x27
+ 1172 0063 0C       		.uleb128 0xc
+ 1173 0064 01       		.uleb128 0x1
+ 1174 0065 13       		.uleb128 0x13
+ 1175 0066 00       		.byte	0
+ 1176 0067 00       		.byte	0
+ 1177 0068 09       		.uleb128 0x9
+ 1178 0069 05       		.uleb128 0x5
+ 1179 006a 00       		.byte	0
+ 1180 006b 49       		.uleb128 0x49
+ 1181 006c 13       		.uleb128 0x13
+ 1182 006d 00       		.byte	0
+ 1183 006e 00       		.byte	0
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 35
+
+
+ 1184 006f 0A       		.uleb128 0xa
+ 1185 0070 16       		.uleb128 0x16
+ 1186 0071 00       		.byte	0
+ 1187 0072 03       		.uleb128 0x3
+ 1188 0073 08       		.uleb128 0x8
+ 1189 0074 3A       		.uleb128 0x3a
+ 1190 0075 0B       		.uleb128 0xb
+ 1191 0076 3B       		.uleb128 0x3b
+ 1192 0077 0B       		.uleb128 0xb
+ 1193 0078 49       		.uleb128 0x49
+ 1194 0079 13       		.uleb128 0x13
+ 1195 007a 00       		.byte	0
+ 1196 007b 00       		.byte	0
+ 1197 007c 0B       		.uleb128 0xb
+ 1198 007d 0F       		.uleb128 0xf
+ 1199 007e 00       		.byte	0
+ 1200 007f 0B       		.uleb128 0xb
+ 1201 0080 0B       		.uleb128 0xb
+ 1202 0081 00       		.byte	0
+ 1203 0082 00       		.byte	0
+ 1204 0083 0C       		.uleb128 0xc
+ 1205 0084 0D       		.uleb128 0xd
+ 1206 0085 00       		.byte	0
+ 1207 0086 03       		.uleb128 0x3
+ 1208 0087 08       		.uleb128 0x8
+ 1209 0088 3A       		.uleb128 0x3a
+ 1210 0089 0B       		.uleb128 0xb
+ 1211 008a 3B       		.uleb128 0x3b
+ 1212 008b 0B       		.uleb128 0xb
+ 1213 008c 49       		.uleb128 0x49
+ 1214 008d 13       		.uleb128 0x13
+ 1215 008e 38       		.uleb128 0x38
+ 1216 008f 0A       		.uleb128 0xa
+ 1217 0090 00       		.byte	0
+ 1218 0091 00       		.byte	0
+ 1219 0092 0D       		.uleb128 0xd
+ 1220 0093 17       		.uleb128 0x17
+ 1221 0094 01       		.byte	0x1
+ 1222 0095 03       		.uleb128 0x3
+ 1223 0096 0E       		.uleb128 0xe
+ 1224 0097 0B       		.uleb128 0xb
+ 1225 0098 0B       		.uleb128 0xb
+ 1226 0099 3A       		.uleb128 0x3a
+ 1227 009a 0B       		.uleb128 0xb
+ 1228 009b 3B       		.uleb128 0x3b
+ 1229 009c 0B       		.uleb128 0xb
+ 1230 009d 01       		.uleb128 0x1
+ 1231 009e 13       		.uleb128 0x13
+ 1232 009f 00       		.byte	0
+ 1233 00a0 00       		.byte	0
+ 1234 00a1 0E       		.uleb128 0xe
+ 1235 00a2 0D       		.uleb128 0xd
+ 1236 00a3 00       		.byte	0
+ 1237 00a4 03       		.uleb128 0x3
+ 1238 00a5 0E       		.uleb128 0xe
+ 1239 00a6 3A       		.uleb128 0x3a
+ 1240 00a7 0B       		.uleb128 0xb
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 36
+
+
+ 1241 00a8 3B       		.uleb128 0x3b
+ 1242 00a9 0B       		.uleb128 0xb
+ 1243 00aa 49       		.uleb128 0x49
+ 1244 00ab 13       		.uleb128 0x13
+ 1245 00ac 00       		.byte	0
+ 1246 00ad 00       		.byte	0
+ 1247 00ae 0F       		.uleb128 0xf
+ 1248 00af 0D       		.uleb128 0xd
+ 1249 00b0 00       		.byte	0
+ 1250 00b1 03       		.uleb128 0x3
+ 1251 00b2 0E       		.uleb128 0xe
+ 1252 00b3 3A       		.uleb128 0x3a
+ 1253 00b4 0B       		.uleb128 0xb
+ 1254 00b5 3B       		.uleb128 0x3b
+ 1255 00b6 0B       		.uleb128 0xb
+ 1256 00b7 49       		.uleb128 0x49
+ 1257 00b8 13       		.uleb128 0x13
+ 1258 00b9 0B       		.uleb128 0xb
+ 1259 00ba 0B       		.uleb128 0xb
+ 1260 00bb 0D       		.uleb128 0xd
+ 1261 00bc 0B       		.uleb128 0xb
+ 1262 00bd 0C       		.uleb128 0xc
+ 1263 00be 0B       		.uleb128 0xb
+ 1264 00bf 38       		.uleb128 0x38
+ 1265 00c0 0A       		.uleb128 0xa
+ 1266 00c1 00       		.byte	0
+ 1267 00c2 00       		.byte	0
+ 1268 00c3 10       		.uleb128 0x10
+ 1269 00c4 0D       		.uleb128 0xd
+ 1270 00c5 00       		.byte	0
+ 1271 00c6 03       		.uleb128 0x3
+ 1272 00c7 0E       		.uleb128 0xe
+ 1273 00c8 3A       		.uleb128 0x3a
+ 1274 00c9 0B       		.uleb128 0xb
+ 1275 00ca 3B       		.uleb128 0x3b
+ 1276 00cb 05       		.uleb128 0x5
+ 1277 00cc 49       		.uleb128 0x49
+ 1278 00cd 13       		.uleb128 0x13
+ 1279 00ce 38       		.uleb128 0x38
+ 1280 00cf 0A       		.uleb128 0xa
+ 1281 00d0 00       		.byte	0
+ 1282 00d1 00       		.byte	0
+ 1283 00d2 11       		.uleb128 0x11
+ 1284 00d3 26       		.uleb128 0x26
+ 1285 00d4 00       		.byte	0
+ 1286 00d5 49       		.uleb128 0x49
+ 1287 00d6 13       		.uleb128 0x13
+ 1288 00d7 00       		.byte	0
+ 1289 00d8 00       		.byte	0
+ 1290 00d9 12       		.uleb128 0x12
+ 1291 00da 16       		.uleb128 0x16
+ 1292 00db 00       		.byte	0
+ 1293 00dc 03       		.uleb128 0x3
+ 1294 00dd 08       		.uleb128 0x8
+ 1295 00de 3A       		.uleb128 0x3a
+ 1296 00df 0B       		.uleb128 0xb
+ 1297 00e0 3B       		.uleb128 0x3b
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 37
+
+
+ 1298 00e1 05       		.uleb128 0x5
+ 1299 00e2 49       		.uleb128 0x49
+ 1300 00e3 13       		.uleb128 0x13
+ 1301 00e4 00       		.byte	0
+ 1302 00e5 00       		.byte	0
+ 1303 00e6 13       		.uleb128 0x13
+ 1304 00e7 2E       		.uleb128 0x2e
+ 1305 00e8 01       		.byte	0x1
+ 1306 00e9 03       		.uleb128 0x3
+ 1307 00ea 0E       		.uleb128 0xe
+ 1308 00eb 3A       		.uleb128 0x3a
+ 1309 00ec 0B       		.uleb128 0xb
+ 1310 00ed 3B       		.uleb128 0x3b
+ 1311 00ee 05       		.uleb128 0x5
+ 1312 00ef 27       		.uleb128 0x27
+ 1313 00f0 0C       		.uleb128 0xc
+ 1314 00f1 49       		.uleb128 0x49
+ 1315 00f2 13       		.uleb128 0x13
+ 1316 00f3 20       		.uleb128 0x20
+ 1317 00f4 0B       		.uleb128 0xb
+ 1318 00f5 01       		.uleb128 0x1
+ 1319 00f6 13       		.uleb128 0x13
+ 1320 00f7 00       		.byte	0
+ 1321 00f8 00       		.byte	0
+ 1322 00f9 14       		.uleb128 0x14
+ 1323 00fa 05       		.uleb128 0x5
+ 1324 00fb 00       		.byte	0
+ 1325 00fc 03       		.uleb128 0x3
+ 1326 00fd 0E       		.uleb128 0xe
+ 1327 00fe 3A       		.uleb128 0x3a
+ 1328 00ff 0B       		.uleb128 0xb
+ 1329 0100 3B       		.uleb128 0x3b
+ 1330 0101 05       		.uleb128 0x5
+ 1331 0102 49       		.uleb128 0x49
+ 1332 0103 13       		.uleb128 0x13
+ 1333 0104 00       		.byte	0
+ 1334 0105 00       		.byte	0
+ 1335 0106 15       		.uleb128 0x15
+ 1336 0107 2E       		.uleb128 0x2e
+ 1337 0108 01       		.byte	0x1
+ 1338 0109 03       		.uleb128 0x3
+ 1339 010a 0E       		.uleb128 0xe
+ 1340 010b 3A       		.uleb128 0x3a
+ 1341 010c 0B       		.uleb128 0xb
+ 1342 010d 3B       		.uleb128 0x3b
+ 1343 010e 05       		.uleb128 0x5
+ 1344 010f 27       		.uleb128 0x27
+ 1345 0110 0C       		.uleb128 0xc
+ 1346 0111 20       		.uleb128 0x20
+ 1347 0112 0B       		.uleb128 0xb
+ 1348 0113 01       		.uleb128 0x1
+ 1349 0114 13       		.uleb128 0x13
+ 1350 0115 00       		.byte	0
+ 1351 0116 00       		.byte	0
+ 1352 0117 16       		.uleb128 0x16
+ 1353 0118 2E       		.uleb128 0x2e
+ 1354 0119 01       		.byte	0x1
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 38
+
+
+ 1355 011a 3F       		.uleb128 0x3f
+ 1356 011b 0C       		.uleb128 0xc
+ 1357 011c 03       		.uleb128 0x3
+ 1358 011d 0E       		.uleb128 0xe
+ 1359 011e 3A       		.uleb128 0x3a
+ 1360 011f 0B       		.uleb128 0xb
+ 1361 0120 3B       		.uleb128 0x3b
+ 1362 0121 0B       		.uleb128 0xb
+ 1363 0122 27       		.uleb128 0x27
+ 1364 0123 0C       		.uleb128 0xc
+ 1365 0124 11       		.uleb128 0x11
+ 1366 0125 01       		.uleb128 0x1
+ 1367 0126 12       		.uleb128 0x12
+ 1368 0127 01       		.uleb128 0x1
+ 1369 0128 40       		.uleb128 0x40
+ 1370 0129 06       		.uleb128 0x6
+ 1371 012a 9742     		.uleb128 0x2117
+ 1372 012c 0C       		.uleb128 0xc
+ 1373 012d 01       		.uleb128 0x1
+ 1374 012e 13       		.uleb128 0x13
+ 1375 012f 00       		.byte	0
+ 1376 0130 00       		.byte	0
+ 1377 0131 17       		.uleb128 0x17
+ 1378 0132 34       		.uleb128 0x34
+ 1379 0133 00       		.byte	0
+ 1380 0134 03       		.uleb128 0x3
+ 1381 0135 08       		.uleb128 0x8
+ 1382 0136 3A       		.uleb128 0x3a
+ 1383 0137 0B       		.uleb128 0xb
+ 1384 0138 3B       		.uleb128 0x3b
+ 1385 0139 0B       		.uleb128 0xb
+ 1386 013a 49       		.uleb128 0x49
+ 1387 013b 13       		.uleb128 0x13
+ 1388 013c 02       		.uleb128 0x2
+ 1389 013d 06       		.uleb128 0x6
+ 1390 013e 00       		.byte	0
+ 1391 013f 00       		.byte	0
+ 1392 0140 18       		.uleb128 0x18
+ 1393 0141 34       		.uleb128 0x34
+ 1394 0142 00       		.byte	0
+ 1395 0143 03       		.uleb128 0x3
+ 1396 0144 0E       		.uleb128 0xe
+ 1397 0145 3A       		.uleb128 0x3a
+ 1398 0146 0B       		.uleb128 0xb
+ 1399 0147 3B       		.uleb128 0x3b
+ 1400 0148 0B       		.uleb128 0xb
+ 1401 0149 49       		.uleb128 0x49
+ 1402 014a 13       		.uleb128 0x13
+ 1403 014b 02       		.uleb128 0x2
+ 1404 014c 06       		.uleb128 0x6
+ 1405 014d 00       		.byte	0
+ 1406 014e 00       		.byte	0
+ 1407 014f 19       		.uleb128 0x19
+ 1408 0150 1D       		.uleb128 0x1d
+ 1409 0151 01       		.byte	0x1
+ 1410 0152 31       		.uleb128 0x31
+ 1411 0153 13       		.uleb128 0x13
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 39
+
+
+ 1412 0154 11       		.uleb128 0x11
+ 1413 0155 01       		.uleb128 0x1
+ 1414 0156 12       		.uleb128 0x12
+ 1415 0157 01       		.uleb128 0x1
+ 1416 0158 58       		.uleb128 0x58
+ 1417 0159 0B       		.uleb128 0xb
+ 1418 015a 59       		.uleb128 0x59
+ 1419 015b 0B       		.uleb128 0xb
+ 1420 015c 00       		.byte	0
+ 1421 015d 00       		.byte	0
+ 1422 015e 1A       		.uleb128 0x1a
+ 1423 015f 05       		.uleb128 0x5
+ 1424 0160 00       		.byte	0
+ 1425 0161 31       		.uleb128 0x31
+ 1426 0162 13       		.uleb128 0x13
+ 1427 0163 02       		.uleb128 0x2
+ 1428 0164 06       		.uleb128 0x6
+ 1429 0165 00       		.byte	0
+ 1430 0166 00       		.byte	0
+ 1431 0167 1B       		.uleb128 0x1b
+ 1432 0168 0B       		.uleb128 0xb
+ 1433 0169 01       		.byte	0x1
+ 1434 016a 11       		.uleb128 0x11
+ 1435 016b 01       		.uleb128 0x1
+ 1436 016c 12       		.uleb128 0x12
+ 1437 016d 01       		.uleb128 0x1
+ 1438 016e 00       		.byte	0
+ 1439 016f 00       		.byte	0
+ 1440 0170 1C       		.uleb128 0x1c
+ 1441 0171 05       		.uleb128 0x5
+ 1442 0172 00       		.byte	0
+ 1443 0173 31       		.uleb128 0x31
+ 1444 0174 13       		.uleb128 0x13
+ 1445 0175 00       		.byte	0
+ 1446 0176 00       		.byte	0
+ 1447 0177 1D       		.uleb128 0x1d
+ 1448 0178 898201   		.uleb128 0x4109
+ 1449 017b 00       		.byte	0
+ 1450 017c 11       		.uleb128 0x11
+ 1451 017d 01       		.uleb128 0x1
+ 1452 017e 31       		.uleb128 0x31
+ 1453 017f 13       		.uleb128 0x13
+ 1454 0180 00       		.byte	0
+ 1455 0181 00       		.byte	0
+ 1456 0182 1E       		.uleb128 0x1e
+ 1457 0183 34       		.uleb128 0x34
+ 1458 0184 00       		.byte	0
+ 1459 0185 03       		.uleb128 0x3
+ 1460 0186 0E       		.uleb128 0xe
+ 1461 0187 3A       		.uleb128 0x3a
+ 1462 0188 0B       		.uleb128 0xb
+ 1463 0189 3B       		.uleb128 0x3b
+ 1464 018a 05       		.uleb128 0x5
+ 1465 018b 49       		.uleb128 0x49
+ 1466 018c 13       		.uleb128 0x13
+ 1467 018d 00       		.byte	0
+ 1468 018e 00       		.byte	0
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 40
+
+
+ 1469 018f 1F       		.uleb128 0x1f
+ 1470 0190 2E       		.uleb128 0x2e
+ 1471 0191 01       		.byte	0x1
+ 1472 0192 3F       		.uleb128 0x3f
+ 1473 0193 0C       		.uleb128 0xc
+ 1474 0194 03       		.uleb128 0x3
+ 1475 0195 0E       		.uleb128 0xe
+ 1476 0196 3A       		.uleb128 0x3a
+ 1477 0197 0B       		.uleb128 0xb
+ 1478 0198 3B       		.uleb128 0x3b
+ 1479 0199 0B       		.uleb128 0xb
+ 1480 019a 27       		.uleb128 0x27
+ 1481 019b 0C       		.uleb128 0xc
+ 1482 019c 49       		.uleb128 0x49
+ 1483 019d 13       		.uleb128 0x13
+ 1484 019e 11       		.uleb128 0x11
+ 1485 019f 01       		.uleb128 0x1
+ 1486 01a0 12       		.uleb128 0x12
+ 1487 01a1 01       		.uleb128 0x1
+ 1488 01a2 40       		.uleb128 0x40
+ 1489 01a3 0A       		.uleb128 0xa
+ 1490 01a4 9742     		.uleb128 0x2117
+ 1491 01a6 0C       		.uleb128 0xc
+ 1492 01a7 01       		.uleb128 0x1
+ 1493 01a8 13       		.uleb128 0x13
+ 1494 01a9 00       		.byte	0
+ 1495 01aa 00       		.byte	0
+ 1496 01ab 20       		.uleb128 0x20
+ 1497 01ac 05       		.uleb128 0x5
+ 1498 01ad 00       		.byte	0
+ 1499 01ae 03       		.uleb128 0x3
+ 1500 01af 0E       		.uleb128 0xe
+ 1501 01b0 3A       		.uleb128 0x3a
+ 1502 01b1 0B       		.uleb128 0xb
+ 1503 01b2 3B       		.uleb128 0x3b
+ 1504 01b3 0B       		.uleb128 0xb
+ 1505 01b4 49       		.uleb128 0x49
+ 1506 01b5 13       		.uleb128 0x13
+ 1507 01b6 02       		.uleb128 0x2
+ 1508 01b7 06       		.uleb128 0x6
+ 1509 01b8 00       		.byte	0
+ 1510 01b9 00       		.byte	0
+ 1511 01ba 21       		.uleb128 0x21
+ 1512 01bb 34       		.uleb128 0x34
+ 1513 01bc 00       		.byte	0
+ 1514 01bd 03       		.uleb128 0x3
+ 1515 01be 0E       		.uleb128 0xe
+ 1516 01bf 3A       		.uleb128 0x3a
+ 1517 01c0 0B       		.uleb128 0xb
+ 1518 01c1 3B       		.uleb128 0x3b
+ 1519 01c2 0B       		.uleb128 0xb
+ 1520 01c3 49       		.uleb128 0x49
+ 1521 01c4 13       		.uleb128 0x13
+ 1522 01c5 02       		.uleb128 0x2
+ 1523 01c6 0A       		.uleb128 0xa
+ 1524 01c7 00       		.byte	0
+ 1525 01c8 00       		.byte	0
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 41
+
+
+ 1526 01c9 22       		.uleb128 0x22
+ 1527 01ca 1D       		.uleb128 0x1d
+ 1528 01cb 01       		.byte	0x1
+ 1529 01cc 31       		.uleb128 0x31
+ 1530 01cd 13       		.uleb128 0x13
+ 1531 01ce 11       		.uleb128 0x11
+ 1532 01cf 01       		.uleb128 0x1
+ 1533 01d0 12       		.uleb128 0x12
+ 1534 01d1 01       		.uleb128 0x1
+ 1535 01d2 58       		.uleb128 0x58
+ 1536 01d3 0B       		.uleb128 0xb
+ 1537 01d4 59       		.uleb128 0x59
+ 1538 01d5 05       		.uleb128 0x5
+ 1539 01d6 00       		.byte	0
+ 1540 01d7 00       		.byte	0
+ 1541 01d8 23       		.uleb128 0x23
+ 1542 01d9 34       		.uleb128 0x34
+ 1543 01da 00       		.byte	0
+ 1544 01db 31       		.uleb128 0x31
+ 1545 01dc 13       		.uleb128 0x13
+ 1546 01dd 02       		.uleb128 0x2
+ 1547 01de 06       		.uleb128 0x6
+ 1548 01df 00       		.byte	0
+ 1549 01e0 00       		.byte	0
+ 1550 01e1 24       		.uleb128 0x24
+ 1551 01e2 1D       		.uleb128 0x1d
+ 1552 01e3 01       		.byte	0x1
+ 1553 01e4 31       		.uleb128 0x31
+ 1554 01e5 13       		.uleb128 0x13
+ 1555 01e6 52       		.uleb128 0x52
+ 1556 01e7 01       		.uleb128 0x1
+ 1557 01e8 55       		.uleb128 0x55
+ 1558 01e9 06       		.uleb128 0x6
+ 1559 01ea 58       		.uleb128 0x58
+ 1560 01eb 0B       		.uleb128 0xb
+ 1561 01ec 59       		.uleb128 0x59
+ 1562 01ed 0B       		.uleb128 0xb
+ 1563 01ee 00       		.byte	0
+ 1564 01ef 00       		.byte	0
+ 1565 01f0 25       		.uleb128 0x25
+ 1566 01f1 34       		.uleb128 0x34
+ 1567 01f2 00       		.byte	0
+ 1568 01f3 03       		.uleb128 0x3
+ 1569 01f4 0E       		.uleb128 0xe
+ 1570 01f5 3A       		.uleb128 0x3a
+ 1571 01f6 0B       		.uleb128 0xb
+ 1572 01f7 3B       		.uleb128 0x3b
+ 1573 01f8 0B       		.uleb128 0xb
+ 1574 01f9 49       		.uleb128 0x49
+ 1575 01fa 13       		.uleb128 0x13
+ 1576 01fb 3F       		.uleb128 0x3f
+ 1577 01fc 0C       		.uleb128 0xc
+ 1578 01fd 3C       		.uleb128 0x3c
+ 1579 01fe 0C       		.uleb128 0xc
+ 1580 01ff 00       		.byte	0
+ 1581 0200 00       		.byte	0
+ 1582 0201 26       		.uleb128 0x26
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 42
+
+
+ 1583 0202 35       		.uleb128 0x35
+ 1584 0203 00       		.byte	0
+ 1585 0204 49       		.uleb128 0x49
+ 1586 0205 13       		.uleb128 0x13
+ 1587 0206 00       		.byte	0
+ 1588 0207 00       		.byte	0
+ 1589 0208 27       		.uleb128 0x27
+ 1590 0209 01       		.uleb128 0x1
+ 1591 020a 01       		.byte	0x1
+ 1592 020b 49       		.uleb128 0x49
+ 1593 020c 13       		.uleb128 0x13
+ 1594 020d 01       		.uleb128 0x1
+ 1595 020e 13       		.uleb128 0x13
+ 1596 020f 00       		.byte	0
+ 1597 0210 00       		.byte	0
+ 1598 0211 28       		.uleb128 0x28
+ 1599 0212 21       		.uleb128 0x21
+ 1600 0213 00       		.byte	0
+ 1601 0214 00       		.byte	0
+ 1602 0215 00       		.byte	0
+ 1603 0216 29       		.uleb128 0x29
+ 1604 0217 34       		.uleb128 0x34
+ 1605 0218 00       		.byte	0
+ 1606 0219 03       		.uleb128 0x3
+ 1607 021a 0E       		.uleb128 0xe
+ 1608 021b 3A       		.uleb128 0x3a
+ 1609 021c 0B       		.uleb128 0xb
+ 1610 021d 3B       		.uleb128 0x3b
+ 1611 021e 05       		.uleb128 0x5
+ 1612 021f 49       		.uleb128 0x49
+ 1613 0220 13       		.uleb128 0x13
+ 1614 0221 3F       		.uleb128 0x3f
+ 1615 0222 0C       		.uleb128 0xc
+ 1616 0223 3C       		.uleb128 0x3c
+ 1617 0224 0C       		.uleb128 0xc
+ 1618 0225 00       		.byte	0
+ 1619 0226 00       		.byte	0
+ 1620 0227 2A       		.uleb128 0x2a
+ 1621 0228 2E       		.uleb128 0x2e
+ 1622 0229 01       		.byte	0x1
+ 1623 022a 3F       		.uleb128 0x3f
+ 1624 022b 0C       		.uleb128 0xc
+ 1625 022c 03       		.uleb128 0x3
+ 1626 022d 0E       		.uleb128 0xe
+ 1627 022e 3A       		.uleb128 0x3a
+ 1628 022f 0B       		.uleb128 0xb
+ 1629 0230 3B       		.uleb128 0x3b
+ 1630 0231 05       		.uleb128 0x5
+ 1631 0232 27       		.uleb128 0x27
+ 1632 0233 0C       		.uleb128 0xc
+ 1633 0234 3C       		.uleb128 0x3c
+ 1634 0235 0C       		.uleb128 0xc
+ 1635 0236 00       		.byte	0
+ 1636 0237 00       		.byte	0
+ 1637 0238 00       		.byte	0
+ 1638              		.section	.debug_loc,"",%progbits
+ 1639              	.Ldebug_loc0:
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 43
+
+
+ 1640              	.LLST0:
+ 1641 0000 00000000 		.4byte	.LFB53
+ 1642 0004 02000000 		.4byte	.LCFI0
+ 1643 0008 0200     		.2byte	0x2
+ 1644 000a 7D       		.byte	0x7d
+ 1645 000b 00       		.sleb128 0
+ 1646 000c 02000000 		.4byte	.LCFI0
+ 1647 0010 28000000 		.4byte	.LFE53
+ 1648 0014 0200     		.2byte	0x2
+ 1649 0016 7D       		.byte	0x7d
+ 1650 0017 08       		.sleb128 8
+ 1651 0018 00000000 		.4byte	0
+ 1652 001c 00000000 		.4byte	0
+ 1653              	.LLST1:
+ 1654 0020 00000000 		.4byte	.LVL0
+ 1655 0024 04000000 		.4byte	.LVL1
+ 1656 0028 0200     		.2byte	0x2
+ 1657 002a 30       		.byte	0x30
+ 1658 002b 9F       		.byte	0x9f
+ 1659 002c 04000000 		.4byte	.LVL1
+ 1660 0030 14000000 		.4byte	.LVL3
+ 1661 0034 0100     		.2byte	0x1
+ 1662 0036 54       		.byte	0x54
+ 1663 0037 14000000 		.4byte	.LVL3
+ 1664 003b 1A000000 		.4byte	.LVL4
+ 1665 003f 0300     		.2byte	0x3
+ 1666 0041 74       		.byte	0x74
+ 1667 0042 7F       		.sleb128 -1
+ 1668 0043 9F       		.byte	0x9f
+ 1669 0044 1A000000 		.4byte	.LVL4
+ 1670 0048 28000000 		.4byte	.LFE53
+ 1671 004c 0100     		.2byte	0x1
+ 1672 004e 54       		.byte	0x54
+ 1673 004f 00000000 		.4byte	0
+ 1674 0053 00000000 		.4byte	0
+ 1675              	.LLST2:
+ 1676 0057 0C000000 		.4byte	.LVL2
+ 1677 005b 14000000 		.4byte	.LVL3
+ 1678 005f 0500     		.2byte	0x5
+ 1679 0061 74       		.byte	0x74
+ 1680 0062 00       		.sleb128 0
+ 1681 0063 3C       		.byte	0x3c
+ 1682 0064 1E       		.byte	0x1e
+ 1683 0065 9F       		.byte	0x9f
+ 1684 0066 14000000 		.4byte	.LVL3
+ 1685 006a 1C000000 		.4byte	.LVL5
+ 1686 006e 0500     		.2byte	0x5
+ 1687 0070 74       		.byte	0x74
+ 1688 0071 7F       		.sleb128 -1
+ 1689 0072 3C       		.byte	0x3c
+ 1690 0073 1E       		.byte	0x1e
+ 1691 0074 9F       		.byte	0x9f
+ 1692 0075 00000000 		.4byte	0
+ 1693 0079 00000000 		.4byte	0
+ 1694              	.LLST3:
+ 1695 007d 0C000000 		.4byte	.LVL2
+ 1696 0081 14000000 		.4byte	.LVL3
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 44
+
+
+ 1697 0085 0400     		.2byte	0x4
+ 1698 0087 74       		.byte	0x74
+ 1699 0088 00       		.sleb128 0
+ 1700 0089 3C       		.byte	0x3c
+ 1701 008a 1E       		.byte	0x1e
+ 1702 008b 14000000 		.4byte	.LVL3
+ 1703 008f 19000000 		.4byte	.LVL4-1
+ 1704 0093 0400     		.2byte	0x4
+ 1705 0095 74       		.byte	0x74
+ 1706 0096 7F       		.sleb128 -1
+ 1707 0097 3C       		.byte	0x3c
+ 1708 0098 1E       		.byte	0x1e
+ 1709 0099 00000000 		.4byte	0
+ 1710 009d 00000000 		.4byte	0
+ 1711              	.LLST4:
+ 1712 00a1 00000000 		.4byte	.LVL6
+ 1713 00a5 06000000 		.4byte	.LVL7
+ 1714 00a9 0100     		.2byte	0x1
+ 1715 00ab 50       		.byte	0x50
+ 1716 00ac 06000000 		.4byte	.LVL7
+ 1717 00b0 0A000000 		.4byte	.LVL8
+ 1718 00b4 0400     		.2byte	0x4
+ 1719 00b6 F3       		.byte	0xf3
+ 1720 00b7 01       		.uleb128 0x1
+ 1721 00b8 50       		.byte	0x50
+ 1722 00b9 9F       		.byte	0x9f
+ 1723 00ba 0A000000 		.4byte	.LVL8
+ 1724 00be 0C000000 		.4byte	.LVL9
+ 1725 00c2 0100     		.2byte	0x1
+ 1726 00c4 50       		.byte	0x50
+ 1727 00c5 0C000000 		.4byte	.LVL9
+ 1728 00c9 20000000 		.4byte	.LFE54
+ 1729 00cd 0400     		.2byte	0x4
+ 1730 00cf F3       		.byte	0xf3
+ 1731 00d0 01       		.uleb128 0x1
+ 1732 00d1 50       		.byte	0x50
+ 1733 00d2 9F       		.byte	0x9f
+ 1734 00d3 00000000 		.4byte	0
+ 1735 00d7 00000000 		.4byte	0
+ 1736              	.LLST7:
+ 1737 00db 00000000 		.4byte	.LVL6
+ 1738 00df 06000000 		.4byte	.LVL7
+ 1739 00e3 0200     		.2byte	0x2
+ 1740 00e5 70       		.byte	0x70
+ 1741 00e6 00       		.sleb128 0
+ 1742 00e7 06000000 		.4byte	.LVL7
+ 1743 00eb 0A000000 		.4byte	.LVL8
+ 1744 00ef 0300     		.2byte	0x3
+ 1745 00f1 F3       		.byte	0xf3
+ 1746 00f2 01       		.uleb128 0x1
+ 1747 00f3 50       		.byte	0x50
+ 1748 00f4 0A000000 		.4byte	.LVL8
+ 1749 00f8 0C000000 		.4byte	.LVL9
+ 1750 00fc 0200     		.2byte	0x2
+ 1751 00fe 70       		.byte	0x70
+ 1752 00ff 00       		.sleb128 0
+ 1753 0100 0C000000 		.4byte	.LVL9
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 45
+
+
+ 1754 0104 20000000 		.4byte	.LFE54
+ 1755 0108 0300     		.2byte	0x3
+ 1756 010a F3       		.byte	0xf3
+ 1757 010b 01       		.uleb128 0x1
+ 1758 010c 50       		.byte	0x50
+ 1759 010d 00000000 		.4byte	0
+ 1760 0111 00000000 		.4byte	0
+ 1761              	.LLST8:
+ 1762 0115 00000000 		.4byte	.LVL11
+ 1763 0119 06000000 		.4byte	.LVL12
+ 1764 011d 0100     		.2byte	0x1
+ 1765 011f 50       		.byte	0x50
+ 1766 0120 06000000 		.4byte	.LVL12
+ 1767 0124 0A000000 		.4byte	.LVL13
+ 1768 0128 0400     		.2byte	0x4
+ 1769 012a F3       		.byte	0xf3
+ 1770 012b 01       		.uleb128 0x1
+ 1771 012c 50       		.byte	0x50
+ 1772 012d 9F       		.byte	0x9f
+ 1773 012e 0A000000 		.4byte	.LVL13
+ 1774 0132 0C000000 		.4byte	.LVL14
+ 1775 0136 0100     		.2byte	0x1
+ 1776 0138 50       		.byte	0x50
+ 1777 0139 0C000000 		.4byte	.LVL14
+ 1778 013d 24000000 		.4byte	.LFE55
+ 1779 0141 0400     		.2byte	0x4
+ 1780 0143 F3       		.byte	0xf3
+ 1781 0144 01       		.uleb128 0x1
+ 1782 0145 50       		.byte	0x50
+ 1783 0146 9F       		.byte	0x9f
+ 1784 0147 00000000 		.4byte	0
+ 1785 014b 00000000 		.4byte	0
+ 1786              	.LLST11:
+ 1787 014f 00000000 		.4byte	.LVL11
+ 1788 0153 06000000 		.4byte	.LVL12
+ 1789 0157 0200     		.2byte	0x2
+ 1790 0159 70       		.byte	0x70
+ 1791 015a 00       		.sleb128 0
+ 1792 015b 06000000 		.4byte	.LVL12
+ 1793 015f 16000000 		.4byte	.LVL15
+ 1794 0163 0100     		.2byte	0x1
+ 1795 0165 53       		.byte	0x53
+ 1796 0166 16000000 		.4byte	.LVL15
+ 1797 016a 24000000 		.4byte	.LFE55
+ 1798 016e 0300     		.2byte	0x3
+ 1799 0170 F3       		.byte	0xf3
+ 1800 0171 01       		.uleb128 0x1
+ 1801 0172 50       		.byte	0x50
+ 1802 0173 00000000 		.4byte	0
+ 1803 0177 00000000 		.4byte	0
+ 1804              		.section	.debug_aranges,"",%progbits
+ 1805 0000 2C000000 		.4byte	0x2c
+ 1806 0004 0200     		.2byte	0x2
+ 1807 0006 00000000 		.4byte	.Ldebug_info0
+ 1808 000a 04       		.byte	0x4
+ 1809 000b 00       		.byte	0
+ 1810 000c 0000     		.2byte	0
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 46
+
+
+ 1811 000e 0000     		.2byte	0
+ 1812 0010 00000000 		.4byte	.LFB53
+ 1813 0014 28000000 		.4byte	.LFE53-.LFB53
+ 1814 0018 00000000 		.4byte	.LFB54
+ 1815 001c 20000000 		.4byte	.LFE54-.LFB54
+ 1816 0020 00000000 		.4byte	.LFB55
+ 1817 0024 24000000 		.4byte	.LFE55-.LFB55
+ 1818 0028 00000000 		.4byte	0
+ 1819 002c 00000000 		.4byte	0
+ 1820              		.section	.debug_ranges,"",%progbits
+ 1821              	.Ldebug_ranges0:
+ 1822 0000 00000000 		.4byte	.LBB24
+ 1823 0004 10000000 		.4byte	.LBE24
+ 1824 0008 14000000 		.4byte	.LBB29
+ 1825 000c 1E000000 		.4byte	.LBE29
+ 1826 0010 00000000 		.4byte	0
+ 1827 0014 00000000 		.4byte	0
+ 1828 0018 00000000 		.4byte	.LFB53
+ 1829 001c 28000000 		.4byte	.LFE53
+ 1830 0020 00000000 		.4byte	.LFB54
+ 1831 0024 20000000 		.4byte	.LFE54
+ 1832 0028 00000000 		.4byte	.LFB55
+ 1833 002c 24000000 		.4byte	.LFE55
+ 1834 0030 00000000 		.4byte	0
+ 1835 0034 00000000 		.4byte	0
+ 1836              		.section	.debug_line,"",%progbits
+ 1837              	.Ldebug_line0:
+ 1838 0000 67010000 		.section	.debug_str,"MS",%progbits,1
+ 1838      0200D800 
+ 1838      00000201 
+ 1838      FB0E0D00 
+ 1838      01010101 
+ 1839              	.LASF91:
+ 1840 0000 5F6B6572 		.ascii	"_kernel_enable_exc\000"
+ 1840      6E656C5F 
+ 1840      656E6162 
+ 1840      6C655F65 
+ 1840      786300
+ 1841              	.LASF90:
+ 1842 0013 6578635F 		.ascii	"exc_return\000"
+ 1842      72657475 
+ 1842      726E00
+ 1843              	.LASF35:
+ 1844 001e 43424143 		.ascii	"CBACK\000"
+ 1844      4B00
+ 1845              	.LASF55:
+ 1846 0024 74737461 		.ascii	"tstat\000"
+ 1846      7400
+ 1847              	.LASF11:
+ 1848 002a 75696E74 		.ascii	"uintptr_t\000"
+ 1848      7074725F 
+ 1848      7400
+ 1849              	.LASF40:
+ 1850 0034 77657263 		.ascii	"wercd\000"
+ 1850      6400
+ 1851              	.LASF60:
+ 1852 003a 74657870 		.ascii	"texptn\000"
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 47
+
+
+ 1852      746E00
+ 1853              	.LASF71:
+ 1854 0041 6578635F 		.ascii	"exc_sense_intmask\000"
+ 1854      73656E73 
+ 1854      655F696E 
+ 1854      746D6173 
+ 1854      6B00
+ 1855              	.LASF8:
+ 1856 0053 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1856      206C6F6E 
+ 1856      6720756E 
+ 1856      7369676E 
+ 1856      65642069 
+ 1857              	.LASF17:
+ 1858 006a 696E745F 		.ascii	"int_t\000"
+ 1858      7400
+ 1859              	.LASF59:
+ 1860 0070 656E6174 		.ascii	"enatex\000"
+ 1860      657800
+ 1861              	.LASF20:
+ 1862 0077 53495A45 		.ascii	"SIZE\000"
+ 1862      00
+ 1863              	.LASF7:
+ 1864 007c 6C6F6E67 		.ascii	"long long int\000"
+ 1864      206C6F6E 
+ 1864      6720696E 
+ 1864      7400
+ 1865              	.LASF1:
+ 1866 008a 7369676E 		.ascii	"signed char\000"
+ 1866      65642063 
+ 1866      68617200 
+ 1867              	.LASF58:
+ 1868 0096 77757071 		.ascii	"wupque\000"
+ 1868      756500
+ 1869              	.LASF16:
+ 1870 009d 626F6F6C 		.ascii	"bool_t\000"
+ 1870      5F7400
+ 1871              	.LASF18:
+ 1872 00a4 75696E74 		.ascii	"uint_t\000"
+ 1872      5F7400
+ 1873              	.LASF73:
+ 1874 00ab 73746174 		.ascii	"state\000"
+ 1874      6500
+ 1875              	.LASF10:
+ 1876 00b1 6C6F6E67 		.ascii	"long int\000"
+ 1876      20696E74 
+ 1876      00
+ 1877              	.LASF69:
+ 1878 00ba 705F6578 		.ascii	"p_excinib\000"
+ 1878      63696E69 
+ 1878      6200
+ 1879              	.LASF61:
+ 1880 00c4 705F7769 		.ascii	"p_winfo\000"
+ 1880      6E666F00 
+ 1881              	.LASF47:
+ 1882 00cc 69707269 		.ascii	"ipriority\000"
+ 1882      6F726974 
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 48
+
+
+ 1882      7900
+ 1883              	.LASF30:
+ 1884 00d6 71756575 		.ascii	"queue\000"
+ 1884      6500
+ 1885              	.LASF14:
+ 1886 00dc 646F7562 		.ascii	"double\000"
+ 1886      6C6500
+ 1887              	.LASF24:
+ 1888 00e3 54455852 		.ascii	"TEXRTN\000"
+ 1888      544E00
+ 1889              	.LASF50:
+ 1890 00ea 74657872 		.ascii	"texrtn\000"
+ 1890      746E00
+ 1891              	.LASF66:
+ 1892 00f1 6578635F 		.ascii	"exc_entry\000"
+ 1892      656E7472 
+ 1892      7900
+ 1893              	.LASF68:
+ 1894 00fb 705F6578 		.ascii	"p_excinf\000"
+ 1894      63696E66 
+ 1894      00
+ 1895              	.LASF88:
+ 1896 0104 785F6465 		.ascii	"x_define_exc\000"
+ 1896      66696E65 
+ 1896      5F657863 
+ 1896      00
+ 1897              	.LASF48:
+ 1898 0111 73746B73 		.ascii	"stksz\000"
+ 1898      7A00
+ 1899              	.LASF70:
+ 1900 0117 6578635F 		.ascii	"exc_get_iipm\000"
+ 1900      6765745F 
+ 1900      6969706D 
+ 1900      00
+ 1901              	.LASF0:
+ 1902 0124 756E7369 		.ascii	"unsigned int\000"
+ 1902      676E6564 
+ 1902      20696E74 
+ 1902      00
+ 1903              	.LASF49:
+ 1904 0131 74657861 		.ascii	"texatr\000"
+ 1904      747200
+ 1905              	.LASF63:
+ 1906 0138 6370755F 		.ascii	"cpu_exception_handler_initialization_block\000"
+ 1906      65786365 
+ 1906      7074696F 
+ 1906      6E5F6861 
+ 1906      6E646C65 
+ 1907              	.LASF12:
+ 1908 0163 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1908      20756E73 
+ 1908      69676E65 
+ 1908      6420696E 
+ 1908      7400
+ 1909              	.LASF79:
+ 1910 0175 5F6B6572 		.ascii	"_kernel_next_time\000"
+ 1910      6E656C5F 
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 49
+
+
+ 1910      6E657874 
+ 1910      5F74696D 
+ 1910      6500
+ 1911              	.LASF19:
+ 1912 0187 756C6F6E 		.ascii	"ulong_t\000"
+ 1912      675F7400 
+ 1913              	.LASF41:
+ 1914 018f 705F746D 		.ascii	"p_tmevtb\000"
+ 1914      65767462 
+ 1914      00
+ 1915              	.LASF75:
+ 1916 0198 78736E73 		.ascii	"xsns_xpn\000"
+ 1916      5F78706E 
+ 1916      00
+ 1917              	.LASF4:
+ 1918 01a1 73686F72 		.ascii	"short unsigned int\000"
+ 1918      7420756E 
+ 1918      7369676E 
+ 1918      65642069 
+ 1918      6E7400
+ 1919              	.LASF77:
+ 1920 01b4 5F6B6572 		.ascii	"_kernel_saved_iipm\000"
+ 1920      6E656C5F 
+ 1920      73617665 
+ 1920      645F6969 
+ 1920      706D00
+ 1921              	.LASF45:
+ 1922 01c7 6578696E 		.ascii	"exinf\000"
+ 1922      6600
+ 1923              	.LASF38:
+ 1924 01cd 63616C6C 		.ascii	"callback\000"
+ 1924      6261636B 
+ 1924      00
+ 1925              	.LASF56:
+ 1926 01d6 7072696F 		.ascii	"priority\000"
+ 1926      72697479 
+ 1926      00
+ 1927              	.LASF22:
+ 1928 01df 4558434E 		.ascii	"EXCNO\000"
+ 1928      4F00
+ 1929              	.LASF67:
+ 1930 01e5 45584349 		.ascii	"EXCINIB\000"
+ 1930      4E494200 
+ 1931              	.LASF9:
+ 1932 01ed 696E7470 		.ascii	"intptr_t\000"
+ 1932      74725F74 
+ 1932      00
+ 1933              	.LASF82:
+ 1934 01f6 5F6B6572 		.ascii	"_kernel_tnum_excno\000"
+ 1934      6E656C5F 
+ 1934      746E756D 
+ 1934      5F657863 
+ 1934      6E6F00
+ 1935              	.LASF25:
+ 1936 0209 73697A65 		.ascii	"sizetype\000"
+ 1936      74797065 
+ 1936      00
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 50
+
+
+ 1937              	.LASF64:
+ 1938 0212 6578636E 		.ascii	"excno\000"
+ 1938      6F00
+ 1939              	.LASF80:
+ 1940 0218 5F6B6572 		.ascii	"_kernel_p_runtsk\000"
+ 1940      6E656C5F 
+ 1940      705F7275 
+ 1940      6E74736B 
+ 1940      00
+ 1941              	.LASF72:
+ 1942 0229 6578635F 		.ascii	"exc_sense_context\000"
+ 1942      73656E73 
+ 1942      655F636F 
+ 1942      6E746578 
+ 1942      7400
+ 1943              	.LASF34:
+ 1944 023b 45565454 		.ascii	"EVTTIM\000"
+ 1944      494D00
+ 1945              	.LASF23:
+ 1946 0242 5441534B 		.ascii	"TASK\000"
+ 1946      00
+ 1947              	.LASF28:
+ 1948 0247 544F5050 		.ascii	"TOPPERS_dummy_field\000"
+ 1948      4552535F 
+ 1948      64756D6D 
+ 1948      795F6669 
+ 1948      656C6400 
+ 1949              	.LASF65:
+ 1950 025b 65786361 		.ascii	"excatr\000"
+ 1950      747200
+ 1951              	.LASF44:
+ 1952 0262 74736B61 		.ascii	"tskatr\000"
+ 1952      747200
+ 1953              	.LASF13:
+ 1954 0269 666C6F61 		.ascii	"float\000"
+ 1954      7400
+ 1955              	.LASF57:
+ 1956 026f 61637471 		.ascii	"actque\000"
+ 1956      756500
+ 1957              	.LASF21:
+ 1958 0276 54455850 		.ascii	"TEXPTN\000"
+ 1958      544E00
+ 1959              	.LASF36:
+ 1960 027d 74696D65 		.ascii	"time_event_block\000"
+ 1960      5F657665 
+ 1960      6E745F62 
+ 1960      6C6F636B 
+ 1960      00
+ 1961              	.LASF32:
+ 1962 028e 705F7072 		.ascii	"p_prev\000"
+ 1962      657600
+ 1963              	.LASF39:
+ 1964 0295 544D4556 		.ascii	"TMEVTB\000"
+ 1964      544200
+ 1965              	.LASF84:
+ 1966 029c 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 1966      4320342E 
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 51
+
+
+ 1966      372E3320 
+ 1966      32303133 
+ 1966      30333132 
+ 1967 02cf 616E6368 		.ascii	"anch revision 196615]\000"
+ 1967      20726576 
+ 1967      6973696F 
+ 1967      6E203139 
+ 1967      36363135 
+ 1968              	.LASF2:
+ 1969 02e5 756E7369 		.ascii	"unsigned char\000"
+ 1969      676E6564 
+ 1969      20636861 
+ 1969      7200
+ 1970              	.LASF26:
+ 1971 02f3 544F5050 		.ascii	"TOPPERS_dummy_t\000"
+ 1971      4552535F 
+ 1971      64756D6D 
+ 1971      795F7400 
+ 1972              	.LASF3:
+ 1973 0303 73686F72 		.ascii	"short int\000"
+ 1973      7420696E 
+ 1973      7400
+ 1974              	.LASF31:
+ 1975 030d 705F6E65 		.ascii	"p_next\000"
+ 1975      787400
+ 1976              	.LASF54:
+ 1977 0314 705F7469 		.ascii	"p_tinib\000"
+ 1977      6E696200 
+ 1978              	.LASF6:
+ 1979 031c 75696E74 		.ascii	"uint32_t\000"
+ 1979      33325F74 
+ 1979      00
+ 1980              	.LASF15:
+ 1981 0325 544F5050 		.ascii	"TOPPERS_fp_t\000"
+ 1981      4552535F 
+ 1981      66705F74 
+ 1981      00
+ 1982              	.LASF37:
+ 1983 0332 696E6465 		.ascii	"index\000"
+ 1983      7800
+ 1984              	.LASF46:
+ 1985 0338 7461736B 		.ascii	"task\000"
+ 1985      00
+ 1986              	.LASF29:
+ 1987 033d 54534B43 		.ascii	"TSKCTXB\000"
+ 1987      54584200 
+ 1988              	.LASF89:
+ 1989 0345 5F6B6572 		.ascii	"_kernel_initialize_exception\000"
+ 1989      6E656C5F 
+ 1989      696E6974 
+ 1989      69616C69 
+ 1989      7A655F65 
+ 1990              	.LASF76:
+ 1991 0362 5F6B6572 		.ascii	"_kernel_lock_flag\000"
+ 1991      6E656C5F 
+ 1991      6C6F636B 
+ 1991      5F666C61 
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 52
+
+
+ 1991      6700
+ 1992              	.LASF51:
+ 1993 0374 54494E49 		.ascii	"TINIB\000"
+ 1993      4200
+ 1994              	.LASF33:
+ 1995 037a 51554555 		.ascii	"QUEUE\000"
+ 1995      4500
+ 1996              	.LASF52:
+ 1997 0380 7461736B 		.ascii	"task_control_block\000"
+ 1997      5F636F6E 
+ 1997      74726F6C 
+ 1997      5F626C6F 
+ 1997      636B00
+ 1998              	.LASF53:
+ 1999 0393 7461736B 		.ascii	"task_queue\000"
+ 1999      5F717565 
+ 1999      756500
+ 2000              	.LASF83:
+ 2001 039e 5F6B6572 		.ascii	"_kernel_excinib_table\000"
+ 2001      6E656C5F 
+ 2001      65786369 
+ 2001      6E69625F 
+ 2001      7461626C 
+ 2002              	.LASF78:
+ 2003 03b4 5F6B6572 		.ascii	"_kernel_bitpat_cfgint\000"
+ 2003      6E656C5F 
+ 2003      62697470 
+ 2003      61745F63 
+ 2003      6667696E 
+ 2004              	.LASF87:
+ 2005 03ca 77616974 		.ascii	"waiting_information\000"
+ 2005      696E675F 
+ 2005      696E666F 
+ 2005      726D6174 
+ 2005      696F6E00 
+ 2006              	.LASF5:
+ 2007 03de 75696E74 		.ascii	"uint8_t\000"
+ 2007      385F7400 
+ 2008              	.LASF85:
+ 2009 03e6 2E5C6173 		.ascii	".\\asp\\kernel\\exception.c\000"
+ 2009      705C6B65 
+ 2009      726E656C 
+ 2009      5C657863 
+ 2009      65707469 
+ 2010              	.LASF27:
+ 2011 03ff 7461736B 		.ascii	"task_context_block\000"
+ 2011      5F636F6E 
+ 2011      74657874 
+ 2011      5F626C6F 
+ 2011      636B00
+ 2012              	.LASF42:
+ 2013 0412 57494E46 		.ascii	"WINFO\000"
+ 2013      4F00
+ 2014              	.LASF81:
+ 2015 0418 5F6B6572 		.ascii	"_kernel_disdsp\000"
+ 2015      6E656C5F 
+ 2015      64697364 
+ARM GAS  C:\TEMP\cckvJLfh.s 			page 53
+
+
+ 2015      737000
+ 2016              	.LASF62:
+ 2017 0427 74736B63 		.ascii	"tskctxb\000"
+ 2017      74786200 
+ 2018              	.LASF43:
+ 2019 042f 7461736B 		.ascii	"task_initialization_block\000"
+ 2019      5F696E69 
+ 2019      7469616C 
+ 2019      697A6174 
+ 2019      696F6E5F 
+ 2020              	.LASF86:
+ 2021 0449 433A5C55 		.ascii	"C:\\Users\\asai\\Documents\\PSoC Creator\\asp_1.9.0"
+ 2021      73657273 
+ 2021      5C617361 
+ 2021      695C446F 
+ 2021      63756D65 
+ 2022 0477 5F332E30 		.ascii	"_3.0\\asp_eval1.cydsn\000"
+ 2022      5C617370 
+ 2022      5F657661 
+ 2022      6C312E63 
+ 2022      7964736E 
+ 2023              	.LASF74:
+ 2024 048c 78736E73 		.ascii	"xsns_dpn\000"
+ 2024      5F64706E 
+ 2024      00
+ 2025              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

@@ -1,0 +1,1535 @@
+ARM GAS  C:\TEMP\ccMFP242.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"cymetadata.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	cy_metadata
+  19              		.global	cy_meta_flashprotect
+  20              		.global	cy_meta_wonvl
+  21              		.global	cy_meta_custnvl
+  22              		.global	cy_meta_configecc
+  23              		.section	.cyconfigecc,"a",%progbits
+  24              		.type	cy_meta_configecc, %object
+  25              		.size	cy_meta_configecc, 992
+  26              	cy_meta_configecc:
+  27 0000 02       		.byte	2
+  28 0001 52       		.byte	82
+  29 0002 00       		.byte	0
+  30 0003 40       		.byte	64
+  31 0004 01       		.byte	1
+  32 0005 64       		.byte	100
+  33 0006 00       		.byte	0
+  34 0007 40       		.byte	64
+  35 0008 02       		.byte	2
+  36 0009 65       		.byte	101
+  37 000a 00       		.byte	0
+  38 000b 40       		.byte	64
+  39 000c 40       		.byte	64
+  40 000d 06       		.byte	6
+  41 000e 01       		.byte	1
+  42 000f 40       		.byte	64
+  43 0010 33       		.byte	51
+  44 0011 07       		.byte	7
+  45 0012 01       		.byte	1
+  46 0013 40       		.byte	64
+  47 0014 63       		.byte	99
+  48 0015 14       		.byte	20
+  49 0016 01       		.byte	1
+  50 0017 40       		.byte	64
+  51 0018 49       		.byte	73
+  52 0019 15       		.byte	21
+  53 001a 01       		.byte	1
+  54 001b 40       		.byte	64
+  55 001c 4D       		.byte	77
+  56 001d 16       		.byte	22
+  57 001e 01       		.byte	1
+ARM GAS  C:\TEMP\ccMFP242.s 			page 2
+
+
+  58 001f 40       		.byte	64
+  59 0020 44       		.byte	68
+  60 0021 17       		.byte	23
+  61 0022 01       		.byte	1
+  62 0023 40       		.byte	64
+  63 0024 02       		.byte	2
+  64 0025 40       		.byte	64
+  65 0026 01       		.byte	1
+  66 0027 40       		.byte	64
+  67 0028 01       		.byte	1
+  68 0029 41       		.byte	65
+  69 002a 01       		.byte	1
+  70 002b 40       		.byte	64
+  71 002c 01       		.byte	1
+  72 002d 42       		.byte	66
+  73 002e 01       		.byte	1
+  74 002f 40       		.byte	64
+  75 0030 03       		.byte	3
+  76 0031 43       		.byte	67
+  77 0032 01       		.byte	1
+  78 0033 40       		.byte	64
+  79 0034 09       		.byte	9
+  80 0035 49       		.byte	73
+  81 0036 01       		.byte	1
+  82 0037 40       		.byte	64
+  83 0038 04       		.byte	4
+  84 0039 50       		.byte	80
+  85 003a 01       		.byte	1
+  86 003b 40       		.byte	64
+  87 003c 01       		.byte	1
+  88 003d 51       		.byte	81
+  89 003e 01       		.byte	1
+  90 003f 40       		.byte	64
+  91 0040 19       		.byte	25
+  92 0041 40       		.byte	64
+  93 0042 1C       		.byte	28
+  94 0043 80       		.byte	-128
+  95 0044 87       		.byte	-121
+  96 0045 72       		.byte	114
+  97 0046 84       		.byte	-124
+  98 0047 38       		.byte	56
+  99 0048 86       		.byte	-122
+ 100 0049 0F       		.byte	15
+ 101 004a 01       		.byte	1
+ 102 004b 10       		.byte	16
+ 103 004c 05       		.byte	5
+ 104 004d 08       		.byte	8
+ 105 004e 06       		.byte	6
+ 106 004f 01       		.byte	1
+ 107 0050 08       		.byte	8
+ 108 0051 02       		.byte	2
+ 109 0052 09       		.byte	9
+ 110 0053 18       		.byte	24
+ 111 0054 0C       		.byte	12
+ 112 0055 04       		.byte	4
+ 113 0056 0D       		.byte	13
+ 114 0057 04       		.byte	4
+ARM GAS  C:\TEMP\ccMFP242.s 			page 3
+
+
+ 115 0058 14       		.byte	20
+ 116 0059 01       		.byte	1
+ 117 005a 15       		.byte	21
+ 118 005b 07       		.byte	7
+ 119 005c 16       		.byte	22
+ 120 005d 06       		.byte	6
+ 121 005e 17       		.byte	23
+ 122 005f 18       		.byte	24
+ 123 0060 18       		.byte	24
+ 124 0061 07       		.byte	7
+ 125 0062 19       		.byte	25
+ 126 0063 1F       		.byte	31
+ 127 0064 1D       		.byte	29
+ 128 0065 1C       		.byte	28
+ 129 0066 1F       		.byte	31
+ 130 0067 02       		.byte	2
+ 131 0068 21       		.byte	33
+ 132 0069 20       		.byte	32
+ 133 006a 24       		.byte	36
+ 134 006b 06       		.byte	6
+ 135 006c 26       		.byte	38
+ 136 006d 01       		.byte	1
+ 137 006e 27       		.byte	39
+ 138 006f 03       		.byte	3
+ 139 0070 28       		.byte	40
+ 140 0071 06       		.byte	6
+ 141 0072 29       		.byte	41
+ 142 0073 1C       		.byte	28
+ 143 0074 2B       		.byte	43
+ 144 0075 01       		.byte	1
+ 145 0076 2C       		.byte	44
+ 146 0077 06       		.byte	6
+ 147 0078 2E       		.byte	46
+ 148 0079 01       		.byte	1
+ 149 007a 2F       		.byte	47
+ 150 007b 04       		.byte	4
+ 151 007c 31       		.byte	49
+ 152 007d 1F       		.byte	31
+ 153 007e 32       		.byte	50
+ 154 007f 07       		.byte	7
+ 155 0080 33       		.byte	51
+ 156 0081 20       		.byte	32
+ 157 0082 3A       		.byte	58
+ 158 0083 08       		.byte	8
+ 159 0084 3B       		.byte	59
+ 160 0085 02       		.byte	2
+ 161 0086 3F       		.byte	63
+ 162 0087 04       		.byte	4
+ 163 0088 58       		.byte	88
+ 164 0089 04       		.byte	4
+ 165 008a 59       		.byte	89
+ 166 008b 04       		.byte	4
+ 167 008c 5F       		.byte	95
+ 168 008d 01       		.byte	1
+ 169 008e 83       		.byte	-125
+ 170 008f 10       		.byte	16
+ 171 0090 85       		.byte	-123
+ARM GAS  C:\TEMP\ccMFP242.s 			page 4
+
+
+ 172 0091 0C       		.byte	12
+ 173 0092 89       		.byte	-119
+ 174 0093 04       		.byte	4
+ 175 0094 8C       		.byte	-116
+ 176 0095 01       		.byte	1
+ 177 0096 8F       		.byte	-113
+ 178 0097 10       		.byte	16
+ 179 0098 91       		.byte	-111
+ 180 0099 20       		.byte	32
+ 181 009a 95       		.byte	-107
+ 182 009b 03       		.byte	3
+ 183 009c 97       		.byte	-105
+ 184 009d 0C       		.byte	12
+ 185 009e 9B       		.byte	-101
+ 186 009f 02       		.byte	2
+ 187 00a0 9D       		.byte	-99
+ 188 00a1 0F       		.byte	15
+ 189 00a2 A1       		.byte	-95
+ 190 00a3 20       		.byte	32
+ 191 00a4 A4       		.byte	-92
+ 192 00a5 01       		.byte	1
+ 193 00a6 A5       		.byte	-91
+ 194 00a7 0F       		.byte	15
+ 195 00a8 A8       		.byte	-88
+ 196 00a9 01       		.byte	1
+ 197 00aa A9       		.byte	-87
+ 198 00ab 0D       		.byte	13
+ 199 00ac AB       		.byte	-85
+ 200 00ad 02       		.byte	2
+ 201 00ae AD       		.byte	-83
+ 202 00af 08       		.byte	8
+ 203 00b0 B1       		.byte	-79
+ 204 00b1 20       		.byte	32
+ 205 00b2 B3       		.byte	-77
+ 206 00b3 01       		.byte	1
+ 207 00b4 B4       		.byte	-76
+ 208 00b5 01       		.byte	1
+ 209 00b6 B5       		.byte	-75
+ 210 00b7 10       		.byte	16
+ 211 00b8 B7       		.byte	-73
+ 212 00b9 0E       		.byte	14
+ 213 00ba B9       		.byte	-71
+ 214 00bb 02       		.byte	2
+ 215 00bc BF       		.byte	-65
+ 216 00bd 15       		.byte	21
+ 217 00be D6       		.byte	-42
+ 218 00bf 02       		.byte	2
+ 219 00c0 D7       		.byte	-41
+ 220 00c1 12       		.byte	18
+ 221 00c2 D8       		.byte	-40
+ 222 00c3 04       		.byte	4
+ 223 00c4 D9       		.byte	-39
+ 224 00c5 04       		.byte	4
+ 225 00c6 DB       		.byte	-37
+ 226 00c7 04       		.byte	4
+ 227 00c8 DF       		.byte	-33
+ 228 00c9 01       		.byte	1
+ARM GAS  C:\TEMP\ccMFP242.s 			page 5
+
+
+ 229 00ca 03       		.byte	3
+ 230 00cb 01       		.byte	1
+ 231 00cc 04       		.byte	4
+ 232 00cd 24       		.byte	36
+ 233 00ce 06       		.byte	6
+ 234 00cf 02       		.byte	2
+ 235 00d0 0C       		.byte	12
+ 236 00d1 10       		.byte	16
+ 237 00d2 0D       		.byte	13
+ 238 00d3 08       		.byte	8
+ 239 00d4 10       		.byte	16
+ 240 00d5 28       		.byte	40
+ 241 00d6 16       		.byte	22
+ 242 00d7 20       		.byte	32
+ 243 00d8 17       		.byte	23
+ 244 00d9 60       		.byte	96
+ 245 00da 18       		.byte	24
+ 246 00db 04       		.byte	4
+ 247 00dc 1B       		.byte	27
+ 248 00dd 20       		.byte	32
+ 249 00de 1F       		.byte	31
+ 250 00df 08       		.byte	8
+ 251 00e0 20       		.byte	32
+ 252 00e1 80       		.byte	-128
+ 253 00e2 21       		.byte	33
+ 254 00e3 20       		.byte	32
+ 255 00e4 22       		.byte	34
+ 256 00e5 04       		.byte	4
+ 257 00e6 23       		.byte	35
+ 258 00e7 01       		.byte	1
+ 259 00e8 25       		.byte	37
+ 260 00e9 01       		.byte	1
+ 261 00ea 26       		.byte	38
+ 262 00eb 04       		.byte	4
+ 263 00ec 27       		.byte	39
+ 264 00ed 40       		.byte	64
+ 265 00ee 28       		.byte	40
+ 266 00ef 10       		.byte	16
+ 267 00f0 29       		.byte	41
+ 268 00f1 44       		.byte	68
+ 269 00f2 2A       		.byte	42
+ 270 00f3 21       		.byte	33
+ 271 00f4 2B       		.byte	43
+ 272 00f5 08       		.byte	8
+ 273 00f6 2D       		.byte	45
+ 274 00f7 01       		.byte	1
+ 275 00f8 2E       		.byte	46
+ 276 00f9 40       		.byte	64
+ 277 00fa 2F       		.byte	47
+ 278 00fb 28       		.byte	40
+ 279 00fc 31       		.byte	49
+ 280 00fd 08       		.byte	8
+ 281 00fe 32       		.byte	50
+ 282 00ff 02       		.byte	2
+ 283 0100 33       		.byte	51
+ 284 0101 60       		.byte	96
+ 285 0102 34       		.byte	52
+ARM GAS  C:\TEMP\ccMFP242.s 			page 6
+
+
+ 286 0103 10       		.byte	16
+ 287 0104 36       		.byte	54
+ 288 0105 08       		.byte	8
+ 289 0106 37       		.byte	55
+ 290 0107 40       		.byte	64
+ 291 0108 38       		.byte	56
+ 292 0109 28       		.byte	40
+ 293 010a 39       		.byte	57
+ 294 010b 82       		.byte	-126
+ 295 010c 3B       		.byte	59
+ 296 010d 01       		.byte	1
+ 297 010e 3D       		.byte	61
+ 298 010f 40       		.byte	64
+ 299 0110 3E       		.byte	62
+ 300 0111 16       		.byte	22
+ 301 0112 5A       		.byte	90
+ 302 0113 08       		.byte	8
+ 303 0114 68       		.byte	104
+ 304 0115 28       		.byte	40
+ 305 0116 6B       		.byte	107
+ 306 0117 01       		.byte	1
+ 307 0118 70       		.byte	112
+ 308 0119 14       		.byte	20
+ 309 011a 71       		.byte	113
+ 310 011b 40       		.byte	64
+ 311 011c 72       		.byte	114
+ 312 011d 16       		.byte	22
+ 313 011e 73       		.byte	115
+ 314 011f 20       		.byte	32
+ 315 0120 84       		.byte	-124
+ 316 0121 40       		.byte	64
+ 317 0122 C0       		.byte	-64
+ 318 0123 E1       		.byte	-31
+ 319 0124 C2       		.byte	-62
+ 320 0125 60       		.byte	96
+ 321 0126 C4       		.byte	-60
+ 322 0127 E6       		.byte	-26
+ 323 0128 CA       		.byte	-54
+ 324 0129 FF       		.byte	-1
+ 325 012a CC       		.byte	-52
+ 326 012b 7F       		.byte	127
+ 327 012c CE       		.byte	-50
+ 328 012d FF       		.byte	-1
+ 329 012e D6       		.byte	-42
+ 330 012f 02       		.byte	2
+ 331 0130 07       		.byte	7
+ 332 0131 03       		.byte	3
+ 333 0132 0B       		.byte	11
+ 334 0133 03       		.byte	3
+ 335 0134 0D       		.byte	13
+ 336 0135 01       		.byte	1
+ 337 0136 14       		.byte	20
+ 338 0137 02       		.byte	2
+ 339 0138 15       		.byte	21
+ 340 0139 03       		.byte	3
+ 341 013a 16       		.byte	22
+ 342 013b 1C       		.byte	28
+ARM GAS  C:\TEMP\ccMFP242.s 			page 7
+
+
+ 343 013c 18       		.byte	24
+ 344 013d 88       		.byte	-120
+ 345 013e 19       		.byte	25
+ 346 013f 02       		.byte	2
+ 347 0140 1A       		.byte	26
+ 348 0141 62       		.byte	98
+ 349 0142 1F       		.byte	31
+ 350 0143 03       		.byte	3
+ 351 0144 24       		.byte	36
+ 352 0145 CE       		.byte	-50
+ 353 0146 25       		.byte	37
+ 354 0147 03       		.byte	3
+ 355 0148 28       		.byte	40
+ 356 0149 CE       		.byte	-50
+ 357 014a 29       		.byte	41
+ 358 014b 03       		.byte	3
+ 359 014c 2C       		.byte	44
+ 360 014d 44       		.byte	68
+ 361 014e 2E       		.byte	46
+ 362 014f A3       		.byte	-93
+ 363 0150 30       		.byte	48
+ 364 0151 01       		.byte	1
+ 365 0152 31       		.byte	49
+ 366 0153 03       		.byte	3
+ 367 0154 32       		.byte	50
+ 368 0155 0E       		.byte	14
+ 369 0156 34       		.byte	52
+ 370 0157 C0       		.byte	-64
+ 371 0158 36       		.byte	54
+ 372 0159 30       		.byte	48
+ 373 015a 3E       		.byte	62
+ 374 015b 40       		.byte	64
+ 375 015c 40       		.byte	64
+ 376 015d 62       		.byte	98
+ 377 015e 41       		.byte	65
+ 378 015f 03       		.byte	3
+ 379 0160 42       		.byte	66
+ 380 0161 04       		.byte	4
+ 381 0162 44       		.byte	68
+ 382 0163 01       		.byte	1
+ 383 0164 45       		.byte	69
+ 384 0165 E0       		.byte	-32
+ 385 0166 46       		.byte	70
+ 386 0167 0C       		.byte	12
+ 387 0168 48       		.byte	72
+ 388 0169 06       		.byte	6
+ 389 016a 49       		.byte	73
+ 390 016b FF       		.byte	-1
+ 391 016c 4A       		.byte	74
+ 392 016d FF       		.byte	-1
+ 393 016e 4B       		.byte	75
+ 394 016f FF       		.byte	-1
+ 395 0170 4C       		.byte	76
+ 396 0171 62       		.byte	98
+ 397 0172 4D       		.byte	77
+ 398 0173 A0       		.byte	-96
+ 399 0174 4E       		.byte	78
+ARM GAS  C:\TEMP\ccMFP242.s 			page 8
+
+
+ 400 0175 F0       		.byte	-16
+ 401 0176 4F       		.byte	79
+ 402 0177 41       		.byte	65
+ 403 0178 50       		.byte	80
+ 404 0179 0C       		.byte	12
+ 405 017a 54       		.byte	84
+ 406 017b 18       		.byte	24
+ 407 017c 56       		.byte	86
+ 408 017d 04       		.byte	4
+ 409 017e 58       		.byte	88
+ 410 017f 04       		.byte	4
+ 411 0180 59       		.byte	89
+ 412 0181 04       		.byte	4
+ 413 0182 5A       		.byte	90
+ 414 0183 04       		.byte	4
+ 415 0184 5B       		.byte	91
+ 416 0185 04       		.byte	4
+ 417 0186 5F       		.byte	95
+ 418 0187 01       		.byte	1
+ 419 0188 66       		.byte	102
+ 420 0189 40       		.byte	64
+ 421 018a 67       		.byte	103
+ 422 018b 02       		.byte	2
+ 423 018c 69       		.byte	105
+ 424 018d 10       		.byte	16
+ 425 018e 6A       		.byte	106
+ 426 018f 30       		.byte	48
+ 427 0190 6B       		.byte	107
+ 428 0191 10       		.byte	16
+ 429 0192 6D       		.byte	109
+ 430 0193 10       		.byte	16
+ 431 0194 6E       		.byte	110
+ 432 0195 10       		.byte	16
+ 433 0196 6F       		.byte	111
+ 434 0197 12       		.byte	18
+ 435 0198 80       		.byte	-128
+ 436 0199 01       		.byte	1
+ 437 019a 81       		.byte	-127
+ 438 019b 20       		.byte	32
+ 439 019c 82       		.byte	-126
+ 440 019d 02       		.byte	2
+ 441 019e 85       		.byte	-123
+ 442 019f 02       		.byte	2
+ 443 01a0 8E       		.byte	-114
+ 444 01a1 07       		.byte	7
+ 445 01a2 93       		.byte	-109
+ 446 01a3 17       		.byte	23
+ 447 01a4 94       		.byte	-108
+ 448 01a5 04       		.byte	4
+ 449 01a6 95       		.byte	-107
+ 450 01a7 18       		.byte	24
+ 451 01a8 96       		.byte	-106
+ 452 01a9 01       		.byte	1
+ 453 01aa 97       		.byte	-105
+ 454 01ab 03       		.byte	3
+ 455 01ac 9C       		.byte	-100
+ 456 01ad 08       		.byte	8
+ARM GAS  C:\TEMP\ccMFP242.s 			page 9
+
+
+ 457 01ae A4       		.byte	-92
+ 458 01af 01       		.byte	1
+ 459 01b0 A6       		.byte	-90
+ 460 01b1 06       		.byte	6
+ 461 01b2 A8       		.byte	-88
+ 462 01b3 04       		.byte	4
+ 463 01b4 A9       		.byte	-87
+ 464 01b5 0E       		.byte	14
+ 465 01b6 AD       		.byte	-83
+ 466 01b7 18       		.byte	24
+ 467 01b8 AF       		.byte	-81
+ 468 01b9 05       		.byte	5
+ 469 01ba B2       		.byte	-78
+ 470 01bb 07       		.byte	7
+ 471 01bc B3       		.byte	-77
+ 472 01bd 18       		.byte	24
+ 473 01be B4       		.byte	-76
+ 474 01bf 08       		.byte	8
+ 475 01c0 B5       		.byte	-75
+ 476 01c1 07       		.byte	7
+ 477 01c2 B7       		.byte	-73
+ 478 01c3 20       		.byte	32
+ 479 01c4 B9       		.byte	-71
+ 480 01c5 08       		.byte	8
+ 481 01c6 BA       		.byte	-70
+ 482 01c7 08       		.byte	8
+ 483 01c8 BB       		.byte	-69
+ 484 01c9 20       		.byte	32
+ 485 01ca BE       		.byte	-66
+ 486 01cb 10       		.byte	16
+ 487 01cc BF       		.byte	-65
+ 488 01cd 04       		.byte	4
+ 489 01ce C0       		.byte	-64
+ 490 01cf 02       		.byte	2
+ 491 01d0 C5       		.byte	-59
+ 492 01d1 10       		.byte	16
+ 493 01d2 C7       		.byte	-57
+ 494 01d3 05       		.byte	5
+ 495 01d4 C8       		.byte	-56
+ 496 01d5 12       		.byte	18
+ 497 01d6 C9       		.byte	-55
+ 498 01d7 FF       		.byte	-1
+ 499 01d8 CA       		.byte	-54
+ 500 01d9 07       		.byte	7
+ 501 01da CB       		.byte	-53
+ 502 01db FF       		.byte	-1
+ 503 01dc CC       		.byte	-52
+ 504 01dd 40       		.byte	64
+ 505 01de CD       		.byte	-51
+ 506 01df 20       		.byte	32
+ 507 01e0 CE       		.byte	-50
+ 508 01e1 F0       		.byte	-16
+ 509 01e2 CF       		.byte	-49
+ 510 01e3 05       		.byte	5
+ 511 01e4 D0       		.byte	-48
+ 512 01e5 08       		.byte	8
+ 513 01e6 D8       		.byte	-40
+ARM GAS  C:\TEMP\ccMFP242.s 			page 10
+
+
+ 514 01e7 04       		.byte	4
+ 515 01e8 D9       		.byte	-39
+ 516 01e9 04       		.byte	4
+ 517 01ea DA       		.byte	-38
+ 518 01eb 04       		.byte	4
+ 519 01ec DF       		.byte	-33
+ 520 01ed 01       		.byte	1
+ 521 01ee E0       		.byte	-32
+ 522 01ef 40       		.byte	64
+ 523 01f0 E1       		.byte	-31
+ 524 01f1 A8       		.byte	-88
+ 525 01f2 E2       		.byte	-30
+ 526 01f3 40       		.byte	64
+ 527 01f4 E3       		.byte	-29
+ 528 01f5 20       		.byte	32
+ 529 01f6 06       		.byte	6
+ 530 01f7 80       		.byte	-128
+ 531 01f8 07       		.byte	7
+ 532 01f9 01       		.byte	1
+ 533 01fa 0A       		.byte	10
+ 534 01fb 18       		.byte	24
+ 535 01fc 0D       		.byte	13
+ 536 01fd 08       		.byte	8
+ 537 01fe 0F       		.byte	15
+ 538 01ff 02       		.byte	2
+ 539 0200 10       		.byte	16
+ 540 0201 28       		.byte	40
+ 541 0202 11       		.byte	17
+ 542 0203 40       		.byte	64
+ 543 0204 16       		.byte	22
+ 544 0205 08       		.byte	8
+ 545 0206 17       		.byte	23
+ 546 0207 08       		.byte	8
+ 547 0208 18       		.byte	24
+ 548 0209 01       		.byte	1
+ 549 020a 19       		.byte	25
+ 550 020b 04       		.byte	4
+ 551 020c 1A       		.byte	26
+ 552 020d 58       		.byte	88
+ 553 020e 1B       		.byte	27
+ 554 020f 20       		.byte	32
+ 555 0210 1D       		.byte	29
+ 556 0211 28       		.byte	40
+ 557 0212 1F       		.byte	31
+ 558 0213 04       		.byte	4
+ 559 0214 22       		.byte	34
+ 560 0215 01       		.byte	1
+ 561 0216 27       		.byte	39
+ 562 0217 29       		.byte	41
+ 563 0218 29       		.byte	41
+ 564 0219 04       		.byte	4
+ 565 021a 2B       		.byte	43
+ 566 021b 08       		.byte	8
+ 567 021c 2F       		.byte	47
+ 568 021d 06       		.byte	6
+ 569 021e 32       		.byte	50
+ 570 021f 08       		.byte	8
+ARM GAS  C:\TEMP\ccMFP242.s 			page 11
+
+
+ 571 0220 33       		.byte	51
+ 572 0221 60       		.byte	96
+ 573 0222 37       		.byte	55
+ 574 0223 09       		.byte	9
+ 575 0224 38       		.byte	56
+ 576 0225 04       		.byte	4
+ 577 0226 39       		.byte	57
+ 578 0227 40       		.byte	64
+ 579 0228 3A       		.byte	58
+ 580 0229 20       		.byte	32
+ 581 022a 3D       		.byte	61
+ 582 022b 08       		.byte	8
+ 583 022c 3F       		.byte	63
+ 584 022d 02       		.byte	2
+ 585 022e 40       		.byte	64
+ 586 022f 05       		.byte	5
+ 587 0230 41       		.byte	65
+ 588 0231 01       		.byte	1
+ 589 0232 43       		.byte	67
+ 590 0233 08       		.byte	8
+ 591 0234 47       		.byte	71
+ 592 0235 20       		.byte	32
+ 593 0236 48       		.byte	72
+ 594 0237 40       		.byte	64
+ 595 0238 4A       		.byte	74
+ 596 0239 08       		.byte	8
+ 597 023a 4F       		.byte	79
+ 598 023b 02       		.byte	2
+ 599 023c 51       		.byte	81
+ 600 023d 40       		.byte	64
+ 601 023e 55       		.byte	85
+ 602 023f 04       		.byte	4
+ 603 0240 56       		.byte	86
+ 604 0241 08       		.byte	8
+ 605 0242 5A       		.byte	90
+ 606 0243 02       		.byte	2
+ 607 0244 61       		.byte	97
+ 608 0245 10       		.byte	16
+ 609 0246 62       		.byte	98
+ 610 0247 42       		.byte	66
+ 611 0248 81       		.byte	-127
+ 612 0249 40       		.byte	64
+ 613 024a 8C       		.byte	-116
+ 614 024b 02       		.byte	2
+ 615 024c 8D       		.byte	-115
+ 616 024d 04       		.byte	4
+ 617 024e 90       		.byte	-112
+ 618 024f 04       		.byte	4
+ 619 0250 91       		.byte	-111
+ 620 0251 02       		.byte	2
+ 621 0252 95       		.byte	-107
+ 622 0253 C0       		.byte	-64
+ 623 0254 96       		.byte	-106
+ 624 0255 40       		.byte	64
+ 625 0256 97       		.byte	-105
+ 626 0257 08       		.byte	8
+ 627 0258 99       		.byte	-103
+ARM GAS  C:\TEMP\ccMFP242.s 			page 12
+
+
+ 628 0259 10       		.byte	16
+ 629 025a 9A       		.byte	-102
+ 630 025b E0       		.byte	-32
+ 631 025c 9B       		.byte	-101
+ 632 025d 40       		.byte	64
+ 633 025e 9C       		.byte	-100
+ 634 025f 02       		.byte	2
+ 635 0260 9E       		.byte	-98
+ 636 0261 08       		.byte	8
+ 637 0262 9F       		.byte	-97
+ 638 0263 09       		.byte	9
+ 639 0264 A0       		.byte	-96
+ 640 0265 28       		.byte	40
+ 641 0266 A2       		.byte	-94
+ 642 0267 08       		.byte	8
+ 643 0268 A3       		.byte	-93
+ 644 0269 0A       		.byte	10
+ 645 026a A4       		.byte	-92
+ 646 026b 40       		.byte	64
+ 647 026c A5       		.byte	-91
+ 648 026d 20       		.byte	32
+ 649 026e A6       		.byte	-90
+ 650 026f 02       		.byte	2
+ 651 0270 A7       		.byte	-89
+ 652 0271 20       		.byte	32
+ 653 0272 AF       		.byte	-81
+ 654 0273 20       		.byte	32
+ 655 0274 C0       		.byte	-64
+ 656 0275 90       		.byte	-112
+ 657 0276 C2       		.byte	-62
+ 658 0277 A6       		.byte	-90
+ 659 0278 C4       		.byte	-60
+ 660 0279 67       		.byte	103
+ 661 027a CA       		.byte	-54
+ 662 027b 36       		.byte	54
+ 663 027c CC       		.byte	-52
+ 664 027d CE       		.byte	-50
+ 665 027e CE       		.byte	-50
+ 666 027f CE       		.byte	-50
+ 667 0280 D0       		.byte	-48
+ 668 0281 2F       		.byte	47
+ 669 0282 D2       		.byte	-46
+ 670 0283 04       		.byte	4
+ 671 0284 D6       		.byte	-42
+ 672 0285 01       		.byte	1
+ 673 0286 D8       		.byte	-40
+ 674 0287 0D       		.byte	13
+ 675 0288 00       		.byte	0
+ 676 0289 03       		.byte	3
+ 677 028a 02       		.byte	2
+ 678 028b 0C       		.byte	12
+ 679 028c 07       		.byte	7
+ 680 028d 01       		.byte	1
+ 681 028e 09       		.byte	9
+ 682 028f 28       		.byte	40
+ 683 0290 11       		.byte	17
+ 684 0291 12       		.byte	18
+ARM GAS  C:\TEMP\ccMFP242.s 			page 13
+
+
+ 685 0292 13       		.byte	19
+ 686 0293 21       		.byte	33
+ 687 0294 15       		.byte	21
+ 688 0295 19       		.byte	25
+ 689 0296 17       		.byte	23
+ 690 0297 22       		.byte	34
+ 691 0298 18       		.byte	24
+ 692 0299 03       		.byte	3
+ 693 029a 19       		.byte	25
+ 694 029b 40       		.byte	64
+ 695 029c 1A       		.byte	26
+ 696 029d 04       		.byte	4
+ 697 029e 1B       		.byte	27
+ 698 029f 06       		.byte	6
+ 699 02a0 22       		.byte	34
+ 700 02a1 0E       		.byte	14
+ 701 02a2 24       		.byte	36
+ 702 02a3 03       		.byte	3
+ 703 02a4 26       		.byte	38
+ 704 02a5 04       		.byte	4
+ 705 02a6 27       		.byte	39
+ 706 02a7 20       		.byte	32
+ 707 02a8 28       		.byte	40
+ 708 02a9 09       		.byte	9
+ 709 02aa 29       		.byte	41
+ 710 02ab 38       		.byte	56
+ 711 02ac 2B       		.byte	43
+ 712 02ad 05       		.byte	5
+ 713 02ae 2D       		.byte	45
+ 714 02af 21       		.byte	33
+ 715 02b0 2F       		.byte	47
+ 716 02b1 18       		.byte	24
+ 717 02b2 30       		.byte	48
+ 718 02b3 0F       		.byte	15
+ 719 02b4 33       		.byte	51
+ 720 02b5 40       		.byte	64
+ 721 02b6 35       		.byte	53
+ 722 02b7 3E       		.byte	62
+ 723 02b8 37       		.byte	55
+ 724 02b9 01       		.byte	1
+ 725 02ba 3A       		.byte	58
+ 726 02bb 02       		.byte	2
+ 727 02bc 3F       		.byte	63
+ 728 02bd 44       		.byte	68
+ 729 02be 40       		.byte	64
+ 730 02bf 42       		.byte	66
+ 731 02c0 41       		.byte	65
+ 732 02c1 03       		.byte	3
+ 733 02c2 45       		.byte	69
+ 734 02c3 EC       		.byte	-20
+ 735 02c4 46       		.byte	70
+ 736 02c5 B0       		.byte	-80
+ 737 02c6 48       		.byte	72
+ 738 02c7 0B       		.byte	11
+ 739 02c8 49       		.byte	73
+ 740 02c9 FF       		.byte	-1
+ 741 02ca 4A       		.byte	74
+ARM GAS  C:\TEMP\ccMFP242.s 			page 14
+
+
+ 742 02cb FF       		.byte	-1
+ 743 02cc 4B       		.byte	75
+ 744 02cd FF       		.byte	-1
+ 745 02ce 4E       		.byte	78
+ 746 02cf F0       		.byte	-16
+ 747 02d0 4F       		.byte	79
+ 748 02d1 44       		.byte	68
+ 749 02d2 50       		.byte	80
+ 750 02d3 0C       		.byte	12
+ 751 02d4 54       		.byte	84
+ 752 02d5 01       		.byte	1
+ 753 02d6 56       		.byte	86
+ 754 02d7 04       		.byte	4
+ 755 02d8 58       		.byte	88
+ 756 02d9 04       		.byte	4
+ 757 02da 59       		.byte	89
+ 758 02db 04       		.byte	4
+ 759 02dc 5A       		.byte	90
+ 760 02dd 04       		.byte	4
+ 761 02de 5B       		.byte	91
+ 762 02df 04       		.byte	4
+ 763 02e0 5F       		.byte	95
+ 764 02e1 01       		.byte	1
+ 765 02e2 66       		.byte	102
+ 766 02e3 C0       		.byte	-64
+ 767 02e4 6A       		.byte	106
+ 768 02e5 40       		.byte	64
+ 769 02e6 6B       		.byte	107
+ 770 02e7 02       		.byte	2
+ 771 02e8 81       		.byte	-127
+ 772 02e9 08       		.byte	8
+ 773 02ea 82       		.byte	-126
+ 774 02eb 01       		.byte	1
+ 775 02ec 85       		.byte	-123
+ 776 02ed 0C       		.byte	12
+ 777 02ee 88       		.byte	-120
+ 778 02ef 02       		.byte	2
+ 779 02f0 89       		.byte	-119
+ 780 02f1 04       		.byte	4
+ 781 02f2 8D       		.byte	-115
+ 782 02f3 01       		.byte	1
+ 783 02f4 8E       		.byte	-114
+ 784 02f5 01       		.byte	1
+ 785 02f6 93       		.byte	-109
+ 786 02f7 03       		.byte	3
+ 787 02f8 95       		.byte	-107
+ 788 02f9 03       		.byte	3
+ 789 02fa 96       		.byte	-106
+ 790 02fb 02       		.byte	2
+ 791 02fc 97       		.byte	-105
+ 792 02fd 0C       		.byte	12
+ 793 02fe 99       		.byte	-103
+ 794 02ff 02       		.byte	2
+ 795 0300 9D       		.byte	-99
+ 796 0301 0C       		.byte	12
+ 797 0302 9F       		.byte	-97
+ 798 0303 03       		.byte	3
+ARM GAS  C:\TEMP\ccMFP242.s 			page 15
+
+
+ 799 0304 A2       		.byte	-94
+ 800 0305 02       		.byte	2
+ 801 0306 A5       		.byte	-91
+ 802 0307 0F       		.byte	15
+ 803 0308 A8       		.byte	-88
+ 804 0309 02       		.byte	2
+ 805 030a A9       		.byte	-87
+ 806 030b 0F       		.byte	15
+ 807 030c AD       		.byte	-83
+ 808 030d 03       		.byte	3
+ 809 030e B0       		.byte	-80
+ 810 030f 02       		.byte	2
+ 811 0310 B3       		.byte	-77
+ 812 0311 0F       		.byte	15
+ 813 0312 B4       		.byte	-76
+ 814 0313 01       		.byte	1
+ 815 0314 B8       		.byte	-72
+ 816 0315 02       		.byte	2
+ 817 0316 BA       		.byte	-70
+ 818 0317 08       		.byte	8
+ 819 0318 BB       		.byte	-69
+ 820 0319 08       		.byte	8
+ 821 031a BE       		.byte	-66
+ 822 031b 10       		.byte	16
+ 823 031c D8       		.byte	-40
+ 824 031d 04       		.byte	4
+ 825 031e D9       		.byte	-39
+ 826 031f 04       		.byte	4
+ 827 0320 DF       		.byte	-33
+ 828 0321 01       		.byte	1
+ 829 0322 00       		.byte	0
+ 830 0323 80       		.byte	-128
+ 831 0324 01       		.byte	1
+ 832 0325 02       		.byte	2
+ 833 0326 03       		.byte	3
+ 834 0327 08       		.byte	8
+ 835 0328 06       		.byte	6
+ 836 0329 80       		.byte	-128
+ 837 032a 08       		.byte	8
+ 838 032b 04       		.byte	4
+ 839 032c 0F       		.byte	15
+ 840 032d 04       		.byte	4
+ 841 032e 11       		.byte	17
+ 842 032f 02       		.byte	2
+ 843 0330 12       		.byte	18
+ 844 0331 08       		.byte	8
+ 845 0332 15       		.byte	21
+ 846 0333 10       		.byte	16
+ 847 0334 17       		.byte	23
+ 848 0335 09       		.byte	9
+ 849 0336 19       		.byte	25
+ 850 0337 16       		.byte	22
+ 851 0338 1B       		.byte	27
+ 852 0339 08       		.byte	8
+ 853 033a 1F       		.byte	31
+ 854 033b 02       		.byte	2
+ 855 033c 21       		.byte	33
+ARM GAS  C:\TEMP\ccMFP242.s 			page 16
+
+
+ 856 033d 08       		.byte	8
+ 857 033e 22       		.byte	34
+ 858 033f 08       		.byte	8
+ 859 0340 26       		.byte	38
+ 860 0341 50       		.byte	80
+ 861 0342 27       		.byte	39
+ 862 0343 20       		.byte	32
+ 863 0344 28       		.byte	40
+ 864 0345 06       		.byte	6
+ 865 0346 29       		.byte	41
+ 866 0347 04       		.byte	4
+ 867 0348 2A       		.byte	42
+ 868 0349 20       		.byte	32
+ 869 034a 2D       		.byte	45
+ 870 034b 10       		.byte	16
+ 871 034c 2E       		.byte	46
+ 872 034d 88       		.byte	-120
+ 873 034e 2F       		.byte	47
+ 874 034f 06       		.byte	6
+ 875 0350 31       		.byte	49
+ 876 0351 09       		.byte	9
+ 877 0352 33       		.byte	51
+ 878 0353 60       		.byte	96
+ 879 0354 36       		.byte	54
+ 880 0355 10       		.byte	16
+ 881 0356 37       		.byte	55
+ 882 0357 09       		.byte	9
+ 883 0358 38       		.byte	56
+ 884 0359 28       		.byte	40
+ 885 035a 39       		.byte	57
+ 886 035b 40       		.byte	64
+ 887 035c 3A       		.byte	58
+ 888 035d 02       		.byte	2
+ 889 035e 3F       		.byte	63
+ 890 035f 24       		.byte	36
+ 891 0360 45       		.byte	69
+ 892 0361 20       		.byte	32
+ 893 0362 46       		.byte	70
+ 894 0363 80       		.byte	-128
+ 895 0364 47       		.byte	71
+ 896 0365 08       		.byte	8
+ 897 0366 4D       		.byte	77
+ 898 0367 01       		.byte	1
+ 899 0368 4F       		.byte	79
+ 900 0369 04       		.byte	4
+ 901 036a 57       		.byte	87
+ 902 036b 10       		.byte	16
+ 903 036c 5D       		.byte	93
+ 904 036d 21       		.byte	33
+ 905 036e 5E       		.byte	94
+ 906 036f 88       		.byte	-120
+ 907 0370 65       		.byte	101
+ 908 0371 20       		.byte	32
+ 909 0372 66       		.byte	102
+ 910 0373 01       		.byte	1
+ 911 0374 67       		.byte	103
+ 912 0375 04       		.byte	4
+ARM GAS  C:\TEMP\ccMFP242.s 			page 17
+
+
+ 913 0376 80       		.byte	-128
+ 914 0377 04       		.byte	4
+ 915 0378 81       		.byte	-127
+ 916 0379 01       		.byte	1
+ 917 037a 90       		.byte	-112
+ 918 037b 2C       		.byte	44
+ 919 037c 91       		.byte	-111
+ 920 037d 02       		.byte	2
+ 921 037e 95       		.byte	-107
+ 922 037f C1       		.byte	-63
+ 923 0380 96       		.byte	-106
+ 924 0381 40       		.byte	64
+ 925 0382 9A       		.byte	-102
+ 926 0383 62       		.byte	98
+ 927 0384 9B       		.byte	-101
+ 928 0385 40       		.byte	64
+ 929 0386 9D       		.byte	-99
+ 930 0387 04       		.byte	4
+ 931 0388 9E       		.byte	-98
+ 932 0389 01       		.byte	1
+ 933 038a A0       		.byte	-96
+ 934 038b 28       		.byte	40
+ 935 038c A1       		.byte	-95
+ 936 038d 01       		.byte	1
+ 937 038e A2       		.byte	-94
+ 938 038f 04       		.byte	4
+ 939 0390 A5       		.byte	-91
+ 940 0391 08       		.byte	8
+ 941 0392 A6       		.byte	-90
+ 942 0393 0A       		.byte	10
+ 943 0394 AD       		.byte	-83
+ 944 0395 20       		.byte	32
+ 945 0396 AE       		.byte	-82
+ 946 0397 40       		.byte	64
+ 947 0398 C0       		.byte	-64
+ 948 0399 1B       		.byte	27
+ 949 039a C2       		.byte	-62
+ 950 039b 44       		.byte	68
+ 951 039c C4       		.byte	-60
+ 952 039d 7A       		.byte	122
+ 953 039e CA       		.byte	-54
+ 954 039f 7E       		.byte	126
+ 955 03a0 CC       		.byte	-52
+ 956 03a1 EF       		.byte	-17
+ 957 03a2 CE       		.byte	-50
+ 958 03a3 6F       		.byte	111
+ 959 03a4 D0       		.byte	-48
+ 960 03a5 E0       		.byte	-32
+ 961 03a6 D6       		.byte	-42
+ 962 03a7 F0       		.byte	-16
+ 963 03a8 D8       		.byte	-40
+ 964 03a9 80       		.byte	-128
+ 965 03aa 30       		.byte	48
+ 966 03ab 20       		.byte	32
+ 967 03ac CC       		.byte	-52
+ 968 03ad 10       		.byte	16
+ 969 03ae A4       		.byte	-92
+ARM GAS  C:\TEMP\ccMFP242.s 			page 18
+
+
+ 970 03af 20       		.byte	32
+ 971 03b0 A4       		.byte	-92
+ 972 03b1 20       		.byte	32
+ 973 03b2 84       		.byte	-124
+ 974 03b3 20       		.byte	32
+ 975 03b4 A4       		.byte	-92
+ 976 03b5 20       		.byte	32
+ 977 03b6 E2       		.byte	-30
+ 978 03b7 40       		.byte	64
+ 979 03b8 0E       		.byte	14
+ 980 03b9 08       		.byte	8
+ 981 03ba 63       		.byte	99
+ 982 03bb 04       		.byte	4
+ 983 03bc 82       		.byte	-126
+ 984 03bd 04       		.byte	4
+ 985 03be 93       		.byte	-109
+ 986 03bf 04       		.byte	4
+ 987 03c0 AF       		.byte	-81
+ 988 03c1 04       		.byte	4
+ 989 03c2 C2       		.byte	-62
+ 990 03c3 80       		.byte	-128
+ 991 03c4 D8       		.byte	-40
+ 992 03c5 40       		.byte	64
+ 993 03c6 E4       		.byte	-28
+ 994 03c7 20       		.byte	32
+ 995 03c8 EA       		.byte	-22
+ 996 03c9 40       		.byte	64
+ 997 03ca 00       		.byte	0
+ 998 03cb 01       		.byte	1
+ 999 03cc 0A       		.byte	10
+ 1000 03cd 01       		.byte	1
+ 1001 03ce 10       		.byte	16
+ 1002 03cf 01       		.byte	1
+ 1003 03d0 1A       		.byte	26
+ 1004 03d1 01       		.byte	1
+ 1005 03d2 00       		.byte	0
+ 1006 03d3 03       		.byte	3
+ 1007 03d4 40       		.byte	64
+ 1008 03d5 00       		.byte	0
+ 1009 03d6 80       		.byte	-128
+ 1010 03d7 40       		.byte	64
+ 1011 03d8 40       		.byte	64
+ 1012 03d9 00       		.byte	0
+ 1013 03da 40       		.byte	64
+ 1014 03db 00       		.byte	0
+ 1015 03dc 00       		.byte	0
+ 1016 03dd 00       		.byte	0
+ 1017 03de 00       		.byte	0
+ 1018 03df 00       		.byte	0
+ 1019              		.section	.cywolatch,"a",%progbits
+ 1020              		.type	cy_meta_wonvl, %object
+ 1021              		.size	cy_meta_wonvl, 4
+ 1022              	cy_meta_wonvl:
+ 1023 0000 BC       		.byte	-68
+ 1024 0001 90       		.byte	-112
+ 1025 0002 AC       		.byte	-84
+ 1026 0003 AF       		.byte	-81
+ARM GAS  C:\TEMP\ccMFP242.s 			page 19
+
+
+ 1027              		.section	.cycustnvl,"a",%progbits
+ 1028              		.type	cy_meta_custnvl, %object
+ 1029              		.size	cy_meta_custnvl, 4
+ 1030              	cy_meta_custnvl:
+ 1031 0000 00       		.byte	0
+ 1032 0001 00       		.byte	0
+ 1033 0002 40       		.byte	64
+ 1034 0003 05       		.byte	5
+ 1035              		.section	.cymeta,"a",%progbits
+ 1036              		.type	cy_metadata, %object
+ 1037              		.size	cy_metadata, 12
+ 1038              	cy_metadata:
+ 1039 0000 00       		.byte	0
+ 1040 0001 01       		.byte	1
+ 1041 0002 2E       		.byte	46
+ 1042 0003 12       		.byte	18
+ 1043 0004 30       		.byte	48
+ 1044 0005 69       		.byte	105
+ 1045 0006 00       		.byte	0
+ 1046 0007 01       		.byte	1
+ 1047 0008 00       		.byte	0
+ 1048 0009 00       		.byte	0
+ 1049 000a 00       		.byte	0
+ 1050 000b 00       		.byte	0
+ 1051              		.section	.cyflashprotect,"a",%progbits
+ 1052              		.type	cy_meta_flashprotect, %object
+ 1053              		.size	cy_meta_flashprotect, 256
+ 1054              	cy_meta_flashprotect:
+ 1055 0000 00000000 		.space	256
+ 1055      00000000 
+ 1055      00000000 
+ 1055      00000000 
+ 1055      00000000 
+ 1056              		.text
+ 1057              	.Letext0:
+ 1058              		.file 1 ".\\Generated_Source\\PSoC5\\cymetadata.c"
+ 1059              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 1060              		.section	.debug_info,"",%progbits
+ 1061              	.Ldebug_info0:
+ 1062 0000 3B010000 		.4byte	0x13b
+ 1063 0004 0200     		.2byte	0x2
+ 1064 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1065 000a 04       		.byte	0x4
+ 1066 000b 01       		.uleb128 0x1
+ 1067 000c 4A010000 		.4byte	.LASF18
+ 1068 0010 01       		.byte	0x1
+ 1069 0011 43000000 		.4byte	.LASF19
+ 1070 0015 00000000 		.4byte	.LASF20
+ 1071 0019 00000000 		.4byte	.Ldebug_line0
+ 1072 001d 02       		.uleb128 0x2
+ 1073 001e 01       		.byte	0x1
+ 1074 001f 06       		.byte	0x6
+ 1075 0020 9C010000 		.4byte	.LASF0
+ 1076 0024 02       		.uleb128 0x2
+ 1077 0025 01       		.byte	0x1
+ 1078 0026 08       		.byte	0x8
+ 1079 0027 7B000000 		.4byte	.LASF1
+ARM GAS  C:\TEMP\ccMFP242.s 			page 20
+
+
+ 1080 002b 02       		.uleb128 0x2
+ 1081 002c 02       		.byte	0x2
+ 1082 002d 05       		.byte	0x5
+ 1083 002e 3A010000 		.4byte	.LASF2
+ 1084 0032 02       		.uleb128 0x2
+ 1085 0033 02       		.byte	0x2
+ 1086 0034 07       		.byte	0x7
+ 1087 0035 9B000000 		.4byte	.LASF3
+ 1088 0039 02       		.uleb128 0x2
+ 1089 003a 04       		.byte	0x4
+ 1090 003b 05       		.byte	0x5
+ 1091 003c 93010000 		.4byte	.LASF4
+ 1092 0040 02       		.uleb128 0x2
+ 1093 0041 04       		.byte	0x4
+ 1094 0042 07       		.byte	0x7
+ 1095 0043 89000000 		.4byte	.LASF5
+ 1096 0047 02       		.uleb128 0x2
+ 1097 0048 08       		.byte	0x8
+ 1098 0049 05       		.byte	0x5
+ 1099 004a 27010000 		.4byte	.LASF6
+ 1100 004e 02       		.uleb128 0x2
+ 1101 004f 08       		.byte	0x8
+ 1102 0050 07       		.byte	0x7
+ 1103 0051 E4000000 		.4byte	.LASF7
+ 1104 0055 03       		.uleb128 0x3
+ 1105 0056 04       		.byte	0x4
+ 1106 0057 05       		.byte	0x5
+ 1107 0058 696E7400 		.ascii	"int\000"
+ 1108 005c 02       		.uleb128 0x2
+ 1109 005d 04       		.byte	0x4
+ 1110 005e 07       		.byte	0x7
+ 1111 005f D7000000 		.4byte	.LASF8
+ 1112 0063 04       		.uleb128 0x4
+ 1113 0064 44010000 		.4byte	.LASF21
+ 1114 0068 02       		.byte	0x2
+ 1115 0069 5B       		.byte	0x5b
+ 1116 006a 24000000 		.4byte	0x24
+ 1117 006e 02       		.uleb128 0x2
+ 1118 006f 04       		.byte	0x4
+ 1119 0070 04       		.byte	0x4
+ 1120 0071 75000000 		.4byte	.LASF9
+ 1121 0075 02       		.uleb128 0x2
+ 1122 0076 08       		.byte	0x8
+ 1123 0077 04       		.byte	0x4
+ 1124 0078 AE000000 		.4byte	.LASF10
+ 1125 007c 02       		.uleb128 0x2
+ 1126 007d 01       		.byte	0x1
+ 1127 007e 08       		.byte	0x8
+ 1128 007f 35010000 		.4byte	.LASF11
+ 1129 0083 05       		.uleb128 0x5
+ 1130 0084 63000000 		.4byte	0x63
+ 1131 0088 94000000 		.4byte	0x94
+ 1132 008c 06       		.uleb128 0x6
+ 1133 008d 94000000 		.4byte	0x94
+ 1134 0091 DF03     		.2byte	0x3df
+ 1135 0093 00       		.byte	0
+ 1136 0094 02       		.uleb128 0x2
+ARM GAS  C:\TEMP\ccMFP242.s 			page 21
+
+
+ 1137 0095 04       		.byte	0x4
+ 1138 0096 07       		.byte	0x7
+ 1139 0097 1E010000 		.4byte	.LASF12
+ 1140 009b 07       		.uleb128 0x7
+ 1141 009c C5000000 		.4byte	.LASF13
+ 1142 00a0 01       		.byte	0x1
+ 1143 00a1 1C       		.byte	0x1c
+ 1144 00a2 AD000000 		.4byte	0xad
+ 1145 00a6 01       		.byte	0x1
+ 1146 00a7 05       		.byte	0x5
+ 1147 00a8 03       		.byte	0x3
+ 1148 00a9 00000000 		.4byte	cy_meta_configecc
+ 1149 00ad 08       		.uleb128 0x8
+ 1150 00ae 83000000 		.4byte	0x83
+ 1151 00b2 05       		.uleb128 0x5
+ 1152 00b3 63000000 		.4byte	0x63
+ 1153 00b7 C2000000 		.4byte	0xc2
+ 1154 00bb 09       		.uleb128 0x9
+ 1155 00bc 94000000 		.4byte	0x94
+ 1156 00c0 03       		.byte	0x3
+ 1157 00c1 00       		.byte	0
+ 1158 00c2 07       		.uleb128 0x7
+ 1159 00c3 B5000000 		.4byte	.LASF14
+ 1160 00c7 01       		.byte	0x1
+ 1161 00c8 A2       		.byte	0xa2
+ 1162 00c9 D4000000 		.4byte	0xd4
+ 1163 00cd 01       		.byte	0x1
+ 1164 00ce 05       		.byte	0x5
+ 1165 00cf 03       		.byte	0x3
+ 1166 00d0 00000000 		.4byte	cy_meta_custnvl
+ 1167 00d4 08       		.uleb128 0x8
+ 1168 00d5 B2000000 		.4byte	0xb2
+ 1169 00d9 07       		.uleb128 0x7
+ 1170 00da 10010000 		.4byte	.LASF15
+ 1171 00de 01       		.byte	0x1
+ 1172 00df AD       		.byte	0xad
+ 1173 00e0 EB000000 		.4byte	0xeb
+ 1174 00e4 01       		.byte	0x1
+ 1175 00e5 05       		.byte	0x5
+ 1176 00e6 03       		.byte	0x3
+ 1177 00e7 00000000 		.4byte	cy_meta_wonvl
+ 1178 00eb 08       		.uleb128 0x8
+ 1179 00ec B2000000 		.4byte	0xb2
+ 1180 00f0 05       		.uleb128 0x5
+ 1181 00f1 63000000 		.4byte	0x63
+ 1182 00f5 00010000 		.4byte	0x100
+ 1183 00f9 09       		.uleb128 0x9
+ 1184 00fa 94000000 		.4byte	0x94
+ 1185 00fe FF       		.byte	0xff
+ 1186 00ff 00       		.byte	0
+ 1187 0100 07       		.uleb128 0x7
+ 1188 0101 FB000000 		.4byte	.LASF16
+ 1189 0105 01       		.byte	0x1
+ 1190 0106 B8       		.byte	0xb8
+ 1191 0107 12010000 		.4byte	0x112
+ 1192 010b 01       		.byte	0x1
+ 1193 010c 05       		.byte	0x5
+ARM GAS  C:\TEMP\ccMFP242.s 			page 22
+
+
+ 1194 010d 03       		.byte	0x3
+ 1195 010e 00000000 		.4byte	cy_meta_flashprotect
+ 1196 0112 08       		.uleb128 0x8
+ 1197 0113 F0000000 		.4byte	0xf0
+ 1198 0117 05       		.uleb128 0x5
+ 1199 0118 63000000 		.4byte	0x63
+ 1200 011c 27010000 		.4byte	0x127
+ 1201 0120 09       		.uleb128 0x9
+ 1202 0121 94000000 		.4byte	0x94
+ 1203 0125 0B       		.byte	0xb
+ 1204 0126 00       		.byte	0
+ 1205 0127 07       		.uleb128 0x7
+ 1206 0128 69000000 		.4byte	.LASF17
+ 1207 012c 01       		.byte	0x1
+ 1208 012d E2       		.byte	0xe2
+ 1209 012e 39010000 		.4byte	0x139
+ 1210 0132 01       		.byte	0x1
+ 1211 0133 05       		.byte	0x5
+ 1212 0134 03       		.byte	0x3
+ 1213 0135 00000000 		.4byte	cy_metadata
+ 1214 0139 08       		.uleb128 0x8
+ 1215 013a 17010000 		.4byte	0x117
+ 1216 013e 00       		.byte	0
+ 1217              		.section	.debug_abbrev,"",%progbits
+ 1218              	.Ldebug_abbrev0:
+ 1219 0000 01       		.uleb128 0x1
+ 1220 0001 11       		.uleb128 0x11
+ 1221 0002 01       		.byte	0x1
+ 1222 0003 25       		.uleb128 0x25
+ 1223 0004 0E       		.uleb128 0xe
+ 1224 0005 13       		.uleb128 0x13
+ 1225 0006 0B       		.uleb128 0xb
+ 1226 0007 03       		.uleb128 0x3
+ 1227 0008 0E       		.uleb128 0xe
+ 1228 0009 1B       		.uleb128 0x1b
+ 1229 000a 0E       		.uleb128 0xe
+ 1230 000b 10       		.uleb128 0x10
+ 1231 000c 06       		.uleb128 0x6
+ 1232 000d 00       		.byte	0
+ 1233 000e 00       		.byte	0
+ 1234 000f 02       		.uleb128 0x2
+ 1235 0010 24       		.uleb128 0x24
+ 1236 0011 00       		.byte	0
+ 1237 0012 0B       		.uleb128 0xb
+ 1238 0013 0B       		.uleb128 0xb
+ 1239 0014 3E       		.uleb128 0x3e
+ 1240 0015 0B       		.uleb128 0xb
+ 1241 0016 03       		.uleb128 0x3
+ 1242 0017 0E       		.uleb128 0xe
+ 1243 0018 00       		.byte	0
+ 1244 0019 00       		.byte	0
+ 1245 001a 03       		.uleb128 0x3
+ 1246 001b 24       		.uleb128 0x24
+ 1247 001c 00       		.byte	0
+ 1248 001d 0B       		.uleb128 0xb
+ 1249 001e 0B       		.uleb128 0xb
+ 1250 001f 3E       		.uleb128 0x3e
+ARM GAS  C:\TEMP\ccMFP242.s 			page 23
+
+
+ 1251 0020 0B       		.uleb128 0xb
+ 1252 0021 03       		.uleb128 0x3
+ 1253 0022 08       		.uleb128 0x8
+ 1254 0023 00       		.byte	0
+ 1255 0024 00       		.byte	0
+ 1256 0025 04       		.uleb128 0x4
+ 1257 0026 16       		.uleb128 0x16
+ 1258 0027 00       		.byte	0
+ 1259 0028 03       		.uleb128 0x3
+ 1260 0029 0E       		.uleb128 0xe
+ 1261 002a 3A       		.uleb128 0x3a
+ 1262 002b 0B       		.uleb128 0xb
+ 1263 002c 3B       		.uleb128 0x3b
+ 1264 002d 0B       		.uleb128 0xb
+ 1265 002e 49       		.uleb128 0x49
+ 1266 002f 13       		.uleb128 0x13
+ 1267 0030 00       		.byte	0
+ 1268 0031 00       		.byte	0
+ 1269 0032 05       		.uleb128 0x5
+ 1270 0033 01       		.uleb128 0x1
+ 1271 0034 01       		.byte	0x1
+ 1272 0035 49       		.uleb128 0x49
+ 1273 0036 13       		.uleb128 0x13
+ 1274 0037 01       		.uleb128 0x1
+ 1275 0038 13       		.uleb128 0x13
+ 1276 0039 00       		.byte	0
+ 1277 003a 00       		.byte	0
+ 1278 003b 06       		.uleb128 0x6
+ 1279 003c 21       		.uleb128 0x21
+ 1280 003d 00       		.byte	0
+ 1281 003e 49       		.uleb128 0x49
+ 1282 003f 13       		.uleb128 0x13
+ 1283 0040 2F       		.uleb128 0x2f
+ 1284 0041 05       		.uleb128 0x5
+ 1285 0042 00       		.byte	0
+ 1286 0043 00       		.byte	0
+ 1287 0044 07       		.uleb128 0x7
+ 1288 0045 34       		.uleb128 0x34
+ 1289 0046 00       		.byte	0
+ 1290 0047 03       		.uleb128 0x3
+ 1291 0048 0E       		.uleb128 0xe
+ 1292 0049 3A       		.uleb128 0x3a
+ 1293 004a 0B       		.uleb128 0xb
+ 1294 004b 3B       		.uleb128 0x3b
+ 1295 004c 0B       		.uleb128 0xb
+ 1296 004d 49       		.uleb128 0x49
+ 1297 004e 13       		.uleb128 0x13
+ 1298 004f 3F       		.uleb128 0x3f
+ 1299 0050 0C       		.uleb128 0xc
+ 1300 0051 02       		.uleb128 0x2
+ 1301 0052 0A       		.uleb128 0xa
+ 1302 0053 00       		.byte	0
+ 1303 0054 00       		.byte	0
+ 1304 0055 08       		.uleb128 0x8
+ 1305 0056 26       		.uleb128 0x26
+ 1306 0057 00       		.byte	0
+ 1307 0058 49       		.uleb128 0x49
+ARM GAS  C:\TEMP\ccMFP242.s 			page 24
+
+
+ 1308 0059 13       		.uleb128 0x13
+ 1309 005a 00       		.byte	0
+ 1310 005b 00       		.byte	0
+ 1311 005c 09       		.uleb128 0x9
+ 1312 005d 21       		.uleb128 0x21
+ 1313 005e 00       		.byte	0
+ 1314 005f 49       		.uleb128 0x49
+ 1315 0060 13       		.uleb128 0x13
+ 1316 0061 2F       		.uleb128 0x2f
+ 1317 0062 0B       		.uleb128 0xb
+ 1318 0063 00       		.byte	0
+ 1319 0064 00       		.byte	0
+ 1320 0065 00       		.byte	0
+ 1321              		.section	.debug_aranges,"",%progbits
+ 1322 0000 14000000 		.4byte	0x14
+ 1323 0004 0200     		.2byte	0x2
+ 1324 0006 00000000 		.4byte	.Ldebug_info0
+ 1325 000a 04       		.byte	0x4
+ 1326 000b 00       		.byte	0
+ 1327 000c 0000     		.2byte	0
+ 1328 000e 0000     		.2byte	0
+ 1329 0010 00000000 		.4byte	0
+ 1330 0014 00000000 		.4byte	0
+ 1331              		.section	.debug_line,"",%progbits
+ 1332              	.Ldebug_line0:
+ 1333 0000 4F000000 		.section	.debug_str,"MS",%progbits,1
+ 1333      02004900 
+ 1333      00000201 
+ 1333      FB0E0D00 
+ 1333      01010101 
+ 1334              	.LASF20:
+ 1335 0000 433A5C55 		.ascii	"C:\\Users\\asai\\Documents\\PSoC Creator\\asp_1.9.0"
+ 1335      73657273 
+ 1335      5C617361 
+ 1335      695C446F 
+ 1335      63756D65 
+ 1336 002e 5F332E30 		.ascii	"_3.0\\asp_eval1.cydsn\000"
+ 1336      5C617370 
+ 1336      5F657661 
+ 1336      6C312E63 
+ 1336      7964736E 
+ 1337              	.LASF19:
+ 1338 0043 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\cymetadata.c\000"
+ 1338      6E657261 
+ 1338      7465645F 
+ 1338      536F7572 
+ 1338      63655C50 
+ 1339              	.LASF17:
+ 1340 0069 63795F6D 		.ascii	"cy_metadata\000"
+ 1340      65746164 
+ 1340      61746100 
+ 1341              	.LASF9:
+ 1342 0075 666C6F61 		.ascii	"float\000"
+ 1342      7400
+ 1343              	.LASF1:
+ 1344 007b 756E7369 		.ascii	"unsigned char\000"
+ 1344      676E6564 
+ARM GAS  C:\TEMP\ccMFP242.s 			page 25
+
+
+ 1344      20636861 
+ 1344      7200
+ 1345              	.LASF5:
+ 1346 0089 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1346      20756E73 
+ 1346      69676E65 
+ 1346      6420696E 
+ 1346      7400
+ 1347              	.LASF3:
+ 1348 009b 73686F72 		.ascii	"short unsigned int\000"
+ 1348      7420756E 
+ 1348      7369676E 
+ 1348      65642069 
+ 1348      6E7400
+ 1349              	.LASF10:
+ 1350 00ae 646F7562 		.ascii	"double\000"
+ 1350      6C6500
+ 1351              	.LASF14:
+ 1352 00b5 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 1352      6574615F 
+ 1352      63757374 
+ 1352      6E766C00 
+ 1353              	.LASF13:
+ 1354 00c5 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 1354      6574615F 
+ 1354      636F6E66 
+ 1354      69676563 
+ 1354      6300
+ 1355              	.LASF8:
+ 1356 00d7 756E7369 		.ascii	"unsigned int\000"
+ 1356      676E6564 
+ 1356      20696E74 
+ 1356      00
+ 1357              	.LASF7:
+ 1358 00e4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1358      206C6F6E 
+ 1358      6720756E 
+ 1358      7369676E 
+ 1358      65642069 
+ 1359              	.LASF16:
+ 1360 00fb 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 1360      6574615F 
+ 1360      666C6173 
+ 1360      6870726F 
+ 1360      74656374 
+ 1361              	.LASF15:
+ 1362 0110 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 1362      6574615F 
+ 1362      776F6E76 
+ 1362      6C00
+ 1363              	.LASF12:
+ 1364 011e 73697A65 		.ascii	"sizetype\000"
+ 1364      74797065 
+ 1364      00
+ 1365              	.LASF6:
+ 1366 0127 6C6F6E67 		.ascii	"long long int\000"
+ 1366      206C6F6E 
+ARM GAS  C:\TEMP\ccMFP242.s 			page 26
+
+
+ 1366      6720696E 
+ 1366      7400
+ 1367              	.LASF11:
+ 1368 0135 63686172 		.ascii	"char\000"
+ 1368      00
+ 1369              	.LASF2:
+ 1370 013a 73686F72 		.ascii	"short int\000"
+ 1370      7420696E 
+ 1370      7400
+ 1371              	.LASF21:
+ 1372 0144 75696E74 		.ascii	"uint8\000"
+ 1372      3800
+ 1373              	.LASF18:
+ 1374 014a 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 1374      4320342E 
+ 1374      372E3320 
+ 1374      32303133 
+ 1374      30333132 
+ 1375 017d 616E6368 		.ascii	"anch revision 196615]\000"
+ 1375      20726576 
+ 1375      6973696F 
+ 1375      6E203139 
+ 1375      36363135 
+ 1376              	.LASF4:
+ 1377 0193 6C6F6E67 		.ascii	"long int\000"
+ 1377      20696E74 
+ 1377      00
+ 1378              	.LASF0:
+ 1379 019c 7369676E 		.ascii	"signed char\000"
+ 1379      65642063 
+ 1379      68617200 
+ 1380              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

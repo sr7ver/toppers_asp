@@ -1,0 +1,2570 @@
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"target_serial.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.target_usart_init,"ax",%progbits
+  19              		.align	1
+  20              		.global	target_usart_init
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	target_usart_init, %function
+  24              	target_usart_init:
+  25              	.LFB29:
+  26              		.file 1 ".\\asp\\target\\cy8ckit050_gcc\\target_serial.c"
+   1:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+   2:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  TOPPERS/ASP Kernel
+   3:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      Toyohashi Open Platform for Embedded Real-Time Systems/
+   4:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      Advanced Standard Profile Kernel
+   5:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * 
+   6:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  Copyright (C) 2008-2011 by Embedded and Real-Time Systems Laboratory
+   7:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   8:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * 
+   9:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  10:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  11:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  12:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  13:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  14:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      スコード中に含まれていること．
+  15:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  16:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  17:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  18:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      の無保証規定を掲載すること．
+  19:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  20:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  21:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      と．
+  22:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  23:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  24:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  25:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *        報告すること．
+  26:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  27:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  28:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  29:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  30:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *      免責すること．
+  31:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * 
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 2
+
+
+  32:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  33:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  34:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  35:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  36:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  の責任を負わない．
+  37:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * 
+  38:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  @(#) $Id: target_serial.c 2202 2011-07-26 13:27:11Z ertl-honda $
+  39:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+  40:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  41:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+  42:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oデバイス（SIO）ドライバ（CY8C5XLP用）
+  43:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+  44:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  45:.\asp\target\cy8ckit050_gcc/target_serial.c **** #include <kernel.h>
+  46:.\asp\target\cy8ckit050_gcc/target_serial.c **** #include <t_syslog.h>
+  47:.\asp\target\cy8ckit050_gcc/target_serial.c **** #include "target_serial.h"
+  48:.\asp\target\cy8ckit050_gcc/target_serial.c **** #include "core_insn.h"
+  49:.\asp\target\cy8ckit050_gcc/target_serial.c **** #include "cyfitter.h"
+  50:.\asp\target\cy8ckit050_gcc/target_serial.c **** #include "UART_1.h"
+  51:.\asp\target\cy8ckit050_gcc/target_serial.c **** #if (TNUM_SIOP >= 2)
+  52:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	#include "UART_2.h"
+  53:.\asp\target\cy8ckit050_gcc/target_serial.c **** #endif /* TNUM_SIOP >= 2 */
+  54:.\asp\target\cy8ckit050_gcc/target_serial.c **** #if(UART_1_INTERNAL_CLOCK_USED)
+  55:.\asp\target\cy8ckit050_gcc/target_serial.c ****     #include "UART_1_IntClock.h"
+  56:.\asp\target\cy8ckit050_gcc/target_serial.c **** #endif /* End UART_1_INTERNAL_CLOCK_USED */
+  57:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  58:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+  59:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポート初期化ブロックの定義
+  60:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+  61:.\asp\target\cy8ckit050_gcc/target_serial.c **** typedef struct sio_port_initialization_block {
+  62:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	ID       port;   /* SIOのポートID(論理番号) */
+  63:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	INTNO    intno;  /* 割込み番号 */
+  64:.\asp\target\cy8ckit050_gcc/target_serial.c **** } SIOPINIB;
+  65:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  66:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+  67:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポート管理ブロックの定義
+  68:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+  69:.\asp\target\cy8ckit050_gcc/target_serial.c **** struct sio_port_control_block {
+  70:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	const SIOPINIB  *p_siopinib;  /* シリアルI/Oポート初期化ブロック */
+  71:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	intptr_t        exinf;        /* 拡張情報 */
+  72:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	bool_t          opnflg;       /* オープン済みフラグ */
+  73:.\asp\target\cy8ckit050_gcc/target_serial.c **** };
+  74:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  75:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+  76:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * シリアルI/Oポート初期化ブロック
+  77:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+  78:.\asp\target\cy8ckit050_gcc/target_serial.c **** const SIOPINIB siopinib_table[TNUM_SIOP] = {
+  79:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	{(ID)0, (INTNO)INTNO_SIO},
+  80:.\asp\target\cy8ckit050_gcc/target_serial.c **** #if (TNUM_SIOP >= 2)
+  81:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	{(ID)1, (INTNO)INTNO_SIO},
+  82:.\asp\target\cy8ckit050_gcc/target_serial.c **** #endif /* TNUM_SIOP >= 2 */
+  83:.\asp\target\cy8ckit050_gcc/target_serial.c **** };
+  84:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  85:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+  86:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポート管理ブロックのエリア
+  87:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+  88:.\asp\target\cy8ckit050_gcc/target_serial.c **** SIOPCB	siopcb_table[TNUM_SIOP];
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 3
+
+
+  89:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  90:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+  91:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/OポートIDから管理ブロックを取り出すためのマクロ
+  92:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+  93:.\asp\target\cy8ckit050_gcc/target_serial.c **** #define INDEX_SIOP(siopid)	((uint_t)((siopid) - 1))
+  94:.\asp\target\cy8ckit050_gcc/target_serial.c **** #define get_siopcb(siopid)	(&(siopcb_table[INDEX_SIOP(siopid)]))
+  95:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+  96:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+  97:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  ターゲットのシリアル初期化
+  98:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *
+  99:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * PSoC Creatorが生成するUARTドライバを参考に作成
+ 100:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *
+ 101:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * ・UART_*_TXCLKGENDPシンボルの定義が不明のためそのまま引用
+ 102:.\asp\target\cy8ckit050_gcc/target_serial.c ****  * ・UART_1_INTERNAL_CLOCK_USEDシンボルはユーザ選択可能とした
+ 103:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 104:.\asp\target\cy8ckit050_gcc/target_serial.c **** void target_usart_init(ID siopid)
+ 105:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+  27              		.loc 1 105 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              	.LVL0:
+ 106:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	switch(siopid) {
+  33              		.loc 1 106 0
+  34 0000 B8B9     		cbnz	r0, .L1
+ 107:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	case 0:	/* シリアルポートID:0 */
+ 108:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		if((UART_1_RXBITCTR_CONTROL_REG && UART_1_CNTR_ENABLE) == 0) {
+  35              		.loc 1 108 0
+  36 0002 0C4B     		ldr	r3, .L5
+  37 0004 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+  38 0006 A2B9     		cbnz	r2, .L1
+ 109:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /* Init Count7 period */
+ 110:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        UART_1_RXBITCTR_PERIOD_REG = UART_1_RXBITCTR_INIT;
+  39              		.loc 1 110 0
+  40 0008 0B48     		ldr	r0, .L5+4
+  41              	.LVL1:
+  42 000a 7221     		movs	r1, #114
+  43 000c 0170     		strb	r1, [r0, #0]
+ 111:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /* Configure the Initial RX interrupt mask */
+ 112:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        UART_1_RXSTATUS_MASK_REG  = UART_1_INIT_RX_INTERRUPTS_MASK;
+  44              		.loc 1 112 0
+  45 000e 3C22     		movs	r2, #60
+ 113:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	
+ 114:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /* Write Counter Value for TX Bit Clk Generator*/
+ 115:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #if(UART_1_TXCLKGEN_DP)
+ 116:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	            UART_1_TXBITCLKGEN_CTR_REG = UART_1_BIT_CENTER;
+  46              		.loc 1 116 0
+  47 0010 0721     		movs	r1, #7
+ 112:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        UART_1_RXSTATUS_MASK_REG  = UART_1_INIT_RX_INTERRUPTS_MASK;
+  48              		.loc 1 112 0
+  49 0012 80F8FD20 		strb	r2, [r0, #253]
+  50              		.loc 1 116 0
+  51 0016 80F89E10 		strb	r1, [r0, #158]
+ 117:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	            UART_1_TXBITCLKTX_COMPLETE_REG = (UART_1_NUMBER_OF_DATA_BITS +
+  52              		.loc 1 117 0
+  53 001a 4822     		movs	r2, #72
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 4
+
+
+ 118:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	                        UART_1_NUMBER_OF_START_BIT) * UART_1_OVER_SAMPLE_COUNT;
+ 119:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #else
+ 120:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	            UART_1_TXBITCTR_PERIOD_REG = ((UART_1_NUMBER_OF_DATA_BITS +
+ 121:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	                        UART_1_NUMBER_OF_START_BIT) * UART_1_OVER_SAMPLE_8) - 1u;
+ 122:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #endif /* End UART_1_TXCLKGEN_DP */
+ 123:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 124:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /* Configure the Initial TX interrupt mask */
+ 125:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #if(UART_1_TX_INTERRUPT_ENABLED && (UART_1_TXBUFFERSIZE > UART_1_FIFO_LENGTH))
+ 126:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	            UART_1_TXSTATUS_MASK_REG = UART_1_TX_STS_FIFO_EMPTY;
+ 127:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #else
+ 128:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	            UART_1_TXSTATUS_MASK_REG = UART_1_INIT_TX_INTERRUPTS_MASK;
+  54              		.loc 1 128 0
+  55 001c 0821     		movs	r1, #8
+ 117:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	            UART_1_TXBITCLKTX_COMPLETE_REG = (UART_1_NUMBER_OF_DATA_BITS +
+  56              		.loc 1 117 0
+  57 001e 80F8AE20 		strb	r2, [r0, #174]
+  58              		.loc 1 128 0
+  59 0022 80F8FF10 		strb	r1, [r0, #255]
+ 129:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #endif /*End UART_1_TX_INTERRUPT_ENABLED*/
+ 130:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 131:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /*RX Counter (Count7) Enable */
+ 132:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        UART_1_RXBITCTR_CONTROL_REG |= UART_1_CNTR_ENABLE;
+  60              		.loc 1 132 0
+  61 0026 1878     		ldrb	r0, [r3, #0]	@ zero_extendqisi2
+  62 0028 40F02002 		orr	r2, r0, #32
+  63 002c 1A70     		strb	r2, [r3, #0]
+ 133:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /* Enable the RX Interrupt. */
+ 134:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*	        UART_1_RXSTATUS_ACTL_REG  |= UART_1_INT_ENABLE;*/
+ 135:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 136:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /*TX Counter (DP/Count7) Enable */
+ 137:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #if(!UART_1_TXCLKGEN_DP)
+ 138:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	            UART_1_TXBITCTR_CONTROL_REG |= UART_1_CNTR_ENABLE;
+ 139:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        #endif /* End UART_1_TXCLKGEN_DP */
+ 140:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	        /* Enable the TX Interrupt. */
+ 141:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*	        UART_1_TXSTATUS_ACTL_REG |= UART_1_INT_ENABLE;*/
+ 142:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 143:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		    #if(UART_1_INTERNAL_CLOCK_USED)
+ 144:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	    	   /* Enable the clock. */
+ 145:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		        UART_1_IntClock_Start();
+ 146:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		    #endif /* End UART_1_INTERNAL_CLOCK_USED */
+ 147:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		}
+ 148:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		break;
+ 149:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	default: /* 未定義ポート */
+ 150:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		break;
+ 151:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	};
+ 152:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+  64              		.loc 1 152 0
+ 145:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		        UART_1_IntClock_Start();
+  65              		.loc 1 145 0
+  66 002e FFF7FEBF 		b	UART_1_IntClock_Start
+  67              	.LVL2:
+  68              	.L1:
+  69 0032 7047     		bx	lr
+  70              	.L6:
+  71              		.align	2
+  72              	.L5:
+  73 0034 97640040 		.word	1073767575
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 5
+
+
+  74 0038 87640040 		.word	1073767559
+  75              		.cfi_endproc
+  76              	.LFE29:
+  77              		.size	target_usart_init, .-target_usart_init
+  78              		.section	.text.sio_initialize,"ax",%progbits
+  79              		.align	1
+  80              		.global	sio_initialize
+  81              		.thumb
+  82              		.thumb_func
+  83              		.type	sio_initialize, %function
+  84              	sio_initialize:
+  85              	.LFB30:
+ 153:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 154:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 155:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  SIOドライバの初期化
+ 156:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 157:.\asp\target\cy8ckit050_gcc/target_serial.c **** void
+ 158:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_initialize(intptr_t exinf)
+ 159:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+  86              		.loc 1 159 0
+  87              		.cfi_startproc
+  88              		@ args = 0, pretend = 0, frame = 0
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90              		@ link register save eliminated.
+  91              	.LVL3:
+ 160:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	SIOPCB	*p_siopcb;
+ 161:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	uint_t	i;
+ 162:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 163:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	/*
+ 164:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 *  シリアルI/Oポート管理ブロックの初期化
+ 165:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 */
+ 166:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	for (p_siopcb = siopcb_table, i = 0; i < TNUM_SIOP; p_siopcb++, i++) {
+ 167:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		p_siopcb->p_siopinib = &(siopinib_table[i]);
+  92              		.loc 1 167 0
+  93 0000 024B     		ldr	r3, .L8
+  94 0002 034A     		ldr	r2, .L8+4
+ 168:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		p_siopcb->opnflg = false;
+  95              		.loc 1 168 0
+  96 0004 0020     		movs	r0, #0
+  97              	.LVL4:
+ 167:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		p_siopcb->p_siopinib = &(siopinib_table[i]);
+  98              		.loc 1 167 0
+  99 0006 1A60     		str	r2, [r3, #0]
+ 100              		.loc 1 168 0
+ 101 0008 9860     		str	r0, [r3, #8]
+ 102              	.LVL5:
+ 103 000a 7047     		bx	lr
+ 104              	.L9:
+ 105              		.align	2
+ 106              	.L8:
+ 107 000c 00000000 		.word	siopcb_table
+ 108 0010 00000000 		.word	.LANCHOR0
+ 109              		.cfi_endproc
+ 110              	.LFE30:
+ 111              		.size	sio_initialize, .-sio_initialize
+ 112              		.section	.text.sio_opn_por,"ax",%progbits
+ 113              		.align	1
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 6
+
+
+ 114              		.global	sio_opn_por
+ 115              		.thumb
+ 116              		.thumb_func
+ 117              		.type	sio_opn_por, %function
+ 118              	sio_opn_por:
+ 119              	.LFB31:
+ 169:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 170:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+ 171:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 172:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 173:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 174:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポートのオープン
+ 175:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 176:.\asp\target\cy8ckit050_gcc/target_serial.c **** SIOPCB *
+ 177:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_opn_por(ID siopid, intptr_t exinf)
+ 178:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 120              		.loc 1 178 0
+ 121              		.cfi_startproc
+ 122              		@ args = 0, pretend = 0, frame = 0
+ 123              		@ frame_needed = 0, uses_anonymous_args = 0
+ 124              	.LVL6:
+ 179:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	SIOPCB          *p_siopcb;
+ 180:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	const SIOPINIB  *p_siopinib;
+ 181:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	bool_t  opnflg;
+ 182:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	ER      ercd;
+ 183:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 184:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	p_siopcb = get_siopcb(siopid);
+ 125              		.loc 1 184 0
+ 126 0000 431E     		subs	r3, r0, #1
+ 127 0002 0C22     		movs	r2, #12
+ 128 0004 5A43     		muls	r2, r3, r2
+ 178:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 129              		.loc 1 178 0
+ 130 0006 70B5     		push	{r4, r5, r6, lr}
+ 131              	.LCFI0:
+ 132              		.cfi_def_cfa_offset 16
+ 133              		.cfi_offset 4, -16
+ 134              		.cfi_offset 5, -12
+ 135              		.cfi_offset 6, -8
+ 136              		.cfi_offset 14, -4
+ 137              		.loc 1 184 0
+ 138 0008 064D     		ldr	r5, .L12
+ 139 000a 5419     		adds	r4, r2, r5
+ 140              	.LVL7:
+ 185:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	p_siopinib = p_siopcb->p_siopinib;
+ 186:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 187:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	/*
+ 188:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 *  オープンしたポートがあるかをopnflgに読んでおく．
+ 189:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 */
+ 190:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	opnflg = p_siopcb->opnflg;
+ 141              		.loc 1 190 0
+ 142 000c A668     		ldr	r6, [r4, #8]
+ 191:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 192:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	p_siopcb->exinf = exinf;
+ 143              		.loc 1 192 0
+ 144 000e 6160     		str	r1, [r4, #4]
+ 185:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	p_siopinib = p_siopcb->p_siopinib;
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 7
+
+
+ 145              		.loc 1 185 0
+ 146 0010 5559     		ldr	r5, [r2, r5]
+ 147              	.LVL8:
+ 193:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 194:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	/*
+ 195:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 *  ハードウェアの初期化
+ 196:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 */
+ 197:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	target_usart_init(siopid);
+ 148              		.loc 1 197 0
+ 149 0012 FFF7FEFF 		bl	target_usart_init
+ 150              	.LVL9:
+ 198:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 199:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	/*
+ 200:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 *  シリアルI/O割込みのマスクを解除する．
+ 201:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 */
+ 202:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	if (!opnflg) {
+ 151              		.loc 1 202 0
+ 152 0016 16B9     		cbnz	r6, .L11
+ 203:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		ercd = ena_int(p_siopinib->intno);
+ 153              		.loc 1 203 0
+ 154 0018 6868     		ldr	r0, [r5, #4]
+ 155 001a FFF7FEFF 		bl	ena_int
+ 156              	.LVL10:
+ 157              	.L11:
+ 204:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		assert(ercd == E_OK);
+ 205:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 206:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 207:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	return(p_siopcb);
+ 208:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+ 158              		.loc 1 208 0
+ 159 001e 2046     		mov	r0, r4
+ 160 0020 70BD     		pop	{r4, r5, r6, pc}
+ 161              	.L13:
+ 162 0022 00BF     		.align	2
+ 163              	.L12:
+ 164 0024 00000000 		.word	siopcb_table
+ 165              		.cfi_endproc
+ 166              	.LFE31:
+ 167              		.size	sio_opn_por, .-sio_opn_por
+ 168              		.section	.text.sio_cls_por,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	sio_cls_por
+ 171              		.thumb
+ 172              		.thumb_func
+ 173              		.type	sio_cls_por, %function
+ 174              	sio_cls_por:
+ 175              	.LFB32:
+ 209:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 210:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 211:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポートのクローズ
+ 212:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 213:.\asp\target\cy8ckit050_gcc/target_serial.c **** void
+ 214:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_cls_por(SIOPCB *p_siopcb)
+ 215:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 176              		.loc 1 215 0
+ 177              		.cfi_startproc
+ 178              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 8
+
+
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 181              	.LVL11:
+ 216:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	/*
+ 217:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 *  シリアルI/O割込みをマスクする．
+ 218:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 */
+ 219:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	if (!(p_siopcb->opnflg)) {
+ 182              		.loc 1 219 0
+ 183 0000 8368     		ldr	r3, [r0, #8]
+ 184 0002 1BB9     		cbnz	r3, .L14
+ 220:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		dis_int(p_siopcb->p_siopinib->intno);
+ 185              		.loc 1 220 0
+ 186 0004 0068     		ldr	r0, [r0, #0]
+ 187              	.LVL12:
+ 188 0006 4068     		ldr	r0, [r0, #4]
+ 221:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 222:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+ 189              		.loc 1 222 0
+ 220:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		dis_int(p_siopcb->p_siopinib->intno);
+ 190              		.loc 1 220 0
+ 191 0008 FFF7FEBF 		b	dis_int
+ 192              	.LVL13:
+ 193              	.L14:
+ 194 000c 7047     		bx	lr
+ 195              		.cfi_endproc
+ 196              	.LFE32:
+ 197              		.size	sio_cls_por, .-sio_cls_por
+ 198              		.section	.text.sio_isr,"ax",%progbits
+ 199              		.align	1
+ 200              		.global	sio_isr
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.type	sio_isr, %function
+ 204              	sio_isr:
+ 205              	.LFB33:
+ 223:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 224:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 225:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  SIOの割込みサービスルーチン
+ 226:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 227:.\asp\target\cy8ckit050_gcc/target_serial.c **** void
+ 228:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_isr(intptr_t exinf)
+ 229:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 206              		.loc 1 229 0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              	.LVL14:
+ 230:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	SIOPCB          *p_siopcb;
+ 231:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 232:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	p_siopcb = get_siopcb(exinf);
+ 211              		.loc 1 232 0
+ 212 0000 0D4B     		ldr	r3, .L22
+ 229:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 213              		.loc 1 229 0
+ 214 0002 10B5     		push	{r4, lr}
+ 215              	.LCFI1:
+ 216              		.cfi_def_cfa_offset 8
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 9
+
+
+ 217              		.cfi_offset 4, -8
+ 218              		.cfi_offset 14, -4
+ 219              		.loc 1 232 0
+ 220 0004 0138     		subs	r0, r0, #1
+ 221              	.LVL15:
+ 222 0006 0C24     		movs	r4, #12
+ 223 0008 04FB0034 		mla	r4, r4, r0, r3
+ 224              	.LVL16:
+ 233:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 234:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	/*
+ 235:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 *  割込みのクリア
+ 236:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	 */
+ 237:.\asp\target\cy8ckit050_gcc/target_serial.c **** /* PSoC UARTでも必要か要確認 */
+ 238:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 239:.\asp\target\cy8ckit050_gcc/target_serial.c **** /* シリアルポートを切り替える場合は，p_siopcb->p_siopinib->ID で判別する*/
+ 240:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 241:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	if ((UART_1_ReadRxStatus() & UART_1_RX_STS_FIFO_NOTEMPTY) != 0u) {
+ 225              		.loc 1 241 0
+ 226 000c FFF7FEFF 		bl	UART_1_ReadRxStatus
+ 227              	.LVL17:
+ 228 0010 00F02001 		and	r1, r0, #32
+ 229 0014 CAB2     		uxtb	r2, r1
+ 230 0016 12B1     		cbz	r2, .L17
+ 242:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		/*
+ 243:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		 *  受信通知コールバックルーチンを呼び出す．
+ 244:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		 */
+ 245:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		sio_irdy_rcv(p_siopcb->exinf);
+ 231              		.loc 1 245 0
+ 232 0018 6068     		ldr	r0, [r4, #4]
+ 233 001a FFF7FEFF 		bl	sio_irdy_rcv
+ 234              	.LVL18:
+ 235              	.L17:
+ 246:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 247:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	if ((UART_1_ReadTxStatus() & UART_1_TX_STS_FIFO_FULL) == 0u) {
+ 236              		.loc 1 247 0
+ 237 001e FFF7FEFF 		bl	UART_1_ReadTxStatus
+ 238              	.LVL19:
+ 239 0022 00F00400 		and	r0, r0, #4
+ 240 0026 C3B2     		uxtb	r3, r0
+ 241 0028 23B9     		cbnz	r3, .L16
+ 248:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		/*
+ 249:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		 *  送信可能コールバックルーチンを呼び出す．
+ 250:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		 */
+ 251:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		sio_irdy_snd(p_siopcb->exinf);
+ 242              		.loc 1 251 0
+ 243 002a 6068     		ldr	r0, [r4, #4]
+ 252:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 253:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+ 244              		.loc 1 253 0
+ 245 002c BDE81040 		pop	{r4, lr}
+ 251:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		sio_irdy_snd(p_siopcb->exinf);
+ 246              		.loc 1 251 0
+ 247 0030 FFF7FEBF 		b	sio_irdy_snd
+ 248              	.LVL20:
+ 249              	.L16:
+ 250 0034 10BD     		pop	{r4, pc}
+ 251              	.L23:
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 10
+
+
+ 252 0036 00BF     		.align	2
+ 253              	.L22:
+ 254 0038 00000000 		.word	siopcb_table
+ 255              		.cfi_endproc
+ 256              	.LFE33:
+ 257              		.size	sio_isr, .-sio_isr
+ 258              		.section	.text.sio_snd_chr,"ax",%progbits
+ 259              		.align	1
+ 260              		.global	sio_snd_chr
+ 261              		.thumb
+ 262              		.thumb_func
+ 263              		.type	sio_snd_chr, %function
+ 264              	sio_snd_chr:
+ 265              	.LFB34:
+ 254:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 255:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 256:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポートへの文字送信
+ 257:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 258:.\asp\target\cy8ckit050_gcc/target_serial.c **** bool_t
+ 259:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_snd_chr(SIOPCB *p_siopcb, char c)
+ 260:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 266              		.loc 1 260 0
+ 267              		.cfi_startproc
+ 268              		@ args = 0, pretend = 0, frame = 0
+ 269              		@ frame_needed = 0, uses_anonymous_args = 0
+ 270              	.LVL21:
+ 271 0000 10B5     		push	{r4, lr}
+ 272              	.LCFI2:
+ 273              		.cfi_def_cfa_offset 8
+ 274              		.cfi_offset 4, -8
+ 275              		.cfi_offset 14, -4
+ 276              		.loc 1 260 0
+ 277 0002 0C46     		mov	r4, r1
+ 261:.\asp\target\cy8ckit050_gcc/target_serial.c **** /* シリアルポートを切り替える場合は，p_siopcb->p_siopinib->ID で判別する*/
+ 262:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	if((UART_1_ReadTxStatus() & UART_1_TX_STS_FIFO_FULL) == 0u){
+ 278              		.loc 1 262 0
+ 279 0004 FFF7FEFF 		bl	UART_1_ReadTxStatus
+ 280              	.LVL22:
+ 281 0008 00F00400 		and	r0, r0, #4
+ 282 000c C1B2     		uxtb	r1, r0
+ 283 000e 19B9     		cbnz	r1, .L26
+ 263:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_TXDATA_REG = (uint8)c;
+ 284              		.loc 1 263 0
+ 285 0010 024B     		ldr	r3, .L27
+ 264:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		return(true);
+ 286              		.loc 1 264 0
+ 287 0012 0120     		movs	r0, #1
+ 263:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_TXDATA_REG = (uint8)c;
+ 288              		.loc 1 263 0
+ 289 0014 1C70     		strb	r4, [r3, #0]
+ 290              		.loc 1 264 0
+ 291 0016 10BD     		pop	{r4, pc}
+ 292              	.L26:
+ 265:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 266:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	return(false);
+ 293              		.loc 1 266 0
+ 294 0018 0020     		movs	r0, #0
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 11
+
+
+ 267:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+ 295              		.loc 1 267 0
+ 296 001a 10BD     		pop	{r4, pc}
+ 297              	.L28:
+ 298              		.align	2
+ 299              	.L27:
+ 300 001c 46650040 		.word	1073767750
+ 301              		.cfi_endproc
+ 302              	.LFE34:
+ 303              		.size	sio_snd_chr, .-sio_snd_chr
+ 304              		.section	.text.sio_rcv_chr,"ax",%progbits
+ 305              		.align	1
+ 306              		.global	sio_rcv_chr
+ 307              		.thumb
+ 308              		.thumb_func
+ 309              		.type	sio_rcv_chr, %function
+ 310              	sio_rcv_chr:
+ 311              	.LFB35:
+ 268:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 269:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 270:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポートからの文字受信
+ 271:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 272:.\asp\target\cy8ckit050_gcc/target_serial.c **** int_t
+ 273:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_rcv_chr(SIOPCB *p_siopcb)
+ 274:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 312              		.loc 1 274 0
+ 313              		.cfi_startproc
+ 314              		@ args = 0, pretend = 0, frame = 0
+ 315              		@ frame_needed = 0, uses_anonymous_args = 0
+ 316              	.LVL23:
+ 317 0000 08B5     		push	{r3, lr}
+ 318              	.LCFI3:
+ 319              		.cfi_def_cfa_offset 8
+ 320              		.cfi_offset 3, -8
+ 321              		.cfi_offset 14, -4
+ 275:.\asp\target\cy8ckit050_gcc/target_serial.c **** /* シリアルポートを切り替える場合は，p_siopcb->p_siopinib->ID で判別する*/
+ 276:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	if((UART_1_ReadRxStatus() & UART_1_RX_STS_FIFO_NOTEMPTY) != 0u){
+ 322              		.loc 1 276 0
+ 323 0002 FFF7FEFF 		bl	UART_1_ReadRxStatus
+ 324              	.LVL24:
+ 325 0006 00F02000 		and	r0, r0, #32
+ 326 000a C1B2     		uxtb	r1, r0
+ 327 000c 11B1     		cbz	r1, .L31
+ 277:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		return((int_t) UART_1_GetChar());
+ 328              		.loc 1 277 0
+ 329 000e FFF7FEFF 		bl	UART_1_GetChar
+ 330              	.LVL25:
+ 331 0012 08BD     		pop	{r3, pc}
+ 332              	.L31:
+ 278:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 279:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	return(-1);
+ 333              		.loc 1 279 0
+ 334 0014 4FF0FF30 		mov	r0, #-1
+ 280:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+ 335              		.loc 1 280 0
+ 336 0018 08BD     		pop	{r3, pc}
+ 337              		.cfi_endproc
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 12
+
+
+ 338              	.LFE35:
+ 339              		.size	sio_rcv_chr, .-sio_rcv_chr
+ 340              		.section	.text.sio_ena_cbr,"ax",%progbits
+ 341              		.align	1
+ 342              		.global	sio_ena_cbr
+ 343              		.thumb
+ 344              		.thumb_func
+ 345              		.type	sio_ena_cbr, %function
+ 346              	sio_ena_cbr:
+ 347              	.LFB36:
+ 281:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 282:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 283:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポートからのコールバックの許可
+ 284:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 285:.\asp\target\cy8ckit050_gcc/target_serial.c **** void
+ 286:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_ena_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
+ 287:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 348              		.loc 1 287 0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+ 353              	.LVL26:
+ 288:.\asp\target\cy8ckit050_gcc/target_serial.c **** /* シリアルポートを切り替える場合は，p_siopcb->p_siopinib->ID で判別する*/
+ 289:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	switch (cbrtn) {
+ 354              		.loc 1 289 0
+ 355 0000 0129     		cmp	r1, #1
+ 356 0002 03D0     		beq	.L34
+ 357 0004 0229     		cmp	r1, #2
+ 358 0006 06D1     		bne	.L32
+ 290:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	  case SIO_RDY_SND:
+ 291:.\asp\target\cy8ckit050_gcc/target_serial.c ****         /* Enable the TX Interrupt. */
+ 292:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_TXSTATUS_ACTL_REG |= UART_1_INT_ENABLE;
+ 293:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		break;
+ 294:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	  case SIO_RDY_RCV:
+ 295:.\asp\target\cy8ckit050_gcc/target_serial.c ****         /* Enable the RX Interrupt. */
+ 296:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_RXSTATUS_ACTL_REG  |= UART_1_INT_ENABLE;
+ 359              		.loc 1 296 0
+ 360 0008 034B     		ldr	r3, .L37
+ 361 000a 00E0     		b	.L36
+ 362              	.L34:
+ 292:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_TXSTATUS_ACTL_REG |= UART_1_INT_ENABLE;
+ 363              		.loc 1 292 0
+ 364 000c 034B     		ldr	r3, .L37+4
+ 365              	.L36:
+ 366              		.loc 1 296 0
+ 367 000e 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 368 0010 42F01000 		orr	r0, r2, #16
+ 369              	.LVL27:
+ 370 0014 1870     		strb	r0, [r3, #0]
+ 371              	.L32:
+ 372 0016 7047     		bx	lr
+ 373              	.L38:
+ 374              		.align	2
+ 375              	.L37:
+ 376 0018 94650040 		.word	1073767828
+ 377 001c 96650040 		.word	1073767830
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 13
+
+
+ 378              		.cfi_endproc
+ 379              	.LFE36:
+ 380              		.size	sio_ena_cbr, .-sio_ena_cbr
+ 381              		.section	.text.sio_dis_cbr,"ax",%progbits
+ 382              		.align	1
+ 383              		.global	sio_dis_cbr
+ 384              		.thumb
+ 385              		.thumb_func
+ 386              		.type	sio_dis_cbr, %function
+ 387              	sio_dis_cbr:
+ 388              	.LFB37:
+ 297:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		break;
+ 298:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	}
+ 299:.\asp\target\cy8ckit050_gcc/target_serial.c **** }
+ 300:.\asp\target\cy8ckit050_gcc/target_serial.c **** 
+ 301:.\asp\target\cy8ckit050_gcc/target_serial.c **** /*
+ 302:.\asp\target\cy8ckit050_gcc/target_serial.c ****  *  シリアルI/Oポートからのコールバックの禁止
+ 303:.\asp\target\cy8ckit050_gcc/target_serial.c ****  */
+ 304:.\asp\target\cy8ckit050_gcc/target_serial.c **** void
+ 305:.\asp\target\cy8ckit050_gcc/target_serial.c **** sio_dis_cbr(SIOPCB *p_siopcb, uint_t cbrtn)
+ 306:.\asp\target\cy8ckit050_gcc/target_serial.c **** {
+ 389              		.loc 1 306 0
+ 390              		.cfi_startproc
+ 391              		@ args = 0, pretend = 0, frame = 0
+ 392              		@ frame_needed = 0, uses_anonymous_args = 0
+ 393              		@ link register save eliminated.
+ 394              	.LVL28:
+ 307:.\asp\target\cy8ckit050_gcc/target_serial.c **** /* シリアルポートを切り替える場合は，p_siopcb->p_siopinib->ID で判別する*/
+ 308:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	switch (cbrtn) {
+ 395              		.loc 1 308 0
+ 396 0000 0129     		cmp	r1, #1
+ 397 0002 03D0     		beq	.L41
+ 398 0004 0229     		cmp	r1, #2
+ 399 0006 06D1     		bne	.L39
+ 309:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	  case SIO_RDY_SND:
+ 310:.\asp\target\cy8ckit050_gcc/target_serial.c ****         /* Disable the TX Interrupt. */
+ 311:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_TXSTATUS_ACTL_REG &= (uint8)~UART_1_INT_ENABLE;
+ 312:.\asp\target\cy8ckit050_gcc/target_serial.c **** 		break;
+ 313:.\asp\target\cy8ckit050_gcc/target_serial.c **** 	  case SIO_RDY_RCV:
+ 314:.\asp\target\cy8ckit050_gcc/target_serial.c ****         /* Disable the RX Interrupt. */
+ 315:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_RXSTATUS_ACTL_REG  &= (uint8)~UART_1_INT_ENABLE;
+ 400              		.loc 1 315 0
+ 401 0008 034B     		ldr	r3, .L44
+ 402 000a 00E0     		b	.L43
+ 403              	.L41:
+ 311:.\asp\target\cy8ckit050_gcc/target_serial.c ****         UART_1_TXSTATUS_ACTL_REG &= (uint8)~UART_1_INT_ENABLE;
+ 404              		.loc 1 311 0
+ 405 000c 034B     		ldr	r3, .L44+4
+ 406              	.L43:
+ 407              		.loc 1 315 0
+ 408 000e 1A78     		ldrb	r2, [r3, #0]	@ zero_extendqisi2
+ 409 0010 02F0EF00 		and	r0, r2, #239
+ 410              	.LVL29:
+ 411 0014 1870     		strb	r0, [r3, #0]
+ 412              	.L39:
+ 413 0016 7047     		bx	lr
+ 414              	.L45:
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 14
+
+
+ 415              		.align	2
+ 416              	.L44:
+ 417 0018 94650040 		.word	1073767828
+ 418 001c 96650040 		.word	1073767830
+ 419              		.cfi_endproc
+ 420              	.LFE37:
+ 421              		.size	sio_dis_cbr, .-sio_dis_cbr
+ 422              		.comm	siopcb_table,12,4
+ 423              		.global	siopinib_table
+ 424              		.section	.rodata
+ 425              		.align	2
+ 426              		.set	.LANCHOR0,. + 0
+ 427              		.type	siopinib_table, %object
+ 428              		.size	siopinib_table, 8
+ 429              	siopinib_table:
+ 430 0000 00000000 		.word	0
+ 431 0004 10000000 		.word	16
+ 432              		.text
+ 433              	.Letext0:
+ 434              		.file 2 ".\\asp\\arch\\gcc/tool_stddef.h"
+ 435              		.file 3 ".\\asp\\include/t_stddef.h"
+ 436              		.file 4 ".\\asp\\include/kernel.h"
+ 437              		.file 5 "./Generated_Source/PSoC5/cytypes.h"
+ 438              		.file 6 ".\\asp\\target\\cy8ckit050_gcc\\target_serial.h"
+ 439              		.file 7 "./Generated_Source/PSoC5/UART_1.h"
+ 440              		.file 8 "./Generated_Source/PSoC5/UART_1_IntClock.h"
+ 441              		.section	.debug_info,"",%progbits
+ 442              	.Ldebug_info0:
+ 443 0000 DB040000 		.4byte	0x4db
+ 444 0004 0200     		.2byte	0x2
+ 445 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 446 000a 04       		.byte	0x4
+ 447 000b 01       		.uleb128 0x1
+ 448 000c 7D020000 		.4byte	.LASF50
+ 449 0010 01       		.byte	0x1
+ 450 0011 51020000 		.4byte	.LASF51
+ 451 0015 00000000 		.4byte	.LASF52
+ 452 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 453 001d 00000000 		.4byte	0
+ 454 0021 00000000 		.4byte	0
+ 455 0025 00000000 		.4byte	.Ldebug_line0
+ 456 0029 02       		.uleb128 0x2
+ 457 002a 04       		.byte	0x4
+ 458 002b 05       		.byte	0x5
+ 459 002c 696E7400 		.ascii	"int\000"
+ 460 0030 03       		.uleb128 0x3
+ 461 0031 04       		.byte	0x4
+ 462 0032 07       		.byte	0x7
+ 463 0033 A5010000 		.4byte	.LASF0
+ 464 0037 03       		.uleb128 0x3
+ 465 0038 01       		.byte	0x1
+ 466 0039 06       		.byte	0x6
+ 467 003a CF020000 		.4byte	.LASF1
+ 468 003e 03       		.uleb128 0x3
+ 469 003f 01       		.byte	0x1
+ 470 0040 08       		.byte	0x8
+ 471 0041 CD000000 		.4byte	.LASF2
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 15
+
+
+ 472 0045 03       		.uleb128 0x3
+ 473 0046 02       		.byte	0x2
+ 474 0047 05       		.byte	0x5
+ 475 0048 47020000 		.4byte	.LASF3
+ 476 004c 03       		.uleb128 0x3
+ 477 004d 02       		.byte	0x2
+ 478 004e 07       		.byte	0x7
+ 479 004f 75000000 		.4byte	.LASF4
+ 480 0053 03       		.uleb128 0x3
+ 481 0054 08       		.byte	0x8
+ 482 0055 05       		.byte	0x5
+ 483 0056 11020000 		.4byte	.LASF5
+ 484 005a 03       		.uleb128 0x3
+ 485 005b 08       		.byte	0x8
+ 486 005c 07       		.byte	0x7
+ 487 005d C1010000 		.4byte	.LASF6
+ 488 0061 04       		.uleb128 0x4
+ 489 0062 9C010000 		.4byte	.LASF11
+ 490 0066 02       		.byte	0x2
+ 491 0067 75       		.byte	0x75
+ 492 0068 6C000000 		.4byte	0x6c
+ 493 006c 03       		.uleb128 0x3
+ 494 006d 04       		.byte	0x4
+ 495 006e 05       		.byte	0x5
+ 496 006f C6020000 		.4byte	.LASF7
+ 497 0073 03       		.uleb128 0x3
+ 498 0074 04       		.byte	0x4
+ 499 0075 07       		.byte	0x7
+ 500 0076 05010000 		.4byte	.LASF8
+ 501 007a 03       		.uleb128 0x3
+ 502 007b 04       		.byte	0x4
+ 503 007c 04       		.byte	0x4
+ 504 007d 53000000 		.4byte	.LASF9
+ 505 0081 03       		.uleb128 0x3
+ 506 0082 08       		.byte	0x8
+ 507 0083 04       		.byte	0x4
+ 508 0084 53010000 		.4byte	.LASF10
+ 509 0088 04       		.uleb128 0x4
+ 510 0089 8F000000 		.4byte	.LASF12
+ 511 008d 03       		.byte	0x3
+ 512 008e 63       		.byte	0x63
+ 513 008f 29000000 		.4byte	0x29
+ 514 0093 04       		.uleb128 0x4
+ 515 0094 59000000 		.4byte	.LASF13
+ 516 0098 03       		.byte	0x3
+ 517 0099 65       		.byte	0x65
+ 518 009a 29000000 		.4byte	0x29
+ 519 009e 04       		.uleb128 0x4
+ 520 009f A8000000 		.4byte	.LASF14
+ 521 00a3 03       		.byte	0x3
+ 522 00a4 66       		.byte	0x66
+ 523 00a5 30000000 		.4byte	0x30
+ 524 00a9 05       		.uleb128 0x5
+ 525 00aa 455200   		.ascii	"ER\000"
+ 526 00ad 03       		.byte	0x3
+ 527 00ae 6C       		.byte	0x6c
+ 528 00af 93000000 		.4byte	0x93
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 16
+
+
+ 529 00b3 05       		.uleb128 0x5
+ 530 00b4 494400   		.ascii	"ID\000"
+ 531 00b7 03       		.byte	0x3
+ 532 00b8 6D       		.byte	0x6d
+ 533 00b9 93000000 		.4byte	0x93
+ 534 00bd 04       		.uleb128 0x4
+ 535 00be 1F020000 		.4byte	.LASF15
+ 536 00c2 04       		.byte	0x4
+ 537 00c3 55       		.byte	0x55
+ 538 00c4 9E000000 		.4byte	0x9e
+ 539 00c8 03       		.uleb128 0x3
+ 540 00c9 04       		.byte	0x4
+ 541 00ca 07       		.byte	0x7
+ 542 00cb F4010000 		.4byte	.LASF16
+ 543 00cf 03       		.uleb128 0x3
+ 544 00d0 01       		.byte	0x1
+ 545 00d1 08       		.byte	0x8
+ 546 00d2 25020000 		.4byte	.LASF17
+ 547 00d6 04       		.uleb128 0x4
+ 548 00d7 17010000 		.4byte	.LASF18
+ 549 00db 05       		.byte	0x5
+ 550 00dc 5B       		.byte	0x5b
+ 551 00dd 3E000000 		.4byte	0x3e
+ 552 00e1 04       		.uleb128 0x4
+ 553 00e2 E6000000 		.4byte	.LASF19
+ 554 00e6 05       		.byte	0x5
+ 555 00e7 F0       		.byte	0xf0
+ 556 00e8 EC000000 		.4byte	0xec
+ 557 00ec 06       		.uleb128 0x6
+ 558 00ed D6000000 		.4byte	0xd6
+ 559 00f1 04       		.uleb128 0x4
+ 560 00f2 88000000 		.4byte	.LASF20
+ 561 00f6 06       		.byte	0x6
+ 562 00f7 41       		.byte	0x41
+ 563 00f8 FC000000 		.4byte	0xfc
+ 564 00fc 07       		.uleb128 0x7
+ 565 00fd 1D010000 		.4byte	.LASF24
+ 566 0101 0C       		.byte	0xc
+ 567 0102 01       		.byte	0x1
+ 568 0103 45       		.byte	0x45
+ 569 0104 33010000 		.4byte	0x133
+ 570 0108 08       		.uleb128 0x8
+ 571 0109 DB000000 		.4byte	.LASF21
+ 572 010d 01       		.byte	0x1
+ 573 010e 46       		.byte	0x46
+ 574 010f 67010000 		.4byte	0x167
+ 575 0113 02       		.byte	0x2
+ 576 0114 23       		.byte	0x23
+ 577 0115 00       		.uleb128 0
+ 578 0116 08       		.uleb128 0x8
+ 579 0117 A2000000 		.4byte	.LASF22
+ 580 011b 01       		.byte	0x1
+ 581 011c 47       		.byte	0x47
+ 582 011d 61000000 		.4byte	0x61
+ 583 0121 02       		.byte	0x2
+ 584 0122 23       		.byte	0x23
+ 585 0123 04       		.uleb128 0x4
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 17
+
+
+ 586 0124 08       		.uleb128 0x8
+ 587 0125 43000000 		.4byte	.LASF23
+ 588 0129 01       		.byte	0x1
+ 589 012a 48       		.byte	0x48
+ 590 012b 88000000 		.4byte	0x88
+ 591 012f 02       		.byte	0x2
+ 592 0130 23       		.byte	0x23
+ 593 0131 08       		.uleb128 0x8
+ 594 0132 00       		.byte	0
+ 595 0133 07       		.uleb128 0x7
+ 596 0134 AF000000 		.4byte	.LASF25
+ 597 0138 08       		.byte	0x8
+ 598 0139 01       		.byte	0x1
+ 599 013a 3D       		.byte	0x3d
+ 600 013b 5C010000 		.4byte	0x15c
+ 601 013f 08       		.uleb128 0x8
+ 602 0140 36020000 		.4byte	.LASF26
+ 603 0144 01       		.byte	0x1
+ 604 0145 3E       		.byte	0x3e
+ 605 0146 B3000000 		.4byte	0xb3
+ 606 014a 02       		.byte	0x2
+ 607 014b 23       		.byte	0x23
+ 608 014c 00       		.uleb128 0
+ 609 014d 08       		.uleb128 0x8
+ 610 014e FE020000 		.4byte	.LASF27
+ 611 0152 01       		.byte	0x1
+ 612 0153 3F       		.byte	0x3f
+ 613 0154 BD000000 		.4byte	0xbd
+ 614 0158 02       		.byte	0x2
+ 615 0159 23       		.byte	0x23
+ 616 015a 04       		.uleb128 0x4
+ 617 015b 00       		.byte	0
+ 618 015c 04       		.uleb128 0x4
+ 619 015d D8010000 		.4byte	.LASF28
+ 620 0161 01       		.byte	0x1
+ 621 0162 40       		.byte	0x40
+ 622 0163 33010000 		.4byte	0x133
+ 623 0167 09       		.uleb128 0x9
+ 624 0168 04       		.byte	0x4
+ 625 0169 6D010000 		.4byte	0x16d
+ 626 016d 0A       		.uleb128 0xa
+ 627 016e 5C010000 		.4byte	0x15c
+ 628 0172 0B       		.uleb128 0xb
+ 629 0173 01       		.byte	0x1
+ 630 0174 8A010000 		.4byte	.LASF29
+ 631 0178 01       		.byte	0x1
+ 632 0179 68       		.byte	0x68
+ 633 017a 01       		.byte	0x1
+ 634 017b 00000000 		.4byte	.LFB29
+ 635 017f 3C000000 		.4byte	.LFE29
+ 636 0183 02       		.byte	0x2
+ 637 0184 7D       		.byte	0x7d
+ 638 0185 00       		.sleb128 0
+ 639 0186 01       		.byte	0x1
+ 640 0187 A5010000 		.4byte	0x1a5
+ 641 018b 0C       		.uleb128 0xc
+ 642 018c E1010000 		.4byte	.LASF31
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 18
+
+
+ 643 0190 01       		.byte	0x1
+ 644 0191 68       		.byte	0x68
+ 645 0192 B3000000 		.4byte	0xb3
+ 646 0196 00000000 		.4byte	.LLST0
+ 647 019a 0D       		.uleb128 0xd
+ 648 019b 32000000 		.4byte	.LVL2
+ 649 019f 01       		.byte	0x1
+ 650 01a0 50040000 		.4byte	0x450
+ 651 01a4 00       		.byte	0
+ 652 01a5 0B       		.uleb128 0xb
+ 653 01a6 01       		.byte	0x1
+ 654 01a7 7B010000 		.4byte	.LASF30
+ 655 01ab 01       		.byte	0x1
+ 656 01ac 9E       		.byte	0x9e
+ 657 01ad 01       		.byte	0x1
+ 658 01ae 00000000 		.4byte	.LFB30
+ 659 01b2 14000000 		.4byte	.LFE30
+ 660 01b6 02       		.byte	0x2
+ 661 01b7 7D       		.byte	0x7d
+ 662 01b8 00       		.sleb128 0
+ 663 01b9 01       		.byte	0x1
+ 664 01ba EA010000 		.4byte	0x1ea
+ 665 01be 0C       		.uleb128 0xc
+ 666 01bf A2000000 		.4byte	.LASF22
+ 667 01c3 01       		.byte	0x1
+ 668 01c4 9E       		.byte	0x9e
+ 669 01c5 61000000 		.4byte	0x61
+ 670 01c9 2C000000 		.4byte	.LLST1
+ 671 01cd 0E       		.uleb128 0xe
+ 672 01ce 4A000000 		.4byte	.LASF32
+ 673 01d2 01       		.byte	0x1
+ 674 01d3 A0       		.byte	0xa0
+ 675 01d4 EA010000 		.4byte	0x1ea
+ 676 01d8 4D000000 		.4byte	.LLST2
+ 677 01dc 0F       		.uleb128 0xf
+ 678 01dd 6900     		.ascii	"i\000"
+ 679 01df 01       		.byte	0x1
+ 680 01e0 A1       		.byte	0xa1
+ 681 01e1 9E000000 		.4byte	0x9e
+ 682 01e5 75000000 		.4byte	.LLST3
+ 683 01e9 00       		.byte	0
+ 684 01ea 09       		.uleb128 0x9
+ 685 01eb 04       		.byte	0x4
+ 686 01ec F1000000 		.4byte	0xf1
+ 687 01f0 10       		.uleb128 0x10
+ 688 01f1 01       		.byte	0x1
+ 689 01f2 2A020000 		.4byte	.LASF35
+ 690 01f6 01       		.byte	0x1
+ 691 01f7 B1       		.byte	0xb1
+ 692 01f8 01       		.byte	0x1
+ 693 01f9 EA010000 		.4byte	0x1ea
+ 694 01fd 00000000 		.4byte	.LFB31
+ 695 0201 28000000 		.4byte	.LFE31
+ 696 0205 95000000 		.4byte	.LLST4
+ 697 0209 01       		.byte	0x1
+ 698 020a 7D020000 		.4byte	0x27d
+ 699 020e 0C       		.uleb128 0xc
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 19
+
+
+ 700 020f E1010000 		.4byte	.LASF31
+ 701 0213 01       		.byte	0x1
+ 702 0214 B1       		.byte	0xb1
+ 703 0215 B3000000 		.4byte	0xb3
+ 704 0219 B5000000 		.4byte	.LLST5
+ 705 021d 0C       		.uleb128 0xc
+ 706 021e A2000000 		.4byte	.LASF22
+ 707 0222 01       		.byte	0x1
+ 708 0223 B1       		.byte	0xb1
+ 709 0224 61000000 		.4byte	0x61
+ 710 0228 D6000000 		.4byte	.LLST6
+ 711 022c 11       		.uleb128 0x11
+ 712 022d 4A000000 		.4byte	.LASF32
+ 713 0231 01       		.byte	0x1
+ 714 0232 B3       		.byte	0xb3
+ 715 0233 EA010000 		.4byte	0x1ea
+ 716 0237 01       		.byte	0x1
+ 717 0238 54       		.byte	0x54
+ 718 0239 11       		.uleb128 0x11
+ 719 023a DB000000 		.4byte	.LASF21
+ 720 023e 01       		.byte	0x1
+ 721 023f B4       		.byte	0xb4
+ 722 0240 67010000 		.4byte	0x167
+ 723 0244 01       		.byte	0x1
+ 724 0245 55       		.byte	0x55
+ 725 0246 11       		.uleb128 0x11
+ 726 0247 43000000 		.4byte	.LASF23
+ 727 024b 01       		.byte	0x1
+ 728 024c B5       		.byte	0xb5
+ 729 024d 88000000 		.4byte	0x88
+ 730 0251 01       		.byte	0x1
+ 731 0252 56       		.byte	0x56
+ 732 0253 12       		.uleb128 0x12
+ 733 0254 4E010000 		.4byte	.LASF53
+ 734 0258 01       		.byte	0x1
+ 735 0259 B6       		.byte	0xb6
+ 736 025a A9000000 		.4byte	0xa9
+ 737 025e 13       		.uleb128 0x13
+ 738 025f 16000000 		.4byte	.LVL9
+ 739 0263 72010000 		.4byte	0x172
+ 740 0267 73020000 		.4byte	0x273
+ 741 026b 14       		.uleb128 0x14
+ 742 026c 01       		.byte	0x1
+ 743 026d 50       		.byte	0x50
+ 744 026e 03       		.byte	0x3
+ 745 026f F3       		.byte	0xf3
+ 746 0270 01       		.uleb128 0x1
+ 747 0271 50       		.byte	0x50
+ 748 0272 00       		.byte	0
+ 749 0273 15       		.uleb128 0x15
+ 750 0274 1E000000 		.4byte	.LVL10
+ 751 0278 5A040000 		.4byte	0x45a
+ 752 027c 00       		.byte	0
+ 753 027d 0B       		.uleb128 0xb
+ 754 027e 01       		.byte	0x1
+ 755 027f E8010000 		.4byte	.LASF33
+ 756 0283 01       		.byte	0x1
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 20
+
+
+ 757 0284 D6       		.byte	0xd6
+ 758 0285 01       		.byte	0x1
+ 759 0286 00000000 		.4byte	.LFB32
+ 760 028a 0E000000 		.4byte	.LFE32
+ 761 028e 02       		.byte	0x2
+ 762 028f 7D       		.byte	0x7d
+ 763 0290 00       		.sleb128 0
+ 764 0291 01       		.byte	0x1
+ 765 0292 B0020000 		.4byte	0x2b0
+ 766 0296 0C       		.uleb128 0xc
+ 767 0297 4A000000 		.4byte	.LASF32
+ 768 029b 01       		.byte	0x1
+ 769 029c D6       		.byte	0xd6
+ 770 029d EA010000 		.4byte	0x1ea
+ 771 02a1 F7000000 		.4byte	.LLST7
+ 772 02a5 0D       		.uleb128 0xd
+ 773 02a6 0C000000 		.4byte	.LVL13
+ 774 02aa 01       		.byte	0x1
+ 775 02ab 73040000 		.4byte	0x473
+ 776 02af 00       		.byte	0
+ 777 02b0 16       		.uleb128 0x16
+ 778 02b1 01       		.byte	0x1
+ 779 02b2 09020000 		.4byte	.LASF34
+ 780 02b6 01       		.byte	0x1
+ 781 02b7 E4       		.byte	0xe4
+ 782 02b8 01       		.byte	0x1
+ 783 02b9 00000000 		.4byte	.LFB33
+ 784 02bd 3C000000 		.4byte	.LFE33
+ 785 02c1 23010000 		.4byte	.LLST8
+ 786 02c5 01       		.byte	0x1
+ 787 02c6 0C030000 		.4byte	0x30c
+ 788 02ca 0C       		.uleb128 0xc
+ 789 02cb A2000000 		.4byte	.LASF22
+ 790 02cf 01       		.byte	0x1
+ 791 02d0 E4       		.byte	0xe4
+ 792 02d1 61000000 		.4byte	0x61
+ 793 02d5 43010000 		.4byte	.LLST9
+ 794 02d9 11       		.uleb128 0x11
+ 795 02da 4A000000 		.4byte	.LASF32
+ 796 02de 01       		.byte	0x1
+ 797 02df E6       		.byte	0xe6
+ 798 02e0 EA010000 		.4byte	0x1ea
+ 799 02e4 01       		.byte	0x1
+ 800 02e5 54       		.byte	0x54
+ 801 02e6 15       		.uleb128 0x15
+ 802 02e7 10000000 		.4byte	.LVL17
+ 803 02eb 8C040000 		.4byte	0x48c
+ 804 02ef 15       		.uleb128 0x15
+ 805 02f0 1E000000 		.4byte	.LVL18
+ 806 02f4 9A040000 		.4byte	0x49a
+ 807 02f8 15       		.uleb128 0x15
+ 808 02f9 22000000 		.4byte	.LVL19
+ 809 02fd AE040000 		.4byte	0x4ae
+ 810 0301 0D       		.uleb128 0xd
+ 811 0302 34000000 		.4byte	.LVL20
+ 812 0306 01       		.byte	0x1
+ 813 0307 BC040000 		.4byte	0x4bc
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 21
+
+
+ 814 030b 00       		.byte	0
+ 815 030c 17       		.uleb128 0x17
+ 816 030d 01       		.byte	0x1
+ 817 030e 3B020000 		.4byte	.LASF36
+ 818 0312 01       		.byte	0x1
+ 819 0313 0301     		.2byte	0x103
+ 820 0315 01       		.byte	0x1
+ 821 0316 88000000 		.4byte	0x88
+ 822 031a 00000000 		.4byte	.LFB34
+ 823 031e 20000000 		.4byte	.LFE34
+ 824 0322 71010000 		.4byte	.LLST10
+ 825 0326 01       		.byte	0x1
+ 826 0327 53030000 		.4byte	0x353
+ 827 032b 18       		.uleb128 0x18
+ 828 032c 4A000000 		.4byte	.LASF32
+ 829 0330 01       		.byte	0x1
+ 830 0331 0301     		.2byte	0x103
+ 831 0333 EA010000 		.4byte	0x1ea
+ 832 0337 91010000 		.4byte	.LLST11
+ 833 033b 19       		.uleb128 0x19
+ 834 033c 6300     		.ascii	"c\000"
+ 835 033e 01       		.byte	0x1
+ 836 033f 0301     		.2byte	0x103
+ 837 0341 CF000000 		.4byte	0xcf
+ 838 0345 B2010000 		.4byte	.LLST12
+ 839 0349 15       		.uleb128 0x15
+ 840 034a 08000000 		.4byte	.LVL22
+ 841 034e AE040000 		.4byte	0x4ae
+ 842 0352 00       		.byte	0
+ 843 0353 17       		.uleb128 0x17
+ 844 0354 01       		.byte	0x1
+ 845 0355 96000000 		.4byte	.LASF37
+ 846 0359 01       		.byte	0x1
+ 847 035a 1101     		.2byte	0x111
+ 848 035c 01       		.byte	0x1
+ 849 035d 93000000 		.4byte	0x93
+ 850 0361 00000000 		.4byte	.LFB35
+ 851 0365 1A000000 		.4byte	.LFE35
+ 852 0369 D3010000 		.4byte	.LLST13
+ 853 036d 01       		.byte	0x1
+ 854 036e 95030000 		.4byte	0x395
+ 855 0372 18       		.uleb128 0x18
+ 856 0373 4A000000 		.4byte	.LASF32
+ 857 0377 01       		.byte	0x1
+ 858 0378 1101     		.2byte	0x111
+ 859 037a EA010000 		.4byte	0x1ea
+ 860 037e F3010000 		.4byte	.LLST14
+ 861 0382 15       		.uleb128 0x15
+ 862 0383 06000000 		.4byte	.LVL24
+ 863 0387 8C040000 		.4byte	0x48c
+ 864 038b 15       		.uleb128 0x15
+ 865 038c 12000000 		.4byte	.LVL25
+ 866 0390 D0040000 		.4byte	0x4d0
+ 867 0394 00       		.byte	0
+ 868 0395 1A       		.uleb128 0x1a
+ 869 0396 01       		.byte	0x1
+ 870 0397 FD010000 		.4byte	.LASF38
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 22
+
+
+ 871 039b 01       		.byte	0x1
+ 872 039c 1E01     		.2byte	0x11e
+ 873 039e 01       		.byte	0x1
+ 874 039f 00000000 		.4byte	.LFB36
+ 875 03a3 20000000 		.4byte	.LFE36
+ 876 03a7 02       		.byte	0x2
+ 877 03a8 7D       		.byte	0x7d
+ 878 03a9 00       		.sleb128 0
+ 879 03aa 01       		.byte	0x1
+ 880 03ab CE030000 		.4byte	0x3ce
+ 881 03af 18       		.uleb128 0x18
+ 882 03b0 4A000000 		.4byte	.LASF32
+ 883 03b4 01       		.byte	0x1
+ 884 03b5 1E01     		.2byte	0x11e
+ 885 03b7 EA010000 		.4byte	0x1ea
+ 886 03bb 14020000 		.4byte	.LLST15
+ 887 03bf 1B       		.uleb128 0x1b
+ 888 03c0 48010000 		.4byte	.LASF39
+ 889 03c4 01       		.byte	0x1
+ 890 03c5 1E01     		.2byte	0x11e
+ 891 03c7 9E000000 		.4byte	0x9e
+ 892 03cb 01       		.byte	0x1
+ 893 03cc 51       		.byte	0x51
+ 894 03cd 00       		.byte	0
+ 895 03ce 1A       		.uleb128 0x1a
+ 896 03cf 01       		.byte	0x1
+ 897 03d0 62010000 		.4byte	.LASF40
+ 898 03d4 01       		.byte	0x1
+ 899 03d5 3101     		.2byte	0x131
+ 900 03d7 01       		.byte	0x1
+ 901 03d8 00000000 		.4byte	.LFB37
+ 902 03dc 20000000 		.4byte	.LFE37
+ 903 03e0 02       		.byte	0x2
+ 904 03e1 7D       		.byte	0x7d
+ 905 03e2 00       		.sleb128 0
+ 906 03e3 01       		.byte	0x1
+ 907 03e4 07040000 		.4byte	0x407
+ 908 03e8 18       		.uleb128 0x18
+ 909 03e9 4A000000 		.4byte	.LASF32
+ 910 03ed 01       		.byte	0x1
+ 911 03ee 3101     		.2byte	0x131
+ 912 03f0 EA010000 		.4byte	0x1ea
+ 913 03f4 35020000 		.4byte	.LLST16
+ 914 03f8 1B       		.uleb128 0x1b
+ 915 03f9 48010000 		.4byte	.LASF39
+ 916 03fd 01       		.byte	0x1
+ 917 03fe 3101     		.2byte	0x131
+ 918 0400 9E000000 		.4byte	0x9e
+ 919 0404 01       		.byte	0x1
+ 920 0405 51       		.byte	0x51
+ 921 0406 00       		.byte	0
+ 922 0407 1C       		.uleb128 0x1c
+ 923 0408 5C010000 		.4byte	0x15c
+ 924 040c 17040000 		.4byte	0x417
+ 925 0410 1D       		.uleb128 0x1d
+ 926 0411 C8000000 		.4byte	0xc8
+ 927 0415 00       		.byte	0
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 23
+
+
+ 928 0416 00       		.byte	0
+ 929 0417 1E       		.uleb128 0x1e
+ 930 0418 EF020000 		.4byte	.LASF41
+ 931 041c 01       		.byte	0x1
+ 932 041d 4E       		.byte	0x4e
+ 933 041e 29040000 		.4byte	0x429
+ 934 0422 01       		.byte	0x1
+ 935 0423 05       		.byte	0x5
+ 936 0424 03       		.byte	0x3
+ 937 0425 00000000 		.4byte	siopinib_table
+ 938 0429 0A       		.uleb128 0xa
+ 939 042a 07040000 		.4byte	0x407
+ 940 042e 1C       		.uleb128 0x1c
+ 941 042f F1000000 		.4byte	0xf1
+ 942 0433 3E040000 		.4byte	0x43e
+ 943 0437 1D       		.uleb128 0x1d
+ 944 0438 C8000000 		.4byte	0xc8
+ 945 043c 00       		.byte	0
+ 946 043d 00       		.byte	0
+ 947 043e 1E       		.uleb128 0x1e
+ 948 043f 6E010000 		.4byte	.LASF42
+ 949 0443 01       		.byte	0x1
+ 950 0444 58       		.byte	0x58
+ 951 0445 2E040000 		.4byte	0x42e
+ 952 0449 01       		.byte	0x1
+ 953 044a 05       		.byte	0x5
+ 954 044b 03       		.byte	0x3
+ 955 044c 00000000 		.4byte	siopcb_table
+ 956 0450 1F       		.uleb128 0x1f
+ 957 0451 01       		.byte	0x1
+ 958 0452 5F000000 		.4byte	.LASF54
+ 959 0456 08       		.byte	0x8
+ 960 0457 27       		.byte	0x27
+ 961 0458 01       		.byte	0x1
+ 962 0459 01       		.byte	0x1
+ 963 045a 20       		.uleb128 0x20
+ 964 045b 01       		.byte	0x1
+ 965 045c 04030000 		.4byte	.LASF43
+ 966 0460 04       		.byte	0x4
+ 967 0461 5301     		.2byte	0x153
+ 968 0463 01       		.byte	0x1
+ 969 0464 A9000000 		.4byte	0xa9
+ 970 0468 01       		.byte	0x1
+ 971 0469 73040000 		.4byte	0x473
+ 972 046d 21       		.uleb128 0x21
+ 973 046e BD000000 		.4byte	0xbd
+ 974 0472 00       		.byte	0
+ 975 0473 20       		.uleb128 0x20
+ 976 0474 01       		.byte	0x1
+ 977 0475 5A010000 		.4byte	.LASF44
+ 978 0479 04       		.byte	0x4
+ 979 047a 5201     		.2byte	0x152
+ 980 047c 01       		.byte	0x1
+ 981 047d A9000000 		.4byte	0xa9
+ 982 0481 01       		.byte	0x1
+ 983 0482 8C040000 		.4byte	0x48c
+ 984 0486 21       		.uleb128 0x21
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 24
+
+
+ 985 0487 BD000000 		.4byte	0xbd
+ 986 048b 00       		.byte	0
+ 987 048c 22       		.uleb128 0x22
+ 988 048d 01       		.byte	0x1
+ 989 048e DB020000 		.4byte	.LASF45
+ 990 0492 07       		.byte	0x7
+ 991 0493 87       		.byte	0x87
+ 992 0494 01       		.byte	0x1
+ 993 0495 D6000000 		.4byte	0xd6
+ 994 0499 01       		.byte	0x1
+ 995 049a 23       		.uleb128 0x23
+ 996 049b 01       		.byte	0x1
+ 997 049c EB000000 		.4byte	.LASF47
+ 998 04a0 06       		.byte	0x6
+ 999 04a1 7E       		.byte	0x7e
+ 1000 04a2 01       		.byte	0x1
+ 1001 04a3 01       		.byte	0x1
+ 1002 04a4 AE040000 		.4byte	0x4ae
+ 1003 04a8 21       		.uleb128 0x21
+ 1004 04a9 61000000 		.4byte	0x61
+ 1005 04ad 00       		.byte	0
+ 1006 04ae 22       		.uleb128 0x22
+ 1007 04af 01       		.byte	0x1
+ 1008 04b0 34010000 		.4byte	.LASF46
+ 1009 04b4 07       		.byte	0x7
+ 1010 04b5 9E       		.byte	0x9e
+ 1011 04b6 01       		.byte	0x1
+ 1012 04b7 D6000000 		.4byte	0xd6
+ 1013 04bb 01       		.byte	0x1
+ 1014 04bc 23       		.uleb128 0x23
+ 1015 04bd 01       		.byte	0x1
+ 1016 04be F8000000 		.4byte	.LASF48
+ 1017 04c2 06       		.byte	0x6
+ 1018 04c3 79       		.byte	0x79
+ 1019 04c4 01       		.byte	0x1
+ 1020 04c5 01       		.byte	0x1
+ 1021 04c6 D0040000 		.4byte	0x4d0
+ 1022 04ca 21       		.uleb128 0x21
+ 1023 04cb 61000000 		.4byte	0x61
+ 1024 04cf 00       		.byte	0
+ 1025 04d0 22       		.uleb128 0x22
+ 1026 04d1 01       		.byte	0x1
+ 1027 04d2 B2010000 		.4byte	.LASF49
+ 1028 04d6 07       		.byte	0x7
+ 1029 04d7 88       		.byte	0x88
+ 1030 04d8 01       		.byte	0x1
+ 1031 04d9 D6000000 		.4byte	0xd6
+ 1032 04dd 01       		.byte	0x1
+ 1033 04de 00       		.byte	0
+ 1034              		.section	.debug_abbrev,"",%progbits
+ 1035              	.Ldebug_abbrev0:
+ 1036 0000 01       		.uleb128 0x1
+ 1037 0001 11       		.uleb128 0x11
+ 1038 0002 01       		.byte	0x1
+ 1039 0003 25       		.uleb128 0x25
+ 1040 0004 0E       		.uleb128 0xe
+ 1041 0005 13       		.uleb128 0x13
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 25
+
+
+ 1042 0006 0B       		.uleb128 0xb
+ 1043 0007 03       		.uleb128 0x3
+ 1044 0008 0E       		.uleb128 0xe
+ 1045 0009 1B       		.uleb128 0x1b
+ 1046 000a 0E       		.uleb128 0xe
+ 1047 000b 55       		.uleb128 0x55
+ 1048 000c 06       		.uleb128 0x6
+ 1049 000d 11       		.uleb128 0x11
+ 1050 000e 01       		.uleb128 0x1
+ 1051 000f 52       		.uleb128 0x52
+ 1052 0010 01       		.uleb128 0x1
+ 1053 0011 10       		.uleb128 0x10
+ 1054 0012 06       		.uleb128 0x6
+ 1055 0013 00       		.byte	0
+ 1056 0014 00       		.byte	0
+ 1057 0015 02       		.uleb128 0x2
+ 1058 0016 24       		.uleb128 0x24
+ 1059 0017 00       		.byte	0
+ 1060 0018 0B       		.uleb128 0xb
+ 1061 0019 0B       		.uleb128 0xb
+ 1062 001a 3E       		.uleb128 0x3e
+ 1063 001b 0B       		.uleb128 0xb
+ 1064 001c 03       		.uleb128 0x3
+ 1065 001d 08       		.uleb128 0x8
+ 1066 001e 00       		.byte	0
+ 1067 001f 00       		.byte	0
+ 1068 0020 03       		.uleb128 0x3
+ 1069 0021 24       		.uleb128 0x24
+ 1070 0022 00       		.byte	0
+ 1071 0023 0B       		.uleb128 0xb
+ 1072 0024 0B       		.uleb128 0xb
+ 1073 0025 3E       		.uleb128 0x3e
+ 1074 0026 0B       		.uleb128 0xb
+ 1075 0027 03       		.uleb128 0x3
+ 1076 0028 0E       		.uleb128 0xe
+ 1077 0029 00       		.byte	0
+ 1078 002a 00       		.byte	0
+ 1079 002b 04       		.uleb128 0x4
+ 1080 002c 16       		.uleb128 0x16
+ 1081 002d 00       		.byte	0
+ 1082 002e 03       		.uleb128 0x3
+ 1083 002f 0E       		.uleb128 0xe
+ 1084 0030 3A       		.uleb128 0x3a
+ 1085 0031 0B       		.uleb128 0xb
+ 1086 0032 3B       		.uleb128 0x3b
+ 1087 0033 0B       		.uleb128 0xb
+ 1088 0034 49       		.uleb128 0x49
+ 1089 0035 13       		.uleb128 0x13
+ 1090 0036 00       		.byte	0
+ 1091 0037 00       		.byte	0
+ 1092 0038 05       		.uleb128 0x5
+ 1093 0039 16       		.uleb128 0x16
+ 1094 003a 00       		.byte	0
+ 1095 003b 03       		.uleb128 0x3
+ 1096 003c 08       		.uleb128 0x8
+ 1097 003d 3A       		.uleb128 0x3a
+ 1098 003e 0B       		.uleb128 0xb
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 26
+
+
+ 1099 003f 3B       		.uleb128 0x3b
+ 1100 0040 0B       		.uleb128 0xb
+ 1101 0041 49       		.uleb128 0x49
+ 1102 0042 13       		.uleb128 0x13
+ 1103 0043 00       		.byte	0
+ 1104 0044 00       		.byte	0
+ 1105 0045 06       		.uleb128 0x6
+ 1106 0046 35       		.uleb128 0x35
+ 1107 0047 00       		.byte	0
+ 1108 0048 49       		.uleb128 0x49
+ 1109 0049 13       		.uleb128 0x13
+ 1110 004a 00       		.byte	0
+ 1111 004b 00       		.byte	0
+ 1112 004c 07       		.uleb128 0x7
+ 1113 004d 13       		.uleb128 0x13
+ 1114 004e 01       		.byte	0x1
+ 1115 004f 03       		.uleb128 0x3
+ 1116 0050 0E       		.uleb128 0xe
+ 1117 0051 0B       		.uleb128 0xb
+ 1118 0052 0B       		.uleb128 0xb
+ 1119 0053 3A       		.uleb128 0x3a
+ 1120 0054 0B       		.uleb128 0xb
+ 1121 0055 3B       		.uleb128 0x3b
+ 1122 0056 0B       		.uleb128 0xb
+ 1123 0057 01       		.uleb128 0x1
+ 1124 0058 13       		.uleb128 0x13
+ 1125 0059 00       		.byte	0
+ 1126 005a 00       		.byte	0
+ 1127 005b 08       		.uleb128 0x8
+ 1128 005c 0D       		.uleb128 0xd
+ 1129 005d 00       		.byte	0
+ 1130 005e 03       		.uleb128 0x3
+ 1131 005f 0E       		.uleb128 0xe
+ 1132 0060 3A       		.uleb128 0x3a
+ 1133 0061 0B       		.uleb128 0xb
+ 1134 0062 3B       		.uleb128 0x3b
+ 1135 0063 0B       		.uleb128 0xb
+ 1136 0064 49       		.uleb128 0x49
+ 1137 0065 13       		.uleb128 0x13
+ 1138 0066 38       		.uleb128 0x38
+ 1139 0067 0A       		.uleb128 0xa
+ 1140 0068 00       		.byte	0
+ 1141 0069 00       		.byte	0
+ 1142 006a 09       		.uleb128 0x9
+ 1143 006b 0F       		.uleb128 0xf
+ 1144 006c 00       		.byte	0
+ 1145 006d 0B       		.uleb128 0xb
+ 1146 006e 0B       		.uleb128 0xb
+ 1147 006f 49       		.uleb128 0x49
+ 1148 0070 13       		.uleb128 0x13
+ 1149 0071 00       		.byte	0
+ 1150 0072 00       		.byte	0
+ 1151 0073 0A       		.uleb128 0xa
+ 1152 0074 26       		.uleb128 0x26
+ 1153 0075 00       		.byte	0
+ 1154 0076 49       		.uleb128 0x49
+ 1155 0077 13       		.uleb128 0x13
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 27
+
+
+ 1156 0078 00       		.byte	0
+ 1157 0079 00       		.byte	0
+ 1158 007a 0B       		.uleb128 0xb
+ 1159 007b 2E       		.uleb128 0x2e
+ 1160 007c 01       		.byte	0x1
+ 1161 007d 3F       		.uleb128 0x3f
+ 1162 007e 0C       		.uleb128 0xc
+ 1163 007f 03       		.uleb128 0x3
+ 1164 0080 0E       		.uleb128 0xe
+ 1165 0081 3A       		.uleb128 0x3a
+ 1166 0082 0B       		.uleb128 0xb
+ 1167 0083 3B       		.uleb128 0x3b
+ 1168 0084 0B       		.uleb128 0xb
+ 1169 0085 27       		.uleb128 0x27
+ 1170 0086 0C       		.uleb128 0xc
+ 1171 0087 11       		.uleb128 0x11
+ 1172 0088 01       		.uleb128 0x1
+ 1173 0089 12       		.uleb128 0x12
+ 1174 008a 01       		.uleb128 0x1
+ 1175 008b 40       		.uleb128 0x40
+ 1176 008c 0A       		.uleb128 0xa
+ 1177 008d 9742     		.uleb128 0x2117
+ 1178 008f 0C       		.uleb128 0xc
+ 1179 0090 01       		.uleb128 0x1
+ 1180 0091 13       		.uleb128 0x13
+ 1181 0092 00       		.byte	0
+ 1182 0093 00       		.byte	0
+ 1183 0094 0C       		.uleb128 0xc
+ 1184 0095 05       		.uleb128 0x5
+ 1185 0096 00       		.byte	0
+ 1186 0097 03       		.uleb128 0x3
+ 1187 0098 0E       		.uleb128 0xe
+ 1188 0099 3A       		.uleb128 0x3a
+ 1189 009a 0B       		.uleb128 0xb
+ 1190 009b 3B       		.uleb128 0x3b
+ 1191 009c 0B       		.uleb128 0xb
+ 1192 009d 49       		.uleb128 0x49
+ 1193 009e 13       		.uleb128 0x13
+ 1194 009f 02       		.uleb128 0x2
+ 1195 00a0 06       		.uleb128 0x6
+ 1196 00a1 00       		.byte	0
+ 1197 00a2 00       		.byte	0
+ 1198 00a3 0D       		.uleb128 0xd
+ 1199 00a4 898201   		.uleb128 0x4109
+ 1200 00a7 00       		.byte	0
+ 1201 00a8 11       		.uleb128 0x11
+ 1202 00a9 01       		.uleb128 0x1
+ 1203 00aa 9542     		.uleb128 0x2115
+ 1204 00ac 0C       		.uleb128 0xc
+ 1205 00ad 31       		.uleb128 0x31
+ 1206 00ae 13       		.uleb128 0x13
+ 1207 00af 00       		.byte	0
+ 1208 00b0 00       		.byte	0
+ 1209 00b1 0E       		.uleb128 0xe
+ 1210 00b2 34       		.uleb128 0x34
+ 1211 00b3 00       		.byte	0
+ 1212 00b4 03       		.uleb128 0x3
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 28
+
+
+ 1213 00b5 0E       		.uleb128 0xe
+ 1214 00b6 3A       		.uleb128 0x3a
+ 1215 00b7 0B       		.uleb128 0xb
+ 1216 00b8 3B       		.uleb128 0x3b
+ 1217 00b9 0B       		.uleb128 0xb
+ 1218 00ba 49       		.uleb128 0x49
+ 1219 00bb 13       		.uleb128 0x13
+ 1220 00bc 02       		.uleb128 0x2
+ 1221 00bd 06       		.uleb128 0x6
+ 1222 00be 00       		.byte	0
+ 1223 00bf 00       		.byte	0
+ 1224 00c0 0F       		.uleb128 0xf
+ 1225 00c1 34       		.uleb128 0x34
+ 1226 00c2 00       		.byte	0
+ 1227 00c3 03       		.uleb128 0x3
+ 1228 00c4 08       		.uleb128 0x8
+ 1229 00c5 3A       		.uleb128 0x3a
+ 1230 00c6 0B       		.uleb128 0xb
+ 1231 00c7 3B       		.uleb128 0x3b
+ 1232 00c8 0B       		.uleb128 0xb
+ 1233 00c9 49       		.uleb128 0x49
+ 1234 00ca 13       		.uleb128 0x13
+ 1235 00cb 02       		.uleb128 0x2
+ 1236 00cc 06       		.uleb128 0x6
+ 1237 00cd 00       		.byte	0
+ 1238 00ce 00       		.byte	0
+ 1239 00cf 10       		.uleb128 0x10
+ 1240 00d0 2E       		.uleb128 0x2e
+ 1241 00d1 01       		.byte	0x1
+ 1242 00d2 3F       		.uleb128 0x3f
+ 1243 00d3 0C       		.uleb128 0xc
+ 1244 00d4 03       		.uleb128 0x3
+ 1245 00d5 0E       		.uleb128 0xe
+ 1246 00d6 3A       		.uleb128 0x3a
+ 1247 00d7 0B       		.uleb128 0xb
+ 1248 00d8 3B       		.uleb128 0x3b
+ 1249 00d9 0B       		.uleb128 0xb
+ 1250 00da 27       		.uleb128 0x27
+ 1251 00db 0C       		.uleb128 0xc
+ 1252 00dc 49       		.uleb128 0x49
+ 1253 00dd 13       		.uleb128 0x13
+ 1254 00de 11       		.uleb128 0x11
+ 1255 00df 01       		.uleb128 0x1
+ 1256 00e0 12       		.uleb128 0x12
+ 1257 00e1 01       		.uleb128 0x1
+ 1258 00e2 40       		.uleb128 0x40
+ 1259 00e3 06       		.uleb128 0x6
+ 1260 00e4 9742     		.uleb128 0x2117
+ 1261 00e6 0C       		.uleb128 0xc
+ 1262 00e7 01       		.uleb128 0x1
+ 1263 00e8 13       		.uleb128 0x13
+ 1264 00e9 00       		.byte	0
+ 1265 00ea 00       		.byte	0
+ 1266 00eb 11       		.uleb128 0x11
+ 1267 00ec 34       		.uleb128 0x34
+ 1268 00ed 00       		.byte	0
+ 1269 00ee 03       		.uleb128 0x3
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 29
+
+
+ 1270 00ef 0E       		.uleb128 0xe
+ 1271 00f0 3A       		.uleb128 0x3a
+ 1272 00f1 0B       		.uleb128 0xb
+ 1273 00f2 3B       		.uleb128 0x3b
+ 1274 00f3 0B       		.uleb128 0xb
+ 1275 00f4 49       		.uleb128 0x49
+ 1276 00f5 13       		.uleb128 0x13
+ 1277 00f6 02       		.uleb128 0x2
+ 1278 00f7 0A       		.uleb128 0xa
+ 1279 00f8 00       		.byte	0
+ 1280 00f9 00       		.byte	0
+ 1281 00fa 12       		.uleb128 0x12
+ 1282 00fb 34       		.uleb128 0x34
+ 1283 00fc 00       		.byte	0
+ 1284 00fd 03       		.uleb128 0x3
+ 1285 00fe 0E       		.uleb128 0xe
+ 1286 00ff 3A       		.uleb128 0x3a
+ 1287 0100 0B       		.uleb128 0xb
+ 1288 0101 3B       		.uleb128 0x3b
+ 1289 0102 0B       		.uleb128 0xb
+ 1290 0103 49       		.uleb128 0x49
+ 1291 0104 13       		.uleb128 0x13
+ 1292 0105 00       		.byte	0
+ 1293 0106 00       		.byte	0
+ 1294 0107 13       		.uleb128 0x13
+ 1295 0108 898201   		.uleb128 0x4109
+ 1296 010b 01       		.byte	0x1
+ 1297 010c 11       		.uleb128 0x11
+ 1298 010d 01       		.uleb128 0x1
+ 1299 010e 31       		.uleb128 0x31
+ 1300 010f 13       		.uleb128 0x13
+ 1301 0110 01       		.uleb128 0x1
+ 1302 0111 13       		.uleb128 0x13
+ 1303 0112 00       		.byte	0
+ 1304 0113 00       		.byte	0
+ 1305 0114 14       		.uleb128 0x14
+ 1306 0115 8A8201   		.uleb128 0x410a
+ 1307 0118 00       		.byte	0
+ 1308 0119 02       		.uleb128 0x2
+ 1309 011a 0A       		.uleb128 0xa
+ 1310 011b 9142     		.uleb128 0x2111
+ 1311 011d 0A       		.uleb128 0xa
+ 1312 011e 00       		.byte	0
+ 1313 011f 00       		.byte	0
+ 1314 0120 15       		.uleb128 0x15
+ 1315 0121 898201   		.uleb128 0x4109
+ 1316 0124 00       		.byte	0
+ 1317 0125 11       		.uleb128 0x11
+ 1318 0126 01       		.uleb128 0x1
+ 1319 0127 31       		.uleb128 0x31
+ 1320 0128 13       		.uleb128 0x13
+ 1321 0129 00       		.byte	0
+ 1322 012a 00       		.byte	0
+ 1323 012b 16       		.uleb128 0x16
+ 1324 012c 2E       		.uleb128 0x2e
+ 1325 012d 01       		.byte	0x1
+ 1326 012e 3F       		.uleb128 0x3f
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 30
+
+
+ 1327 012f 0C       		.uleb128 0xc
+ 1328 0130 03       		.uleb128 0x3
+ 1329 0131 0E       		.uleb128 0xe
+ 1330 0132 3A       		.uleb128 0x3a
+ 1331 0133 0B       		.uleb128 0xb
+ 1332 0134 3B       		.uleb128 0x3b
+ 1333 0135 0B       		.uleb128 0xb
+ 1334 0136 27       		.uleb128 0x27
+ 1335 0137 0C       		.uleb128 0xc
+ 1336 0138 11       		.uleb128 0x11
+ 1337 0139 01       		.uleb128 0x1
+ 1338 013a 12       		.uleb128 0x12
+ 1339 013b 01       		.uleb128 0x1
+ 1340 013c 40       		.uleb128 0x40
+ 1341 013d 06       		.uleb128 0x6
+ 1342 013e 9742     		.uleb128 0x2117
+ 1343 0140 0C       		.uleb128 0xc
+ 1344 0141 01       		.uleb128 0x1
+ 1345 0142 13       		.uleb128 0x13
+ 1346 0143 00       		.byte	0
+ 1347 0144 00       		.byte	0
+ 1348 0145 17       		.uleb128 0x17
+ 1349 0146 2E       		.uleb128 0x2e
+ 1350 0147 01       		.byte	0x1
+ 1351 0148 3F       		.uleb128 0x3f
+ 1352 0149 0C       		.uleb128 0xc
+ 1353 014a 03       		.uleb128 0x3
+ 1354 014b 0E       		.uleb128 0xe
+ 1355 014c 3A       		.uleb128 0x3a
+ 1356 014d 0B       		.uleb128 0xb
+ 1357 014e 3B       		.uleb128 0x3b
+ 1358 014f 05       		.uleb128 0x5
+ 1359 0150 27       		.uleb128 0x27
+ 1360 0151 0C       		.uleb128 0xc
+ 1361 0152 49       		.uleb128 0x49
+ 1362 0153 13       		.uleb128 0x13
+ 1363 0154 11       		.uleb128 0x11
+ 1364 0155 01       		.uleb128 0x1
+ 1365 0156 12       		.uleb128 0x12
+ 1366 0157 01       		.uleb128 0x1
+ 1367 0158 40       		.uleb128 0x40
+ 1368 0159 06       		.uleb128 0x6
+ 1369 015a 9742     		.uleb128 0x2117
+ 1370 015c 0C       		.uleb128 0xc
+ 1371 015d 01       		.uleb128 0x1
+ 1372 015e 13       		.uleb128 0x13
+ 1373 015f 00       		.byte	0
+ 1374 0160 00       		.byte	0
+ 1375 0161 18       		.uleb128 0x18
+ 1376 0162 05       		.uleb128 0x5
+ 1377 0163 00       		.byte	0
+ 1378 0164 03       		.uleb128 0x3
+ 1379 0165 0E       		.uleb128 0xe
+ 1380 0166 3A       		.uleb128 0x3a
+ 1381 0167 0B       		.uleb128 0xb
+ 1382 0168 3B       		.uleb128 0x3b
+ 1383 0169 05       		.uleb128 0x5
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 31
+
+
+ 1384 016a 49       		.uleb128 0x49
+ 1385 016b 13       		.uleb128 0x13
+ 1386 016c 02       		.uleb128 0x2
+ 1387 016d 06       		.uleb128 0x6
+ 1388 016e 00       		.byte	0
+ 1389 016f 00       		.byte	0
+ 1390 0170 19       		.uleb128 0x19
+ 1391 0171 05       		.uleb128 0x5
+ 1392 0172 00       		.byte	0
+ 1393 0173 03       		.uleb128 0x3
+ 1394 0174 08       		.uleb128 0x8
+ 1395 0175 3A       		.uleb128 0x3a
+ 1396 0176 0B       		.uleb128 0xb
+ 1397 0177 3B       		.uleb128 0x3b
+ 1398 0178 05       		.uleb128 0x5
+ 1399 0179 49       		.uleb128 0x49
+ 1400 017a 13       		.uleb128 0x13
+ 1401 017b 02       		.uleb128 0x2
+ 1402 017c 06       		.uleb128 0x6
+ 1403 017d 00       		.byte	0
+ 1404 017e 00       		.byte	0
+ 1405 017f 1A       		.uleb128 0x1a
+ 1406 0180 2E       		.uleb128 0x2e
+ 1407 0181 01       		.byte	0x1
+ 1408 0182 3F       		.uleb128 0x3f
+ 1409 0183 0C       		.uleb128 0xc
+ 1410 0184 03       		.uleb128 0x3
+ 1411 0185 0E       		.uleb128 0xe
+ 1412 0186 3A       		.uleb128 0x3a
+ 1413 0187 0B       		.uleb128 0xb
+ 1414 0188 3B       		.uleb128 0x3b
+ 1415 0189 05       		.uleb128 0x5
+ 1416 018a 27       		.uleb128 0x27
+ 1417 018b 0C       		.uleb128 0xc
+ 1418 018c 11       		.uleb128 0x11
+ 1419 018d 01       		.uleb128 0x1
+ 1420 018e 12       		.uleb128 0x12
+ 1421 018f 01       		.uleb128 0x1
+ 1422 0190 40       		.uleb128 0x40
+ 1423 0191 0A       		.uleb128 0xa
+ 1424 0192 9742     		.uleb128 0x2117
+ 1425 0194 0C       		.uleb128 0xc
+ 1426 0195 01       		.uleb128 0x1
+ 1427 0196 13       		.uleb128 0x13
+ 1428 0197 00       		.byte	0
+ 1429 0198 00       		.byte	0
+ 1430 0199 1B       		.uleb128 0x1b
+ 1431 019a 05       		.uleb128 0x5
+ 1432 019b 00       		.byte	0
+ 1433 019c 03       		.uleb128 0x3
+ 1434 019d 0E       		.uleb128 0xe
+ 1435 019e 3A       		.uleb128 0x3a
+ 1436 019f 0B       		.uleb128 0xb
+ 1437 01a0 3B       		.uleb128 0x3b
+ 1438 01a1 05       		.uleb128 0x5
+ 1439 01a2 49       		.uleb128 0x49
+ 1440 01a3 13       		.uleb128 0x13
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 32
+
+
+ 1441 01a4 02       		.uleb128 0x2
+ 1442 01a5 0A       		.uleb128 0xa
+ 1443 01a6 00       		.byte	0
+ 1444 01a7 00       		.byte	0
+ 1445 01a8 1C       		.uleb128 0x1c
+ 1446 01a9 01       		.uleb128 0x1
+ 1447 01aa 01       		.byte	0x1
+ 1448 01ab 49       		.uleb128 0x49
+ 1449 01ac 13       		.uleb128 0x13
+ 1450 01ad 01       		.uleb128 0x1
+ 1451 01ae 13       		.uleb128 0x13
+ 1452 01af 00       		.byte	0
+ 1453 01b0 00       		.byte	0
+ 1454 01b1 1D       		.uleb128 0x1d
+ 1455 01b2 21       		.uleb128 0x21
+ 1456 01b3 00       		.byte	0
+ 1457 01b4 49       		.uleb128 0x49
+ 1458 01b5 13       		.uleb128 0x13
+ 1459 01b6 2F       		.uleb128 0x2f
+ 1460 01b7 0B       		.uleb128 0xb
+ 1461 01b8 00       		.byte	0
+ 1462 01b9 00       		.byte	0
+ 1463 01ba 1E       		.uleb128 0x1e
+ 1464 01bb 34       		.uleb128 0x34
+ 1465 01bc 00       		.byte	0
+ 1466 01bd 03       		.uleb128 0x3
+ 1467 01be 0E       		.uleb128 0xe
+ 1468 01bf 3A       		.uleb128 0x3a
+ 1469 01c0 0B       		.uleb128 0xb
+ 1470 01c1 3B       		.uleb128 0x3b
+ 1471 01c2 0B       		.uleb128 0xb
+ 1472 01c3 49       		.uleb128 0x49
+ 1473 01c4 13       		.uleb128 0x13
+ 1474 01c5 3F       		.uleb128 0x3f
+ 1475 01c6 0C       		.uleb128 0xc
+ 1476 01c7 02       		.uleb128 0x2
+ 1477 01c8 0A       		.uleb128 0xa
+ 1478 01c9 00       		.byte	0
+ 1479 01ca 00       		.byte	0
+ 1480 01cb 1F       		.uleb128 0x1f
+ 1481 01cc 2E       		.uleb128 0x2e
+ 1482 01cd 00       		.byte	0
+ 1483 01ce 3F       		.uleb128 0x3f
+ 1484 01cf 0C       		.uleb128 0xc
+ 1485 01d0 03       		.uleb128 0x3
+ 1486 01d1 0E       		.uleb128 0xe
+ 1487 01d2 3A       		.uleb128 0x3a
+ 1488 01d3 0B       		.uleb128 0xb
+ 1489 01d4 3B       		.uleb128 0x3b
+ 1490 01d5 0B       		.uleb128 0xb
+ 1491 01d6 27       		.uleb128 0x27
+ 1492 01d7 0C       		.uleb128 0xc
+ 1493 01d8 3C       		.uleb128 0x3c
+ 1494 01d9 0C       		.uleb128 0xc
+ 1495 01da 00       		.byte	0
+ 1496 01db 00       		.byte	0
+ 1497 01dc 20       		.uleb128 0x20
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 33
+
+
+ 1498 01dd 2E       		.uleb128 0x2e
+ 1499 01de 01       		.byte	0x1
+ 1500 01df 3F       		.uleb128 0x3f
+ 1501 01e0 0C       		.uleb128 0xc
+ 1502 01e1 03       		.uleb128 0x3
+ 1503 01e2 0E       		.uleb128 0xe
+ 1504 01e3 3A       		.uleb128 0x3a
+ 1505 01e4 0B       		.uleb128 0xb
+ 1506 01e5 3B       		.uleb128 0x3b
+ 1507 01e6 05       		.uleb128 0x5
+ 1508 01e7 27       		.uleb128 0x27
+ 1509 01e8 0C       		.uleb128 0xc
+ 1510 01e9 49       		.uleb128 0x49
+ 1511 01ea 13       		.uleb128 0x13
+ 1512 01eb 3C       		.uleb128 0x3c
+ 1513 01ec 0C       		.uleb128 0xc
+ 1514 01ed 01       		.uleb128 0x1
+ 1515 01ee 13       		.uleb128 0x13
+ 1516 01ef 00       		.byte	0
+ 1517 01f0 00       		.byte	0
+ 1518 01f1 21       		.uleb128 0x21
+ 1519 01f2 05       		.uleb128 0x5
+ 1520 01f3 00       		.byte	0
+ 1521 01f4 49       		.uleb128 0x49
+ 1522 01f5 13       		.uleb128 0x13
+ 1523 01f6 00       		.byte	0
+ 1524 01f7 00       		.byte	0
+ 1525 01f8 22       		.uleb128 0x22
+ 1526 01f9 2E       		.uleb128 0x2e
+ 1527 01fa 00       		.byte	0
+ 1528 01fb 3F       		.uleb128 0x3f
+ 1529 01fc 0C       		.uleb128 0xc
+ 1530 01fd 03       		.uleb128 0x3
+ 1531 01fe 0E       		.uleb128 0xe
+ 1532 01ff 3A       		.uleb128 0x3a
+ 1533 0200 0B       		.uleb128 0xb
+ 1534 0201 3B       		.uleb128 0x3b
+ 1535 0202 0B       		.uleb128 0xb
+ 1536 0203 27       		.uleb128 0x27
+ 1537 0204 0C       		.uleb128 0xc
+ 1538 0205 49       		.uleb128 0x49
+ 1539 0206 13       		.uleb128 0x13
+ 1540 0207 3C       		.uleb128 0x3c
+ 1541 0208 0C       		.uleb128 0xc
+ 1542 0209 00       		.byte	0
+ 1543 020a 00       		.byte	0
+ 1544 020b 23       		.uleb128 0x23
+ 1545 020c 2E       		.uleb128 0x2e
+ 1546 020d 01       		.byte	0x1
+ 1547 020e 3F       		.uleb128 0x3f
+ 1548 020f 0C       		.uleb128 0xc
+ 1549 0210 03       		.uleb128 0x3
+ 1550 0211 0E       		.uleb128 0xe
+ 1551 0212 3A       		.uleb128 0x3a
+ 1552 0213 0B       		.uleb128 0xb
+ 1553 0214 3B       		.uleb128 0x3b
+ 1554 0215 0B       		.uleb128 0xb
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 34
+
+
+ 1555 0216 27       		.uleb128 0x27
+ 1556 0217 0C       		.uleb128 0xc
+ 1557 0218 3C       		.uleb128 0x3c
+ 1558 0219 0C       		.uleb128 0xc
+ 1559 021a 01       		.uleb128 0x1
+ 1560 021b 13       		.uleb128 0x13
+ 1561 021c 00       		.byte	0
+ 1562 021d 00       		.byte	0
+ 1563 021e 00       		.byte	0
+ 1564              		.section	.debug_loc,"",%progbits
+ 1565              	.Ldebug_loc0:
+ 1566              	.LLST0:
+ 1567 0000 00000000 		.4byte	.LVL0
+ 1568 0004 0A000000 		.4byte	.LVL1
+ 1569 0008 0100     		.2byte	0x1
+ 1570 000a 50       		.byte	0x50
+ 1571 000b 0A000000 		.4byte	.LVL1
+ 1572 000f 32000000 		.4byte	.LVL2
+ 1573 0013 0400     		.2byte	0x4
+ 1574 0015 F3       		.byte	0xf3
+ 1575 0016 01       		.uleb128 0x1
+ 1576 0017 50       		.byte	0x50
+ 1577 0018 9F       		.byte	0x9f
+ 1578 0019 32000000 		.4byte	.LVL2
+ 1579 001d 3C000000 		.4byte	.LFE29
+ 1580 0021 0100     		.2byte	0x1
+ 1581 0023 50       		.byte	0x50
+ 1582 0024 00000000 		.4byte	0
+ 1583 0028 00000000 		.4byte	0
+ 1584              	.LLST1:
+ 1585 002c 00000000 		.4byte	.LVL3
+ 1586 0030 06000000 		.4byte	.LVL4
+ 1587 0034 0100     		.2byte	0x1
+ 1588 0036 50       		.byte	0x50
+ 1589 0037 06000000 		.4byte	.LVL4
+ 1590 003b 14000000 		.4byte	.LFE30
+ 1591 003f 0400     		.2byte	0x4
+ 1592 0041 F3       		.byte	0xf3
+ 1593 0042 01       		.uleb128 0x1
+ 1594 0043 50       		.byte	0x50
+ 1595 0044 9F       		.byte	0x9f
+ 1596 0045 00000000 		.4byte	0
+ 1597 0049 00000000 		.4byte	0
+ 1598              	.LLST2:
+ 1599 004d 00000000 		.4byte	.LVL3
+ 1600 0051 0A000000 		.4byte	.LVL5
+ 1601 0055 0600     		.2byte	0x6
+ 1602 0057 03       		.byte	0x3
+ 1603 0058 00000000 		.4byte	siopcb_table
+ 1604 005c 9F       		.byte	0x9f
+ 1605 005d 0A000000 		.4byte	.LVL5
+ 1606 0061 14000000 		.4byte	.LFE30
+ 1607 0065 0600     		.2byte	0x6
+ 1608 0067 03       		.byte	0x3
+ 1609 0068 0C000000 		.4byte	siopcb_table+12
+ 1610 006c 9F       		.byte	0x9f
+ 1611 006d 00000000 		.4byte	0
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 35
+
+
+ 1612 0071 00000000 		.4byte	0
+ 1613              	.LLST3:
+ 1614 0075 00000000 		.4byte	.LVL3
+ 1615 0079 0A000000 		.4byte	.LVL5
+ 1616 007d 0200     		.2byte	0x2
+ 1617 007f 30       		.byte	0x30
+ 1618 0080 9F       		.byte	0x9f
+ 1619 0081 0A000000 		.4byte	.LVL5
+ 1620 0085 14000000 		.4byte	.LFE30
+ 1621 0089 0200     		.2byte	0x2
+ 1622 008b 31       		.byte	0x31
+ 1623 008c 9F       		.byte	0x9f
+ 1624 008d 00000000 		.4byte	0
+ 1625 0091 00000000 		.4byte	0
+ 1626              	.LLST4:
+ 1627 0095 00000000 		.4byte	.LFB31
+ 1628 0099 08000000 		.4byte	.LCFI0
+ 1629 009d 0200     		.2byte	0x2
+ 1630 009f 7D       		.byte	0x7d
+ 1631 00a0 00       		.sleb128 0
+ 1632 00a1 08000000 		.4byte	.LCFI0
+ 1633 00a5 28000000 		.4byte	.LFE31
+ 1634 00a9 0200     		.2byte	0x2
+ 1635 00ab 7D       		.byte	0x7d
+ 1636 00ac 10       		.sleb128 16
+ 1637 00ad 00000000 		.4byte	0
+ 1638 00b1 00000000 		.4byte	0
+ 1639              	.LLST5:
+ 1640 00b5 00000000 		.4byte	.LVL6
+ 1641 00b9 15000000 		.4byte	.LVL9-1
+ 1642 00bd 0100     		.2byte	0x1
+ 1643 00bf 50       		.byte	0x50
+ 1644 00c0 15000000 		.4byte	.LVL9-1
+ 1645 00c4 28000000 		.4byte	.LFE31
+ 1646 00c8 0400     		.2byte	0x4
+ 1647 00ca F3       		.byte	0xf3
+ 1648 00cb 01       		.uleb128 0x1
+ 1649 00cc 50       		.byte	0x50
+ 1650 00cd 9F       		.byte	0x9f
+ 1651 00ce 00000000 		.4byte	0
+ 1652 00d2 00000000 		.4byte	0
+ 1653              	.LLST6:
+ 1654 00d6 00000000 		.4byte	.LVL6
+ 1655 00da 15000000 		.4byte	.LVL9-1
+ 1656 00de 0100     		.2byte	0x1
+ 1657 00e0 51       		.byte	0x51
+ 1658 00e1 15000000 		.4byte	.LVL9-1
+ 1659 00e5 28000000 		.4byte	.LFE31
+ 1660 00e9 0400     		.2byte	0x4
+ 1661 00eb F3       		.byte	0xf3
+ 1662 00ec 01       		.uleb128 0x1
+ 1663 00ed 51       		.byte	0x51
+ 1664 00ee 9F       		.byte	0x9f
+ 1665 00ef 00000000 		.4byte	0
+ 1666 00f3 00000000 		.4byte	0
+ 1667              	.LLST7:
+ 1668 00f7 00000000 		.4byte	.LVL11
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 36
+
+
+ 1669 00fb 06000000 		.4byte	.LVL12
+ 1670 00ff 0100     		.2byte	0x1
+ 1671 0101 50       		.byte	0x50
+ 1672 0102 06000000 		.4byte	.LVL12
+ 1673 0106 0C000000 		.4byte	.LVL13
+ 1674 010a 0400     		.2byte	0x4
+ 1675 010c F3       		.byte	0xf3
+ 1676 010d 01       		.uleb128 0x1
+ 1677 010e 50       		.byte	0x50
+ 1678 010f 9F       		.byte	0x9f
+ 1679 0110 0C000000 		.4byte	.LVL13
+ 1680 0114 0E000000 		.4byte	.LFE32
+ 1681 0118 0100     		.2byte	0x1
+ 1682 011a 50       		.byte	0x50
+ 1683 011b 00000000 		.4byte	0
+ 1684 011f 00000000 		.4byte	0
+ 1685              	.LLST8:
+ 1686 0123 00000000 		.4byte	.LFB33
+ 1687 0127 04000000 		.4byte	.LCFI1
+ 1688 012b 0200     		.2byte	0x2
+ 1689 012d 7D       		.byte	0x7d
+ 1690 012e 00       		.sleb128 0
+ 1691 012f 04000000 		.4byte	.LCFI1
+ 1692 0133 3C000000 		.4byte	.LFE33
+ 1693 0137 0200     		.2byte	0x2
+ 1694 0139 7D       		.byte	0x7d
+ 1695 013a 08       		.sleb128 8
+ 1696 013b 00000000 		.4byte	0
+ 1697 013f 00000000 		.4byte	0
+ 1698              	.LLST9:
+ 1699 0143 00000000 		.4byte	.LVL14
+ 1700 0147 06000000 		.4byte	.LVL15
+ 1701 014b 0100     		.2byte	0x1
+ 1702 014d 50       		.byte	0x50
+ 1703 014e 06000000 		.4byte	.LVL15
+ 1704 0152 0F000000 		.4byte	.LVL17-1
+ 1705 0156 0300     		.2byte	0x3
+ 1706 0158 70       		.byte	0x70
+ 1707 0159 01       		.sleb128 1
+ 1708 015a 9F       		.byte	0x9f
+ 1709 015b 0F000000 		.4byte	.LVL17-1
+ 1710 015f 3C000000 		.4byte	.LFE33
+ 1711 0163 0400     		.2byte	0x4
+ 1712 0165 F3       		.byte	0xf3
+ 1713 0166 01       		.uleb128 0x1
+ 1714 0167 50       		.byte	0x50
+ 1715 0168 9F       		.byte	0x9f
+ 1716 0169 00000000 		.4byte	0
+ 1717 016d 00000000 		.4byte	0
+ 1718              	.LLST10:
+ 1719 0171 00000000 		.4byte	.LFB34
+ 1720 0175 02000000 		.4byte	.LCFI2
+ 1721 0179 0200     		.2byte	0x2
+ 1722 017b 7D       		.byte	0x7d
+ 1723 017c 00       		.sleb128 0
+ 1724 017d 02000000 		.4byte	.LCFI2
+ 1725 0181 20000000 		.4byte	.LFE34
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 37
+
+
+ 1726 0185 0200     		.2byte	0x2
+ 1727 0187 7D       		.byte	0x7d
+ 1728 0188 08       		.sleb128 8
+ 1729 0189 00000000 		.4byte	0
+ 1730 018d 00000000 		.4byte	0
+ 1731              	.LLST11:
+ 1732 0191 00000000 		.4byte	.LVL21
+ 1733 0195 07000000 		.4byte	.LVL22-1
+ 1734 0199 0100     		.2byte	0x1
+ 1735 019b 50       		.byte	0x50
+ 1736 019c 07000000 		.4byte	.LVL22-1
+ 1737 01a0 20000000 		.4byte	.LFE34
+ 1738 01a4 0400     		.2byte	0x4
+ 1739 01a6 F3       		.byte	0xf3
+ 1740 01a7 01       		.uleb128 0x1
+ 1741 01a8 50       		.byte	0x50
+ 1742 01a9 9F       		.byte	0x9f
+ 1743 01aa 00000000 		.4byte	0
+ 1744 01ae 00000000 		.4byte	0
+ 1745              	.LLST12:
+ 1746 01b2 00000000 		.4byte	.LVL21
+ 1747 01b6 07000000 		.4byte	.LVL22-1
+ 1748 01ba 0100     		.2byte	0x1
+ 1749 01bc 51       		.byte	0x51
+ 1750 01bd 07000000 		.4byte	.LVL22-1
+ 1751 01c1 20000000 		.4byte	.LFE34
+ 1752 01c5 0400     		.2byte	0x4
+ 1753 01c7 F3       		.byte	0xf3
+ 1754 01c8 01       		.uleb128 0x1
+ 1755 01c9 51       		.byte	0x51
+ 1756 01ca 9F       		.byte	0x9f
+ 1757 01cb 00000000 		.4byte	0
+ 1758 01cf 00000000 		.4byte	0
+ 1759              	.LLST13:
+ 1760 01d3 00000000 		.4byte	.LFB35
+ 1761 01d7 02000000 		.4byte	.LCFI3
+ 1762 01db 0200     		.2byte	0x2
+ 1763 01dd 7D       		.byte	0x7d
+ 1764 01de 00       		.sleb128 0
+ 1765 01df 02000000 		.4byte	.LCFI3
+ 1766 01e3 1A000000 		.4byte	.LFE35
+ 1767 01e7 0200     		.2byte	0x2
+ 1768 01e9 7D       		.byte	0x7d
+ 1769 01ea 08       		.sleb128 8
+ 1770 01eb 00000000 		.4byte	0
+ 1771 01ef 00000000 		.4byte	0
+ 1772              	.LLST14:
+ 1773 01f3 00000000 		.4byte	.LVL23
+ 1774 01f7 05000000 		.4byte	.LVL24-1
+ 1775 01fb 0100     		.2byte	0x1
+ 1776 01fd 50       		.byte	0x50
+ 1777 01fe 05000000 		.4byte	.LVL24-1
+ 1778 0202 1A000000 		.4byte	.LFE35
+ 1779 0206 0400     		.2byte	0x4
+ 1780 0208 F3       		.byte	0xf3
+ 1781 0209 01       		.uleb128 0x1
+ 1782 020a 50       		.byte	0x50
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 38
+
+
+ 1783 020b 9F       		.byte	0x9f
+ 1784 020c 00000000 		.4byte	0
+ 1785 0210 00000000 		.4byte	0
+ 1786              	.LLST15:
+ 1787 0214 00000000 		.4byte	.LVL26
+ 1788 0218 14000000 		.4byte	.LVL27
+ 1789 021c 0100     		.2byte	0x1
+ 1790 021e 50       		.byte	0x50
+ 1791 021f 14000000 		.4byte	.LVL27
+ 1792 0223 20000000 		.4byte	.LFE36
+ 1793 0227 0400     		.2byte	0x4
+ 1794 0229 F3       		.byte	0xf3
+ 1795 022a 01       		.uleb128 0x1
+ 1796 022b 50       		.byte	0x50
+ 1797 022c 9F       		.byte	0x9f
+ 1798 022d 00000000 		.4byte	0
+ 1799 0231 00000000 		.4byte	0
+ 1800              	.LLST16:
+ 1801 0235 00000000 		.4byte	.LVL28
+ 1802 0239 14000000 		.4byte	.LVL29
+ 1803 023d 0100     		.2byte	0x1
+ 1804 023f 50       		.byte	0x50
+ 1805 0240 14000000 		.4byte	.LVL29
+ 1806 0244 20000000 		.4byte	.LFE37
+ 1807 0248 0400     		.2byte	0x4
+ 1808 024a F3       		.byte	0xf3
+ 1809 024b 01       		.uleb128 0x1
+ 1810 024c 50       		.byte	0x50
+ 1811 024d 9F       		.byte	0x9f
+ 1812 024e 00000000 		.4byte	0
+ 1813 0252 00000000 		.4byte	0
+ 1814              		.section	.debug_aranges,"",%progbits
+ 1815 0000 5C000000 		.4byte	0x5c
+ 1816 0004 0200     		.2byte	0x2
+ 1817 0006 00000000 		.4byte	.Ldebug_info0
+ 1818 000a 04       		.byte	0x4
+ 1819 000b 00       		.byte	0
+ 1820 000c 0000     		.2byte	0
+ 1821 000e 0000     		.2byte	0
+ 1822 0010 00000000 		.4byte	.LFB29
+ 1823 0014 3C000000 		.4byte	.LFE29-.LFB29
+ 1824 0018 00000000 		.4byte	.LFB30
+ 1825 001c 14000000 		.4byte	.LFE30-.LFB30
+ 1826 0020 00000000 		.4byte	.LFB31
+ 1827 0024 28000000 		.4byte	.LFE31-.LFB31
+ 1828 0028 00000000 		.4byte	.LFB32
+ 1829 002c 0E000000 		.4byte	.LFE32-.LFB32
+ 1830 0030 00000000 		.4byte	.LFB33
+ 1831 0034 3C000000 		.4byte	.LFE33-.LFB33
+ 1832 0038 00000000 		.4byte	.LFB34
+ 1833 003c 20000000 		.4byte	.LFE34-.LFB34
+ 1834 0040 00000000 		.4byte	.LFB35
+ 1835 0044 1A000000 		.4byte	.LFE35-.LFB35
+ 1836 0048 00000000 		.4byte	.LFB36
+ 1837 004c 20000000 		.4byte	.LFE36-.LFB36
+ 1838 0050 00000000 		.4byte	.LFB37
+ 1839 0054 20000000 		.4byte	.LFE37-.LFB37
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 39
+
+
+ 1840 0058 00000000 		.4byte	0
+ 1841 005c 00000000 		.4byte	0
+ 1842              		.section	.debug_ranges,"",%progbits
+ 1843              	.Ldebug_ranges0:
+ 1844 0000 00000000 		.4byte	.LFB29
+ 1845 0004 3C000000 		.4byte	.LFE29
+ 1846 0008 00000000 		.4byte	.LFB30
+ 1847 000c 14000000 		.4byte	.LFE30
+ 1848 0010 00000000 		.4byte	.LFB31
+ 1849 0014 28000000 		.4byte	.LFE31
+ 1850 0018 00000000 		.4byte	.LFB32
+ 1851 001c 0E000000 		.4byte	.LFE32
+ 1852 0020 00000000 		.4byte	.LFB33
+ 1853 0024 3C000000 		.4byte	.LFE33
+ 1854 0028 00000000 		.4byte	.LFB34
+ 1855 002c 20000000 		.4byte	.LFE34
+ 1856 0030 00000000 		.4byte	.LFB35
+ 1857 0034 1A000000 		.4byte	.LFE35
+ 1858 0038 00000000 		.4byte	.LFB36
+ 1859 003c 20000000 		.4byte	.LFE36
+ 1860 0040 00000000 		.4byte	.LFB37
+ 1861 0044 20000000 		.4byte	.LFE37
+ 1862 0048 00000000 		.4byte	0
+ 1863 004c 00000000 		.4byte	0
+ 1864              		.section	.debug_line,"",%progbits
+ 1865              	.Ldebug_line0:
+ 1866 0000 C9010000 		.section	.debug_str,"MS",%progbits,1
+ 1866      0200E400 
+ 1866      00000201 
+ 1866      FB0E0D00 
+ 1866      01010101 
+ 1867              	.LASF52:
+ 1868 0000 433A5C55 		.ascii	"C:\\Users\\asai\\Documents\\PSoC Creator\\asp_1.9.0"
+ 1868      73657273 
+ 1868      5C617361 
+ 1868      695C446F 
+ 1868      63756D65 
+ 1869 002e 5F332E30 		.ascii	"_3.0\\asp_eval1.cydsn\000"
+ 1869      5C617370 
+ 1869      5F657661 
+ 1869      6C312E63 
+ 1869      7964736E 
+ 1870              	.LASF23:
+ 1871 0043 6F706E66 		.ascii	"opnflg\000"
+ 1871      6C6700
+ 1872              	.LASF32:
+ 1873 004a 705F7369 		.ascii	"p_siopcb\000"
+ 1873      6F706362 
+ 1873      00
+ 1874              	.LASF9:
+ 1875 0053 666C6F61 		.ascii	"float\000"
+ 1875      7400
+ 1876              	.LASF13:
+ 1877 0059 696E745F 		.ascii	"int_t\000"
+ 1877      7400
+ 1878              	.LASF54:
+ 1879 005f 55415254 		.ascii	"UART_1_IntClock_Start\000"
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 40
+
+
+ 1879      5F315F49 
+ 1879      6E74436C 
+ 1879      6F636B5F 
+ 1879      53746172 
+ 1880              	.LASF4:
+ 1881 0075 73686F72 		.ascii	"short unsigned int\000"
+ 1881      7420756E 
+ 1881      7369676E 
+ 1881      65642069 
+ 1881      6E7400
+ 1882              	.LASF20:
+ 1883 0088 53494F50 		.ascii	"SIOPCB\000"
+ 1883      434200
+ 1884              	.LASF12:
+ 1885 008f 626F6F6C 		.ascii	"bool_t\000"
+ 1885      5F7400
+ 1886              	.LASF37:
+ 1887 0096 73696F5F 		.ascii	"sio_rcv_chr\000"
+ 1887      7263765F 
+ 1887      63687200 
+ 1888              	.LASF22:
+ 1889 00a2 6578696E 		.ascii	"exinf\000"
+ 1889      6600
+ 1890              	.LASF14:
+ 1891 00a8 75696E74 		.ascii	"uint_t\000"
+ 1891      5F7400
+ 1892              	.LASF25:
+ 1893 00af 73696F5F 		.ascii	"sio_port_initialization_block\000"
+ 1893      706F7274 
+ 1893      5F696E69 
+ 1893      7469616C 
+ 1893      697A6174 
+ 1894              	.LASF2:
+ 1895 00cd 756E7369 		.ascii	"unsigned char\000"
+ 1895      676E6564 
+ 1895      20636861 
+ 1895      7200
+ 1896              	.LASF21:
+ 1897 00db 705F7369 		.ascii	"p_siopinib\000"
+ 1897      6F70696E 
+ 1897      696200
+ 1898              	.LASF19:
+ 1899 00e6 72656738 		.ascii	"reg8\000"
+ 1899      00
+ 1900              	.LASF47:
+ 1901 00eb 73696F5F 		.ascii	"sio_irdy_rcv\000"
+ 1901      69726479 
+ 1901      5F726376 
+ 1901      00
+ 1902              	.LASF48:
+ 1903 00f8 73696F5F 		.ascii	"sio_irdy_snd\000"
+ 1903      69726479 
+ 1903      5F736E64 
+ 1903      00
+ 1904              	.LASF8:
+ 1905 0105 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1905      20756E73 
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 41
+
+
+ 1905      69676E65 
+ 1905      6420696E 
+ 1905      7400
+ 1906              	.LASF18:
+ 1907 0117 75696E74 		.ascii	"uint8\000"
+ 1907      3800
+ 1908              	.LASF24:
+ 1909 011d 73696F5F 		.ascii	"sio_port_control_block\000"
+ 1909      706F7274 
+ 1909      5F636F6E 
+ 1909      74726F6C 
+ 1909      5F626C6F 
+ 1910              	.LASF46:
+ 1911 0134 55415254 		.ascii	"UART_1_ReadTxStatus\000"
+ 1911      5F315F52 
+ 1911      65616454 
+ 1911      78537461 
+ 1911      74757300 
+ 1912              	.LASF39:
+ 1913 0148 63627274 		.ascii	"cbrtn\000"
+ 1913      6E00
+ 1914              	.LASF53:
+ 1915 014e 65726364 		.ascii	"ercd\000"
+ 1915      00
+ 1916              	.LASF10:
+ 1917 0153 646F7562 		.ascii	"double\000"
+ 1917      6C6500
+ 1918              	.LASF44:
+ 1919 015a 6469735F 		.ascii	"dis_int\000"
+ 1919      696E7400 
+ 1920              	.LASF40:
+ 1921 0162 73696F5F 		.ascii	"sio_dis_cbr\000"
+ 1921      6469735F 
+ 1921      63627200 
+ 1922              	.LASF42:
+ 1923 016e 73696F70 		.ascii	"siopcb_table\000"
+ 1923      63625F74 
+ 1923      61626C65 
+ 1923      00
+ 1924              	.LASF30:
+ 1925 017b 73696F5F 		.ascii	"sio_initialize\000"
+ 1925      696E6974 
+ 1925      69616C69 
+ 1925      7A6500
+ 1926              	.LASF29:
+ 1927 018a 74617267 		.ascii	"target_usart_init\000"
+ 1927      65745F75 
+ 1927      73617274 
+ 1927      5F696E69 
+ 1927      7400
+ 1928              	.LASF11:
+ 1929 019c 696E7470 		.ascii	"intptr_t\000"
+ 1929      74725F74 
+ 1929      00
+ 1930              	.LASF0:
+ 1931 01a5 756E7369 		.ascii	"unsigned int\000"
+ 1931      676E6564 
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 42
+
+
+ 1931      20696E74 
+ 1931      00
+ 1932              	.LASF49:
+ 1933 01b2 55415254 		.ascii	"UART_1_GetChar\000"
+ 1933      5F315F47 
+ 1933      65744368 
+ 1933      617200
+ 1934              	.LASF6:
+ 1935 01c1 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1935      206C6F6E 
+ 1935      6720756E 
+ 1935      7369676E 
+ 1935      65642069 
+ 1936              	.LASF28:
+ 1937 01d8 53494F50 		.ascii	"SIOPINIB\000"
+ 1937      494E4942 
+ 1937      00
+ 1938              	.LASF31:
+ 1939 01e1 73696F70 		.ascii	"siopid\000"
+ 1939      696400
+ 1940              	.LASF33:
+ 1941 01e8 73696F5F 		.ascii	"sio_cls_por\000"
+ 1941      636C735F 
+ 1941      706F7200 
+ 1942              	.LASF16:
+ 1943 01f4 73697A65 		.ascii	"sizetype\000"
+ 1943      74797065 
+ 1943      00
+ 1944              	.LASF38:
+ 1945 01fd 73696F5F 		.ascii	"sio_ena_cbr\000"
+ 1945      656E615F 
+ 1945      63627200 
+ 1946              	.LASF34:
+ 1947 0209 73696F5F 		.ascii	"sio_isr\000"
+ 1947      69737200 
+ 1948              	.LASF5:
+ 1949 0211 6C6F6E67 		.ascii	"long long int\000"
+ 1949      206C6F6E 
+ 1949      6720696E 
+ 1949      7400
+ 1950              	.LASF15:
+ 1951 021f 494E544E 		.ascii	"INTNO\000"
+ 1951      4F00
+ 1952              	.LASF17:
+ 1953 0225 63686172 		.ascii	"char\000"
+ 1953      00
+ 1954              	.LASF35:
+ 1955 022a 73696F5F 		.ascii	"sio_opn_por\000"
+ 1955      6F706E5F 
+ 1955      706F7200 
+ 1956              	.LASF26:
+ 1957 0236 706F7274 		.ascii	"port\000"
+ 1957      00
+ 1958              	.LASF36:
+ 1959 023b 73696F5F 		.ascii	"sio_snd_chr\000"
+ 1959      736E645F 
+ 1959      63687200 
+ARM GAS  C:\TEMP\ccJ2l2ua.s 			page 43
+
+
+ 1960              	.LASF3:
+ 1961 0247 73686F72 		.ascii	"short int\000"
+ 1961      7420696E 
+ 1961      7400
+ 1962              	.LASF51:
+ 1963 0251 2E5C6173 		.ascii	".\\asp\\target\\cy8ckit050_gcc\\target_serial.c\000"
+ 1963      705C7461 
+ 1963      72676574 
+ 1963      5C637938 
+ 1963      636B6974 
+ 1964              	.LASF50:
+ 1965 027d 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 1965      4320342E 
+ 1965      372E3320 
+ 1965      32303133 
+ 1965      30333132 
+ 1966 02b0 616E6368 		.ascii	"anch revision 196615]\000"
+ 1966      20726576 
+ 1966      6973696F 
+ 1966      6E203139 
+ 1966      36363135 
+ 1967              	.LASF7:
+ 1968 02c6 6C6F6E67 		.ascii	"long int\000"
+ 1968      20696E74 
+ 1968      00
+ 1969              	.LASF1:
+ 1970 02cf 7369676E 		.ascii	"signed char\000"
+ 1970      65642063 
+ 1970      68617200 
+ 1971              	.LASF45:
+ 1972 02db 55415254 		.ascii	"UART_1_ReadRxStatus\000"
+ 1972      5F315F52 
+ 1972      65616452 
+ 1972      78537461 
+ 1972      74757300 
+ 1973              	.LASF41:
+ 1974 02ef 73696F70 		.ascii	"siopinib_table\000"
+ 1974      696E6962 
+ 1974      5F746162 
+ 1974      6C6500
+ 1975              	.LASF27:
+ 1976 02fe 696E746E 		.ascii	"intno\000"
+ 1976      6F00
+ 1977              	.LASF43:
+ 1978 0304 656E615F 		.ascii	"ena_int\000"
+ 1978      696E7400 
+ 1979              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

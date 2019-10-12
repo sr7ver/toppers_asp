@@ -1,0 +1,44 @@
+#
+#  @(#) $Id: Makefile.core 2390 2012-06-18 05:03:23Z ertl-honda $
+# 
+
+#
+#		Makefile のプロセッサ依存部（ARM-M用）
+#
+
+# 
+#  コア依存部ディレクトリ名の定義 
+# 
+COREDIR = $(SRCDIR)/arch/$(PRC)_$(TOOL)/common
+
+#
+#  ツール依存部ディレクトリ名の定義 
+#
+TOOLDIR = $(SRCDIR)/arch/$(TOOL)
+
+#
+#  コンパイルオプション
+#
+COPTS := $(COPTS) -mthumb 
+INCLUDES := $(INCLUDES) -I$(COREDIR) -I$(TOOLDIR)
+LDFLAGS := -nostdlib $(LDFLAGS) 
+CDEFS := $(CDEFS)
+LIBS := $(LIBS)  -lgcc
+
+#
+#  カーネルに関する定義
+#
+KERNEL_DIR := $(KERNEL_DIR) $(COREDIR)
+KERNEL_ASMOBJS := $(KERNEL_ASMOBJS) core_support.o
+KERNEL_COBJS := $(KERNEL_COBJS) core_config.o
+
+#
+#  依存関係の定義
+#
+cfg1_out.c: $(COREDIR)/core_def.csv
+kernel_cfg.timestamp: $(COREDIR)/core.tf
+
+#
+#  コンフィギュレータ関係の変数の定義
+#
+CFG_TABS := $(CFG_TABS) --cfg1-def-table $(COREDIR)/core_def.csv

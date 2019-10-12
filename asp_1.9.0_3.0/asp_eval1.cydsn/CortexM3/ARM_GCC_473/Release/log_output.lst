@@ -1,0 +1,2393 @@
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"log_output.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.convert,"ax",%progbits
+  19              		.align	1
+  20              		.thumb
+  21              		.thumb_func
+  22              		.type	convert, %function
+  23              	convert:
+  24              	.LFB8:
+  25              		.file 1 ".\\asp\\library\\log_output.c"
+   1:.\asp\library/log_output.c **** /*
+   2:.\asp\library/log_output.c ****  *  TOPPERS Software
+   3:.\asp\library/log_output.c ****  *      Toyohashi Open Platform for Embedded Real-Time Systems
+   4:.\asp\library/log_output.c ****  * 
+   5:.\asp\library/log_output.c ****  *  Copyright (C) 2000-2003 by Embedded and Real-Time Systems Laboratory
+   6:.\asp\library/log_output.c ****  *                              Toyohashi Univ. of Technology, JAPAN
+   7:.\asp\library/log_output.c ****  *  Copyright (C) 2004-2011 by Embedded and Real-Time Systems Laboratory
+   8:.\asp\library/log_output.c ****  *              Graduate School of Information Science, Nagoya Univ., JAPAN
+   9:.\asp\library/log_output.c ****  * 
+  10:.\asp\library/log_output.c ****  *  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+  11:.\asp\library/log_output.c ****  *  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+  12:.\asp\library/log_output.c ****  *  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+  13:.\asp\library/log_output.c ****  *  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+  14:.\asp\library/log_output.c ****  *      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+  15:.\asp\library/log_output.c ****  *      スコード中に含まれていること．
+  16:.\asp\library/log_output.c ****  *  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+  17:.\asp\library/log_output.c ****  *      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+  18:.\asp\library/log_output.c ****  *      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+  19:.\asp\library/log_output.c ****  *      の無保証規定を掲載すること．
+  20:.\asp\library/log_output.c ****  *  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+  21:.\asp\library/log_output.c ****  *      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+  22:.\asp\library/log_output.c ****  *      と．
+  23:.\asp\library/log_output.c ****  *    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+  24:.\asp\library/log_output.c ****  *        作権表示，この利用条件および下記の無保証規定を掲載すること．
+  25:.\asp\library/log_output.c ****  *    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+  26:.\asp\library/log_output.c ****  *        報告すること．
+  27:.\asp\library/log_output.c ****  *  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+  28:.\asp\library/log_output.c ****  *      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+  29:.\asp\library/log_output.c ****  *      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+  30:.\asp\library/log_output.c ****  *      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+  31:.\asp\library/log_output.c ****  *      免責すること．
+  32:.\asp\library/log_output.c ****  * 
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 2
+
+
+  33:.\asp\library/log_output.c ****  *  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+  34:.\asp\library/log_output.c ****  *  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+  35:.\asp\library/log_output.c ****  *  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+  36:.\asp\library/log_output.c ****  *  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+  37:.\asp\library/log_output.c ****  *  の責任を負わない．
+  38:.\asp\library/log_output.c ****  * 
+  39:.\asp\library/log_output.c ****  *  @(#) $Id: log_output.c 2246 2011-08-26 22:39:15Z ertl-hiro $
+  40:.\asp\library/log_output.c ****  */
+  41:.\asp\library/log_output.c **** 
+  42:.\asp\library/log_output.c **** /*
+  43:.\asp\library/log_output.c ****  *		システムログのフォーマット出力
+  44:.\asp\library/log_output.c ****  */
+  45:.\asp\library/log_output.c **** 
+  46:.\asp\library/log_output.c **** #include <t_stddef.h>
+  47:.\asp\library/log_output.c **** #include <t_syslog.h>
+  48:.\asp\library/log_output.c **** #include <log_output.h>
+  49:.\asp\library/log_output.c **** 
+  50:.\asp\library/log_output.c **** /*
+  51:.\asp\library/log_output.c ****  *  数値を文字列に変換
+  52:.\asp\library/log_output.c ****  */
+  53:.\asp\library/log_output.c **** #define CONVERT_BUFLEN	((sizeof(uintptr_t) * CHAR_BIT + 2) / 3)
+  54:.\asp\library/log_output.c **** 										/* uintptr_t型の数値の最大文字数 */
+  55:.\asp\library/log_output.c **** static void
+  56:.\asp\library/log_output.c **** convert(uintptr_t val, uint_t radix, const char *radchar,
+  57:.\asp\library/log_output.c **** 			uint_t width, bool_t minus, bool_t padzero, void (*putc)(char))
+  58:.\asp\library/log_output.c **** {
+  26              		.loc 1 58 0
+  27              		.cfi_startproc
+  28              		@ args = 12, pretend = 0, frame = 16
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30              	.LVL0:
+  31 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 28
+  34              		.cfi_offset 4, -28
+  35              		.cfi_offset 5, -24
+  36              		.cfi_offset 6, -20
+  37              		.cfi_offset 7, -16
+  38              		.cfi_offset 8, -12
+  39              		.cfi_offset 9, -8
+  40              		.cfi_offset 14, -4
+  41 0004 85B0     		sub	sp, sp, #20
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 48
+  44              		.loc 1 58 0
+  45 0006 DDF83090 		ldr	r9, [sp, #48]
+  46 000a 0D9F     		ldr	r7, [sp, #52]
+  47 000c 0E9D     		ldr	r5, [sp, #56]
+  48 000e 1E46     		mov	r6, r3
+  59:.\asp\library/log_output.c **** 	char	buf[CONVERT_BUFLEN];
+  60:.\asp\library/log_output.c **** 	uint_t	i, j;
+  61:.\asp\library/log_output.c **** 
+  62:.\asp\library/log_output.c **** 	i = 0U;
+  49              		.loc 1 62 0
+  50 0010 0024     		movs	r4, #0
+  51              	.LVL1:
+  52              	.L3:
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 3
+
+
+  63:.\asp\library/log_output.c **** 	do {
+  64:.\asp\library/log_output.c **** 		buf[i++] = radchar[val % radix];
+  53              		.loc 1 64 0 discriminator 1
+  54 0012 B0FBF1F3 		udiv	r3, r0, r1
+  55 0016 01FB1300 		mls	r0, r1, r3, r0
+  56              	.LVL2:
+  57 001a 12F800E0 		ldrb	lr, [r2, r0]	@ zero_extendqisi2
+  58 001e 01A8     		add	r0, sp, #4
+  59 0020 04F800E0 		strb	lr, [r4, r0]
+  60 0024 0134     		adds	r4, r4, #1
+  61              	.LVL3:
+  65:.\asp\library/log_output.c **** 		val /= radix;
+  66:.\asp\library/log_output.c **** 	} while (i < CONVERT_BUFLEN && val != 0);
+  62              		.loc 1 66 0 discriminator 1
+  63 0026 0B2C     		cmp	r4, #11
+  65:.\asp\library/log_output.c **** 		val /= radix;
+  64              		.loc 1 65 0 discriminator 1
+  65 0028 1846     		mov	r0, r3
+  66              	.LVL4:
+  67              		.loc 1 66 0 discriminator 1
+  68 002a 01D0     		beq	.L2
+  69 002c 002B     		cmp	r3, #0
+  70 002e F0D1     		bne	.L3
+  71              	.L2:
+  67:.\asp\library/log_output.c **** 
+  68:.\asp\library/log_output.c **** 	if (minus && width > 0) {
+  72              		.loc 1 68 0
+  73 0030 B9F1000F 		cmp	r9, #0
+  74 0034 04D0     		beq	.L4
+  75              		.loc 1 68 0 is_stmt 0 discriminator 1
+  76 0036 06B1     		cbz	r6, .L5
+  69:.\asp\library/log_output.c **** 		width -= 1;
+  77              		.loc 1 69 0 is_stmt 1
+  78 0038 013E     		subs	r6, r6, #1
+  79              	.LVL5:
+  80              	.L5:
+  70:.\asp\library/log_output.c **** 	}
+  71:.\asp\library/log_output.c **** 	if (minus && padzero) {
+  81              		.loc 1 71 0
+  82 003a 0FB1     		cbz	r7, .L4
+  72:.\asp\library/log_output.c **** 		(*putc)('-');
+  83              		.loc 1 72 0
+  84 003c 2D20     		movs	r0, #45
+  85              	.LVL6:
+  86 003e A847     		blx	r5
+  87              	.LVL7:
+  88              	.L4:
+  73:.\asp\library/log_output.c **** 	}
+  74:.\asp\library/log_output.c **** 	for (j = i; j < width; j++) {
+  75:.\asp\library/log_output.c **** 		(*putc)(padzero ? '0' : ' ');
+  89              		.loc 1 75 0 discriminator 1
+  90 0040 A046     		mov	r8, r4
+  91              	.L6:
+  92              	.LVL8:
+  74:.\asp\library/log_output.c **** 	for (j = i; j < width; j++) {
+  93              		.loc 1 74 0 discriminator 1
+  94 0042 B045     		cmp	r8, r6
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 4
+
+
+  95 0044 07D2     		bcs	.L31
+  96              	.L8:
+  97              		.loc 1 75 0
+  98 0046 002F     		cmp	r7, #0
+  99 0048 0CBF     		ite	eq
+ 100 004a 2020     		moveq	r0, #32
+ 101 004c 3020     		movne	r0, #48
+ 102 004e A847     		blx	r5
+ 103              	.LVL9:
+  74:.\asp\library/log_output.c **** 	for (j = i; j < width; j++) {
+ 104              		.loc 1 74 0
+ 105 0050 08F10108 		add	r8, r8, #1
+ 106              	.LVL10:
+ 107 0054 F5E7     		b	.L6
+ 108              	.L31:
+  76:.\asp\library/log_output.c **** 	}
+  77:.\asp\library/log_output.c **** 	if (minus && !padzero) {
+ 109              		.loc 1 77 0
+ 110 0056 B9F1000F 		cmp	r9, #0
+ 111 005a 02D0     		beq	.L21
+ 112              		.loc 1 77 0 is_stmt 0 discriminator 1
+ 113 005c 0FB9     		cbnz	r7, .L21
+  78:.\asp\library/log_output.c **** 		(*putc)('-');
+ 114              		.loc 1 78 0 is_stmt 1
+ 115 005e 2D20     		movs	r0, #45
+ 116 0060 A847     		blx	r5
+ 117              	.LVL11:
+ 118              	.L21:
+  79:.\asp\library/log_output.c **** 	}
+  80:.\asp\library/log_output.c **** 	while (i > 0U) {
+  81:.\asp\library/log_output.c **** 		(*putc)(buf[--i]);
+ 119              		.loc 1 81 0
+ 120 0062 013C     		subs	r4, r4, #1
+ 121              	.LVL12:
+ 122 0064 01A9     		add	r1, sp, #4
+ 123 0066 085D     		ldrb	r0, [r1, r4]	@ zero_extendqisi2
+ 124 0068 A847     		blx	r5
+ 125              	.LVL13:
+  80:.\asp\library/log_output.c **** 	while (i > 0U) {
+ 126              		.loc 1 80 0
+ 127 006a 002C     		cmp	r4, #0
+ 128 006c F9D1     		bne	.L21
+  82:.\asp\library/log_output.c **** 	}
+  83:.\asp\library/log_output.c **** }
+ 129              		.loc 1 83 0
+ 130 006e 05B0     		add	sp, sp, #20
+ 131 0070 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 132              		.cfi_endproc
+ 133              	.LFE8:
+ 134              		.size	convert, .-convert
+ 135              		.section	.text.syslog_printf,"ax",%progbits
+ 136              		.align	1
+ 137              		.global	syslog_printf
+ 138              		.thumb
+ 139              		.thumb_func
+ 140              		.type	syslog_printf, %function
+ 141              	syslog_printf:
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 5
+
+
+ 142              	.LFB9:
+  84:.\asp\library/log_output.c **** 
+  85:.\asp\library/log_output.c **** /*
+  86:.\asp\library/log_output.c ****  *  文字列整形出力
+  87:.\asp\library/log_output.c ****  */
+  88:.\asp\library/log_output.c **** static const char raddec[] = "0123456789";
+  89:.\asp\library/log_output.c **** static const char radhex[] = "0123456789abcdef";
+  90:.\asp\library/log_output.c **** static const char radHEX[] = "0123456789ABCDEF";
+  91:.\asp\library/log_output.c **** 
+  92:.\asp\library/log_output.c **** void
+  93:.\asp\library/log_output.c **** syslog_printf(const char *format, const intptr_t *p_args, void (*putc)(char))
+  94:.\asp\library/log_output.c **** {
+ 143              		.loc 1 94 0
+ 144              		.cfi_startproc
+ 145              		@ args = 0, pretend = 0, frame = 0
+ 146              		@ frame_needed = 0, uses_anonymous_args = 0
+ 147              	.LVL14:
+ 148 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 149              	.LCFI2:
+ 150              		.cfi_def_cfa_offset 20
+ 151              		.cfi_offset 4, -20
+ 152              		.cfi_offset 5, -16
+ 153              		.cfi_offset 6, -12
+ 154              		.cfi_offset 7, -8
+ 155              		.cfi_offset 14, -4
+ 156 0002 0446     		mov	r4, r0
+ 157 0004 85B0     		sub	sp, sp, #20
+ 158              	.LCFI3:
+ 159              		.cfi_def_cfa_offset 40
+ 160 0006 0D46     		mov	r5, r1
+ 161 0008 1646     		mov	r6, r2
+ 162              	.LVL15:
+ 163              	.L63:
+  95:.\asp\library/log_output.c **** 	char		c;
+  96:.\asp\library/log_output.c **** 	uint_t		width;
+  97:.\asp\library/log_output.c **** 	bool_t		padzero;
+  98:.\asp\library/log_output.c **** 	intptr_t	val;
+  99:.\asp\library/log_output.c **** 	const char	*str;
+ 100:.\asp\library/log_output.c **** 
+ 101:.\asp\library/log_output.c **** 	while ((c = *format++) != '\0') {
+ 164              		.loc 1 101 0 discriminator 1
+ 165 000a 2078     		ldrb	r0, [r4, #0]	@ zero_extendqisi2
+ 166              	.LVL16:
+ 167 000c 0028     		cmp	r0, #0
+ 168 000e 66D0     		beq	.L68
+ 169              	.L54:
+ 102:.\asp\library/log_output.c **** 		if (c != '%') {
+ 170              		.loc 1 102 0
+ 171 0010 2528     		cmp	r0, #37
+ 172 0012 01D0     		beq	.L34
+ 101:.\asp\library/log_output.c **** 	while ((c = *format++) != '\0') {
+ 173              		.loc 1 101 0
+ 174 0014 0134     		adds	r4, r4, #1
+ 175              	.LVL17:
+ 176 0016 58E0     		b	.L64
+ 177              	.LVL18:
+ 178              	.L34:
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 6
+
+
+ 103:.\asp\library/log_output.c **** 			(*putc)(c);
+ 104:.\asp\library/log_output.c **** 			continue;
+ 105:.\asp\library/log_output.c **** 		}
+ 106:.\asp\library/log_output.c **** 
+ 107:.\asp\library/log_output.c **** 		width = 0U;
+ 108:.\asp\library/log_output.c **** 		padzero = false;
+ 109:.\asp\library/log_output.c **** 		if ((c = *format++) == '0') {
+ 179              		.loc 1 109 0
+ 180 0018 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 181              	.LVL19:
+ 182 001a 3028     		cmp	r0, #48
+ 183 001c 02D0     		beq	.L36
+ 184 001e 0234     		adds	r4, r4, #2
+ 185              	.LVL20:
+ 108:.\asp\library/log_output.c **** 		padzero = false;
+ 186              		.loc 1 108 0
+ 187 0020 0022     		movs	r2, #0
+ 188 0022 02E0     		b	.L37
+ 189              	.LVL21:
+ 190              	.L36:
+ 110:.\asp\library/log_output.c **** 			padzero = true;
+ 111:.\asp\library/log_output.c **** 			c = *format++;
+ 191              		.loc 1 111 0
+ 192 0024 A078     		ldrb	r0, [r4, #2]	@ zero_extendqisi2
+ 193              	.LVL22:
+ 110:.\asp\library/log_output.c **** 			padzero = true;
+ 194              		.loc 1 110 0
+ 195 0026 0122     		movs	r2, #1
+ 196              		.loc 1 111 0
+ 197 0028 0334     		adds	r4, r4, #3
+ 198              	.LVL23:
+ 199              	.L37:
+ 108:.\asp\library/log_output.c **** 		padzero = false;
+ 200              		.loc 1 108 0 discriminator 1
+ 201 002a 0023     		movs	r3, #0
+ 202              	.LVL24:
+ 203              	.L38:
+ 112:.\asp\library/log_output.c **** 		}
+ 113:.\asp\library/log_output.c **** 		while ('0' <= c && c <= '9') {
+ 204              		.loc 1 113 0 discriminator 1
+ 205 002c A0F13001 		sub	r1, r0, #48
+ 206 0030 0929     		cmp	r1, #9
+ 207 0032 06D8     		bhi	.L69
+ 208              	.L39:
+ 114:.\asp\library/log_output.c **** 			width = width * 10U + c - '0';
+ 209              		.loc 1 114 0
+ 210 0034 0A21     		movs	r1, #10
+ 211 0036 01FB0303 		mla	r3, r1, r3, r0
+ 212              	.LVL25:
+ 115:.\asp\library/log_output.c **** 			c = *format++;
+ 213              		.loc 1 115 0
+ 214 003a 14F8010B 		ldrb	r0, [r4], #1	@ zero_extendqisi2
+ 215              	.LVL26:
+ 114:.\asp\library/log_output.c **** 			width = width * 10U + c - '0';
+ 216              		.loc 1 114 0
+ 217 003e 303B     		subs	r3, r3, #48
+ 218              	.LVL27:
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 7
+
+
+ 219 0040 F4E7     		b	.L38
+ 220              	.LVL28:
+ 221              	.L69:
+ 116:.\asp\library/log_output.c **** 		}
+ 117:.\asp\library/log_output.c **** 		if (c == 'l') {
+ 222              		.loc 1 117 0
+ 223 0042 6C28     		cmp	r0, #108
+ 118:.\asp\library/log_output.c **** 			c = *format++;
+ 224              		.loc 1 118 0
+ 225 0044 08BF     		it	eq
+ 226 0046 14F8010B 		ldrbeq	r0, [r4], #1	@ zero_extendqisi2
+ 227              	.LVL29:
+ 119:.\asp\library/log_output.c **** 		}
+ 120:.\asp\library/log_output.c **** 		switch (c) {
+ 228              		.loc 1 120 0
+ 229 004a 7028     		cmp	r0, #112
+ 230 004c 2AD0     		beq	.L46
+ 231 004e 0DD8     		bhi	.L49
+ 232 0050 6328     		cmp	r0, #99
+ 233 0052 37D0     		beq	.L44
+ 234 0054 07D8     		bhi	.L50
+ 235 0056 5828     		cmp	r0, #88
+ 236 0058 2CD0     		beq	.L43
+ 237 005a D6D8     		bhi	.L63
+ 238 005c 0028     		cmp	r0, #0
+ 239 005e 3CD0     		beq	.L41
+ 240 0060 2528     		cmp	r0, #37
+ 241 0062 D2D1     		bne	.L63
+ 242 0064 31E0     		b	.L64
+ 243              	.L50:
+ 244 0066 6428     		cmp	r0, #100
+ 245 0068 CFD1     		bne	.L63
+ 246 006a 08E0     		b	.L70
+ 247              	.L49:
+ 248 006c 7528     		cmp	r0, #117
+ 249 006e 13D0     		beq	.L48
+ 250 0070 7828     		cmp	r0, #120
+ 251 0072 17D0     		beq	.L46
+ 252 0074 7328     		cmp	r0, #115
+ 253 0076 C8D1     		bne	.L63
+ 121:.\asp\library/log_output.c **** 		case 'd':
+ 122:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 123:.\asp\library/log_output.c **** 			if (val >= 0) {
+ 124:.\asp\library/log_output.c **** 				convert((uintptr_t) val, 10U, raddec,
+ 125:.\asp\library/log_output.c **** 										width, false, padzero, putc);
+ 126:.\asp\library/log_output.c **** 			}
+ 127:.\asp\library/log_output.c **** 			else {
+ 128:.\asp\library/log_output.c **** 				convert((uintptr_t)(-val), 10U, raddec,
+ 129:.\asp\library/log_output.c **** 										width, true, padzero, putc);
+ 130:.\asp\library/log_output.c **** 			}
+ 131:.\asp\library/log_output.c **** 			break;
+ 132:.\asp\library/log_output.c **** 		case 'u':
+ 133:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 134:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 10U, raddec, width, false, padzero, putc);
+ 135:.\asp\library/log_output.c **** 			break;
+ 136:.\asp\library/log_output.c **** 		case 'x':
+ 137:.\asp\library/log_output.c **** 		case 'p':
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 8
+
+
+ 138:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 139:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 16U, radhex, width, false, padzero, putc);
+ 140:.\asp\library/log_output.c **** 			break;
+ 141:.\asp\library/log_output.c **** 		case 'X':
+ 142:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 143:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 16U, radHEX, width, false, padzero, putc);
+ 144:.\asp\library/log_output.c **** 			break;
+ 145:.\asp\library/log_output.c **** 		case 'c':
+ 146:.\asp\library/log_output.c **** 			(*putc)((char)(intptr_t)(*p_args++));
+ 147:.\asp\library/log_output.c **** 			break;
+ 148:.\asp\library/log_output.c **** 		case 's':
+ 149:.\asp\library/log_output.c **** 			str = (const char *)(*p_args++);
+ 254              		.loc 1 149 0
+ 255 0078 55F8047B 		ldr	r7, [r5], #4
+ 256              	.LVL30:
+ 150:.\asp\library/log_output.c **** 			while ((c = *str++) != '\0') {
+ 257              		.loc 1 150 0
+ 258 007c 27E0     		b	.L52
+ 259              	.LVL31:
+ 260              	.L70:
+ 122:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 261              		.loc 1 122 0
+ 262 007e 55F8040B 		ldr	r0, [r5], #4
+ 263              	.LVL32:
+ 123:.\asp\library/log_output.c **** 			if (val >= 0) {
+ 264              		.loc 1 123 0
+ 265 0082 0028     		cmp	r0, #0
+ 266 0084 0ADA     		bge	.L67
+ 267              	.L51:
+ 128:.\asp\library/log_output.c **** 				convert((uintptr_t)(-val), 10U, raddec,
+ 268              		.loc 1 128 0
+ 269 0086 0121     		movs	r1, #1
+ 270 0088 8DE84600 		stmia	sp, {r1, r2, r6}
+ 271 008c 4042     		negs	r0, r0
+ 272              	.LVL33:
+ 273              	.L65:
+ 274 008e 154A     		ldr	r2, .L71
+ 275 0090 0A21     		movs	r1, #10
+ 276              	.L66:
+ 277 0092 FFF7FEFF 		bl	convert
+ 278              	.LVL34:
+ 279 0096 B8E7     		b	.L63
+ 280              	.LVL35:
+ 281              	.L48:
+ 133:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 282              		.loc 1 133 0
+ 283 0098 55F8040B 		ldr	r0, [r5], #4
+ 284              	.LVL36:
+ 285              	.L67:
+ 134:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 10U, raddec, width, false, padzero, putc);
+ 286              		.loc 1 134 0
+ 287 009c 0021     		movs	r1, #0
+ 288 009e 8DE84600 		stmia	sp, {r1, r2, r6}
+ 289 00a2 F4E7     		b	.L65
+ 290              	.LVL37:
+ 291              	.L46:
+ 139:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 16U, radhex, width, false, padzero, putc);
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 9
+
+
+ 292              		.loc 1 139 0
+ 293 00a4 0021     		movs	r1, #0
+ 294 00a6 8DE84600 		stmia	sp, {r1, r2, r6}
+ 138:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 295              		.loc 1 138 0
+ 296 00aa 55F8040B 		ldr	r0, [r5], #4
+ 297              	.LVL38:
+ 139:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 16U, radhex, width, false, padzero, putc);
+ 298              		.loc 1 139 0
+ 299 00ae 1021     		movs	r1, #16
+ 300 00b0 0D4A     		ldr	r2, .L71+4
+ 301 00b2 EEE7     		b	.L66
+ 302              	.LVL39:
+ 303              	.L43:
+ 143:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 16U, radHEX, width, false, padzero, putc);
+ 304              		.loc 1 143 0
+ 305 00b4 0021     		movs	r1, #0
+ 306 00b6 8DE84600 		stmia	sp, {r1, r2, r6}
+ 142:.\asp\library/log_output.c **** 			val = (intptr_t)(*p_args++);
+ 307              		.loc 1 142 0
+ 308 00ba 55F8040B 		ldr	r0, [r5], #4
+ 309              	.LVL40:
+ 143:.\asp\library/log_output.c **** 			convert((uintptr_t) val, 16U, radHEX, width, false, padzero, putc);
+ 310              		.loc 1 143 0
+ 311 00be 1021     		movs	r1, #16
+ 312 00c0 0A4A     		ldr	r2, .L71+8
+ 313 00c2 E6E7     		b	.L66
+ 314              	.LVL41:
+ 315              	.L44:
+ 146:.\asp\library/log_output.c **** 			(*putc)((char)(intptr_t)(*p_args++));
+ 316              		.loc 1 146 0
+ 317 00c4 55F8040B 		ldr	r0, [r5], #4
+ 318              	.LVL42:
+ 319 00c8 C0B2     		uxtb	r0, r0
+ 320              	.LVL43:
+ 321              	.L64:
+ 322 00ca B047     		blx	r6
+ 323              	.LVL44:
+ 147:.\asp\library/log_output.c **** 			break;
+ 324              		.loc 1 147 0
+ 325 00cc 9DE7     		b	.L63
+ 326              	.LVL45:
+ 327              	.L52:
+ 328              		.loc 1 150 0 discriminator 1
+ 329 00ce 17F8010B 		ldrb	r0, [r7], #1	@ zero_extendqisi2
+ 330              	.LVL46:
+ 331 00d2 0028     		cmp	r0, #0
+ 332 00d4 99D0     		beq	.L63
+ 333              	.L53:
+ 151:.\asp\library/log_output.c **** 				(*putc)(c);
+ 334              		.loc 1 151 0
+ 335 00d6 B047     		blx	r6
+ 336              	.LVL47:
+ 337 00d8 F9E7     		b	.L52
+ 338              	.LVL48:
+ 339              	.L41:
+ 152:.\asp\library/log_output.c **** 			}
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 10
+
+
+ 153:.\asp\library/log_output.c **** 			break;
+ 154:.\asp\library/log_output.c **** 		case '%':
+ 155:.\asp\library/log_output.c **** 			(*putc)('%');
+ 156:.\asp\library/log_output.c **** 			break;
+ 157:.\asp\library/log_output.c **** 		case '\0':
+ 158:.\asp\library/log_output.c **** 			format--;
+ 340              		.loc 1 158 0
+ 341 00da 013C     		subs	r4, r4, #1
+ 342              	.LVL49:
+ 159:.\asp\library/log_output.c **** 			break;
+ 343              		.loc 1 159 0
+ 344 00dc 95E7     		b	.L63
+ 345              	.LVL50:
+ 346              	.L68:
+ 160:.\asp\library/log_output.c **** 		default:
+ 161:.\asp\library/log_output.c **** 			break;
+ 162:.\asp\library/log_output.c **** 		}
+ 163:.\asp\library/log_output.c **** 	}
+ 164:.\asp\library/log_output.c **** }
+ 347              		.loc 1 164 0
+ 348 00de 05B0     		add	sp, sp, #20
+ 349 00e0 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 350              	.L72:
+ 351 00e2 00BF     		.align	2
+ 352              	.L71:
+ 353 00e4 00000000 		.word	.LANCHOR0
+ 354 00e8 0B000000 		.word	.LANCHOR0+11
+ 355 00ec 1C000000 		.word	.LANCHOR0+28
+ 356              		.cfi_endproc
+ 357              	.LFE9:
+ 358              		.size	syslog_printf, .-syslog_printf
+ 359              		.section	.text.syslog_print,"ax",%progbits
+ 360              		.align	1
+ 361              		.global	syslog_print
+ 362              		.thumb
+ 363              		.thumb_func
+ 364              		.type	syslog_print, %function
+ 365              	syslog_print:
+ 366              	.LFB10:
+ 165:.\asp\library/log_output.c **** 
+ 166:.\asp\library/log_output.c **** /*
+ 167:.\asp\library/log_output.c ****  *  ログ情報の出力
+ 168:.\asp\library/log_output.c ****  */
+ 169:.\asp\library/log_output.c **** void
+ 170:.\asp\library/log_output.c **** syslog_print(const SYSLOG *p_syslog, void (*putc)(char))
+ 171:.\asp\library/log_output.c **** {
+ 367              		.loc 1 171 0
+ 368              		.cfi_startproc
+ 369              		@ args = 0, pretend = 0, frame = 0
+ 370              		@ frame_needed = 0, uses_anonymous_args = 0
+ 371              		@ link register save eliminated.
+ 372              	.LVL51:
+ 373              		.loc 1 171 0
+ 374 0000 0A46     		mov	r2, r1
+ 172:.\asp\library/log_output.c **** 	switch (p_syslog->logtype) {
+ 375              		.loc 1 172 0
+ 376 0002 0168     		ldr	r1, [r0, #0]
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 11
+
+
+ 377              	.LVL52:
+ 171:.\asp\library/log_output.c **** {
+ 378              		.loc 1 171 0
+ 379 0004 0346     		mov	r3, r0
+ 380              		.loc 1 172 0
+ 381 0006 0129     		cmp	r1, #1
+ 382 0008 05D0     		beq	.L75
+ 383 000a 0229     		cmp	r1, #2
+ 384 000c 08D1     		bne	.L77
+ 173:.\asp\library/log_output.c **** 	case LOG_TYPE_COMMENT:
+ 174:.\asp\library/log_output.c **** 		syslog_printf((const char *)(p_syslog->loginfo[0]),
+ 175:.\asp\library/log_output.c **** 								&(p_syslog->loginfo[1]), putc);
+ 176:.\asp\library/log_output.c **** 		break;
+ 177:.\asp\library/log_output.c **** 	case LOG_TYPE_ASSERT:
+ 178:.\asp\library/log_output.c **** 		syslog_printf("%s:%u: Assertion `%s' failed.",
+ 385              		.loc 1 178 0
+ 386 000e 0548     		ldr	r0, .L79
+ 387              	.LVL53:
+ 388 0010 03F10801 		add	r1, r3, #8
+ 389 0014 02E0     		b	.L78
+ 390              	.LVL54:
+ 391              	.L75:
+ 174:.\asp\library/log_output.c **** 		syslog_printf((const char *)(p_syslog->loginfo[0]),
+ 392              		.loc 1 174 0
+ 393 0016 8068     		ldr	r0, [r0, #8]
+ 394              	.LVL55:
+ 395 0018 03F10C01 		add	r1, r3, #12
+ 396              	.L78:
+ 179:.\asp\library/log_output.c **** 								&(p_syslog->loginfo[0]), putc);
+ 180:.\asp\library/log_output.c **** 		break;
+ 181:.\asp\library/log_output.c **** 	default:
+ 182:.\asp\library/log_output.c **** 		/*
+ 183:.\asp\library/log_output.c **** 		 *  他の種別のログ情報には対応していない．
+ 184:.\asp\library/log_output.c **** 		 */
+ 185:.\asp\library/log_output.c **** 		break;
+ 186:.\asp\library/log_output.c **** 	}
+ 187:.\asp\library/log_output.c **** }
+ 397              		.loc 1 187 0
+ 178:.\asp\library/log_output.c **** 		syslog_printf("%s:%u: Assertion `%s' failed.",
+ 398              		.loc 1 178 0
+ 399 001c FFF7FEBF 		b	syslog_printf
+ 400              	.LVL56:
+ 401              	.L77:
+ 402 0020 7047     		bx	lr
+ 403              	.L80:
+ 404 0022 00BF     		.align	2
+ 405              	.L79:
+ 406 0024 00000000 		.word	.LC0
+ 407              		.cfi_endproc
+ 408              	.LFE10:
+ 409              		.size	syslog_print, .-syslog_print
+ 410              		.section	.text.syslog_lostmsg,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	syslog_lostmsg
+ 413              		.thumb
+ 414              		.thumb_func
+ 415              		.type	syslog_lostmsg, %function
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 12
+
+
+ 416              	syslog_lostmsg:
+ 417              	.LFB11:
+ 188:.\asp\library/log_output.c **** 
+ 189:.\asp\library/log_output.c **** /*
+ 190:.\asp\library/log_output.c ****  *  ログ情報喪失メッセージの出力
+ 191:.\asp\library/log_output.c ****  */
+ 192:.\asp\library/log_output.c **** void
+ 193:.\asp\library/log_output.c **** syslog_lostmsg(uint_t lostlog, void (*putc)(char))
+ 194:.\asp\library/log_output.c **** {
+ 418              		.loc 1 194 0
+ 419              		.cfi_startproc
+ 420              		@ args = 0, pretend = 0, frame = 8
+ 421              		@ frame_needed = 0, uses_anonymous_args = 0
+ 422              	.LVL57:
+ 423 0000 13B5     		push	{r0, r1, r4, lr}
+ 424              	.LCFI4:
+ 425              		.cfi_def_cfa_offset 16
+ 426              		.cfi_offset 0, -16
+ 427              		.cfi_offset 1, -12
+ 428              		.cfi_offset 4, -8
+ 429              		.cfi_offset 14, -4
+ 430              		.loc 1 194 0
+ 431 0002 0C46     		mov	r4, r1
+ 195:.\asp\library/log_output.c **** 	intptr_t	lostinfo[1];
+ 196:.\asp\library/log_output.c **** 
+ 197:.\asp\library/log_output.c **** 	lostinfo[0] = (intptr_t) lostlog;
+ 432              		.loc 1 197 0
+ 433 0004 02A9     		add	r1, sp, #8
+ 434              	.LVL58:
+ 435 0006 41F8040D 		str	r0, [r1, #-4]!
+ 198:.\asp\library/log_output.c **** 	syslog_printf("%d messages are lost.", lostinfo, putc);
+ 436              		.loc 1 198 0
+ 437 000a 2246     		mov	r2, r4
+ 438 000c 0248     		ldr	r0, .L82
+ 439              	.LVL59:
+ 440 000e FFF7FEFF 		bl	syslog_printf
+ 441              	.LVL60:
+ 199:.\asp\library/log_output.c **** 	(*putc)('\n');
+ 442              		.loc 1 199 0
+ 443 0012 0A20     		movs	r0, #10
+ 444 0014 A047     		blx	r4
+ 445              	.LVL61:
+ 200:.\asp\library/log_output.c **** }
+ 446              		.loc 1 200 0
+ 447 0016 1CBD     		pop	{r2, r3, r4, pc}
+ 448              	.L83:
+ 449              		.align	2
+ 450              	.L82:
+ 451 0018 1E000000 		.word	.LC1
+ 452              		.cfi_endproc
+ 453              	.LFE11:
+ 454              		.size	syslog_lostmsg, .-syslog_lostmsg
+ 455              		.section	.rodata
+ 456              		.set	.LANCHOR0,. + 0
+ 457              		.type	raddec, %object
+ 458              		.size	raddec, 11
+ 459              	raddec:
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 13
+
+
+ 460 0000 30313233 		.ascii	"0123456789\000"
+ 460      34353637 
+ 460      383900
+ 461              		.type	radhex, %object
+ 462              		.size	radhex, 17
+ 463              	radhex:
+ 464 000b 30313233 		.ascii	"0123456789abcdef\000"
+ 464      34353637 
+ 464      38396162 
+ 464      63646566 
+ 464      00
+ 465              		.type	radHEX, %object
+ 466              		.size	radHEX, 17
+ 467              	radHEX:
+ 468 001c 30313233 		.ascii	"0123456789ABCDEF\000"
+ 468      34353637 
+ 468      38394142 
+ 468      43444546 
+ 468      00
+ 469              		.section	.rodata.str1.1,"aMS",%progbits,1
+ 470              	.LC0:
+ 471 0000 25733A25 		.ascii	"%s:%u: Assertion `%s' failed.\000"
+ 471      753A2041 
+ 471      73736572 
+ 471      74696F6E 
+ 471      20602573 
+ 472              	.LC1:
+ 473 001e 2564206D 		.ascii	"%d messages are lost.\000"
+ 473      65737361 
+ 473      67657320 
+ 473      61726520 
+ 473      6C6F7374 
+ 474              		.text
+ 475              	.Letext0:
+ 476              		.file 2 ".\\asp\\arch\\gcc/tool_stddef.h"
+ 477              		.file 3 ".\\asp\\include/t_stddef.h"
+ 478              		.file 4 ".\\asp\\include/t_syslog.h"
+ 479              		.section	.debug_info,"",%progbits
+ 480              	.Ldebug_info0:
+ 481 0000 EE030000 		.4byte	0x3ee
+ 482 0004 0200     		.2byte	0x2
+ 483 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 484 000a 04       		.byte	0x4
+ 485 000b 01       		.uleb128 0x1
+ 486 000c 99000000 		.4byte	.LASF40
+ 487 0010 01       		.byte	0x1
+ 488 0011 00020000 		.4byte	.LASF41
+ 489 0015 08010000 		.4byte	.LASF42
+ 490 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 491 001d 00000000 		.4byte	0
+ 492 0021 00000000 		.4byte	0
+ 493 0025 00000000 		.4byte	.Ldebug_line0
+ 494 0029 02       		.uleb128 0x2
+ 495 002a 04       		.byte	0x4
+ 496 002b 05       		.byte	0x5
+ 497 002c 696E7400 		.ascii	"int\000"
+ 498 0030 03       		.uleb128 0x3
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 14
+
+
+ 499 0031 04       		.byte	0x4
+ 500 0032 07       		.byte	0x7
+ 501 0033 69010000 		.4byte	.LASF0
+ 502 0037 03       		.uleb128 0x3
+ 503 0038 01       		.byte	0x1
+ 504 0039 06       		.byte	0x6
+ 505 003a 4C000000 		.4byte	.LASF1
+ 506 003e 03       		.uleb128 0x3
+ 507 003f 01       		.byte	0x1
+ 508 0040 08       		.byte	0x8
+ 509 0041 F5000000 		.4byte	.LASF2
+ 510 0045 03       		.uleb128 0x3
+ 511 0046 02       		.byte	0x2
+ 512 0047 05       		.byte	0x5
+ 513 0048 10000000 		.4byte	.LASF3
+ 514 004c 03       		.uleb128 0x3
+ 515 004d 02       		.byte	0x2
+ 516 004e 07       		.byte	0x7
+ 517 004f 84010000 		.4byte	.LASF4
+ 518 0053 03       		.uleb128 0x3
+ 519 0054 08       		.byte	0x8
+ 520 0055 05       		.byte	0x5
+ 521 0056 6C000000 		.4byte	.LASF5
+ 522 005a 03       		.uleb128 0x3
+ 523 005b 08       		.byte	0x8
+ 524 005c 07       		.byte	0x7
+ 525 005d 4B010000 		.4byte	.LASF6
+ 526 0061 04       		.uleb128 0x4
+ 527 0062 1A000000 		.4byte	.LASF8
+ 528 0066 02       		.byte	0x2
+ 529 0067 75       		.byte	0x75
+ 530 0068 6C000000 		.4byte	0x6c
+ 531 006c 03       		.uleb128 0x3
+ 532 006d 04       		.byte	0x4
+ 533 006e 05       		.byte	0x5
+ 534 006f 7A000000 		.4byte	.LASF7
+ 535 0073 04       		.uleb128 0x4
+ 536 0074 2B000000 		.4byte	.LASF9
+ 537 0078 02       		.byte	0x2
+ 538 0079 76       		.byte	0x76
+ 539 007a 7E000000 		.4byte	0x7e
+ 540 007e 03       		.uleb128 0x3
+ 541 007f 04       		.byte	0x4
+ 542 0080 07       		.byte	0x7
+ 543 0081 C8010000 		.4byte	.LASF10
+ 544 0085 03       		.uleb128 0x3
+ 545 0086 04       		.byte	0x4
+ 546 0087 04       		.byte	0x4
+ 547 0088 5E000000 		.4byte	.LASF11
+ 548 008c 03       		.uleb128 0x3
+ 549 008d 08       		.byte	0x8
+ 550 008e 04       		.byte	0x4
+ 551 008f E1010000 		.4byte	.LASF12
+ 552 0093 04       		.uleb128 0x4
+ 553 0094 9C010000 		.4byte	.LASF13
+ 554 0098 03       		.byte	0x3
+ 555 0099 63       		.byte	0x63
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 15
+
+
+ 556 009a 29000000 		.4byte	0x29
+ 557 009e 04       		.uleb128 0x4
+ 558 009f C1010000 		.4byte	.LASF14
+ 559 00a3 03       		.byte	0x3
+ 560 00a4 66       		.byte	0x66
+ 561 00a5 30000000 		.4byte	0x30
+ 562 00a9 04       		.uleb128 0x4
+ 563 00aa 76010000 		.4byte	.LASF15
+ 564 00ae 03       		.byte	0x3
+ 565 00af 69       		.byte	0x69
+ 566 00b0 7E000000 		.4byte	0x7e
+ 567 00b4 04       		.uleb128 0x4
+ 568 00b5 62010000 		.4byte	.LASF16
+ 569 00b9 03       		.byte	0x3
+ 570 00ba 76       		.byte	0x76
+ 571 00bb A9000000 		.4byte	0xa9
+ 572 00bf 05       		.uleb128 0x5
+ 573 00c0 20       		.byte	0x20
+ 574 00c1 04       		.byte	0x4
+ 575 00c2 70       		.byte	0x70
+ 576 00c3 F2000000 		.4byte	0xf2
+ 577 00c7 06       		.uleb128 0x6
+ 578 00c8 EF010000 		.4byte	.LASF17
+ 579 00cc 04       		.byte	0x4
+ 580 00cd 71       		.byte	0x71
+ 581 00ce 9E000000 		.4byte	0x9e
+ 582 00d2 02       		.byte	0x2
+ 583 00d3 23       		.byte	0x23
+ 584 00d4 00       		.uleb128 0
+ 585 00d5 06       		.uleb128 0x6
+ 586 00d6 BA010000 		.4byte	.LASF18
+ 587 00da 04       		.byte	0x4
+ 588 00db 72       		.byte	0x72
+ 589 00dc B4000000 		.4byte	0xb4
+ 590 00e0 02       		.byte	0x2
+ 591 00e1 23       		.byte	0x23
+ 592 00e2 04       		.uleb128 0x4
+ 593 00e3 06       		.uleb128 0x6
+ 594 00e4 8A000000 		.4byte	.LASF19
+ 595 00e8 04       		.byte	0x4
+ 596 00e9 73       		.byte	0x73
+ 597 00ea F2000000 		.4byte	0xf2
+ 598 00ee 02       		.byte	0x2
+ 599 00ef 23       		.byte	0x23
+ 600 00f0 08       		.uleb128 0x8
+ 601 00f1 00       		.byte	0
+ 602 00f2 07       		.uleb128 0x7
+ 603 00f3 61000000 		.4byte	0x61
+ 604 00f7 02010000 		.4byte	0x102
+ 605 00fb 08       		.uleb128 0x8
+ 606 00fc 02010000 		.4byte	0x102
+ 607 0100 05       		.byte	0x5
+ 608 0101 00       		.byte	0
+ 609 0102 03       		.uleb128 0x3
+ 610 0103 04       		.byte	0x4
+ 611 0104 07       		.byte	0x7
+ 612 0105 F7010000 		.4byte	.LASF20
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 16
+
+
+ 613 0109 04       		.uleb128 0x4
+ 614 010a 00000000 		.4byte	.LASF21
+ 615 010e 04       		.byte	0x4
+ 616 010f 74       		.byte	0x74
+ 617 0110 BF000000 		.4byte	0xbf
+ 618 0114 09       		.uleb128 0x9
+ 619 0115 64000000 		.4byte	.LASF43
+ 620 0119 01       		.byte	0x1
+ 621 011a 38       		.byte	0x38
+ 622 011b 01       		.byte	0x1
+ 623 011c 00000000 		.4byte	.LFB8
+ 624 0120 74000000 		.4byte	.LFE8
+ 625 0124 00000000 		.4byte	.LLST0
+ 626 0128 01       		.byte	0x1
+ 627 0129 F1010000 		.4byte	0x1f1
+ 628 012d 0A       		.uleb128 0xa
+ 629 012e 76616C00 		.ascii	"val\000"
+ 630 0132 01       		.byte	0x1
+ 631 0133 38       		.byte	0x38
+ 632 0134 73000000 		.4byte	0x73
+ 633 0138 2C000000 		.4byte	.LLST1
+ 634 013c 0B       		.uleb128 0xb
+ 635 013d 7E010000 		.4byte	.LASF22
+ 636 0141 01       		.byte	0x1
+ 637 0142 38       		.byte	0x38
+ 638 0143 9E000000 		.4byte	0x9e
+ 639 0147 55000000 		.4byte	.LLST2
+ 640 014b 0B       		.uleb128 0xb
+ 641 014c 23000000 		.4byte	.LASF23
+ 642 0150 01       		.byte	0x1
+ 643 0151 38       		.byte	0x38
+ 644 0152 F1010000 		.4byte	0x1f1
+ 645 0156 76000000 		.4byte	.LLST3
+ 646 015a 0B       		.uleb128 0xb
+ 647 015b 58000000 		.4byte	.LASF24
+ 648 015f 01       		.byte	0x1
+ 649 0160 39       		.byte	0x39
+ 650 0161 9E000000 		.4byte	0x9e
+ 651 0165 97000000 		.4byte	.LLST4
+ 652 0169 0C       		.uleb128 0xc
+ 653 016a E2000000 		.4byte	.LASF25
+ 654 016e 01       		.byte	0x1
+ 655 016f 39       		.byte	0x39
+ 656 0170 93000000 		.4byte	0x93
+ 657 0174 02       		.byte	0x2
+ 658 0175 91       		.byte	0x91
+ 659 0176 00       		.sleb128 0
+ 660 0177 0C       		.uleb128 0xc
+ 661 0178 22020000 		.4byte	.LASF26
+ 662 017c 01       		.byte	0x1
+ 663 017d 39       		.byte	0x39
+ 664 017e 93000000 		.4byte	0x93
+ 665 0182 02       		.byte	0x2
+ 666 0183 91       		.byte	0x91
+ 667 0184 04       		.sleb128 4
+ 668 0185 0C       		.uleb128 0xc
+ 669 0186 03010000 		.4byte	.LASF27
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 17
+
+
+ 670 018a 01       		.byte	0x1
+ 671 018b 39       		.byte	0x39
+ 672 018c 0F020000 		.4byte	0x20f
+ 673 0190 02       		.byte	0x2
+ 674 0191 91       		.byte	0x91
+ 675 0192 08       		.sleb128 8
+ 676 0193 0D       		.uleb128 0xd
+ 677 0194 62756600 		.ascii	"buf\000"
+ 678 0198 01       		.byte	0x1
+ 679 0199 3B       		.byte	0x3b
+ 680 019a 15020000 		.4byte	0x215
+ 681 019e 02       		.byte	0x2
+ 682 019f 91       		.byte	0x91
+ 683 01a0 54       		.sleb128 -44
+ 684 01a1 0E       		.uleb128 0xe
+ 685 01a2 6900     		.ascii	"i\000"
+ 686 01a4 01       		.byte	0x1
+ 687 01a5 3C       		.byte	0x3c
+ 688 01a6 9E000000 		.4byte	0x9e
+ 689 01aa B5000000 		.4byte	.LLST5
+ 690 01ae 0D       		.uleb128 0xd
+ 691 01af 6A00     		.ascii	"j\000"
+ 692 01b1 01       		.byte	0x1
+ 693 01b2 3C       		.byte	0x3c
+ 694 01b3 9E000000 		.4byte	0x9e
+ 695 01b7 01       		.byte	0x1
+ 696 01b8 58       		.byte	0x58
+ 697 01b9 0F       		.uleb128 0xf
+ 698 01ba 40000000 		.4byte	.LVL7
+ 699 01be C9010000 		.4byte	0x1c9
+ 700 01c2 10       		.uleb128 0x10
+ 701 01c3 01       		.byte	0x1
+ 702 01c4 50       		.byte	0x50
+ 703 01c5 02       		.byte	0x2
+ 704 01c6 08       		.byte	0x8
+ 705 01c7 2D       		.byte	0x2d
+ 706 01c8 00       		.byte	0
+ 707 01c9 0F       		.uleb128 0xf
+ 708 01ca 50000000 		.4byte	.LVL9
+ 709 01ce E4010000 		.4byte	0x1e4
+ 710 01d2 10       		.uleb128 0x10
+ 711 01d3 01       		.byte	0x1
+ 712 01d4 50       		.byte	0x50
+ 713 01d5 0D       		.byte	0xd
+ 714 01d6 08       		.byte	0x8
+ 715 01d7 20       		.byte	0x20
+ 716 01d8 08       		.byte	0x8
+ 717 01d9 30       		.byte	0x30
+ 718 01da 77       		.byte	0x77
+ 719 01db 00       		.sleb128 0
+ 720 01dc 30       		.byte	0x30
+ 721 01dd 29       		.byte	0x29
+ 722 01de 28       		.byte	0x28
+ 723 01df 0100     		.2byte	0x1
+ 724 01e1 16       		.byte	0x16
+ 725 01e2 13       		.byte	0x13
+ 726 01e3 00       		.byte	0
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 18
+
+
+ 727 01e4 11       		.uleb128 0x11
+ 728 01e5 62000000 		.4byte	.LVL11
+ 729 01e9 10       		.uleb128 0x10
+ 730 01ea 01       		.byte	0x1
+ 731 01eb 50       		.byte	0x50
+ 732 01ec 02       		.byte	0x2
+ 733 01ed 08       		.byte	0x8
+ 734 01ee 2D       		.byte	0x2d
+ 735 01ef 00       		.byte	0
+ 736 01f0 00       		.byte	0
+ 737 01f1 12       		.uleb128 0x12
+ 738 01f2 04       		.byte	0x4
+ 739 01f3 F7010000 		.4byte	0x1f7
+ 740 01f7 13       		.uleb128 0x13
+ 741 01f8 FC010000 		.4byte	0x1fc
+ 742 01fc 03       		.uleb128 0x3
+ 743 01fd 01       		.byte	0x1
+ 744 01fe 08       		.byte	0x8
+ 745 01ff 97010000 		.4byte	.LASF28
+ 746 0203 14       		.uleb128 0x14
+ 747 0204 01       		.byte	0x1
+ 748 0205 0F020000 		.4byte	0x20f
+ 749 0209 15       		.uleb128 0x15
+ 750 020a FC010000 		.4byte	0x1fc
+ 751 020e 00       		.byte	0
+ 752 020f 12       		.uleb128 0x12
+ 753 0210 04       		.byte	0x4
+ 754 0211 03020000 		.4byte	0x203
+ 755 0215 07       		.uleb128 0x7
+ 756 0216 FC010000 		.4byte	0x1fc
+ 757 021a 25020000 		.4byte	0x225
+ 758 021e 08       		.uleb128 0x8
+ 759 021f 02010000 		.4byte	0x102
+ 760 0223 0A       		.byte	0xa
+ 761 0224 00       		.byte	0
+ 762 0225 16       		.uleb128 0x16
+ 763 0226 01       		.byte	0x1
+ 764 0227 AC010000 		.4byte	.LASF31
+ 765 022b 01       		.byte	0x1
+ 766 022c 5D       		.byte	0x5d
+ 767 022d 01       		.byte	0x1
+ 768 022e 00000000 		.4byte	.LFB9
+ 769 0232 F0000000 		.4byte	.LFE9
+ 770 0236 D4000000 		.4byte	.LLST6
+ 771 023a 01       		.byte	0x1
+ 772 023b BF020000 		.4byte	0x2bf
+ 773 023f 0B       		.uleb128 0xb
+ 774 0240 1B020000 		.4byte	.LASF29
+ 775 0244 01       		.byte	0x1
+ 776 0245 5D       		.byte	0x5d
+ 777 0246 F1010000 		.4byte	0x1f1
+ 778 024a 00010000 		.4byte	.LLST7
+ 779 024e 0B       		.uleb128 0xb
+ 780 024f E8010000 		.4byte	.LASF30
+ 781 0253 01       		.byte	0x1
+ 782 0254 5D       		.byte	0x5d
+ 783 0255 BF020000 		.4byte	0x2bf
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 19
+
+
+ 784 0259 98010000 		.4byte	.LLST8
+ 785 025d 0B       		.uleb128 0xb
+ 786 025e 03010000 		.4byte	.LASF27
+ 787 0262 01       		.byte	0x1
+ 788 0263 5D       		.byte	0x5d
+ 789 0264 0F020000 		.4byte	0x20f
+ 790 0268 B6010000 		.4byte	.LLST9
+ 791 026c 0E       		.uleb128 0xe
+ 792 026d 6300     		.ascii	"c\000"
+ 793 026f 01       		.byte	0x1
+ 794 0270 5F       		.byte	0x5f
+ 795 0271 FC010000 		.4byte	0x1fc
+ 796 0275 D4010000 		.4byte	.LLST10
+ 797 0279 17       		.uleb128 0x17
+ 798 027a 58000000 		.4byte	.LASF24
+ 799 027e 01       		.byte	0x1
+ 800 027f 60       		.byte	0x60
+ 801 0280 9E000000 		.4byte	0x9e
+ 802 0284 A1020000 		.4byte	.LLST11
+ 803 0288 17       		.uleb128 0x17
+ 804 0289 22020000 		.4byte	.LASF26
+ 805 028d 01       		.byte	0x1
+ 806 028e 61       		.byte	0x61
+ 807 028f 93000000 		.4byte	0x93
+ 808 0293 E1020000 		.4byte	.LLST12
+ 809 0297 0E       		.uleb128 0xe
+ 810 0298 76616C00 		.ascii	"val\000"
+ 811 029c 01       		.byte	0x1
+ 812 029d 62       		.byte	0x62
+ 813 029e 61000000 		.4byte	0x61
+ 814 02a2 01030000 		.4byte	.LLST13
+ 815 02a6 0E       		.uleb128 0xe
+ 816 02a7 73747200 		.ascii	"str\000"
+ 817 02ab 01       		.byte	0x1
+ 818 02ac 63       		.byte	0x63
+ 819 02ad F1010000 		.4byte	0x1f1
+ 820 02b1 35030000 		.4byte	.LLST14
+ 821 02b5 18       		.uleb128 0x18
+ 822 02b6 96000000 		.4byte	.LVL34
+ 823 02ba 14010000 		.4byte	0x114
+ 824 02be 00       		.byte	0
+ 825 02bf 12       		.uleb128 0x12
+ 826 02c0 04       		.byte	0x4
+ 827 02c1 C5020000 		.4byte	0x2c5
+ 828 02c5 13       		.uleb128 0x13
+ 829 02c6 61000000 		.4byte	0x61
+ 830 02ca 19       		.uleb128 0x19
+ 831 02cb 01       		.byte	0x1
+ 832 02cc E8000000 		.4byte	.LASF32
+ 833 02d0 01       		.byte	0x1
+ 834 02d1 AA       		.byte	0xaa
+ 835 02d2 01       		.byte	0x1
+ 836 02d3 00000000 		.4byte	.LFB10
+ 837 02d7 28000000 		.4byte	.LFE10
+ 838 02db 02       		.byte	0x2
+ 839 02dc 7D       		.byte	0x7d
+ 840 02dd 00       		.sleb128 0
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 20
+
+
+ 841 02de 01       		.byte	0x1
+ 842 02df 0C030000 		.4byte	0x30c
+ 843 02e3 0B       		.uleb128 0xb
+ 844 02e4 A3010000 		.4byte	.LASF33
+ 845 02e8 01       		.byte	0x1
+ 846 02e9 AA       		.byte	0xaa
+ 847 02ea 0C030000 		.4byte	0x30c
+ 848 02ee 53030000 		.4byte	.LLST15
+ 849 02f2 0B       		.uleb128 0xb
+ 850 02f3 03010000 		.4byte	.LASF27
+ 851 02f7 01       		.byte	0x1
+ 852 02f8 AA       		.byte	0xaa
+ 853 02f9 0F020000 		.4byte	0x20f
+ 854 02fd A0030000 		.4byte	.LLST16
+ 855 0301 1A       		.uleb128 0x1a
+ 856 0302 20000000 		.4byte	.LVL56
+ 857 0306 01       		.byte	0x1
+ 858 0307 25020000 		.4byte	0x225
+ 859 030b 00       		.byte	0
+ 860 030c 12       		.uleb128 0x12
+ 861 030d 04       		.byte	0x4
+ 862 030e 12030000 		.4byte	0x312
+ 863 0312 13       		.uleb128 0x13
+ 864 0313 09010000 		.4byte	0x109
+ 865 0317 1B       		.uleb128 0x1b
+ 866 0318 01       		.byte	0x1
+ 867 0319 35000000 		.4byte	.LASF34
+ 868 031d 01       		.byte	0x1
+ 869 031e C1       		.byte	0xc1
+ 870 031f 01       		.byte	0x1
+ 871 0320 00000000 		.4byte	.LFB11
+ 872 0324 1C000000 		.4byte	.LFE11
+ 873 0328 D7030000 		.4byte	.LLST17
+ 874 032c 01       		.byte	0x1
+ 875 032d 8F030000 		.4byte	0x38f
+ 876 0331 0B       		.uleb128 0xb
+ 877 0332 44000000 		.4byte	.LASF35
+ 878 0336 01       		.byte	0x1
+ 879 0337 C1       		.byte	0xc1
+ 880 0338 9E000000 		.4byte	0x9e
+ 881 033c F7030000 		.4byte	.LLST18
+ 882 0340 0B       		.uleb128 0xb
+ 883 0341 03010000 		.4byte	.LASF27
+ 884 0345 01       		.byte	0x1
+ 885 0346 C1       		.byte	0xc1
+ 886 0347 0F020000 		.4byte	0x20f
+ 887 034b 24040000 		.4byte	.LLST19
+ 888 034f 1C       		.uleb128 0x1c
+ 889 0350 07000000 		.4byte	.LASF36
+ 890 0354 01       		.byte	0x1
+ 891 0355 C3       		.byte	0xc3
+ 892 0356 8F030000 		.4byte	0x38f
+ 893 035a 02       		.byte	0x2
+ 894 035b 91       		.byte	0x91
+ 895 035c 74       		.sleb128 -12
+ 896 035d 1D       		.uleb128 0x1d
+ 897 035e 12000000 		.4byte	.LVL60
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 21
+
+
+ 898 0362 25020000 		.4byte	0x225
+ 899 0366 80030000 		.4byte	0x380
+ 900 036a 10       		.uleb128 0x10
+ 901 036b 01       		.byte	0x1
+ 902 036c 52       		.byte	0x52
+ 903 036d 02       		.byte	0x2
+ 904 036e 74       		.byte	0x74
+ 905 036f 00       		.sleb128 0
+ 906 0370 10       		.uleb128 0x10
+ 907 0371 01       		.byte	0x1
+ 908 0372 51       		.byte	0x51
+ 909 0373 02       		.byte	0x2
+ 910 0374 91       		.byte	0x91
+ 911 0375 74       		.sleb128 -12
+ 912 0376 10       		.uleb128 0x10
+ 913 0377 01       		.byte	0x1
+ 914 0378 50       		.byte	0x50
+ 915 0379 05       		.byte	0x5
+ 916 037a 03       		.byte	0x3
+ 917 037b 1E000000 		.4byte	.LC1
+ 918 037f 00       		.byte	0
+ 919 0380 1E       		.uleb128 0x1e
+ 920 0381 16000000 		.4byte	.LVL61
+ 921 0385 02       		.byte	0x2
+ 922 0386 74       		.byte	0x74
+ 923 0387 00       		.sleb128 0
+ 924 0388 10       		.uleb128 0x10
+ 925 0389 01       		.byte	0x1
+ 926 038a 50       		.byte	0x50
+ 927 038b 01       		.byte	0x1
+ 928 038c 3A       		.byte	0x3a
+ 929 038d 00       		.byte	0
+ 930 038e 00       		.byte	0
+ 931 038f 07       		.uleb128 0x7
+ 932 0390 61000000 		.4byte	0x61
+ 933 0394 9F030000 		.4byte	0x39f
+ 934 0398 08       		.uleb128 0x8
+ 935 0399 02010000 		.4byte	0x102
+ 936 039d 00       		.byte	0
+ 937 039e 00       		.byte	0
+ 938 039f 1C       		.uleb128 0x1c
+ 939 03a0 DA010000 		.4byte	.LASF37
+ 940 03a4 01       		.byte	0x1
+ 941 03a5 58       		.byte	0x58
+ 942 03a6 B0030000 		.4byte	0x3b0
+ 943 03aa 05       		.byte	0x5
+ 944 03ab 03       		.byte	0x3
+ 945 03ac 00000000 		.4byte	raddec
+ 946 03b0 13       		.uleb128 0x13
+ 947 03b1 15020000 		.4byte	0x215
+ 948 03b5 07       		.uleb128 0x7
+ 949 03b6 FC010000 		.4byte	0x1fc
+ 950 03ba C5030000 		.4byte	0x3c5
+ 951 03be 08       		.uleb128 0x8
+ 952 03bf 02010000 		.4byte	0x102
+ 953 03c3 10       		.byte	0x10
+ 954 03c4 00       		.byte	0
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 22
+
+
+ 955 03c5 1C       		.uleb128 0x1c
+ 956 03c6 83000000 		.4byte	.LASF38
+ 957 03ca 01       		.byte	0x1
+ 958 03cb 59       		.byte	0x59
+ 959 03cc D6030000 		.4byte	0x3d6
+ 960 03d0 05       		.byte	0x5
+ 961 03d1 03       		.byte	0x3
+ 962 03d2 0B000000 		.4byte	radhex
+ 963 03d6 13       		.uleb128 0x13
+ 964 03d7 B5030000 		.4byte	0x3b5
+ 965 03db 1C       		.uleb128 0x1c
+ 966 03dc 92000000 		.4byte	.LASF39
+ 967 03e0 01       		.byte	0x1
+ 968 03e1 5A       		.byte	0x5a
+ 969 03e2 EC030000 		.4byte	0x3ec
+ 970 03e6 05       		.byte	0x5
+ 971 03e7 03       		.byte	0x3
+ 972 03e8 1C000000 		.4byte	radHEX
+ 973 03ec 13       		.uleb128 0x13
+ 974 03ed B5030000 		.4byte	0x3b5
+ 975 03f1 00       		.byte	0
+ 976              		.section	.debug_abbrev,"",%progbits
+ 977              	.Ldebug_abbrev0:
+ 978 0000 01       		.uleb128 0x1
+ 979 0001 11       		.uleb128 0x11
+ 980 0002 01       		.byte	0x1
+ 981 0003 25       		.uleb128 0x25
+ 982 0004 0E       		.uleb128 0xe
+ 983 0005 13       		.uleb128 0x13
+ 984 0006 0B       		.uleb128 0xb
+ 985 0007 03       		.uleb128 0x3
+ 986 0008 0E       		.uleb128 0xe
+ 987 0009 1B       		.uleb128 0x1b
+ 988 000a 0E       		.uleb128 0xe
+ 989 000b 55       		.uleb128 0x55
+ 990 000c 06       		.uleb128 0x6
+ 991 000d 11       		.uleb128 0x11
+ 992 000e 01       		.uleb128 0x1
+ 993 000f 52       		.uleb128 0x52
+ 994 0010 01       		.uleb128 0x1
+ 995 0011 10       		.uleb128 0x10
+ 996 0012 06       		.uleb128 0x6
+ 997 0013 00       		.byte	0
+ 998 0014 00       		.byte	0
+ 999 0015 02       		.uleb128 0x2
+ 1000 0016 24       		.uleb128 0x24
+ 1001 0017 00       		.byte	0
+ 1002 0018 0B       		.uleb128 0xb
+ 1003 0019 0B       		.uleb128 0xb
+ 1004 001a 3E       		.uleb128 0x3e
+ 1005 001b 0B       		.uleb128 0xb
+ 1006 001c 03       		.uleb128 0x3
+ 1007 001d 08       		.uleb128 0x8
+ 1008 001e 00       		.byte	0
+ 1009 001f 00       		.byte	0
+ 1010 0020 03       		.uleb128 0x3
+ 1011 0021 24       		.uleb128 0x24
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 23
+
+
+ 1012 0022 00       		.byte	0
+ 1013 0023 0B       		.uleb128 0xb
+ 1014 0024 0B       		.uleb128 0xb
+ 1015 0025 3E       		.uleb128 0x3e
+ 1016 0026 0B       		.uleb128 0xb
+ 1017 0027 03       		.uleb128 0x3
+ 1018 0028 0E       		.uleb128 0xe
+ 1019 0029 00       		.byte	0
+ 1020 002a 00       		.byte	0
+ 1021 002b 04       		.uleb128 0x4
+ 1022 002c 16       		.uleb128 0x16
+ 1023 002d 00       		.byte	0
+ 1024 002e 03       		.uleb128 0x3
+ 1025 002f 0E       		.uleb128 0xe
+ 1026 0030 3A       		.uleb128 0x3a
+ 1027 0031 0B       		.uleb128 0xb
+ 1028 0032 3B       		.uleb128 0x3b
+ 1029 0033 0B       		.uleb128 0xb
+ 1030 0034 49       		.uleb128 0x49
+ 1031 0035 13       		.uleb128 0x13
+ 1032 0036 00       		.byte	0
+ 1033 0037 00       		.byte	0
+ 1034 0038 05       		.uleb128 0x5
+ 1035 0039 13       		.uleb128 0x13
+ 1036 003a 01       		.byte	0x1
+ 1037 003b 0B       		.uleb128 0xb
+ 1038 003c 0B       		.uleb128 0xb
+ 1039 003d 3A       		.uleb128 0x3a
+ 1040 003e 0B       		.uleb128 0xb
+ 1041 003f 3B       		.uleb128 0x3b
+ 1042 0040 0B       		.uleb128 0xb
+ 1043 0041 01       		.uleb128 0x1
+ 1044 0042 13       		.uleb128 0x13
+ 1045 0043 00       		.byte	0
+ 1046 0044 00       		.byte	0
+ 1047 0045 06       		.uleb128 0x6
+ 1048 0046 0D       		.uleb128 0xd
+ 1049 0047 00       		.byte	0
+ 1050 0048 03       		.uleb128 0x3
+ 1051 0049 0E       		.uleb128 0xe
+ 1052 004a 3A       		.uleb128 0x3a
+ 1053 004b 0B       		.uleb128 0xb
+ 1054 004c 3B       		.uleb128 0x3b
+ 1055 004d 0B       		.uleb128 0xb
+ 1056 004e 49       		.uleb128 0x49
+ 1057 004f 13       		.uleb128 0x13
+ 1058 0050 38       		.uleb128 0x38
+ 1059 0051 0A       		.uleb128 0xa
+ 1060 0052 00       		.byte	0
+ 1061 0053 00       		.byte	0
+ 1062 0054 07       		.uleb128 0x7
+ 1063 0055 01       		.uleb128 0x1
+ 1064 0056 01       		.byte	0x1
+ 1065 0057 49       		.uleb128 0x49
+ 1066 0058 13       		.uleb128 0x13
+ 1067 0059 01       		.uleb128 0x1
+ 1068 005a 13       		.uleb128 0x13
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 24
+
+
+ 1069 005b 00       		.byte	0
+ 1070 005c 00       		.byte	0
+ 1071 005d 08       		.uleb128 0x8
+ 1072 005e 21       		.uleb128 0x21
+ 1073 005f 00       		.byte	0
+ 1074 0060 49       		.uleb128 0x49
+ 1075 0061 13       		.uleb128 0x13
+ 1076 0062 2F       		.uleb128 0x2f
+ 1077 0063 0B       		.uleb128 0xb
+ 1078 0064 00       		.byte	0
+ 1079 0065 00       		.byte	0
+ 1080 0066 09       		.uleb128 0x9
+ 1081 0067 2E       		.uleb128 0x2e
+ 1082 0068 01       		.byte	0x1
+ 1083 0069 03       		.uleb128 0x3
+ 1084 006a 0E       		.uleb128 0xe
+ 1085 006b 3A       		.uleb128 0x3a
+ 1086 006c 0B       		.uleb128 0xb
+ 1087 006d 3B       		.uleb128 0x3b
+ 1088 006e 0B       		.uleb128 0xb
+ 1089 006f 27       		.uleb128 0x27
+ 1090 0070 0C       		.uleb128 0xc
+ 1091 0071 11       		.uleb128 0x11
+ 1092 0072 01       		.uleb128 0x1
+ 1093 0073 12       		.uleb128 0x12
+ 1094 0074 01       		.uleb128 0x1
+ 1095 0075 40       		.uleb128 0x40
+ 1096 0076 06       		.uleb128 0x6
+ 1097 0077 9642     		.uleb128 0x2116
+ 1098 0079 0C       		.uleb128 0xc
+ 1099 007a 01       		.uleb128 0x1
+ 1100 007b 13       		.uleb128 0x13
+ 1101 007c 00       		.byte	0
+ 1102 007d 00       		.byte	0
+ 1103 007e 0A       		.uleb128 0xa
+ 1104 007f 05       		.uleb128 0x5
+ 1105 0080 00       		.byte	0
+ 1106 0081 03       		.uleb128 0x3
+ 1107 0082 08       		.uleb128 0x8
+ 1108 0083 3A       		.uleb128 0x3a
+ 1109 0084 0B       		.uleb128 0xb
+ 1110 0085 3B       		.uleb128 0x3b
+ 1111 0086 0B       		.uleb128 0xb
+ 1112 0087 49       		.uleb128 0x49
+ 1113 0088 13       		.uleb128 0x13
+ 1114 0089 02       		.uleb128 0x2
+ 1115 008a 06       		.uleb128 0x6
+ 1116 008b 00       		.byte	0
+ 1117 008c 00       		.byte	0
+ 1118 008d 0B       		.uleb128 0xb
+ 1119 008e 05       		.uleb128 0x5
+ 1120 008f 00       		.byte	0
+ 1121 0090 03       		.uleb128 0x3
+ 1122 0091 0E       		.uleb128 0xe
+ 1123 0092 3A       		.uleb128 0x3a
+ 1124 0093 0B       		.uleb128 0xb
+ 1125 0094 3B       		.uleb128 0x3b
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 25
+
+
+ 1126 0095 0B       		.uleb128 0xb
+ 1127 0096 49       		.uleb128 0x49
+ 1128 0097 13       		.uleb128 0x13
+ 1129 0098 02       		.uleb128 0x2
+ 1130 0099 06       		.uleb128 0x6
+ 1131 009a 00       		.byte	0
+ 1132 009b 00       		.byte	0
+ 1133 009c 0C       		.uleb128 0xc
+ 1134 009d 05       		.uleb128 0x5
+ 1135 009e 00       		.byte	0
+ 1136 009f 03       		.uleb128 0x3
+ 1137 00a0 0E       		.uleb128 0xe
+ 1138 00a1 3A       		.uleb128 0x3a
+ 1139 00a2 0B       		.uleb128 0xb
+ 1140 00a3 3B       		.uleb128 0x3b
+ 1141 00a4 0B       		.uleb128 0xb
+ 1142 00a5 49       		.uleb128 0x49
+ 1143 00a6 13       		.uleb128 0x13
+ 1144 00a7 02       		.uleb128 0x2
+ 1145 00a8 0A       		.uleb128 0xa
+ 1146 00a9 00       		.byte	0
+ 1147 00aa 00       		.byte	0
+ 1148 00ab 0D       		.uleb128 0xd
+ 1149 00ac 34       		.uleb128 0x34
+ 1150 00ad 00       		.byte	0
+ 1151 00ae 03       		.uleb128 0x3
+ 1152 00af 08       		.uleb128 0x8
+ 1153 00b0 3A       		.uleb128 0x3a
+ 1154 00b1 0B       		.uleb128 0xb
+ 1155 00b2 3B       		.uleb128 0x3b
+ 1156 00b3 0B       		.uleb128 0xb
+ 1157 00b4 49       		.uleb128 0x49
+ 1158 00b5 13       		.uleb128 0x13
+ 1159 00b6 02       		.uleb128 0x2
+ 1160 00b7 0A       		.uleb128 0xa
+ 1161 00b8 00       		.byte	0
+ 1162 00b9 00       		.byte	0
+ 1163 00ba 0E       		.uleb128 0xe
+ 1164 00bb 34       		.uleb128 0x34
+ 1165 00bc 00       		.byte	0
+ 1166 00bd 03       		.uleb128 0x3
+ 1167 00be 08       		.uleb128 0x8
+ 1168 00bf 3A       		.uleb128 0x3a
+ 1169 00c0 0B       		.uleb128 0xb
+ 1170 00c1 3B       		.uleb128 0x3b
+ 1171 00c2 0B       		.uleb128 0xb
+ 1172 00c3 49       		.uleb128 0x49
+ 1173 00c4 13       		.uleb128 0x13
+ 1174 00c5 02       		.uleb128 0x2
+ 1175 00c6 06       		.uleb128 0x6
+ 1176 00c7 00       		.byte	0
+ 1177 00c8 00       		.byte	0
+ 1178 00c9 0F       		.uleb128 0xf
+ 1179 00ca 898201   		.uleb128 0x4109
+ 1180 00cd 01       		.byte	0x1
+ 1181 00ce 11       		.uleb128 0x11
+ 1182 00cf 01       		.uleb128 0x1
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 26
+
+
+ 1183 00d0 01       		.uleb128 0x1
+ 1184 00d1 13       		.uleb128 0x13
+ 1185 00d2 00       		.byte	0
+ 1186 00d3 00       		.byte	0
+ 1187 00d4 10       		.uleb128 0x10
+ 1188 00d5 8A8201   		.uleb128 0x410a
+ 1189 00d8 00       		.byte	0
+ 1190 00d9 02       		.uleb128 0x2
+ 1191 00da 0A       		.uleb128 0xa
+ 1192 00db 9142     		.uleb128 0x2111
+ 1193 00dd 0A       		.uleb128 0xa
+ 1194 00de 00       		.byte	0
+ 1195 00df 00       		.byte	0
+ 1196 00e0 11       		.uleb128 0x11
+ 1197 00e1 898201   		.uleb128 0x4109
+ 1198 00e4 01       		.byte	0x1
+ 1199 00e5 11       		.uleb128 0x11
+ 1200 00e6 01       		.uleb128 0x1
+ 1201 00e7 00       		.byte	0
+ 1202 00e8 00       		.byte	0
+ 1203 00e9 12       		.uleb128 0x12
+ 1204 00ea 0F       		.uleb128 0xf
+ 1205 00eb 00       		.byte	0
+ 1206 00ec 0B       		.uleb128 0xb
+ 1207 00ed 0B       		.uleb128 0xb
+ 1208 00ee 49       		.uleb128 0x49
+ 1209 00ef 13       		.uleb128 0x13
+ 1210 00f0 00       		.byte	0
+ 1211 00f1 00       		.byte	0
+ 1212 00f2 13       		.uleb128 0x13
+ 1213 00f3 26       		.uleb128 0x26
+ 1214 00f4 00       		.byte	0
+ 1215 00f5 49       		.uleb128 0x49
+ 1216 00f6 13       		.uleb128 0x13
+ 1217 00f7 00       		.byte	0
+ 1218 00f8 00       		.byte	0
+ 1219 00f9 14       		.uleb128 0x14
+ 1220 00fa 15       		.uleb128 0x15
+ 1221 00fb 01       		.byte	0x1
+ 1222 00fc 27       		.uleb128 0x27
+ 1223 00fd 0C       		.uleb128 0xc
+ 1224 00fe 01       		.uleb128 0x1
+ 1225 00ff 13       		.uleb128 0x13
+ 1226 0100 00       		.byte	0
+ 1227 0101 00       		.byte	0
+ 1228 0102 15       		.uleb128 0x15
+ 1229 0103 05       		.uleb128 0x5
+ 1230 0104 00       		.byte	0
+ 1231 0105 49       		.uleb128 0x49
+ 1232 0106 13       		.uleb128 0x13
+ 1233 0107 00       		.byte	0
+ 1234 0108 00       		.byte	0
+ 1235 0109 16       		.uleb128 0x16
+ 1236 010a 2E       		.uleb128 0x2e
+ 1237 010b 01       		.byte	0x1
+ 1238 010c 3F       		.uleb128 0x3f
+ 1239 010d 0C       		.uleb128 0xc
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 27
+
+
+ 1240 010e 03       		.uleb128 0x3
+ 1241 010f 0E       		.uleb128 0xe
+ 1242 0110 3A       		.uleb128 0x3a
+ 1243 0111 0B       		.uleb128 0xb
+ 1244 0112 3B       		.uleb128 0x3b
+ 1245 0113 0B       		.uleb128 0xb
+ 1246 0114 27       		.uleb128 0x27
+ 1247 0115 0C       		.uleb128 0xc
+ 1248 0116 11       		.uleb128 0x11
+ 1249 0117 01       		.uleb128 0x1
+ 1250 0118 12       		.uleb128 0x12
+ 1251 0119 01       		.uleb128 0x1
+ 1252 011a 40       		.uleb128 0x40
+ 1253 011b 06       		.uleb128 0x6
+ 1254 011c 9642     		.uleb128 0x2116
+ 1255 011e 0C       		.uleb128 0xc
+ 1256 011f 01       		.uleb128 0x1
+ 1257 0120 13       		.uleb128 0x13
+ 1258 0121 00       		.byte	0
+ 1259 0122 00       		.byte	0
+ 1260 0123 17       		.uleb128 0x17
+ 1261 0124 34       		.uleb128 0x34
+ 1262 0125 00       		.byte	0
+ 1263 0126 03       		.uleb128 0x3
+ 1264 0127 0E       		.uleb128 0xe
+ 1265 0128 3A       		.uleb128 0x3a
+ 1266 0129 0B       		.uleb128 0xb
+ 1267 012a 3B       		.uleb128 0x3b
+ 1268 012b 0B       		.uleb128 0xb
+ 1269 012c 49       		.uleb128 0x49
+ 1270 012d 13       		.uleb128 0x13
+ 1271 012e 02       		.uleb128 0x2
+ 1272 012f 06       		.uleb128 0x6
+ 1273 0130 00       		.byte	0
+ 1274 0131 00       		.byte	0
+ 1275 0132 18       		.uleb128 0x18
+ 1276 0133 898201   		.uleb128 0x4109
+ 1277 0136 00       		.byte	0
+ 1278 0137 11       		.uleb128 0x11
+ 1279 0138 01       		.uleb128 0x1
+ 1280 0139 31       		.uleb128 0x31
+ 1281 013a 13       		.uleb128 0x13
+ 1282 013b 00       		.byte	0
+ 1283 013c 00       		.byte	0
+ 1284 013d 19       		.uleb128 0x19
+ 1285 013e 2E       		.uleb128 0x2e
+ 1286 013f 01       		.byte	0x1
+ 1287 0140 3F       		.uleb128 0x3f
+ 1288 0141 0C       		.uleb128 0xc
+ 1289 0142 03       		.uleb128 0x3
+ 1290 0143 0E       		.uleb128 0xe
+ 1291 0144 3A       		.uleb128 0x3a
+ 1292 0145 0B       		.uleb128 0xb
+ 1293 0146 3B       		.uleb128 0x3b
+ 1294 0147 0B       		.uleb128 0xb
+ 1295 0148 27       		.uleb128 0x27
+ 1296 0149 0C       		.uleb128 0xc
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 28
+
+
+ 1297 014a 11       		.uleb128 0x11
+ 1298 014b 01       		.uleb128 0x1
+ 1299 014c 12       		.uleb128 0x12
+ 1300 014d 01       		.uleb128 0x1
+ 1301 014e 40       		.uleb128 0x40
+ 1302 014f 0A       		.uleb128 0xa
+ 1303 0150 9742     		.uleb128 0x2117
+ 1304 0152 0C       		.uleb128 0xc
+ 1305 0153 01       		.uleb128 0x1
+ 1306 0154 13       		.uleb128 0x13
+ 1307 0155 00       		.byte	0
+ 1308 0156 00       		.byte	0
+ 1309 0157 1A       		.uleb128 0x1a
+ 1310 0158 898201   		.uleb128 0x4109
+ 1311 015b 00       		.byte	0
+ 1312 015c 11       		.uleb128 0x11
+ 1313 015d 01       		.uleb128 0x1
+ 1314 015e 9542     		.uleb128 0x2115
+ 1315 0160 0C       		.uleb128 0xc
+ 1316 0161 31       		.uleb128 0x31
+ 1317 0162 13       		.uleb128 0x13
+ 1318 0163 00       		.byte	0
+ 1319 0164 00       		.byte	0
+ 1320 0165 1B       		.uleb128 0x1b
+ 1321 0166 2E       		.uleb128 0x2e
+ 1322 0167 01       		.byte	0x1
+ 1323 0168 3F       		.uleb128 0x3f
+ 1324 0169 0C       		.uleb128 0xc
+ 1325 016a 03       		.uleb128 0x3
+ 1326 016b 0E       		.uleb128 0xe
+ 1327 016c 3A       		.uleb128 0x3a
+ 1328 016d 0B       		.uleb128 0xb
+ 1329 016e 3B       		.uleb128 0x3b
+ 1330 016f 0B       		.uleb128 0xb
+ 1331 0170 27       		.uleb128 0x27
+ 1332 0171 0C       		.uleb128 0xc
+ 1333 0172 11       		.uleb128 0x11
+ 1334 0173 01       		.uleb128 0x1
+ 1335 0174 12       		.uleb128 0x12
+ 1336 0175 01       		.uleb128 0x1
+ 1337 0176 40       		.uleb128 0x40
+ 1338 0177 06       		.uleb128 0x6
+ 1339 0178 9742     		.uleb128 0x2117
+ 1340 017a 0C       		.uleb128 0xc
+ 1341 017b 01       		.uleb128 0x1
+ 1342 017c 13       		.uleb128 0x13
+ 1343 017d 00       		.byte	0
+ 1344 017e 00       		.byte	0
+ 1345 017f 1C       		.uleb128 0x1c
+ 1346 0180 34       		.uleb128 0x34
+ 1347 0181 00       		.byte	0
+ 1348 0182 03       		.uleb128 0x3
+ 1349 0183 0E       		.uleb128 0xe
+ 1350 0184 3A       		.uleb128 0x3a
+ 1351 0185 0B       		.uleb128 0xb
+ 1352 0186 3B       		.uleb128 0x3b
+ 1353 0187 0B       		.uleb128 0xb
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 29
+
+
+ 1354 0188 49       		.uleb128 0x49
+ 1355 0189 13       		.uleb128 0x13
+ 1356 018a 02       		.uleb128 0x2
+ 1357 018b 0A       		.uleb128 0xa
+ 1358 018c 00       		.byte	0
+ 1359 018d 00       		.byte	0
+ 1360 018e 1D       		.uleb128 0x1d
+ 1361 018f 898201   		.uleb128 0x4109
+ 1362 0192 01       		.byte	0x1
+ 1363 0193 11       		.uleb128 0x11
+ 1364 0194 01       		.uleb128 0x1
+ 1365 0195 31       		.uleb128 0x31
+ 1366 0196 13       		.uleb128 0x13
+ 1367 0197 01       		.uleb128 0x1
+ 1368 0198 13       		.uleb128 0x13
+ 1369 0199 00       		.byte	0
+ 1370 019a 00       		.byte	0
+ 1371 019b 1E       		.uleb128 0x1e
+ 1372 019c 898201   		.uleb128 0x4109
+ 1373 019f 01       		.byte	0x1
+ 1374 01a0 11       		.uleb128 0x11
+ 1375 01a1 01       		.uleb128 0x1
+ 1376 01a2 9342     		.uleb128 0x2113
+ 1377 01a4 0A       		.uleb128 0xa
+ 1378 01a5 00       		.byte	0
+ 1379 01a6 00       		.byte	0
+ 1380 01a7 00       		.byte	0
+ 1381              		.section	.debug_loc,"",%progbits
+ 1382              	.Ldebug_loc0:
+ 1383              	.LLST0:
+ 1384 0000 00000000 		.4byte	.LFB8
+ 1385 0004 04000000 		.4byte	.LCFI0
+ 1386 0008 0200     		.2byte	0x2
+ 1387 000a 7D       		.byte	0x7d
+ 1388 000b 00       		.sleb128 0
+ 1389 000c 04000000 		.4byte	.LCFI0
+ 1390 0010 06000000 		.4byte	.LCFI1
+ 1391 0014 0200     		.2byte	0x2
+ 1392 0016 7D       		.byte	0x7d
+ 1393 0017 1C       		.sleb128 28
+ 1394 0018 06000000 		.4byte	.LCFI1
+ 1395 001c 74000000 		.4byte	.LFE8
+ 1396 0020 0200     		.2byte	0x2
+ 1397 0022 7D       		.byte	0x7d
+ 1398 0023 30       		.sleb128 48
+ 1399 0024 00000000 		.4byte	0
+ 1400 0028 00000000 		.4byte	0
+ 1401              	.LLST1:
+ 1402 002c 00000000 		.4byte	.LVL0
+ 1403 0030 1A000000 		.4byte	.LVL2
+ 1404 0034 0100     		.2byte	0x1
+ 1405 0036 50       		.byte	0x50
+ 1406 0037 2A000000 		.4byte	.LVL4
+ 1407 003b 3E000000 		.4byte	.LVL6
+ 1408 003f 0100     		.2byte	0x1
+ 1409 0041 50       		.byte	0x50
+ 1410 0042 3E000000 		.4byte	.LVL6
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 30
+
+
+ 1411 0046 3F000000 		.4byte	.LVL7-1
+ 1412 004a 0100     		.2byte	0x1
+ 1413 004c 53       		.byte	0x53
+ 1414 004d 00000000 		.4byte	0
+ 1415 0051 00000000 		.4byte	0
+ 1416              	.LLST2:
+ 1417 0055 00000000 		.4byte	.LVL0
+ 1418 0059 3F000000 		.4byte	.LVL7-1
+ 1419 005d 0100     		.2byte	0x1
+ 1420 005f 51       		.byte	0x51
+ 1421 0060 3F000000 		.4byte	.LVL7-1
+ 1422 0064 74000000 		.4byte	.LFE8
+ 1423 0068 0400     		.2byte	0x4
+ 1424 006a F3       		.byte	0xf3
+ 1425 006b 01       		.uleb128 0x1
+ 1426 006c 51       		.byte	0x51
+ 1427 006d 9F       		.byte	0x9f
+ 1428 006e 00000000 		.4byte	0
+ 1429 0072 00000000 		.4byte	0
+ 1430              	.LLST3:
+ 1431 0076 00000000 		.4byte	.LVL0
+ 1432 007a 3F000000 		.4byte	.LVL7-1
+ 1433 007e 0100     		.2byte	0x1
+ 1434 0080 52       		.byte	0x52
+ 1435 0081 3F000000 		.4byte	.LVL7-1
+ 1436 0085 74000000 		.4byte	.LFE8
+ 1437 0089 0400     		.2byte	0x4
+ 1438 008b F3       		.byte	0xf3
+ 1439 008c 01       		.uleb128 0x1
+ 1440 008d 52       		.byte	0x52
+ 1441 008e 9F       		.byte	0x9f
+ 1442 008f 00000000 		.4byte	0
+ 1443 0093 00000000 		.4byte	0
+ 1444              	.LLST4:
+ 1445 0097 00000000 		.4byte	.LVL0
+ 1446 009b 12000000 		.4byte	.LVL1
+ 1447 009f 0100     		.2byte	0x1
+ 1448 00a1 53       		.byte	0x53
+ 1449 00a2 12000000 		.4byte	.LVL1
+ 1450 00a6 74000000 		.4byte	.LFE8
+ 1451 00aa 0100     		.2byte	0x1
+ 1452 00ac 56       		.byte	0x56
+ 1453 00ad 00000000 		.4byte	0
+ 1454 00b1 00000000 		.4byte	0
+ 1455              	.LLST5:
+ 1456 00b5 00000000 		.4byte	.LVL0
+ 1457 00b9 12000000 		.4byte	.LVL1
+ 1458 00bd 0200     		.2byte	0x2
+ 1459 00bf 30       		.byte	0x30
+ 1460 00c0 9F       		.byte	0x9f
+ 1461 00c1 12000000 		.4byte	.LVL1
+ 1462 00c5 74000000 		.4byte	.LFE8
+ 1463 00c9 0100     		.2byte	0x1
+ 1464 00cb 54       		.byte	0x54
+ 1465 00cc 00000000 		.4byte	0
+ 1466 00d0 00000000 		.4byte	0
+ 1467              	.LLST6:
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 31
+
+
+ 1468 00d4 00000000 		.4byte	.LFB9
+ 1469 00d8 02000000 		.4byte	.LCFI2
+ 1470 00dc 0200     		.2byte	0x2
+ 1471 00de 7D       		.byte	0x7d
+ 1472 00df 00       		.sleb128 0
+ 1473 00e0 02000000 		.4byte	.LCFI2
+ 1474 00e4 06000000 		.4byte	.LCFI3
+ 1475 00e8 0200     		.2byte	0x2
+ 1476 00ea 7D       		.byte	0x7d
+ 1477 00eb 14       		.sleb128 20
+ 1478 00ec 06000000 		.4byte	.LCFI3
+ 1479 00f0 F0000000 		.4byte	.LFE9
+ 1480 00f4 0200     		.2byte	0x2
+ 1481 00f6 7D       		.byte	0x7d
+ 1482 00f7 28       		.sleb128 40
+ 1483 00f8 00000000 		.4byte	0
+ 1484 00fc 00000000 		.4byte	0
+ 1485              	.LLST7:
+ 1486 0100 00000000 		.4byte	.LVL14
+ 1487 0104 0A000000 		.4byte	.LVL15
+ 1488 0108 0100     		.2byte	0x1
+ 1489 010a 50       		.byte	0x50
+ 1490 010b 0A000000 		.4byte	.LVL15
+ 1491 010f 0C000000 		.4byte	.LVL16
+ 1492 0113 0100     		.2byte	0x1
+ 1493 0115 54       		.byte	0x54
+ 1494 0116 0C000000 		.4byte	.LVL16
+ 1495 011a 16000000 		.4byte	.LVL17
+ 1496 011e 0300     		.2byte	0x3
+ 1497 0120 74       		.byte	0x74
+ 1498 0121 01       		.sleb128 1
+ 1499 0122 9F       		.byte	0x9f
+ 1500 0123 16000000 		.4byte	.LVL17
+ 1501 0127 18000000 		.4byte	.LVL18
+ 1502 012b 0100     		.2byte	0x1
+ 1503 012d 54       		.byte	0x54
+ 1504 012e 18000000 		.4byte	.LVL18
+ 1505 0132 1A000000 		.4byte	.LVL19
+ 1506 0136 0300     		.2byte	0x3
+ 1507 0138 74       		.byte	0x74
+ 1508 0139 01       		.sleb128 1
+ 1509 013a 9F       		.byte	0x9f
+ 1510 013b 1A000000 		.4byte	.LVL19
+ 1511 013f 20000000 		.4byte	.LVL20
+ 1512 0143 0300     		.2byte	0x3
+ 1513 0145 74       		.byte	0x74
+ 1514 0146 02       		.sleb128 2
+ 1515 0147 9F       		.byte	0x9f
+ 1516 0148 20000000 		.4byte	.LVL20
+ 1517 014c 24000000 		.4byte	.LVL21
+ 1518 0150 0100     		.2byte	0x1
+ 1519 0152 54       		.byte	0x54
+ 1520 0153 24000000 		.4byte	.LVL21
+ 1521 0157 2A000000 		.4byte	.LVL23
+ 1522 015b 0300     		.2byte	0x3
+ 1523 015d 74       		.byte	0x74
+ 1524 015e 02       		.sleb128 2
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 32
+
+
+ 1525 015f 9F       		.byte	0x9f
+ 1526 0160 2C000000 		.4byte	.LVL24
+ 1527 0164 3E000000 		.4byte	.LVL26
+ 1528 0168 0100     		.2byte	0x1
+ 1529 016a 54       		.byte	0x54
+ 1530 016b 3E000000 		.4byte	.LVL26
+ 1531 016f 40000000 		.4byte	.LVL27
+ 1532 0173 0300     		.2byte	0x3
+ 1533 0175 74       		.byte	0x74
+ 1534 0176 7F       		.sleb128 -1
+ 1535 0177 9F       		.byte	0x9f
+ 1536 0178 40000000 		.4byte	.LVL27
+ 1537 017c DE000000 		.4byte	.LVL50
+ 1538 0180 0100     		.2byte	0x1
+ 1539 0182 54       		.byte	0x54
+ 1540 0183 DE000000 		.4byte	.LVL50
+ 1541 0187 F0000000 		.4byte	.LFE9
+ 1542 018b 0300     		.2byte	0x3
+ 1543 018d 74       		.byte	0x74
+ 1544 018e 01       		.sleb128 1
+ 1545 018f 9F       		.byte	0x9f
+ 1546 0190 00000000 		.4byte	0
+ 1547 0194 00000000 		.4byte	0
+ 1548              	.LLST8:
+ 1549 0198 00000000 		.4byte	.LVL14
+ 1550 019c 0A000000 		.4byte	.LVL15
+ 1551 01a0 0100     		.2byte	0x1
+ 1552 01a2 51       		.byte	0x51
+ 1553 01a3 0A000000 		.4byte	.LVL15
+ 1554 01a7 F0000000 		.4byte	.LFE9
+ 1555 01ab 0100     		.2byte	0x1
+ 1556 01ad 55       		.byte	0x55
+ 1557 01ae 00000000 		.4byte	0
+ 1558 01b2 00000000 		.4byte	0
+ 1559              	.LLST9:
+ 1560 01b6 00000000 		.4byte	.LVL14
+ 1561 01ba 0A000000 		.4byte	.LVL15
+ 1562 01be 0100     		.2byte	0x1
+ 1563 01c0 52       		.byte	0x52
+ 1564 01c1 0A000000 		.4byte	.LVL15
+ 1565 01c5 F0000000 		.4byte	.LFE9
+ 1566 01c9 0100     		.2byte	0x1
+ 1567 01cb 56       		.byte	0x56
+ 1568 01cc 00000000 		.4byte	0
+ 1569 01d0 00000000 		.4byte	0
+ 1570              	.LLST10:
+ 1571 01d4 0C000000 		.4byte	.LVL16
+ 1572 01d8 16000000 		.4byte	.LVL17
+ 1573 01dc 0200     		.2byte	0x2
+ 1574 01de 74       		.byte	0x74
+ 1575 01df 00       		.sleb128 0
+ 1576 01e0 16000000 		.4byte	.LVL17
+ 1577 01e4 18000000 		.4byte	.LVL18
+ 1578 01e8 0200     		.2byte	0x2
+ 1579 01ea 74       		.byte	0x74
+ 1580 01eb 7F       		.sleb128 -1
+ 1581 01ec 18000000 		.4byte	.LVL18
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 33
+
+
+ 1582 01f0 1A000000 		.4byte	.LVL19
+ 1583 01f4 0200     		.2byte	0x2
+ 1584 01f6 74       		.byte	0x74
+ 1585 01f7 00       		.sleb128 0
+ 1586 01f8 1A000000 		.4byte	.LVL19
+ 1587 01fc 20000000 		.4byte	.LVL20
+ 1588 0200 0200     		.2byte	0x2
+ 1589 0202 74       		.byte	0x74
+ 1590 0203 01       		.sleb128 1
+ 1591 0204 20000000 		.4byte	.LVL20
+ 1592 0208 24000000 		.4byte	.LVL21
+ 1593 020c 0200     		.2byte	0x2
+ 1594 020e 74       		.byte	0x74
+ 1595 020f 7F       		.sleb128 -1
+ 1596 0210 24000000 		.4byte	.LVL21
+ 1597 0214 26000000 		.4byte	.LVL22
+ 1598 0218 0200     		.2byte	0x2
+ 1599 021a 74       		.byte	0x74
+ 1600 021b 01       		.sleb128 1
+ 1601 021c 26000000 		.4byte	.LVL22
+ 1602 0220 2A000000 		.4byte	.LVL23
+ 1603 0224 0200     		.2byte	0x2
+ 1604 0226 74       		.byte	0x74
+ 1605 0227 02       		.sleb128 2
+ 1606 0228 2C000000 		.4byte	.LVL24
+ 1607 022c 3E000000 		.4byte	.LVL26
+ 1608 0230 0100     		.2byte	0x1
+ 1609 0232 50       		.byte	0x50
+ 1610 0233 40000000 		.4byte	.LVL27
+ 1611 0237 42000000 		.4byte	.LVL28
+ 1612 023b 0200     		.2byte	0x2
+ 1613 023d 74       		.byte	0x74
+ 1614 023e 7F       		.sleb128 -1
+ 1615 023f 42000000 		.4byte	.LVL28
+ 1616 0243 82000000 		.4byte	.LVL32
+ 1617 0247 0100     		.2byte	0x1
+ 1618 0249 50       		.byte	0x50
+ 1619 024a 98000000 		.4byte	.LVL35
+ 1620 024e 9C000000 		.4byte	.LVL36
+ 1621 0252 0100     		.2byte	0x1
+ 1622 0254 50       		.byte	0x50
+ 1623 0255 A4000000 		.4byte	.LVL37
+ 1624 0259 AE000000 		.4byte	.LVL38
+ 1625 025d 0100     		.2byte	0x1
+ 1626 025f 50       		.byte	0x50
+ 1627 0260 B4000000 		.4byte	.LVL39
+ 1628 0264 BE000000 		.4byte	.LVL40
+ 1629 0268 0100     		.2byte	0x1
+ 1630 026a 50       		.byte	0x50
+ 1631 026b C4000000 		.4byte	.LVL41
+ 1632 026f C8000000 		.4byte	.LVL42
+ 1633 0273 0100     		.2byte	0x1
+ 1634 0275 50       		.byte	0x50
+ 1635 0276 D2000000 		.4byte	.LVL46
+ 1636 027a D7000000 		.4byte	.LVL47-1
+ 1637 027e 0200     		.2byte	0x2
+ 1638 0280 77       		.byte	0x77
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 34
+
+
+ 1639 0281 7F       		.sleb128 -1
+ 1640 0282 DA000000 		.4byte	.LVL48
+ 1641 0286 DE000000 		.4byte	.LVL50
+ 1642 028a 0100     		.2byte	0x1
+ 1643 028c 50       		.byte	0x50
+ 1644 028d DE000000 		.4byte	.LVL50
+ 1645 0291 F0000000 		.4byte	.LFE9
+ 1646 0295 0200     		.2byte	0x2
+ 1647 0297 74       		.byte	0x74
+ 1648 0298 00       		.sleb128 0
+ 1649 0299 00000000 		.4byte	0
+ 1650 029d 00000000 		.4byte	0
+ 1651              	.LLST11:
+ 1652 02a1 18000000 		.4byte	.LVL18
+ 1653 02a5 2C000000 		.4byte	.LVL24
+ 1654 02a9 0200     		.2byte	0x2
+ 1655 02ab 30       		.byte	0x30
+ 1656 02ac 9F       		.byte	0x9f
+ 1657 02ad 2C000000 		.4byte	.LVL24
+ 1658 02b1 3A000000 		.4byte	.LVL25
+ 1659 02b5 0100     		.2byte	0x1
+ 1660 02b7 53       		.byte	0x53
+ 1661 02b8 40000000 		.4byte	.LVL27
+ 1662 02bc 95000000 		.4byte	.LVL34-1
+ 1663 02c0 0100     		.2byte	0x1
+ 1664 02c2 53       		.byte	0x53
+ 1665 02c3 98000000 		.4byte	.LVL35
+ 1666 02c7 CA000000 		.4byte	.LVL43
+ 1667 02cb 0100     		.2byte	0x1
+ 1668 02cd 53       		.byte	0x53
+ 1669 02ce DA000000 		.4byte	.LVL48
+ 1670 02d2 DE000000 		.4byte	.LVL50
+ 1671 02d6 0100     		.2byte	0x1
+ 1672 02d8 53       		.byte	0x53
+ 1673 02d9 00000000 		.4byte	0
+ 1674 02dd 00000000 		.4byte	0
+ 1675              	.LLST12:
+ 1676 02e1 18000000 		.4byte	.LVL18
+ 1677 02e5 24000000 		.4byte	.LVL21
+ 1678 02e9 0200     		.2byte	0x2
+ 1679 02eb 30       		.byte	0x30
+ 1680 02ec 9F       		.byte	0x9f
+ 1681 02ed 24000000 		.4byte	.LVL21
+ 1682 02f1 2A000000 		.4byte	.LVL23
+ 1683 02f5 0200     		.2byte	0x2
+ 1684 02f7 31       		.byte	0x31
+ 1685 02f8 9F       		.byte	0x9f
+ 1686 02f9 00000000 		.4byte	0
+ 1687 02fd 00000000 		.4byte	0
+ 1688              	.LLST13:
+ 1689 0301 82000000 		.4byte	.LVL32
+ 1690 0305 8E000000 		.4byte	.LVL33
+ 1691 0309 0100     		.2byte	0x1
+ 1692 030b 50       		.byte	0x50
+ 1693 030c 9C000000 		.4byte	.LVL36
+ 1694 0310 A4000000 		.4byte	.LVL37
+ 1695 0314 0100     		.2byte	0x1
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 35
+
+
+ 1696 0316 50       		.byte	0x50
+ 1697 0317 AE000000 		.4byte	.LVL38
+ 1698 031b B4000000 		.4byte	.LVL39
+ 1699 031f 0100     		.2byte	0x1
+ 1700 0321 50       		.byte	0x50
+ 1701 0322 BE000000 		.4byte	.LVL40
+ 1702 0326 C4000000 		.4byte	.LVL41
+ 1703 032a 0100     		.2byte	0x1
+ 1704 032c 50       		.byte	0x50
+ 1705 032d 00000000 		.4byte	0
+ 1706 0331 00000000 		.4byte	0
+ 1707              	.LLST14:
+ 1708 0335 7C000000 		.4byte	.LVL30
+ 1709 0339 7E000000 		.4byte	.LVL31
+ 1710 033d 0100     		.2byte	0x1
+ 1711 033f 57       		.byte	0x57
+ 1712 0340 CE000000 		.4byte	.LVL45
+ 1713 0344 DA000000 		.4byte	.LVL48
+ 1714 0348 0100     		.2byte	0x1
+ 1715 034a 57       		.byte	0x57
+ 1716 034b 00000000 		.4byte	0
+ 1717 034f 00000000 		.4byte	0
+ 1718              	.LLST15:
+ 1719 0353 00000000 		.4byte	.LVL51
+ 1720 0357 10000000 		.4byte	.LVL53
+ 1721 035b 0100     		.2byte	0x1
+ 1722 035d 50       		.byte	0x50
+ 1723 035e 10000000 		.4byte	.LVL53
+ 1724 0362 16000000 		.4byte	.LVL54
+ 1725 0366 0100     		.2byte	0x1
+ 1726 0368 53       		.byte	0x53
+ 1727 0369 16000000 		.4byte	.LVL54
+ 1728 036d 18000000 		.4byte	.LVL55
+ 1729 0371 0100     		.2byte	0x1
+ 1730 0373 50       		.byte	0x50
+ 1731 0374 18000000 		.4byte	.LVL55
+ 1732 0378 1F000000 		.4byte	.LVL56-1
+ 1733 037c 0100     		.2byte	0x1
+ 1734 037e 53       		.byte	0x53
+ 1735 037f 1F000000 		.4byte	.LVL56-1
+ 1736 0383 20000000 		.4byte	.LVL56
+ 1737 0387 0400     		.2byte	0x4
+ 1738 0389 F3       		.byte	0xf3
+ 1739 038a 01       		.uleb128 0x1
+ 1740 038b 50       		.byte	0x50
+ 1741 038c 9F       		.byte	0x9f
+ 1742 038d 20000000 		.4byte	.LVL56
+ 1743 0391 28000000 		.4byte	.LFE10
+ 1744 0395 0100     		.2byte	0x1
+ 1745 0397 50       		.byte	0x50
+ 1746 0398 00000000 		.4byte	0
+ 1747 039c 00000000 		.4byte	0
+ 1748              	.LLST16:
+ 1749 03a0 00000000 		.4byte	.LVL51
+ 1750 03a4 04000000 		.4byte	.LVL52
+ 1751 03a8 0100     		.2byte	0x1
+ 1752 03aa 51       		.byte	0x51
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 36
+
+
+ 1753 03ab 04000000 		.4byte	.LVL52
+ 1754 03af 1F000000 		.4byte	.LVL56-1
+ 1755 03b3 0100     		.2byte	0x1
+ 1756 03b5 52       		.byte	0x52
+ 1757 03b6 1F000000 		.4byte	.LVL56-1
+ 1758 03ba 20000000 		.4byte	.LVL56
+ 1759 03be 0400     		.2byte	0x4
+ 1760 03c0 F3       		.byte	0xf3
+ 1761 03c1 01       		.uleb128 0x1
+ 1762 03c2 51       		.byte	0x51
+ 1763 03c3 9F       		.byte	0x9f
+ 1764 03c4 20000000 		.4byte	.LVL56
+ 1765 03c8 28000000 		.4byte	.LFE10
+ 1766 03cc 0100     		.2byte	0x1
+ 1767 03ce 52       		.byte	0x52
+ 1768 03cf 00000000 		.4byte	0
+ 1769 03d3 00000000 		.4byte	0
+ 1770              	.LLST17:
+ 1771 03d7 00000000 		.4byte	.LFB11
+ 1772 03db 02000000 		.4byte	.LCFI4
+ 1773 03df 0200     		.2byte	0x2
+ 1774 03e1 7D       		.byte	0x7d
+ 1775 03e2 00       		.sleb128 0
+ 1776 03e3 02000000 		.4byte	.LCFI4
+ 1777 03e7 1C000000 		.4byte	.LFE11
+ 1778 03eb 0200     		.2byte	0x2
+ 1779 03ed 7D       		.byte	0x7d
+ 1780 03ee 10       		.sleb128 16
+ 1781 03ef 00000000 		.4byte	0
+ 1782 03f3 00000000 		.4byte	0
+ 1783              	.LLST18:
+ 1784 03f7 00000000 		.4byte	.LVL57
+ 1785 03fb 0E000000 		.4byte	.LVL59
+ 1786 03ff 0100     		.2byte	0x1
+ 1787 0401 50       		.byte	0x50
+ 1788 0402 0E000000 		.4byte	.LVL59
+ 1789 0406 11000000 		.4byte	.LVL60-1
+ 1790 040a 0200     		.2byte	0x2
+ 1791 040c 71       		.byte	0x71
+ 1792 040d 00       		.sleb128 0
+ 1793 040e 11000000 		.4byte	.LVL60-1
+ 1794 0412 1C000000 		.4byte	.LFE11
+ 1795 0416 0400     		.2byte	0x4
+ 1796 0418 F3       		.byte	0xf3
+ 1797 0419 01       		.uleb128 0x1
+ 1798 041a 50       		.byte	0x50
+ 1799 041b 9F       		.byte	0x9f
+ 1800 041c 00000000 		.4byte	0
+ 1801 0420 00000000 		.4byte	0
+ 1802              	.LLST19:
+ 1803 0424 00000000 		.4byte	.LVL57
+ 1804 0428 06000000 		.4byte	.LVL58
+ 1805 042c 0100     		.2byte	0x1
+ 1806 042e 51       		.byte	0x51
+ 1807 042f 06000000 		.4byte	.LVL58
+ 1808 0433 1C000000 		.4byte	.LFE11
+ 1809 0437 0100     		.2byte	0x1
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 37
+
+
+ 1810 0439 54       		.byte	0x54
+ 1811 043a 00000000 		.4byte	0
+ 1812 043e 00000000 		.4byte	0
+ 1813              		.section	.debug_aranges,"",%progbits
+ 1814 0000 34000000 		.4byte	0x34
+ 1815 0004 0200     		.2byte	0x2
+ 1816 0006 00000000 		.4byte	.Ldebug_info0
+ 1817 000a 04       		.byte	0x4
+ 1818 000b 00       		.byte	0
+ 1819 000c 0000     		.2byte	0
+ 1820 000e 0000     		.2byte	0
+ 1821 0010 00000000 		.4byte	.LFB8
+ 1822 0014 74000000 		.4byte	.LFE8-.LFB8
+ 1823 0018 00000000 		.4byte	.LFB9
+ 1824 001c F0000000 		.4byte	.LFE9-.LFB9
+ 1825 0020 00000000 		.4byte	.LFB10
+ 1826 0024 28000000 		.4byte	.LFE10-.LFB10
+ 1827 0028 00000000 		.4byte	.LFB11
+ 1828 002c 1C000000 		.4byte	.LFE11-.LFB11
+ 1829 0030 00000000 		.4byte	0
+ 1830 0034 00000000 		.4byte	0
+ 1831              		.section	.debug_ranges,"",%progbits
+ 1832              	.Ldebug_ranges0:
+ 1833 0000 00000000 		.4byte	.LFB8
+ 1834 0004 74000000 		.4byte	.LFE8
+ 1835 0008 00000000 		.4byte	.LFB9
+ 1836 000c F0000000 		.4byte	.LFE9
+ 1837 0010 00000000 		.4byte	.LFB10
+ 1838 0014 28000000 		.4byte	.LFE10
+ 1839 0018 00000000 		.4byte	.LFB11
+ 1840 001c 1C000000 		.4byte	.LFE11
+ 1841 0020 00000000 		.4byte	0
+ 1842 0024 00000000 		.4byte	0
+ 1843              		.section	.debug_line,"",%progbits
+ 1844              	.Ldebug_line0:
+ 1845 0000 43010000 		.section	.debug_str,"MS",%progbits,1
+ 1845      02007B00 
+ 1845      00000201 
+ 1845      FB0E0D00 
+ 1845      01010101 
+ 1846              	.LASF21:
+ 1847 0000 5359534C 		.ascii	"SYSLOG\000"
+ 1847      4F4700
+ 1848              	.LASF36:
+ 1849 0007 6C6F7374 		.ascii	"lostinfo\000"
+ 1849      696E666F 
+ 1849      00
+ 1850              	.LASF3:
+ 1851 0010 73686F72 		.ascii	"short int\000"
+ 1851      7420696E 
+ 1851      7400
+ 1852              	.LASF8:
+ 1853 001a 696E7470 		.ascii	"intptr_t\000"
+ 1853      74725F74 
+ 1853      00
+ 1854              	.LASF23:
+ 1855 0023 72616463 		.ascii	"radchar\000"
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 38
+
+
+ 1855      68617200 
+ 1856              	.LASF9:
+ 1857 002b 75696E74 		.ascii	"uintptr_t\000"
+ 1857      7074725F 
+ 1857      7400
+ 1858              	.LASF34:
+ 1859 0035 7379736C 		.ascii	"syslog_lostmsg\000"
+ 1859      6F675F6C 
+ 1859      6F73746D 
+ 1859      736700
+ 1860              	.LASF35:
+ 1861 0044 6C6F7374 		.ascii	"lostlog\000"
+ 1861      6C6F6700 
+ 1862              	.LASF1:
+ 1863 004c 7369676E 		.ascii	"signed char\000"
+ 1863      65642063 
+ 1863      68617200 
+ 1864              	.LASF24:
+ 1865 0058 77696474 		.ascii	"width\000"
+ 1865      6800
+ 1866              	.LASF11:
+ 1867 005e 666C6F61 		.ascii	"float\000"
+ 1867      7400
+ 1868              	.LASF43:
+ 1869 0064 636F6E76 		.ascii	"convert\000"
+ 1869      65727400 
+ 1870              	.LASF5:
+ 1871 006c 6C6F6E67 		.ascii	"long long int\000"
+ 1871      206C6F6E 
+ 1871      6720696E 
+ 1871      7400
+ 1872              	.LASF7:
+ 1873 007a 6C6F6E67 		.ascii	"long int\000"
+ 1873      20696E74 
+ 1873      00
+ 1874              	.LASF38:
+ 1875 0083 72616468 		.ascii	"radhex\000"
+ 1875      657800
+ 1876              	.LASF19:
+ 1877 008a 6C6F6769 		.ascii	"loginfo\000"
+ 1877      6E666F00 
+ 1878              	.LASF39:
+ 1879 0092 72616448 		.ascii	"radHEX\000"
+ 1879      455800
+ 1880              	.LASF40:
+ 1881 0099 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 1881      4320342E 
+ 1881      372E3320 
+ 1881      32303133 
+ 1881      30333132 
+ 1882 00cc 616E6368 		.ascii	"anch revision 196615]\000"
+ 1882      20726576 
+ 1882      6973696F 
+ 1882      6E203139 
+ 1882      36363135 
+ 1883              	.LASF25:
+ 1884 00e2 6D696E75 		.ascii	"minus\000"
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 39
+
+
+ 1884      7300
+ 1885              	.LASF32:
+ 1886 00e8 7379736C 		.ascii	"syslog_print\000"
+ 1886      6F675F70 
+ 1886      72696E74 
+ 1886      00
+ 1887              	.LASF2:
+ 1888 00f5 756E7369 		.ascii	"unsigned char\000"
+ 1888      676E6564 
+ 1888      20636861 
+ 1888      7200
+ 1889              	.LASF27:
+ 1890 0103 70757463 		.ascii	"putc\000"
+ 1890      00
+ 1891              	.LASF42:
+ 1892 0108 433A5C55 		.ascii	"C:\\Users\\asai\\Documents\\PSoC Creator\\asp_1.9.0"
+ 1892      73657273 
+ 1892      5C617361 
+ 1892      695C446F 
+ 1892      63756D65 
+ 1893 0136 5F332E30 		.ascii	"_3.0\\asp_eval1.cydsn\000"
+ 1893      5C617370 
+ 1893      5F657661 
+ 1893      6C312E63 
+ 1893      7964736E 
+ 1894              	.LASF6:
+ 1895 014b 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1895      206C6F6E 
+ 1895      6720756E 
+ 1895      7369676E 
+ 1895      65642069 
+ 1896              	.LASF16:
+ 1897 0162 53595354 		.ascii	"SYSTIM\000"
+ 1897      494D00
+ 1898              	.LASF0:
+ 1899 0169 756E7369 		.ascii	"unsigned int\000"
+ 1899      676E6564 
+ 1899      20696E74 
+ 1899      00
+ 1900              	.LASF15:
+ 1901 0176 756C6F6E 		.ascii	"ulong_t\000"
+ 1901      675F7400 
+ 1902              	.LASF22:
+ 1903 017e 72616469 		.ascii	"radix\000"
+ 1903      7800
+ 1904              	.LASF4:
+ 1905 0184 73686F72 		.ascii	"short unsigned int\000"
+ 1905      7420756E 
+ 1905      7369676E 
+ 1905      65642069 
+ 1905      6E7400
+ 1906              	.LASF28:
+ 1907 0197 63686172 		.ascii	"char\000"
+ 1907      00
+ 1908              	.LASF13:
+ 1909 019c 626F6F6C 		.ascii	"bool_t\000"
+ 1909      5F7400
+ARM GAS  C:\TEMP\ccdXN0Nh.s 			page 40
+
+
+ 1910              	.LASF33:
+ 1911 01a3 705F7379 		.ascii	"p_syslog\000"
+ 1911      736C6F67 
+ 1911      00
+ 1912              	.LASF31:
+ 1913 01ac 7379736C 		.ascii	"syslog_printf\000"
+ 1913      6F675F70 
+ 1913      72696E74 
+ 1913      6600
+ 1914              	.LASF18:
+ 1915 01ba 6C6F6774 		.ascii	"logtim\000"
+ 1915      696D00
+ 1916              	.LASF14:
+ 1917 01c1 75696E74 		.ascii	"uint_t\000"
+ 1917      5F7400
+ 1918              	.LASF10:
+ 1919 01c8 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1919      20756E73 
+ 1919      69676E65 
+ 1919      6420696E 
+ 1919      7400
+ 1920              	.LASF37:
+ 1921 01da 72616464 		.ascii	"raddec\000"
+ 1921      656300
+ 1922              	.LASF12:
+ 1923 01e1 646F7562 		.ascii	"double\000"
+ 1923      6C6500
+ 1924              	.LASF30:
+ 1925 01e8 705F6172 		.ascii	"p_args\000"
+ 1925      677300
+ 1926              	.LASF17:
+ 1927 01ef 6C6F6774 		.ascii	"logtype\000"
+ 1927      79706500 
+ 1928              	.LASF20:
+ 1929 01f7 73697A65 		.ascii	"sizetype\000"
+ 1929      74797065 
+ 1929      00
+ 1930              	.LASF41:
+ 1931 0200 2E5C6173 		.ascii	".\\asp\\library\\log_output.c\000"
+ 1931      705C6C69 
+ 1931      62726172 
+ 1931      795C6C6F 
+ 1931      675F6F75 
+ 1932              	.LASF29:
+ 1933 021b 666F726D 		.ascii	"format\000"
+ 1933      617400
+ 1934              	.LASF26:
+ 1935 0222 7061647A 		.ascii	"padzero\000"
+ 1935      65726F00 
+ 1936              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br

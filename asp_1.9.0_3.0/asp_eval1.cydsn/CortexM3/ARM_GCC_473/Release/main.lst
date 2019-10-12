@@ -1,0 +1,1089 @@
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 4
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.startup.main,"ax",%progbits
+  19              		.align	1
+  20              		.global	main
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	main, %function
+  24              	main:
+  25              	.LFB56:
+  26              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+  12:.\main.c      **** 
+  13:.\main.c      **** #include <device.h>
+  14:.\main.c      **** extern void sta_ker(void);
+  15:.\main.c      **** 
+  16:.\main.c      **** int main()
+  17:.\main.c      **** {
+  27              		.loc 1 17 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 3, -8
+  35              		.cfi_offset 14, -4
+  36              	.LBB4:
+  37              	.LBB5:
+  38              		.file 2 "./Generated_Source/PSoC5/core_cmFunc.h"
+   1:./Generated_Source/PSoC5/core_cmFunc.h **** /**************************************************************************//**
+   2:./Generated_Source/PSoC5/core_cmFunc.h ****  * @file     core_cmFunc.h
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 2
+
+
+   3:./Generated_Source/PSoC5/core_cmFunc.h ****  * @brief    CMSIS Cortex-M Core Function Access Header File
+   4:./Generated_Source/PSoC5/core_cmFunc.h ****  * @version  V3.20
+   5:./Generated_Source/PSoC5/core_cmFunc.h ****  * @date     25. February 2013
+   6:./Generated_Source/PSoC5/core_cmFunc.h ****  *
+   7:./Generated_Source/PSoC5/core_cmFunc.h ****  * @note
+   8:./Generated_Source/PSoC5/core_cmFunc.h ****  *
+   9:./Generated_Source/PSoC5/core_cmFunc.h ****  ******************************************************************************/
+  10:./Generated_Source/PSoC5/core_cmFunc.h **** /* Copyright (c) 2009 - 2013 ARM LIMITED
+  11:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  12:./Generated_Source/PSoC5/core_cmFunc.h ****    All rights reserved.
+  13:./Generated_Source/PSoC5/core_cmFunc.h ****    Redistribution and use in source and binary forms, with or without
+  14:./Generated_Source/PSoC5/core_cmFunc.h ****    modification, are permitted provided that the following conditions are met:
+  15:./Generated_Source/PSoC5/core_cmFunc.h ****    - Redistributions of source code must retain the above copyright
+  16:./Generated_Source/PSoC5/core_cmFunc.h ****      notice, this list of conditions and the following disclaimer.
+  17:./Generated_Source/PSoC5/core_cmFunc.h ****    - Redistributions in binary form must reproduce the above copyright
+  18:./Generated_Source/PSoC5/core_cmFunc.h ****      notice, this list of conditions and the following disclaimer in the
+  19:./Generated_Source/PSoC5/core_cmFunc.h ****      documentation and/or other materials provided with the distribution.
+  20:./Generated_Source/PSoC5/core_cmFunc.h ****    - Neither the name of ARM nor the names of its contributors may be used
+  21:./Generated_Source/PSoC5/core_cmFunc.h ****      to endorse or promote products derived from this software without
+  22:./Generated_Source/PSoC5/core_cmFunc.h ****      specific prior written permission.
+  23:./Generated_Source/PSoC5/core_cmFunc.h ****    *
+  24:./Generated_Source/PSoC5/core_cmFunc.h ****    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  25:./Generated_Source/PSoC5/core_cmFunc.h ****    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  26:./Generated_Source/PSoC5/core_cmFunc.h ****    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  27:./Generated_Source/PSoC5/core_cmFunc.h ****    ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS AND CONTRIBUTORS BE
+  28:./Generated_Source/PSoC5/core_cmFunc.h ****    LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  29:./Generated_Source/PSoC5/core_cmFunc.h ****    CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  30:./Generated_Source/PSoC5/core_cmFunc.h ****    SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  31:./Generated_Source/PSoC5/core_cmFunc.h ****    INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  32:./Generated_Source/PSoC5/core_cmFunc.h ****    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  33:./Generated_Source/PSoC5/core_cmFunc.h ****    ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  34:./Generated_Source/PSoC5/core_cmFunc.h ****    POSSIBILITY OF SUCH DAMAGE.
+  35:./Generated_Source/PSoC5/core_cmFunc.h ****    ---------------------------------------------------------------------------*/
+  36:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  37:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  38:./Generated_Source/PSoC5/core_cmFunc.h **** #ifndef __CORE_CMFUNC_H
+  39:./Generated_Source/PSoC5/core_cmFunc.h **** #define __CORE_CMFUNC_H
+  40:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  41:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  42:./Generated_Source/PSoC5/core_cmFunc.h **** /* ###########################  Core Function Access  ########################### */
+  43:./Generated_Source/PSoC5/core_cmFunc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+  44:./Generated_Source/PSoC5/core_cmFunc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+  45:./Generated_Source/PSoC5/core_cmFunc.h ****   @{
+  46:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+  47:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  48:./Generated_Source/PSoC5/core_cmFunc.h **** #if   defined ( __CC_ARM ) /*------------------RealView Compiler -----------------*/
+  49:./Generated_Source/PSoC5/core_cmFunc.h **** /* ARM armcc specific functions */
+  50:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  51:./Generated_Source/PSoC5/core_cmFunc.h **** #if (__ARMCC_VERSION < 400677)
+  52:./Generated_Source/PSoC5/core_cmFunc.h ****   #error "Please use ARM Compiler Toolchain V4.0.677 or later!"
+  53:./Generated_Source/PSoC5/core_cmFunc.h **** #endif
+  54:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  55:./Generated_Source/PSoC5/core_cmFunc.h **** /* intrinsic void __enable_irq();     */
+  56:./Generated_Source/PSoC5/core_cmFunc.h **** /* intrinsic void __disable_irq();    */
+  57:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  58:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Control Register
+  59:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 3
+
+
+  60:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the Control Register.
+  61:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  62:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               Control Register value
+  63:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+  64:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_CONTROL(void)
+  65:./Generated_Source/PSoC5/core_cmFunc.h **** {
+  66:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
+  67:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regControl);
+  68:./Generated_Source/PSoC5/core_cmFunc.h **** }
+  69:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  70:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  71:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Control Register
+  72:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  73:./Generated_Source/PSoC5/core_cmFunc.h ****     This function writes the given value to the Control Register.
+  74:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  75:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    control  Control Register value to set
+  76:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+  77:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE void __set_CONTROL(uint32_t control)
+  78:./Generated_Source/PSoC5/core_cmFunc.h **** {
+  79:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regControl         __ASM("control");
+  80:./Generated_Source/PSoC5/core_cmFunc.h ****   __regControl = control;
+  81:./Generated_Source/PSoC5/core_cmFunc.h **** }
+  82:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  83:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  84:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get IPSR Register
+  85:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  86:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the IPSR Register.
+  87:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  88:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               IPSR Register value
+  89:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+  90:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_IPSR(void)
+  91:./Generated_Source/PSoC5/core_cmFunc.h **** {
+  92:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regIPSR          __ASM("ipsr");
+  93:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regIPSR);
+  94:./Generated_Source/PSoC5/core_cmFunc.h **** }
+  95:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  96:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  97:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get APSR Register
+  98:./Generated_Source/PSoC5/core_cmFunc.h **** 
+  99:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the APSR Register.
+ 100:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 101:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               APSR Register value
+ 102:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 103:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_APSR(void)
+ 104:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 105:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regAPSR          __ASM("apsr");
+ 106:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regAPSR);
+ 107:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 108:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 109:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 110:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get xPSR Register
+ 111:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 112:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the xPSR Register.
+ 113:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 114:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               xPSR Register value
+ 115:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 116:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_xPSR(void)
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 4
+
+
+ 117:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 118:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regXPSR          __ASM("xpsr");
+ 119:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regXPSR);
+ 120:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 121:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 122:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 123:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Process Stack Pointer
+ 124:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 125:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current value of the Process Stack Pointer (PSP).
+ 126:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 127:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               PSP Register value
+ 128:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 129:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_PSP(void)
+ 130:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 131:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
+ 132:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regProcessStackPointer);
+ 133:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 134:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 135:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 136:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Process Stack Pointer
+ 137:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 138:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Process Stack Pointer (PSP).
+ 139:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 140:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 141:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 142:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE void __set_PSP(uint32_t topOfProcStack)
+ 143:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 144:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regProcessStackPointer  __ASM("psp");
+ 145:./Generated_Source/PSoC5/core_cmFunc.h ****   __regProcessStackPointer = topOfProcStack;
+ 146:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 147:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 148:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 149:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Main Stack Pointer
+ 150:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 151:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current value of the Main Stack Pointer (MSP).
+ 152:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 153:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               MSP Register value
+ 154:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 155:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_MSP(void)
+ 156:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 157:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
+ 158:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regMainStackPointer);
+ 159:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 160:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 161:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 162:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Main Stack Pointer
+ 163:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 164:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Main Stack Pointer (MSP).
+ 165:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 166:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 167:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 168:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE void __set_MSP(uint32_t topOfMainStack)
+ 169:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 170:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regMainStackPointer     __ASM("msp");
+ 171:./Generated_Source/PSoC5/core_cmFunc.h ****   __regMainStackPointer = topOfMainStack;
+ 172:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 173:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 5
+
+
+ 174:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 175:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Priority Mask
+ 176:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 177:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current state of the priority mask bit from the Priority Mask Registe
+ 178:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 179:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               Priority Mask value
+ 180:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 181:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_PRIMASK(void)
+ 182:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 183:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 184:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regPriMask);
+ 185:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 186:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 187:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 188:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Priority Mask
+ 189:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 190:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Priority Mask Register.
+ 191:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 192:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    priMask  Priority Mask
+ 193:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 194:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE void __set_PRIMASK(uint32_t priMask)
+ 195:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 196:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regPriMask         __ASM("primask");
+ 197:./Generated_Source/PSoC5/core_cmFunc.h ****   __regPriMask = (priMask);
+ 198:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 199:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 200:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 201:./Generated_Source/PSoC5/core_cmFunc.h **** #if       (__CORTEX_M >= 0x03)
+ 202:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 203:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Enable FIQ
+ 204:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 205:./Generated_Source/PSoC5/core_cmFunc.h ****     This function enables FIQ interrupts by clearing the F-bit in the CPSR.
+ 206:./Generated_Source/PSoC5/core_cmFunc.h ****     Can only be executed in Privileged modes.
+ 207:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 208:./Generated_Source/PSoC5/core_cmFunc.h **** #define __enable_fault_irq                __enable_fiq
+ 209:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 210:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 211:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Disable FIQ
+ 212:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 213:./Generated_Source/PSoC5/core_cmFunc.h ****     This function disables FIQ interrupts by setting the F-bit in the CPSR.
+ 214:./Generated_Source/PSoC5/core_cmFunc.h ****     Can only be executed in Privileged modes.
+ 215:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 216:./Generated_Source/PSoC5/core_cmFunc.h **** #define __disable_fault_irq               __disable_fiq
+ 217:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 218:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 219:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Base Priority
+ 220:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 221:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current value of the Base Priority register.
+ 222:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 223:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               Base Priority register value
+ 224:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 225:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t  __get_BASEPRI(void)
+ 226:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 227:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 228:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regBasePri);
+ 229:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 230:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 6
+
+
+ 231:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 232:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Base Priority
+ 233:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 234:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Base Priority register.
+ 235:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 236:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    basePri  Base Priority value to set
+ 237:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 238:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE void __set_BASEPRI(uint32_t basePri)
+ 239:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 240:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regBasePri         __ASM("basepri");
+ 241:./Generated_Source/PSoC5/core_cmFunc.h ****   __regBasePri = (basePri & 0xff);
+ 242:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 243:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 244:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 245:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Fault Mask
+ 246:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 247:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current value of the Fault Mask register.
+ 248:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 249:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               Fault Mask register value
+ 250:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 251:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_FAULTMASK(void)
+ 252:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 253:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 254:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regFaultMask);
+ 255:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 256:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 257:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 258:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Fault Mask
+ 259:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 260:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Fault Mask register.
+ 261:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 262:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    faultMask  Fault Mask value to set
+ 263:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 264:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE void __set_FAULTMASK(uint32_t faultMask)
+ 265:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 266:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regFaultMask       __ASM("faultmask");
+ 267:./Generated_Source/PSoC5/core_cmFunc.h ****   __regFaultMask = (faultMask & (uint32_t)1);
+ 268:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 269:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 270:./Generated_Source/PSoC5/core_cmFunc.h **** #endif /* (__CORTEX_M >= 0x03) */
+ 271:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 272:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 273:./Generated_Source/PSoC5/core_cmFunc.h **** #if       (__CORTEX_M == 0x04)
+ 274:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 275:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get FPSCR
+ 276:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 277:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current value of the Floating Point Status/Control register.
+ 278:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 279:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               Floating Point Status/Control register value
+ 280:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 281:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE uint32_t __get_FPSCR(void)
+ 282:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 283:./Generated_Source/PSoC5/core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 284:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
+ 285:./Generated_Source/PSoC5/core_cmFunc.h ****   return(__regfpscr);
+ 286:./Generated_Source/PSoC5/core_cmFunc.h **** #else
+ 287:./Generated_Source/PSoC5/core_cmFunc.h ****    return(0);
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 7
+
+
+ 288:./Generated_Source/PSoC5/core_cmFunc.h **** #endif
+ 289:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 290:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 291:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 292:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set FPSCR
+ 293:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 294:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Floating Point Status/Control register.
+ 295:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 296:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    fpscr  Floating Point Status/Control value to set
+ 297:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 298:./Generated_Source/PSoC5/core_cmFunc.h **** __STATIC_INLINE void __set_FPSCR(uint32_t fpscr)
+ 299:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 300:./Generated_Source/PSoC5/core_cmFunc.h **** #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+ 301:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t __regfpscr         __ASM("fpscr");
+ 302:./Generated_Source/PSoC5/core_cmFunc.h ****   __regfpscr = (fpscr);
+ 303:./Generated_Source/PSoC5/core_cmFunc.h **** #endif
+ 304:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 305:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 306:./Generated_Source/PSoC5/core_cmFunc.h **** #endif /* (__CORTEX_M == 0x04) */
+ 307:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 308:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 309:./Generated_Source/PSoC5/core_cmFunc.h **** #elif defined ( __ICCARM__ ) /*------------------ ICC Compiler -------------------*/
+ 310:./Generated_Source/PSoC5/core_cmFunc.h **** /* IAR iccarm specific functions */
+ 311:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 312:./Generated_Source/PSoC5/core_cmFunc.h **** #include <cmsis_iar.h>
+ 313:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 314:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 315:./Generated_Source/PSoC5/core_cmFunc.h **** #elif defined ( __TMS470__ ) /*---------------- TI CCS Compiler ------------------*/
+ 316:./Generated_Source/PSoC5/core_cmFunc.h **** /* TI CCS specific functions */
+ 317:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 318:./Generated_Source/PSoC5/core_cmFunc.h **** #include <cmsis_ccs.h>
+ 319:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 320:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 321:./Generated_Source/PSoC5/core_cmFunc.h **** #elif defined ( __GNUC__ ) /*------------------ GNU Compiler ---------------------*/
+ 322:./Generated_Source/PSoC5/core_cmFunc.h **** /* GNU gcc specific functions */
+ 323:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 324:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Enable IRQ Interrupts
+ 325:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 326:./Generated_Source/PSoC5/core_cmFunc.h ****   This function enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 327:./Generated_Source/PSoC5/core_cmFunc.h ****   Can only be executed in Privileged modes.
+ 328:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 329:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __enable_irq(void)
+ 330:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 331:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 332:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 333:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 334:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 335:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Disable IRQ Interrupts
+ 336:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 337:./Generated_Source/PSoC5/core_cmFunc.h ****   This function disables IRQ interrupts by setting the I-bit in the CPSR.
+ 338:./Generated_Source/PSoC5/core_cmFunc.h ****   Can only be executed in Privileged modes.
+ 339:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 340:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_irq(void)
+ 341:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 342:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+ 343:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 344:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 8
+
+
+ 345:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 346:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Control Register
+ 347:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 348:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the Control Register.
+ 349:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 350:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               Control Register value
+ 351:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 352:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_CONTROL(void)
+ 353:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 354:./Generated_Source/PSoC5/core_cmFunc.h ****   uint32_t result;
+ 355:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 356:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
+ 357:./Generated_Source/PSoC5/core_cmFunc.h ****   return(result);
+ 358:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 359:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 360:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 361:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Control Register
+ 362:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 363:./Generated_Source/PSoC5/core_cmFunc.h ****     This function writes the given value to the Control Register.
+ 364:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 365:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    control  Control Register value to set
+ 366:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 367:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_CONTROL(uint32_t control)
+ 368:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 369:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) : "memory");
+ 370:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 371:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 372:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 373:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get IPSR Register
+ 374:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 375:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the IPSR Register.
+ 376:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 377:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               IPSR Register value
+ 378:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 379:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_IPSR(void)
+ 380:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 381:./Generated_Source/PSoC5/core_cmFunc.h ****   uint32_t result;
+ 382:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 383:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
+ 384:./Generated_Source/PSoC5/core_cmFunc.h ****   return(result);
+ 385:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 386:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 387:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 388:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get APSR Register
+ 389:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 390:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the APSR Register.
+ 391:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 392:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               APSR Register value
+ 393:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 394:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_APSR(void)
+ 395:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 396:./Generated_Source/PSoC5/core_cmFunc.h ****   uint32_t result;
+ 397:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 398:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
+ 399:./Generated_Source/PSoC5/core_cmFunc.h ****   return(result);
+ 400:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 401:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 9
+
+
+ 402:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 403:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get xPSR Register
+ 404:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 405:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the content of the xPSR Register.
+ 406:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 407:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               xPSR Register value
+ 408:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 409:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_xPSR(void)
+ 410:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 411:./Generated_Source/PSoC5/core_cmFunc.h ****   uint32_t result;
+ 412:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 413:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MRS %0, xpsr" : "=r" (result) );
+ 414:./Generated_Source/PSoC5/core_cmFunc.h ****   return(result);
+ 415:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 416:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 417:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 418:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Process Stack Pointer
+ 419:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 420:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current value of the Process Stack Pointer (PSP).
+ 421:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 422:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               PSP Register value
+ 423:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 424:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_PSP(void)
+ 425:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 426:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t result;
+ 427:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 428:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MRS %0, psp\n"  : "=r" (result) );
+ 429:./Generated_Source/PSoC5/core_cmFunc.h ****   return(result);
+ 430:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 431:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 432:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 433:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Process Stack Pointer
+ 434:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 435:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Process Stack Pointer (PSP).
+ 436:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 437:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    topOfProcStack  Process Stack Pointer value to set
+ 438:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 439:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_PSP(uint32_t topOfProcStack)
+ 440:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 441:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MSR psp, %0\n" : : "r" (topOfProcStack) : "sp");
+ 442:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 443:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 444:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 445:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Main Stack Pointer
+ 446:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 447:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current value of the Main Stack Pointer (MSP).
+ 448:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 449:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               MSP Register value
+ 450:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 451:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_MSP(void)
+ 452:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 453:./Generated_Source/PSoC5/core_cmFunc.h ****   register uint32_t result;
+ 454:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 455:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MRS %0, msp\n" : "=r" (result) );
+ 456:./Generated_Source/PSoC5/core_cmFunc.h ****   return(result);
+ 457:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 458:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 10
+
+
+ 459:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 460:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Main Stack Pointer
+ 461:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 462:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Main Stack Pointer (MSP).
+ 463:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 464:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    topOfMainStack  Main Stack Pointer value to set
+ 465:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 466:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_MSP(uint32_t topOfMainStack)
+ 467:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 468:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MSR msp, %0\n" : : "r" (topOfMainStack) : "sp");
+ 469:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 470:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 471:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 472:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Get Priority Mask
+ 473:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 474:./Generated_Source/PSoC5/core_cmFunc.h ****     This function returns the current state of the priority mask bit from the Priority Mask Registe
+ 475:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 476:./Generated_Source/PSoC5/core_cmFunc.h ****     \return               Priority Mask value
+ 477:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 478:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE uint32_t __get_PRIMASK(void)
+ 479:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 480:./Generated_Source/PSoC5/core_cmFunc.h ****   uint32_t result;
+ 481:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 482:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) );
+ 483:./Generated_Source/PSoC5/core_cmFunc.h ****   return(result);
+ 484:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 485:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 486:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 487:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Set Priority Mask
+ 488:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 489:./Generated_Source/PSoC5/core_cmFunc.h ****     This function assigns the given value to the Priority Mask Register.
+ 490:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 491:./Generated_Source/PSoC5/core_cmFunc.h ****     \param [in]    priMask  Priority Mask
+ 492:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 493:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __set_PRIMASK(uint32_t priMask)
+ 494:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 495:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("MSR primask, %0" : : "r" (priMask) : "memory");
+ 496:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 497:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 498:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 499:./Generated_Source/PSoC5/core_cmFunc.h **** #if       (__CORTEX_M >= 0x03)
+ 500:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 501:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Enable FIQ
+ 502:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 503:./Generated_Source/PSoC5/core_cmFunc.h ****     This function enables FIQ interrupts by clearing the F-bit in the CPSR.
+ 504:./Generated_Source/PSoC5/core_cmFunc.h ****     Can only be executed in Privileged modes.
+ 505:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 506:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __enable_fault_irq(void)
+ 507:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 508:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("cpsie f" : : : "memory");
+ 509:./Generated_Source/PSoC5/core_cmFunc.h **** }
+ 510:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 511:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 512:./Generated_Source/PSoC5/core_cmFunc.h **** /** \brief  Disable FIQ
+ 513:./Generated_Source/PSoC5/core_cmFunc.h **** 
+ 514:./Generated_Source/PSoC5/core_cmFunc.h ****     This function disables FIQ interrupts by setting the F-bit in the CPSR.
+ 515:./Generated_Source/PSoC5/core_cmFunc.h ****     Can only be executed in Privileged modes.
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 11
+
+
+ 516:./Generated_Source/PSoC5/core_cmFunc.h ****  */
+ 517:./Generated_Source/PSoC5/core_cmFunc.h **** __attribute__( ( always_inline ) ) __STATIC_INLINE void __disable_fault_irq(void)
+ 518:./Generated_Source/PSoC5/core_cmFunc.h **** {
+ 519:./Generated_Source/PSoC5/core_cmFunc.h ****   __ASM volatile ("cpsid f" : : : "memory");
+  39              		.loc 2 519 0
+  40              	@ 519 "./Generated_Source/PSoC5/core_cmFunc.h" 1
+  41 0002 71B6     		cpsid f
+  42              	@ 0 "" 2
+  43              		.thumb
+  44              	.LBE5:
+  45              	.LBE4:
+  18:.\main.c      ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+  19:.\main.c      **** 	__disable_fault_irq();	/* cpsid f*/
+  20:.\main.c      ****     CyGlobalIntEnable; /* Uncomment this line to enable global interrupts. */
+  46              		.loc 1 20 0
+  47              	@ 20 ".\main.c" 1
+  48 0004 62B6     		CPSIE   i
+  49              	@ 0 "" 2
+  21:.\main.c      **** 	sta_ker();
+  50              		.loc 1 21 0
+  51              		.thumb
+  52 0006 FFF7FEFF 		bl	sta_ker
+  53              	.LVL0:
+  22:.\main.c      **** }
+  54              		.loc 1 22 0
+  55 000a 08BD     		pop	{r3, pc}
+  56              		.cfi_endproc
+  57              	.LFE56:
+  58              		.size	main, .-main
+  59              		.text
+  60              	.Letext0:
+  61              		.file 3 "c:\\program files\\cypress\\psoc creator\\3.0\\psoc creator\\import\\gnu_cs\\arm\\4.7.3\\
+  62              		.file 4 "./Generated_Source/PSoC5/core_cm3.h"
+  63              		.section	.debug_info,"",%progbits
+  64              	.Ldebug_info0:
+  65 0000 F0000000 		.4byte	0xf0
+  66 0004 0200     		.2byte	0x2
+  67 0006 00000000 		.4byte	.Ldebug_abbrev0
+  68 000a 04       		.byte	0x4
+  69 000b 01       		.uleb128 0x1
+  70 000c 76000000 		.4byte	.LASF13
+  71 0010 01       		.byte	0x1
+  72 0011 14010000 		.4byte	.LASF14
+  73 0015 2E000000 		.4byte	.LASF15
+  74 0019 00000000 		.4byte	.Ldebug_ranges0+0
+  75 001d 00000000 		.4byte	0
+  76 0021 00000000 		.4byte	0
+  77 0025 00000000 		.4byte	.Ldebug_line0
+  78 0029 02       		.uleb128 0x2
+  79 002a 01       		.byte	0x1
+  80 002b 06       		.byte	0x6
+  81 002c 31010000 		.4byte	.LASF0
+  82 0030 02       		.uleb128 0x2
+  83 0031 01       		.byte	0x1
+  84 0032 08       		.byte	0x8
+  85 0033 F0000000 		.4byte	.LASF1
+  86 0037 02       		.uleb128 0x2
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 12
+
+
+  87 0038 02       		.byte	0x2
+  88 0039 05       		.byte	0x5
+  89 003a 43010000 		.4byte	.LASF2
+  90 003e 02       		.uleb128 0x2
+  91 003f 02       		.byte	0x2
+  92 0040 07       		.byte	0x7
+  93 0041 0E000000 		.4byte	.LASF3
+  94 0045 03       		.uleb128 0x3
+  95 0046 BF000000 		.4byte	.LASF16
+  96 004a 03       		.byte	0x3
+  97 004b 4F       		.byte	0x4f
+  98 004c 50000000 		.4byte	0x50
+  99 0050 02       		.uleb128 0x2
+ 100 0051 04       		.byte	0x4
+ 101 0052 05       		.byte	0x5
+ 102 0053 0B010000 		.4byte	.LASF4
+ 103 0057 02       		.uleb128 0x2
+ 104 0058 04       		.byte	0x4
+ 105 0059 07       		.byte	0x7
+ 106 005a C7000000 		.4byte	.LASF5
+ 107 005e 02       		.uleb128 0x2
+ 108 005f 08       		.byte	0x8
+ 109 0060 05       		.byte	0x5
+ 110 0061 00000000 		.4byte	.LASF6
+ 111 0065 02       		.uleb128 0x2
+ 112 0066 08       		.byte	0x8
+ 113 0067 07       		.byte	0x7
+ 114 0068 D9000000 		.4byte	.LASF7
+ 115 006c 04       		.uleb128 0x4
+ 116 006d 04       		.byte	0x4
+ 117 006e 05       		.byte	0x5
+ 118 006f 696E7400 		.ascii	"int\000"
+ 119 0073 02       		.uleb128 0x2
+ 120 0074 04       		.byte	0x4
+ 121 0075 07       		.byte	0x7
+ 122 0076 21000000 		.4byte	.LASF8
+ 123 007a 02       		.uleb128 0x2
+ 124 007b 04       		.byte	0x4
+ 125 007c 04       		.byte	0x4
+ 126 007d 3D010000 		.4byte	.LASF9
+ 127 0081 02       		.uleb128 0x2
+ 128 0082 08       		.byte	0x8
+ 129 0083 04       		.byte	0x4
+ 130 0084 1D010000 		.4byte	.LASF10
+ 131 0088 02       		.uleb128 0x2
+ 132 0089 01       		.byte	0x1
+ 133 008a 08       		.byte	0x8
+ 134 008b FE000000 		.4byte	.LASF11
+ 135 008f 02       		.uleb128 0x2
+ 136 0090 04       		.byte	0x4
+ 137 0091 07       		.byte	0x7
+ 138 0092 61010000 		.4byte	.LASF12
+ 139 0096 05       		.uleb128 0x5
+ 140 0097 4D010000 		.4byte	.LASF17
+ 141 009b 02       		.byte	0x2
+ 142 009c 0502     		.2byte	0x205
+ 143 009e 01       		.byte	0x1
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 13
+
+
+ 144 009f 03       		.byte	0x3
+ 145 00a0 06       		.uleb128 0x6
+ 146 00a1 01       		.byte	0x1
+ 147 00a2 71000000 		.4byte	.LASF18
+ 148 00a6 01       		.byte	0x1
+ 149 00a7 10       		.byte	0x10
+ 150 00a8 6C000000 		.4byte	0x6c
+ 151 00ac 00000000 		.4byte	.LFB56
+ 152 00b0 0C000000 		.4byte	.LFE56
+ 153 00b4 00000000 		.4byte	.LLST0
+ 154 00b8 01       		.byte	0x1
+ 155 00b9 D6000000 		.4byte	0xd6
+ 156 00bd 07       		.uleb128 0x7
+ 157 00be 96000000 		.4byte	0x96
+ 158 00c2 02000000 		.4byte	.LBB4
+ 159 00c6 04000000 		.4byte	.LBE4
+ 160 00ca 01       		.byte	0x1
+ 161 00cb 13       		.byte	0x13
+ 162 00cc 08       		.uleb128 0x8
+ 163 00cd 0A000000 		.4byte	.LVL0
+ 164 00d1 E9000000 		.4byte	0xe9
+ 165 00d5 00       		.byte	0
+ 166 00d6 09       		.uleb128 0x9
+ 167 00d7 24010000 		.4byte	.LASF19
+ 168 00db 04       		.byte	0x4
+ 169 00dc 1606     		.2byte	0x616
+ 170 00de E4000000 		.4byte	0xe4
+ 171 00e2 01       		.byte	0x1
+ 172 00e3 01       		.byte	0x1
+ 173 00e4 0A       		.uleb128 0xa
+ 174 00e5 45000000 		.4byte	0x45
+ 175 00e9 0B       		.uleb128 0xb
+ 176 00ea 01       		.byte	0x1
+ 177 00eb 03010000 		.4byte	.LASF20
+ 178 00ef 01       		.byte	0x1
+ 179 00f0 0E       		.byte	0xe
+ 180 00f1 01       		.byte	0x1
+ 181 00f2 01       		.byte	0x1
+ 182 00f3 00       		.byte	0
+ 183              		.section	.debug_abbrev,"",%progbits
+ 184              	.Ldebug_abbrev0:
+ 185 0000 01       		.uleb128 0x1
+ 186 0001 11       		.uleb128 0x11
+ 187 0002 01       		.byte	0x1
+ 188 0003 25       		.uleb128 0x25
+ 189 0004 0E       		.uleb128 0xe
+ 190 0005 13       		.uleb128 0x13
+ 191 0006 0B       		.uleb128 0xb
+ 192 0007 03       		.uleb128 0x3
+ 193 0008 0E       		.uleb128 0xe
+ 194 0009 1B       		.uleb128 0x1b
+ 195 000a 0E       		.uleb128 0xe
+ 196 000b 55       		.uleb128 0x55
+ 197 000c 06       		.uleb128 0x6
+ 198 000d 11       		.uleb128 0x11
+ 199 000e 01       		.uleb128 0x1
+ 200 000f 52       		.uleb128 0x52
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 14
+
+
+ 201 0010 01       		.uleb128 0x1
+ 202 0011 10       		.uleb128 0x10
+ 203 0012 06       		.uleb128 0x6
+ 204 0013 00       		.byte	0
+ 205 0014 00       		.byte	0
+ 206 0015 02       		.uleb128 0x2
+ 207 0016 24       		.uleb128 0x24
+ 208 0017 00       		.byte	0
+ 209 0018 0B       		.uleb128 0xb
+ 210 0019 0B       		.uleb128 0xb
+ 211 001a 3E       		.uleb128 0x3e
+ 212 001b 0B       		.uleb128 0xb
+ 213 001c 03       		.uleb128 0x3
+ 214 001d 0E       		.uleb128 0xe
+ 215 001e 00       		.byte	0
+ 216 001f 00       		.byte	0
+ 217 0020 03       		.uleb128 0x3
+ 218 0021 16       		.uleb128 0x16
+ 219 0022 00       		.byte	0
+ 220 0023 03       		.uleb128 0x3
+ 221 0024 0E       		.uleb128 0xe
+ 222 0025 3A       		.uleb128 0x3a
+ 223 0026 0B       		.uleb128 0xb
+ 224 0027 3B       		.uleb128 0x3b
+ 225 0028 0B       		.uleb128 0xb
+ 226 0029 49       		.uleb128 0x49
+ 227 002a 13       		.uleb128 0x13
+ 228 002b 00       		.byte	0
+ 229 002c 00       		.byte	0
+ 230 002d 04       		.uleb128 0x4
+ 231 002e 24       		.uleb128 0x24
+ 232 002f 00       		.byte	0
+ 233 0030 0B       		.uleb128 0xb
+ 234 0031 0B       		.uleb128 0xb
+ 235 0032 3E       		.uleb128 0x3e
+ 236 0033 0B       		.uleb128 0xb
+ 237 0034 03       		.uleb128 0x3
+ 238 0035 08       		.uleb128 0x8
+ 239 0036 00       		.byte	0
+ 240 0037 00       		.byte	0
+ 241 0038 05       		.uleb128 0x5
+ 242 0039 2E       		.uleb128 0x2e
+ 243 003a 00       		.byte	0
+ 244 003b 03       		.uleb128 0x3
+ 245 003c 0E       		.uleb128 0xe
+ 246 003d 3A       		.uleb128 0x3a
+ 247 003e 0B       		.uleb128 0xb
+ 248 003f 3B       		.uleb128 0x3b
+ 249 0040 05       		.uleb128 0x5
+ 250 0041 27       		.uleb128 0x27
+ 251 0042 0C       		.uleb128 0xc
+ 252 0043 20       		.uleb128 0x20
+ 253 0044 0B       		.uleb128 0xb
+ 254 0045 00       		.byte	0
+ 255 0046 00       		.byte	0
+ 256 0047 06       		.uleb128 0x6
+ 257 0048 2E       		.uleb128 0x2e
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 15
+
+
+ 258 0049 01       		.byte	0x1
+ 259 004a 3F       		.uleb128 0x3f
+ 260 004b 0C       		.uleb128 0xc
+ 261 004c 03       		.uleb128 0x3
+ 262 004d 0E       		.uleb128 0xe
+ 263 004e 3A       		.uleb128 0x3a
+ 264 004f 0B       		.uleb128 0xb
+ 265 0050 3B       		.uleb128 0x3b
+ 266 0051 0B       		.uleb128 0xb
+ 267 0052 49       		.uleb128 0x49
+ 268 0053 13       		.uleb128 0x13
+ 269 0054 11       		.uleb128 0x11
+ 270 0055 01       		.uleb128 0x1
+ 271 0056 12       		.uleb128 0x12
+ 272 0057 01       		.uleb128 0x1
+ 273 0058 40       		.uleb128 0x40
+ 274 0059 06       		.uleb128 0x6
+ 275 005a 9742     		.uleb128 0x2117
+ 276 005c 0C       		.uleb128 0xc
+ 277 005d 01       		.uleb128 0x1
+ 278 005e 13       		.uleb128 0x13
+ 279 005f 00       		.byte	0
+ 280 0060 00       		.byte	0
+ 281 0061 07       		.uleb128 0x7
+ 282 0062 1D       		.uleb128 0x1d
+ 283 0063 00       		.byte	0
+ 284 0064 31       		.uleb128 0x31
+ 285 0065 13       		.uleb128 0x13
+ 286 0066 11       		.uleb128 0x11
+ 287 0067 01       		.uleb128 0x1
+ 288 0068 12       		.uleb128 0x12
+ 289 0069 01       		.uleb128 0x1
+ 290 006a 58       		.uleb128 0x58
+ 291 006b 0B       		.uleb128 0xb
+ 292 006c 59       		.uleb128 0x59
+ 293 006d 0B       		.uleb128 0xb
+ 294 006e 00       		.byte	0
+ 295 006f 00       		.byte	0
+ 296 0070 08       		.uleb128 0x8
+ 297 0071 898201   		.uleb128 0x4109
+ 298 0074 00       		.byte	0
+ 299 0075 11       		.uleb128 0x11
+ 300 0076 01       		.uleb128 0x1
+ 301 0077 31       		.uleb128 0x31
+ 302 0078 13       		.uleb128 0x13
+ 303 0079 00       		.byte	0
+ 304 007a 00       		.byte	0
+ 305 007b 09       		.uleb128 0x9
+ 306 007c 34       		.uleb128 0x34
+ 307 007d 00       		.byte	0
+ 308 007e 03       		.uleb128 0x3
+ 309 007f 0E       		.uleb128 0xe
+ 310 0080 3A       		.uleb128 0x3a
+ 311 0081 0B       		.uleb128 0xb
+ 312 0082 3B       		.uleb128 0x3b
+ 313 0083 05       		.uleb128 0x5
+ 314 0084 49       		.uleb128 0x49
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 16
+
+
+ 315 0085 13       		.uleb128 0x13
+ 316 0086 3F       		.uleb128 0x3f
+ 317 0087 0C       		.uleb128 0xc
+ 318 0088 3C       		.uleb128 0x3c
+ 319 0089 0C       		.uleb128 0xc
+ 320 008a 00       		.byte	0
+ 321 008b 00       		.byte	0
+ 322 008c 0A       		.uleb128 0xa
+ 323 008d 35       		.uleb128 0x35
+ 324 008e 00       		.byte	0
+ 325 008f 49       		.uleb128 0x49
+ 326 0090 13       		.uleb128 0x13
+ 327 0091 00       		.byte	0
+ 328 0092 00       		.byte	0
+ 329 0093 0B       		.uleb128 0xb
+ 330 0094 2E       		.uleb128 0x2e
+ 331 0095 00       		.byte	0
+ 332 0096 3F       		.uleb128 0x3f
+ 333 0097 0C       		.uleb128 0xc
+ 334 0098 03       		.uleb128 0x3
+ 335 0099 0E       		.uleb128 0xe
+ 336 009a 3A       		.uleb128 0x3a
+ 337 009b 0B       		.uleb128 0xb
+ 338 009c 3B       		.uleb128 0x3b
+ 339 009d 0B       		.uleb128 0xb
+ 340 009e 27       		.uleb128 0x27
+ 341 009f 0C       		.uleb128 0xc
+ 342 00a0 3C       		.uleb128 0x3c
+ 343 00a1 0C       		.uleb128 0xc
+ 344 00a2 00       		.byte	0
+ 345 00a3 00       		.byte	0
+ 346 00a4 00       		.byte	0
+ 347              		.section	.debug_loc,"",%progbits
+ 348              	.Ldebug_loc0:
+ 349              	.LLST0:
+ 350 0000 00000000 		.4byte	.LFB56
+ 351 0004 02000000 		.4byte	.LCFI0
+ 352 0008 0200     		.2byte	0x2
+ 353 000a 7D       		.byte	0x7d
+ 354 000b 00       		.sleb128 0
+ 355 000c 02000000 		.4byte	.LCFI0
+ 356 0010 0C000000 		.4byte	.LFE56
+ 357 0014 0200     		.2byte	0x2
+ 358 0016 7D       		.byte	0x7d
+ 359 0017 08       		.sleb128 8
+ 360 0018 00000000 		.4byte	0
+ 361 001c 00000000 		.4byte	0
+ 362              		.section	.debug_aranges,"",%progbits
+ 363 0000 1C000000 		.4byte	0x1c
+ 364 0004 0200     		.2byte	0x2
+ 365 0006 00000000 		.4byte	.Ldebug_info0
+ 366 000a 04       		.byte	0x4
+ 367 000b 00       		.byte	0
+ 368 000c 0000     		.2byte	0
+ 369 000e 0000     		.2byte	0
+ 370 0010 00000000 		.4byte	.LFB56
+ 371 0014 0C000000 		.4byte	.LFE56-.LFB56
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 17
+
+
+ 372 0018 00000000 		.4byte	0
+ 373 001c 00000000 		.4byte	0
+ 374              		.section	.debug_ranges,"",%progbits
+ 375              	.Ldebug_ranges0:
+ 376 0000 00000000 		.4byte	.LFB56
+ 377 0004 0C000000 		.4byte	.LFE56
+ 378 0008 00000000 		.4byte	0
+ 379 000c 00000000 		.4byte	0
+ 380              		.section	.debug_line,"",%progbits
+ 381              	.Ldebug_line0:
+ 382 0000 1A010000 		.section	.debug_str,"MS",%progbits,1
+ 382      0200F700 
+ 382      00000201 
+ 382      FB0E0D00 
+ 382      01010101 
+ 383              	.LASF6:
+ 384 0000 6C6F6E67 		.ascii	"long long int\000"
+ 384      206C6F6E 
+ 384      6720696E 
+ 384      7400
+ 385              	.LASF3:
+ 386 000e 73686F72 		.ascii	"short unsigned int\000"
+ 386      7420756E 
+ 386      7369676E 
+ 386      65642069 
+ 386      6E7400
+ 387              	.LASF8:
+ 388 0021 756E7369 		.ascii	"unsigned int\000"
+ 388      676E6564 
+ 388      20696E74 
+ 388      00
+ 389              	.LASF15:
+ 390 002e 433A5C55 		.ascii	"C:\\Users\\asai\\Documents\\PSoC Creator\\asp_1.9.0"
+ 390      73657273 
+ 390      5C617361 
+ 390      695C446F 
+ 390      63756D65 
+ 391 005c 5F332E30 		.ascii	"_3.0\\asp_eval1.cydsn\000"
+ 391      5C617370 
+ 391      5F657661 
+ 391      6C312E63 
+ 391      7964736E 
+ 392              	.LASF18:
+ 393 0071 6D61696E 		.ascii	"main\000"
+ 393      00
+ 394              	.LASF13:
+ 395 0076 474E5520 		.ascii	"GNU C 4.7.3 20130312 (release) [ARM/embedded-4_7-br"
+ 395      4320342E 
+ 395      372E3320 
+ 395      32303133 
+ 395      30333132 
+ 396 00a9 616E6368 		.ascii	"anch revision 196615]\000"
+ 396      20726576 
+ 396      6973696F 
+ 396      6E203139 
+ 396      36363135 
+ 397              	.LASF16:
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 18
+
+
+ 398 00bf 696E7433 		.ascii	"int32_t\000"
+ 398      325F7400 
+ 399              	.LASF5:
+ 400 00c7 6C6F6E67 		.ascii	"long unsigned int\000"
+ 400      20756E73 
+ 400      69676E65 
+ 400      6420696E 
+ 400      7400
+ 401              	.LASF7:
+ 402 00d9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 402      206C6F6E 
+ 402      6720756E 
+ 402      7369676E 
+ 402      65642069 
+ 403              	.LASF1:
+ 404 00f0 756E7369 		.ascii	"unsigned char\000"
+ 404      676E6564 
+ 404      20636861 
+ 404      7200
+ 405              	.LASF11:
+ 406 00fe 63686172 		.ascii	"char\000"
+ 406      00
+ 407              	.LASF20:
+ 408 0103 7374615F 		.ascii	"sta_ker\000"
+ 408      6B657200 
+ 409              	.LASF4:
+ 410 010b 6C6F6E67 		.ascii	"long int\000"
+ 410      20696E74 
+ 410      00
+ 411              	.LASF14:
+ 412 0114 2E5C6D61 		.ascii	".\\main.c\000"
+ 412      696E2E63 
+ 412      00
+ 413              	.LASF10:
+ 414 011d 646F7562 		.ascii	"double\000"
+ 414      6C6500
+ 415              	.LASF19:
+ 416 0124 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 416      52784275 
+ 416      66666572 
+ 416      00
+ 417              	.LASF0:
+ 418 0131 7369676E 		.ascii	"signed char\000"
+ 418      65642063 
+ 418      68617200 
+ 419              	.LASF9:
+ 420 013d 666C6F61 		.ascii	"float\000"
+ 420      7400
+ 421              	.LASF2:
+ 422 0143 73686F72 		.ascii	"short int\000"
+ 422      7420696E 
+ 422      7400
+ 423              	.LASF17:
+ 424 014d 5F5F6469 		.ascii	"__disable_fault_irq\000"
+ 424      7361626C 
+ 424      655F6661 
+ 424      756C745F 
+ARM GAS  C:\TEMP\ccifpJgf.s 			page 19
+
+
+ 424      69727100 
+ 425              	.LASF12:
+ 426 0161 73697A65 		.ascii	"sizetype\000"
+ 426      74797065 
+ 426      00
+ 427              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.7.3 20130312 (release) [ARM/embedded-4_7-br
