@@ -48,12 +48,35 @@
 #include "core_insn.h"
 #include "cyfitter.h"
 #include "UART_1.h"
-#if (TNUM_SIOP >= 2)
-	#include "UART_2.h"
-#endif /* TNUM_SIOP >= 2 */
 #if(UART_1_INTERNAL_CLOCK_USED)
     #include "UART_1_IntClock.h"
 #endif /* End UART_1_INTERNAL_CLOCK_USED */
+
+#if (TNUM_SIOP >= 2)
+	#include "UART_2.h"
+    
+    #if(UART_2_INTERNAL_CLOCK_USED)
+        #include "UART_2_IntClock.h"
+    #endif /* End UART_2_INTERNAL_CLOCK_USED */
+#endif /* TNUM_SIOP >= 2 */
+
+#if (TNUM_SIOP >= 3)
+	#include "UART_3.h"
+    
+    #if(UART_3_INTERNAL_CLOCK_USED)
+        #include "UART_3_IntClock.h"
+    #endif /* End UART_3_INTERNAL_CLOCK_USED */
+#endif /* TNUM_SIOP >= 3 */
+
+#if (TNUM_SIOP >= 4)
+	#include "UART_4.h"
+    
+    #if(UART_4_INTERNAL_CLOCK_USED)
+        #include "UART_4_IntClock.h"
+    #endif /* End UART_4_INTERNAL_CLOCK_USED */
+#endif /* TNUM_SIOP >= 4 */
+
+
 
 /*
  *  シリアルI/Oポート初期化ブロックの定義
@@ -80,6 +103,12 @@ const SIOPINIB siopinib_table[TNUM_SIOP] = {
 #if (TNUM_SIOP >= 2)
 	{(ID)1, (INTNO)INTNO_SIO},
 #endif /* TNUM_SIOP >= 2 */
+#if (TNUM_SIOP >= 3)
+	{(ID)2, (INTNO)INTNO_SIO},
+#endif /* TNUM_SIOP >= 3 */
+#if (TNUM_SIOP >= 4)
+	{(ID)3, (INTNO)INTNO_SIO},
+#endif /* TNUM_SIOP >= 4 */
 };
 
 /*
@@ -146,6 +175,139 @@ void target_usart_init(ID siopid)
 		    #endif /* End UART_1_INTERNAL_CLOCK_USED */
 		}
 		break;
+        
+    #if (TNUM_SIOP >= 2)
+    case 1:	/* シリアルポートID:1 */
+		if((UART_2_RXBITCTR_CONTROL_REG && UART_2_CNTR_ENABLE) == 0) {
+	        /* Init Count7 period */
+	        UART_2_RXBITCTR_PERIOD_REG = UART_2_RXBITCTR_INIT;
+	        /* Configure the Initial RX interrupt mask */
+	        UART_2_RXSTATUS_MASK_REG  = UART_2_INIT_RX_INTERRUPTS_MASK;
+	
+	        /* Write Counter Value for TX Bit Clk Generator*/
+	        #if(UART_2_TXCLKGEN_DP)
+	            UART_2_TXBITCLKGEN_CTR_REG = UART_2_BIT_CENTER;
+	            UART_2_TXBITCLKTX_COMPLETE_REG = (UART_2_NUMBER_OF_DATA_BITS +
+	                        UART_2_NUMBER_OF_START_BIT) * UART_2_OVER_SAMPLE_COUNT;
+	        #else
+	            UART_2_TXBITCTR_PERIOD_REG = ((UART_2_NUMBER_OF_DATA_BITS +
+	                        UART_2_NUMBER_OF_START_BIT) * UART_2_OVER_SAMPLE_8) - 1u;
+	        #endif /* End UART_2_TXCLKGEN_DP */
+
+	        /* Configure the Initial TX interrupt mask */
+	        #if(UART_2_TX_INTERRUPT_ENABLED && (UART_2_TXBUFFERSIZE > UART_2_FIFO_LENGTH))
+	            UART_2_TXSTATUS_MASK_REG = UART_2_TX_STS_FIFO_EMPTY;
+	        #else
+	            UART_2_TXSTATUS_MASK_REG = UART_2_INIT_TX_INTERRUPTS_MASK;
+	        #endif /*End UART_2_TX_INTERRUPT_ENABLED*/
+
+	        /*RX Counter (Count7) Enable */
+	        UART_2_RXBITCTR_CONTROL_REG |= UART_2_CNTR_ENABLE;
+	        /* Enable the RX Interrupt. */
+/*	        UART_2_RXSTATUS_ACTL_REG  |= UART_2_INT_ENABLE;*/
+
+	        /*TX Counter (DP/Count7) Enable */
+	        #if(!UART_2_TXCLKGEN_DP)
+	            UART_2_TXBITCTR_CONTROL_REG |= UART_2_CNTR_ENABLE;
+	        #endif /* End UART_2_TXCLKGEN_DP */
+	        /* Enable the TX Interrupt. */
+/*	        UART_2_TXSTATUS_ACTL_REG |= UART_2_INT_ENABLE;*/
+
+		    #if(UART_2_INTERNAL_CLOCK_USED)
+	    	   /* Enable the clock. */
+		        UART_2_IntClock_Start();
+		    #endif /* End UART_2_INTERNAL_CLOCK_USED */
+		}
+		break;
+    #endif
+    #if (TNUM_SIOP >= 3)
+    case 2:	/* シリアルポートID:2 */
+		if((UART_3_RXBITCTR_CONTROL_REG && UART_3_CNTR_ENABLE) == 0) {
+	        /* Init Count7 period */
+	        UART_3_RXBITCTR_PERIOD_REG = UART_3_RXBITCTR_INIT;
+	        /* Configure the Initial RX interrupt mask */
+	        UART_3_RXSTATUS_MASK_REG  = UART_3_INIT_RX_INTERRUPTS_MASK;
+	
+	        /* Write Counter Value for TX Bit Clk Generator*/
+	        #if(UART_3_TXCLKGEN_DP)
+	            UART_3_TXBITCLKGEN_CTR_REG = UART_3_BIT_CENTER;
+	            UART_3_TXBITCLKTX_COMPLETE_REG = (UART_3_NUMBER_OF_DATA_BITS +
+	                        UART_3_NUMBER_OF_START_BIT) * UART_3_OVER_SAMPLE_COUNT;
+	        #else
+	            UART_3_TXBITCTR_PERIOD_REG = ((UART_3_NUMBER_OF_DATA_BITS +
+	                        UART_3_NUMBER_OF_START_BIT) * UART_3_OVER_SAMPLE_8) - 1u;
+	        #endif /* End UART_3_TXCLKGEN_DP */
+
+	        /* Configure the Initial TX interrupt mask */
+	        #if(UART_3_TX_INTERRUPT_ENABLED && (UART_3_TXBUFFERSIZE > UART_3_FIFO_LENGTH))
+	            UART_3_TXSTATUS_MASK_REG = UART_3_TX_STS_FIFO_EMPTY;
+	        #else
+	            UART_3_TXSTATUS_MASK_REG = UART_3_INIT_TX_INTERRUPTS_MASK;
+	        #endif /*End UART_3_TX_INTERRUPT_ENABLED*/
+
+	        /*RX Counter (Count7) Enable */
+	        UART_3_RXBITCTR_CONTROL_REG |= UART_3_CNTR_ENABLE;
+	        /* Enable the RX Interrupt. */
+/*	        UART_3_RXSTATUS_ACTL_REG  |= UART_3_INT_ENABLE;*/
+
+	        /*TX Counter (DP/Count7) Enable */
+	        #if(!UART_3_TXCLKGEN_DP)
+	            UART_3_TXBITCTR_CONTROL_REG |= UART_3_CNTR_ENABLE;
+	        #endif /* End UART_3_TXCLKGEN_DP */
+	        /* Enable the TX Interrupt. */
+/*	        UART_3_TXSTATUS_ACTL_REG |= UART_3_INT_ENABLE;*/
+
+		    #if(UART_3_INTERNAL_CLOCK_USED)
+	    	   /* Enable the clock. */
+		        UART_3_IntClock_Start();
+		    #endif /* End UART_3_INTERNAL_CLOCK_USED */
+		}
+		break;
+    #endif
+    #if (TNUM_SIOP >= 4)
+	case 3:	/* シリアルポートID:3 */
+		if((UART_4_RXBITCTR_CONTROL_REG && UART_4_CNTR_ENABLE) == 0) {
+	        /* Init Count7 period */
+	        UART_4_RXBITCTR_PERIOD_REG = UART_4_RXBITCTR_INIT;
+	        /* Configure the Initial RX interrupt mask */
+	        UART_4_RXSTATUS_MASK_REG  = UART_4_INIT_RX_INTERRUPTS_MASK;
+	
+	        /* Write Counter Value for TX Bit Clk Generator*/
+	        #if(UART_4_TXCLKGEN_DP)
+	            UART_4_TXBITCLKGEN_CTR_REG = UART_4_BIT_CENTER;
+	            UART_4_TXBITCLKTX_COMPLETE_REG = (UART_4_NUMBER_OF_DATA_BITS +
+	                        UART_4_NUMBER_OF_START_BIT) * UART_4_OVER_SAMPLE_COUNT;
+	        #else
+	            UART_4_TXBITCTR_PERIOD_REG = ((UART_4_NUMBER_OF_DATA_BITS +
+	                        UART_4_NUMBER_OF_START_BIT) * UART_4_OVER_SAMPLE_8) - 1u;
+	        #endif /* End UART_4_TXCLKGEN_DP */
+
+	        /* Configure the Initial TX interrupt mask */
+	        #if(UART_4_TX_INTERRUPT_ENABLED && (UART_4_TXBUFFERSIZE > UART_4_FIFO_LENGTH))
+	            UART_4_TXSTATUS_MASK_REG = UART_4_TX_STS_FIFO_EMPTY;
+	        #else
+	            UART_4_TXSTATUS_MASK_REG = UART_4_INIT_TX_INTERRUPTS_MASK;
+	        #endif /*End UART_4_TX_INTERRUPT_ENABLED*/
+
+	        /*RX Counter (Count7) Enable */
+	        UART_4_RXBITCTR_CONTROL_REG |= UART_4_CNTR_ENABLE;
+	        /* Enable the RX Interrupt. */
+/*	        UART_4_RXSTATUS_ACTL_REG  |= UART_4_INT_ENABLE;*/
+
+	        /*TX Counter (DP/Count7) Enable */
+	        #if(!UART_4_TXCLKGEN_DP)
+	            UART_4_TXBITCTR_CONTROL_REG |= UART_4_CNTR_ENABLE;
+	        #endif /* End UART_4_TXCLKGEN_DP */
+	        /* Enable the TX Interrupt. */
+/*	        UART_4_TXSTATUS_ACTL_REG |= UART_4_INT_ENABLE;*/
+
+		    #if(UART_4_INTERNAL_CLOCK_USED)
+	    	   /* Enable the clock. */
+		        UART_4_IntClock_Start();
+		    #endif /* End UART_4_INTERNAL_CLOCK_USED */
+		}
+		break;
+    #endif
 	default: /* 未定義ポート */
 		break;
 	};

@@ -54,6 +54,22 @@
  */
 #define INHNO_SIO       CYINT_IRQ_BASE + isr_1__INTC_NUMBER  /* 割込みハンドラ番号 */
 #define INTNO_SIO       CYINT_IRQ_BASE + isr_1__INTC_NUMBER  /* 割込み番号 */
+
+#if (TNUM_SIOP >= 2)
+#define INHNO_SIO1      CYINT_IRQ_BASE + isr_2__INTC_NUMBER  /* 割込みハンドラ番号 */
+#define INTNO_SIO1      CYINT_IRQ_BASE + isr_2__INTC_NUMBER  /* 割込み番号 */
+#endif
+
+#if (TNUM_SIOP >= 3)
+#define INHNO_SIO2      CYINT_IRQ_BASE + isr_3__INTC_NUMBER  /* 割込みハンドラ番号 */
+#define INTNO_SIO2      CYINT_IRQ_BASE + isr_3__INTC_NUMBER  /* 割込み番号 */
+#endif
+
+#if (TNUM_SIOP >= 4)
+#define INHNO_SIO3      CYINT_IRQ_BASE + isr_4__INTC_NUMBER  /* 割込みハンドラ番号 */
+#define INTNO_SIO3      CYINT_IRQ_BASE + isr_4__INTC_NUMBER  /* 割込み番号 */
+#endif
+    
 #define INTPRI_SIO       -3        /* 割込み優先度 */
 #define INTATR_SIO       0         /* 割込み属性 */
 
